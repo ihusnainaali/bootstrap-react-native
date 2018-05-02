@@ -1,4 +1,6 @@
 --- !com.amazonaws.mobilehub.v0.Project 
+apps:
+  react-native: !com.amazonaws.mobilehub.v0.AppDO {}
 features:
   content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
     attributes:
@@ -27,5 +29,8 @@ features:
             require-numbers: true
             require-symbols: true
             require-upper-case: true
+  user-files: !com.amazonaws.mobilehub.v0.UserFiles 
+    attributes:
+      enabled: true
 name: pangyou
 region: us-east-1
