@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Image, View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 class Welcome extends Component {
 	render() {
     return (
   		<View style={styles.welcomeWrapper}>
+				<StatusBar barStyle="light-content" />
         <View style={styles.welcomeTopGrid}>
 					<Text style={styles.welcomeTitle}>Pangyou</Text>
 					<Image
