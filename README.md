@@ -16,7 +16,7 @@ If you don't have Node installed, install Homebrew.  Paste all of the following 
 - npm install -g react-native-cli
 
 
-#### Clone Pangyou Repository
+### Clone Pangyou Repository
 
 - On GitHub, navigate to the main page of the repository.
 
@@ -33,7 +33,7 @@ If you don't have Node installed, install Homebrew.  Paste all of the following 
 - Press Enter. Your local clone will be created.
 
 
-#### Create a New Branch From Master
+### Branch Naming Guidelines
 
 The following guidelines are to be followed when creating a new branch:
 
@@ -50,6 +50,8 @@ A practical example:
 - ref/name-of-new-branch
 - wip/name-of-new-branch
 
+
+### Create a New Branch From Master
 
 - Create the branch on your local machine and switch in this branch:
 
