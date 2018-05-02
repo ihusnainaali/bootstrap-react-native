@@ -37,11 +37,11 @@ If you don't have Node installed, install Homebrew.  Paste all of the following 
 
 The following guidelines are to be followed when creating a new branch:
 
-* feat      Feature I'm adding or expanding
-* fix       Bug fix or experiment
-* junk      Throwaway branch created to experiment
-* refact       Refactor a branch
-* wip       Works in progress; stuff I know won't be finished soon
+* feat - Feature I'm adding or expanding
+* fix - Bug fix or experiment
+* junk - Throwaway branch created to experiment
+* refact - Refactor a branch
+* wip - Works in progress; stuff I know won't be finished soon
 
 A practical example:
 - feat/name-of-new-branch
