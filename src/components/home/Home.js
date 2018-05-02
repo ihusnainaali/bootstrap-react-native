@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { TabNavigator } from 'react-navigation';
+import { Icon } from 'react-native-elements';
 
 class Home extends Component {
 	render() {
@@ -11,19 +12,19 @@ class Home extends Component {
         </View>
 				<View style={styles.homeBottomGrid}>
 					<TouchableOpacity
-						style={styles.navButtonContainer}
+						style={styles.menuButtonContainer}
 						onPress={() => this.props.navigation.navigate('Friends')}>
-						<Text style={styles.navButtonText}>Friends</Text>
+						<Text style={styles.menuButtonText}>Friends</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
 						style={styles.menuButtonContainer}
 						onPress={() => this.props.navigation.navigate('Journals')}>
-						<Text style={styles.registerButtonText}>Journals</Text>
+						<Text style={styles.menuButtonText}>Journals</Text>
 					</TouchableOpacity>
                     <TouchableOpacity
 						style={styles.menuButtonContainer}
 						onPress={() => this.props.navigation.navigate('Journals')}>
-						<Text style={styles.registerButtonText}>Profile</Text>
+						<Text style={styles.menuButtonText}>Profile</Text>
 					</TouchableOpacity>
 				</View>
   		</View>
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   },
   homeTitle: {
     color: 'white',
-		fontSize: 35,
+		fontSize: 25,
     fontWeight: 'bold',
 		marginBottom: 30
   },

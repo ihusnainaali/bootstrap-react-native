@@ -16,10 +16,23 @@ import Splash from './Splash';
 import Welcome from './src/components/welcome/Welcome';
 import Login from './src/components/login/Login';
 import Register from './src/components/register/Register';
+import Home from './src/components/home/Home';
 
 class HomeScreen extends Component {
   static navigationOptions = {
     title: 'Home',
+  };
+
+  render() {
+    return (
+      <Home />
+    );
+  }
+}
+
+class WelcomeScreen extends Component {
+  static navigationOptions = {
+    title: 'Welcome',
   };
 
   render() {
@@ -57,6 +70,9 @@ const RootStack = StackNavigator(
   {
     Home: {
       screen: HomeScreen,
+    },
+    Welcome: {
+      screen: WelcomeScreen,
     },
     Login: {
       screen: LoginScreen,
