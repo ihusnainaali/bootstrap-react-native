@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Image, View, Text, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
-class Login extends Component {
+class Register extends Component {
 	render() {
     return (
   		<View style={styles.wrapper}>
         <View style={styles.titleWrapper}>
-					<Text style={styles.title}>Login</Text>
+					<Text style={styles.title}>Registration</Text>
         </View>
   		</View>
     );
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withNavigation(Login);
+export default withNavigation(Register);
