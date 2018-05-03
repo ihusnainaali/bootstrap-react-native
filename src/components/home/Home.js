@@ -1,62 +1,83 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { TabNavigator,TabBarBottom } from 'react-navigation';
+import { TabNavigator,TabBarBottom,withNavigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-class HomeScreen extends React.Component {
+// TODO Routing Handled Here
+import Pangyou from '../pangyou/Pangyou';
+import Friends from '../friends/Friends';
+import Journals from '../journals/Journals';
+import Profile from '../profile/Profile';
+import Settings from '../settings/Settings';
+
+class PangyouScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Pangyou',
+  };
+
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Home!</Text>
-      </View>
+      <Pangyou />
     );
   }
 }
 
 class FriendsScreen extends React.Component {
+
+  static navigationOptions = {
+    title: 'Friends',
+  };
+
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Friends!</Text>
-      </View>
+      <Friends />
     );
   }
 }
 
 class JournalsScreen extends React.Component {
+
+  static navigationOptions = {
+    title: 'Journals',
+  };
+
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Journals!</Text>
-      </View>
+      <Journals />
     );
   }
 }
 
 class ProfileScreen extends React.Component {
+
+  static navigationOptions = {
+    title: 'Profile',
+  };
+
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Profile!</Text>
-      </View>
+      <Profile />
     );
   }
 }
 
-
 class SettingsScreen extends React.Component {
+
+  static navigationOptions = {
+    title: 'Settings',
+  };
+
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Settings!</Text>
-      </View>
+      <Settings />
     );
   }
+
 }
 
 export default TabNavigator(
   {
-		Home: { screen: HomeScreen },
+		Pangyou: { screen: PangyouScreen },
 		Friends: { screen: FriendsScreen },
 		Journals: {screen: JournalsScreen},
 		Profile: {screen: ProfileScreen},
@@ -67,7 +88,7 @@ export default TabNavigator(
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === 'Home') {
+        if (routeName === 'Pangyou') {
           iconName = `face`;
 				} else if (routeName === 'Friends') {
 					iconName = `people${focused ? '' : '-outline'}`;

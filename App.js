@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   Platform,
@@ -59,9 +53,9 @@ class RegisterScreen extends Component {
 
 // The Home Screen after Authenticated Log-in
 class HomeScreen extends Component {
-  static navigationOptions = {
-    title: 'Home',
-  };
+  // static navigationOptions = {
+  //   title: 'Home',
+  // };
 
   render() {
     return (
@@ -90,7 +84,7 @@ const RootStack = StackNavigator(
     initialRouteName: 'Home',
     navigationOptions: {
       headerStyle: {
-        backgroundColor: '#4C989F',
+        backgroundColor: '#80d6ff',
       },
       headerTintColor: '#376569',
       headerTitleStyle: {
