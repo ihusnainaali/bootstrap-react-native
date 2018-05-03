@@ -32,7 +32,7 @@ class Welcome extends Component {
 
 const styles = StyleSheet.create({
 	welcomeWrapper: {
-		backgroundColor: '#80d6ff',
+		backgroundColor: '#ffffff',
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center'
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     height: 168
   },
 	loginButtonContainer: {
-		backgroundColor: '#f6d7c3',
+		backgroundColor: '#80d6ff',
 		borderWidth:8,
 		borderRadius: 40,
 		borderColor: '#000000',
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
 		color: '#000000'
 	},
 	registerButtonContainer: {
-		backgroundColor: '#f6d7c3',
+		backgroundColor: '#80d6ff',
 		borderWidth:8,
 		borderRadius: 40,
 		borderColor: '#000000',

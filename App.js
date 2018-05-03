@@ -11,6 +11,7 @@ import Welcome from './src/components/welcome/Welcome';
 import Login from './src/components/login/Login';
 import Register from './src/components/register/Register';
 import Home from './src/components/home/Home';
+import Verification from './src/components/verification/Verification';
 
 // Initial Loading Screen
 class WelcomeScreen extends Component {
@@ -51,15 +52,26 @@ class RegisterScreen extends Component {
   }
 }
 
-// The Home Screen after Authenticated Log-in
 class HomeScreen extends Component {
-  // static navigationOptions = {
-  //   title: 'Home',
-  // };
+  static navigationOptions = {
+    title: 'Home',
+  };
 
   render() {
     return (
       <Home />
+    );
+  }
+}
+
+class VerificationScreen extends Component {
+  static navigationOptions = {
+    title: 'Verification',
+  };
+
+  render() {
+    return (
+      <Verification />
     );
   }
 }
@@ -79,14 +91,17 @@ const RootStack = StackNavigator(
       screen: HomeScreen,
     },
     // TODO Add Remaining Screens
+    Verification: {
+      screen: VerificationScreen,
+    },
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Welcome',
     navigationOptions: {
       headerStyle: {
-        backgroundColor: '#80d6ff',
+        backgroundColor: '#ffffff',
       },
-      headerTintColor: '#376569',
+      headerTintColor: '#80d6ff',
       headerTitleStyle: {
         fontWeight: 'bold',
       },

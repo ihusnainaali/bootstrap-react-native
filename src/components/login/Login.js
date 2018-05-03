@@ -2,7 +2,50 @@ import React, { Component } from 'react';
 import { Image, View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
+import Amplify, { Auth } from 'aws-amplify'
+import config from '../../../aws-exports'
+Amplify.configure(config)
+
 class Login extends Component {
+	state = {
+		username: '',
+		password: '',
+		error: '',
+		user: {}
+	}
+
+  onChangeText = (key, value) => {
+    this.setState({
+      [key]: value
+    })
+	}
+
+	setError(error){
+		this.setState({error});
+	}
+	
+	clearError(){
+		this.setState({error: ''});
+	}
+
+	signIn() {
+		const {username, password} = this.state
+		this.clearError();
+
+		Auth.signIn(username, password)
+			.then(user => {
+				console.log(user);
+			})
+			.catch(err => {
+				if (err.code === "UserNotConfirmedException") {
+					this.props.navigation.navigate('Verification', {username});
+				}
+				else {
+					this.setError(err.message);
+				}
+			})
+	}
+
 	render() {
     return (
 			<KeyboardAvoidingView behavior="padding" style={styles.loginWrapper}>
@@ -12,29 +55,32 @@ class Login extends Component {
 				<View style={styles.loginMiddleGrid}>
 					<TextInput
 						placeholder="Username or Email"
-						placeholderTextColor="#d1d1d1"
+						placeholderTextColor="#000000"
 						returnKeyType="next"
 						onSubmitEditing={() => this.passwordInput.focus()}
 						keyboardType="email-address"
 						autoCapitalize="none"
 						autoCorrect={false}
 						style={styles.loginInput}
+						onChangeText={(value) => this.onChangeText("username", value)}
 						/>
 					<TextInput
 						placeholder="Password"
-						placeholderTextColor="#d1d1d1"
+						placeholderTextColor="#000000"
 						returnKeyType="go"
 						secureTextEntry
 						autoCapitalize="none"
 						autoCorrect={false}
 						style={styles.loginInput}
 						ref={(input) => this.passwordInput = input}
+						onChangeText={(value) => this.onChangeText("password", value)}
 						/>
+						<Text>{this.state.error}</Text>
 				</View>
 				<View style={styles.loginBottomGrid}>
 					<TouchableOpacity
 						style={styles.submitButtonContainer}
-						onPress={() => this.props.navigation.navigate('Submit')}>
+						onPress={this.props.navigation.navigate('Home')}>
 						<Text style={styles.submitButtonText}>LOGIN</Text>
 					</TouchableOpacity>
 				</View>
@@ -78,16 +124,19 @@ const styles = StyleSheet.create({
   },
 	loginInput: {
 		height: 50,
-		backgroundColor: '#4C989F',
+		backgroundColor: '#80d6ff',
+		borderWidth:1,
+		borderColor: '#000000',
 		marginBottom: 30,
 		color: '#FFFFFF',
 		fontWeight: 'bold',
 		paddingHorizontal: 10,
+		paddingVertical: 10,
 		width: 275
 	},
 	submitButtonContainer: {
-		backgroundColor: '#4C989F',
-		borderWidth:8,
+		backgroundColor: '#80d6ff',
+		borderWidth:1,
 		borderRadius: 40,
 		borderColor: '#000000',
 		marginBottom: 20,
@@ -98,7 +147,7 @@ const styles = StyleSheet.create({
 		fontSize: 28,
     fontWeight: '900',
 		textAlign: 'center',
-		color: '#FFFFFF'
+		color: '#000000'
 	}
 });
 
