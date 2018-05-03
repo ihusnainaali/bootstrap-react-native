@@ -1,65 +1,95 @@
-import React, { Component } from 'react';
-import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { TabNavigator, withNavigation } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+import React from 'react';
+import { Text, View } from 'react-native';
+import { TabNavigator,TabBarBottom } from 'react-navigation';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-
-class Home extends Component {
-	render() {
+class HomeScreen extends React.Component {
+  render() {
     return (
-  		<View style={styles.homeWrapper}>
-
-        <View style={styles.homeTopGrid}>
-					<Text style={styles.homeTitle}>Welcome</Text>
-        </View>
-        
-  		</View>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Home!</Text>
+      </View>
     );
-	}
+  }
 }
 
-const styles = StyleSheet.create({
-	homeWrapper: {
-		backgroundColor: '#4C989F',
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-  homeTopGrid: {
-    flex: 1,
-		marginTop: 100,
-		alignItems: 'center'
-  },
-	menuBottomGrid: {
-		flex: 1,
-		flexDirection: 'row'
-  },
-  homeTitle: {
-    color: 'white',
-		fontSize: 25,
-    fontWeight: 'bold',
-		marginBottom: 30
-  },
-	homeLogo: {
-    width: 168,
-    height: 148
-  },
-	homeButton: {
-		backgroundColor: '#f6d7c3',
-		borderWidth:1,
-		borderRadius: 40,
-		borderColor: '#000000',
-		width: 125,
-		paddingVertical: 50,
-		paddingHorizontal: 10,
-		marginBottom: 10
-	},
-	menuButtonText: {
-		fontSize: 18,
-    fontWeight: '900',
-		textAlign: 'center',
-		color: '#000000'
-	},
-});
+class FriendsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Friends!</Text>
+      </View>
+    );
+  }
+}
 
-export default withNavigation(Home);
+class JournalsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Journals!</Text>
+      </View>
+    );
+  }
+}
+
+class ProfileScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Profile!</Text>
+      </View>
+    );
+  }
+}
+
+
+class SettingsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Settings!</Text>
+      </View>
+    );
+  }
+}
+
+export default TabNavigator(
+  {
+		Home: { screen: HomeScreen },
+		Friends: { screen: FriendsScreen },
+		Journals: {screen: JournalsScreen},
+		Profile: {screen: ProfileScreen},
+    Settings: { screen: SettingsScreen },
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'Home') {
+          iconName = `face`;
+				} else if (routeName === 'Friends') {
+					iconName = `people${focused ? '' : '-outline'}`;
+				} else if (routeName === 'Journals') {
+          iconName = `library-books`;
+				} else if (routeName === 'Profile') {
+					iconName = `person${focused ? '' : '-outline'}`;
+				} else if (routeName === 'Settings') {
+          iconName = `settings`;
+        }
+        // You can return any component that you like here! We usually use an
+        // icon component from react-native-vector-icons
+        return <MaterialIcons name={iconName} size={25} color={tintColor} />;
+      },
+    }),
+    tabBarOptions: {
+      activeTintColor: '#80d6ff',
+      inactiveTintColor: 'gray',
+    },
+    tabBarComponent: TabBarBottom,
+    tabBarPosition: 'bottom',
+    animationEnabled: true,
+    swipeEnabled: false,
+  }
+);
