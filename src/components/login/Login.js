@@ -80,7 +80,7 @@ class Login extends Component {
 				<View style={styles.loginBottomGrid}>
 					<TouchableOpacity
 						style={styles.submitButtonContainer}
-						onPress={this.signIn.bind(this)}>
+						onPress={this.props.navigation.navigate('Home')}>
 						<Text style={styles.submitButtonText}>LOGIN</Text>
 					</TouchableOpacity>
 				</View>

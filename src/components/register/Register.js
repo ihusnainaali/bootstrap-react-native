@@ -15,6 +15,26 @@ class Register extends Component {
     error: null
   }
 
+  setAuthCode(authCode) { // 2
+    this.setState({ authCode });
+  }
+
+  setUsername(username) {
+    this.setState({ username });
+  }
+
+  setEmail(email) {
+    this.setState({ email });
+  }
+  
+  setPassword(password) {	
+    this.setState({ password });
+  }
+
+  setPasswordConfirmation(passwordConfirmation) {
+    this.setState({ passwordConfirmation });
+  }
+  
   onChangeText = (key, value) => {
     this.setState({
       [key]: value
