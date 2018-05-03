@@ -18,18 +18,7 @@ import Login from './src/components/login/Login';
 import Register from './src/components/register/Register';
 import Home from './src/components/home/Home';
 
-class HomeScreen extends Component {
-  static navigationOptions = {
-    title: 'Home',
-  };
-
-  render() {
-    return (
-      <Home />
-    );
-  }
-}
-
+// Initial Loading Screen
 class WelcomeScreen extends Component {
   static navigationOptions = {
     title: 'Welcome',
@@ -42,6 +31,7 @@ class WelcomeScreen extends Component {
   }
 }
 
+// Log-in Screen
 class LoginScreen extends Component {
   static navigationOptions = {
     title: 'Login',
@@ -54,6 +44,7 @@ class LoginScreen extends Component {
   }
 }
 
+// Registration Screen
 class RegisterScreen extends Component {
   static navigationOptions = {
     title: 'Register',
@@ -66,11 +57,21 @@ class RegisterScreen extends Component {
   }
 }
 
+// The Home Screen after Authenticated Log-in
+class HomeScreen extends Component {
+  static navigationOptions = {
+    title: 'Home',
+  };
+
+  render() {
+    return (
+      <Home />
+    );
+  }
+}
+
 const RootStack = StackNavigator(
   {
-    Home: {
-      screen: HomeScreen,
-    },
     Welcome: {
       screen: WelcomeScreen,
     },
@@ -80,6 +81,10 @@ const RootStack = StackNavigator(
     Register: {
       screen: RegisterScreen,
     },
+    Home: {
+      screen: HomeScreen,
+    },
+    // TODO Add Remaining Screens
   },
   {
     initialRouteName: 'Home',

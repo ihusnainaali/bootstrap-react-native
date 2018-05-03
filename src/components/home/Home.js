@@ -1,32 +1,18 @@
 import React, { Component } from 'react';
 import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, withNavigation } from 'react-navigation';
 import { Icon } from 'react-native-elements';
+
 
 class Home extends Component {
 	render() {
     return (
   		<View style={styles.homeWrapper}>
+
         <View style={styles.homeTopGrid}>
 					<Text style={styles.homeTitle}>Welcome</Text>
         </View>
-				<View style={styles.homeBottomGrid}>
-					<TouchableOpacity
-						style={styles.menuButtonContainer}
-						onPress={() => this.props.navigation.navigate('Friends')}>
-						<Text style={styles.menuButtonText}>Friends</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						style={styles.menuButtonContainer}
-						onPress={() => this.props.navigation.navigate('Journals')}>
-						<Text style={styles.menuButtonText}>Journals</Text>
-					</TouchableOpacity>
-                    <TouchableOpacity
-						style={styles.menuButtonContainer}
-						onPress={() => this.props.navigation.navigate('Journals')}>
-						<Text style={styles.menuButtonText}>Profile</Text>
-					</TouchableOpacity>
-				</View>
+        
   		</View>
     );
 	}
@@ -44,11 +30,9 @@ const styles = StyleSheet.create({
 		marginTop: 100,
 		alignItems: 'center'
   },
-	homeBottomGrid: {
-    flex: 1,
-		marginTop: 125,
-		marginBottom: 100,
-		alignItems: 'center'
+	menuBottomGrid: {
+		flex: 1,
+		flexDirection: 'row'
   },
   homeTitle: {
     color: 'white',
@@ -58,19 +42,20 @@ const styles = StyleSheet.create({
   },
 	homeLogo: {
     width: 168,
-    height: 168
+    height: 148
   },
-	menuButtonContainer: {
+	homeButton: {
 		backgroundColor: '#f6d7c3',
-		borderWidth:8,
+		borderWidth:1,
 		borderRadius: 40,
 		borderColor: '#000000',
-		marginBottom: 20,
-		paddingVertical: 10,
-		width: 250
+		width: 125,
+		paddingVertical: 50,
+		paddingHorizontal: 10,
+		marginBottom: 10
 	},
 	menuButtonText: {
-		fontSize: 28,
+		fontSize: 18,
     fontWeight: '900',
 		textAlign: 'center',
 		color: '#000000'
