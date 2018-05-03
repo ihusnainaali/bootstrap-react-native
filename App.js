@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   Platform,
@@ -16,10 +10,12 @@ import Splash from './Splash';
 import Welcome from './src/components/welcome/Welcome';
 import Login from './src/components/login/Login';
 import Register from './src/components/register/Register';
+import Home from './src/components/home/Home';
 
-class HomeScreen extends Component {
+// Initial Loading Screen
+class WelcomeScreen extends Component {
   static navigationOptions = {
-    title: 'Home',
+    title: 'Welcome',
   };
 
   render() {
@@ -29,6 +25,7 @@ class HomeScreen extends Component {
   }
 }
 
+// Log-in Screen
 class LoginScreen extends Component {
   static navigationOptions = {
     title: 'Login',
@@ -41,6 +38,7 @@ class LoginScreen extends Component {
   }
 }
 
+// Registration Screen
 class RegisterScreen extends Component {
   static navigationOptions = {
     title: 'Register',
@@ -53,10 +51,23 @@ class RegisterScreen extends Component {
   }
 }
 
+// The Home Screen after Authenticated Log-in
+class HomeScreen extends Component {
+  // static navigationOptions = {
+  //   title: 'Home',
+  // };
+
+  render() {
+    return (
+      <Home />
+    );
+  }
+}
+
 const RootStack = StackNavigator(
   {
-    Home: {
-      screen: HomeScreen,
+    Welcome: {
+      screen: WelcomeScreen,
     },
     Login: {
       screen: LoginScreen,
@@ -64,12 +75,16 @@ const RootStack = StackNavigator(
     Register: {
       screen: RegisterScreen,
     },
+    Home: {
+      screen: HomeScreen,
+    },
+    // TODO Add Remaining Screens
   },
   {
     initialRouteName: 'Home',
     navigationOptions: {
       headerStyle: {
-        backgroundColor: '#4C989F',
+        backgroundColor: '#80d6ff',
       },
       headerTintColor: '#376569',
       headerTitleStyle: {
