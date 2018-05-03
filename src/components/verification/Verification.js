@@ -23,15 +23,21 @@ class Verification extends Component {
         this.setState({error});
     }
 
+    clearError(){
+		this.setState({error: ''});
+    }
+    
     confirmSignUp() { // 1
         const {username, verificationCode} = this.state
+        this.clearError();
+
         Auth.confirmSignUp(username, verificationCode)
             .then(res => {
                 console.log(res);
                 this.props.navigation.navigate('Login');
             })
             .catch(err => {
-                console.log('error confirm signup: ', err)
+                this.setError(err.message);
             })
     }
 

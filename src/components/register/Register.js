@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { Image, View, Text, StyleSheet, TextInput, Button, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import Amplify, { Auth } from 'aws-amplify'
@@ -25,6 +25,10 @@ class Register extends Component {
     this.setState({ error });
   }
 
+  clearError(){
+		this.setState({error: ''});
+	}
+
   validateEmail(email) {
     var EmailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var eduEndingRegex = /^.*\.edu$|^.*\.edu\.[a-zA-Z]{2,}/
@@ -42,8 +46,9 @@ class Register extends Component {
   }
 
   signUp() {
-    const {username, email, password, passwordConfirmation} = this.state;
-    this.state.error = '';
+    const { username, email, password, passwordConfirmation } = this.state;
+    this.clearError();
+
     if (!this.validateEmail(email)) {
       this.setError('Please use the school email to register.');
       return;
@@ -75,73 +80,121 @@ class Register extends Component {
 
   render() {
     return (
-      <View style={styles.wrapper}>
-        <TextInput
-          placeholder="User Name"
-          autoCapitalize="none"
-          onChangeText={(value) => this.onChangeText("username", value)}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Email"
-          autoCapitalize="none"
-          onChangeText={(value) => this.onChangeText("email", value)}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Password"
-          autoCapitalize="none"
-          secureTextEntry
-          onChangeText={(value) => this.onChangeText("password", value)}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Confirm Password"
-          autoCapitalize="none"
-          secureTextEntry
-          onChangeText={(value) => this.onChangeText("passwordConfirmation", value)}
-          style={styles.input}
-        />
-        <Button title='Sign Up' onPress={this.signUp.bind(this)} />
-        <View style={styles.titleWrapper}>
-          <Text style={styles.title}>Registration</Text>
+      <KeyboardAvoidingView behavior="padding" style={styles.registerWrapper}>
+        <View style={styles.registerTopGrid}>
+          <Text style={styles.registerTitle}>Register</Text>
+        </View>
+        <View style={styles.registerMiddleGrid}>
+          <TextInput
+            placeholder="Username"
+            placeholderTextColor="#d1d1d1"
+            returnKeyType="next"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            style={styles.registerInput}
+            onChangeText={(value) => this.onChangeText("username", value)}
+          />
+          <TextInput
+            placeholder="Email"
+            placeholderTextColor="#d1d1d1"
+            returnKeyType="next"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            style={styles.registerInput}
+            onChangeText={(value) => this.onChangeText("email", value)}
+          />
+          <TextInput
+            placeholder="Password"
+            placeholderTextColor="#d1d1d1"
+            returnKeyType="go"
+            secureTextEntry
+            autoCapitalize="none"
+            autoCorrect={false}
+            style={styles.registerInput}
+            onChangeText={(value) => this.onChangeText("password", value)}
+          />
+          <TextInput
+            placeholder="Confirm Password"
+            placeholderTextColor="#d1d1d1"
+            returnKeyType="go"
+            secureTextEntry
+            autoCapitalize="none"
+            autoCorrect={false}
+            style={styles.registerInput}
+            onChangeText={(value) => this.onChangeText("passwordConfirmation", value)}
+          />
           <Text>{this.state.error}</Text>
         </View>
-      </View>
+        <View style={styles.registerBottomGrid}>
+          <TouchableOpacity
+            style={styles.submitButtonContainer}
+            onPress={this.signUp.bind(this)}>
+            <Text style={styles.submitButtonText}>Register</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    backgroundColor: '#4C989F',
+  registerWrapper: {
+    backgroundColor: '#FFFFFF',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
-  titleWrapper: {
+  registerTopGrid: {
     flex: 1,
-    justifyContent: 'center',
+    marginTop: 100,
+    alignItems: 'center'
   },
-  titleLogo: {
-    width: 200,
-    height: 450
+  registerMiddleGrid: {
+    flex: 1,
+    marginTop: 20,
+    alignItems: 'center'
   },
-  title: {
-    color: 'white',
+  registerBottomGrid: {
+    flex: 1,
+    marginTop: 125,
+    marginBottom: 100,
+    alignItems: 'center'
+  },
+  registerTitle: {
+    color: 'black',
     fontSize: 35,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginBottom: 30
   },
-  subtitle: {
-    color: 'white',
-    fontWeight: 'normal',
-    paddingBottom: 15
+  registerLogo: {
+    width: 168,
+    height: 168
   },
-  input: {
-    width: 300,
-    paddingBottom: 10,
-    alignItems: 'flex-start',
-    backgroundColor: 'white'
+  registerInput: {
+    height: 30,
+    backgroundColor: '#4C989F',
+    marginBottom: 10,
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    paddingHorizontal: 10,
+    width: 275
+  },
+  submitButtonContainer: {
+    backgroundColor: '#4C989F',
+    borderWidth: 8,
+    borderRadius: 40,
+    borderColor: '#000000',
+    marginBottom: 20,
+    paddingVertical: 10,
+    width: 250
+  },
+  submitButtonText: {
+    fontSize: 28,
+    fontWeight: '900',
+    textAlign: 'center',
+    color: '#FFFFFF'
   }
 });
 

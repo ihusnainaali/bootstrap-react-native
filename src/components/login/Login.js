@@ -24,8 +24,14 @@ class Login extends Component {
 		this.setState({error});
 	}
 	
-	signIn() { // 1
+	clearError(){
+		this.setState({error: ''});
+	}
+
+	signIn() {
 		const {username, password} = this.state
+		this.clearError();
+
 		Auth.signIn(username, password)
 			.then(user => {
 				console.log(user);
