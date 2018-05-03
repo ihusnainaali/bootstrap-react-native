@@ -10,10 +10,7 @@ import Splash from './Splash';
 import Welcome from './src/components/welcome/Welcome';
 import Login from './src/components/login/Login';
 import Register from './src/components/register/Register';
-<<<<<<< HEAD
-=======
 import Home from './src/components/home/Home';
->>>>>>> fe1e1f65940de344318eb1f4bb0dd96716f3dc17
 import Verification from './src/components/verification/Verification';
 
 // Initial Loading Screen
@@ -55,9 +52,6 @@ class RegisterScreen extends Component {
   }
 }
 
-<<<<<<< HEAD
-=======
-// The Home Screen after Authenticated Log-in
 class HomeScreen extends Component {
   static navigationOptions = {
     title: 'Home',
@@ -70,7 +64,6 @@ class HomeScreen extends Component {
   }
 }
 
->>>>>>> fe1e1f65940de344318eb1f4bb0dd96716f3dc17
 class VerificationScreen extends Component {
   static navigationOptions = {
     title: 'Verification',
@@ -94,24 +87,21 @@ const RootStack = StackNavigator(
     Register: {
       screen: RegisterScreen,
     },
-<<<<<<< HEAD
-=======
     Home: {
       screen: HomeScreen,
     },
     // TODO Add Remaining Screens
->>>>>>> fe1e1f65940de344318eb1f4bb0dd96716f3dc17
     Verification: {
       screen: VerificationScreen,
     },
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Welcome',
     navigationOptions: {
       headerStyle: {
-        backgroundColor: '#80d6ff',
+        backgroundColor: '#ffffff',
       },
-      headerTintColor: '#376569',
+      headerTintColor: '#80d6ff',
       headerTitleStyle: {
         fontWeight: 'bold',
       },

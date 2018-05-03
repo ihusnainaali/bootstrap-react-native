@@ -24,7 +24,6 @@ class Login extends Component {
 		this.setState({error});
 	}
 	
-<<<<<<< HEAD
 	clearError(){
 		this.setState({error: ''});
 	}
@@ -33,10 +32,6 @@ class Login extends Component {
 		const {username, password} = this.state
 		this.clearError();
 
-=======
-	signIn() { // 1
-		const {username, password} = this.state
->>>>>>> fe1e1f65940de344318eb1f4bb0dd96716f3dc17
 		Auth.signIn(username, password)
 			.then(user => {
 				console.log(user);
@@ -60,7 +55,7 @@ class Login extends Component {
 				<View style={styles.loginMiddleGrid}>
 					<TextInput
 						placeholder="Username or Email"
-						placeholderTextColor="#d1d1d1"
+						placeholderTextColor="#000000"
 						returnKeyType="next"
 						onSubmitEditing={() => this.passwordInput.focus()}
 						keyboardType="email-address"
@@ -71,7 +66,7 @@ class Login extends Component {
 						/>
 					<TextInput
 						placeholder="Password"
-						placeholderTextColor="#d1d1d1"
+						placeholderTextColor="#000000"
 						returnKeyType="go"
 						secureTextEntry
 						autoCapitalize="none"
@@ -129,16 +124,19 @@ const styles = StyleSheet.create({
   },
 	loginInput: {
 		height: 50,
-		backgroundColor: '#4C989F',
+		backgroundColor: '#80d6ff',
+		borderWidth:1,
+		borderColor: '#000000',
 		marginBottom: 30,
 		color: '#FFFFFF',
 		fontWeight: 'bold',
 		paddingHorizontal: 10,
+		paddingVertical: 10,
 		width: 275
 	},
 	submitButtonContainer: {
-		backgroundColor: '#4C989F',
-		borderWidth:8,
+		backgroundColor: '#80d6ff',
+		borderWidth:1,
 		borderRadius: 40,
 		borderColor: '#000000',
 		marginBottom: 20,
@@ -149,7 +147,7 @@ const styles = StyleSheet.create({
 		fontSize: 28,
     fontWeight: '900',
 		textAlign: 'center',
-		color: '#FFFFFF'
+		color: '#000000'
 	}
 });
 

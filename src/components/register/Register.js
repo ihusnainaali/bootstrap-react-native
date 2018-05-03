@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { Image, View, Text, StyleSheet, TextInput, Button, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import Amplify, { Auth } from 'aws-amplify'
@@ -87,7 +87,7 @@ class Register extends Component {
         <View style={styles.registerMiddleGrid}>
           <TextInput
             placeholder="Username"
-            placeholderTextColor="#d1d1d1"
+            placeholderTextColor="#000000"
             returnKeyType="next"
             keyboardType="email-address"
             autoCapitalize="none"
@@ -97,7 +97,7 @@ class Register extends Component {
           />
           <TextInput
             placeholder="Email"
-            placeholderTextColor="#d1d1d1"
+            placeholderTextColor="#000000"
             returnKeyType="next"
             keyboardType="email-address"
             autoCapitalize="none"
@@ -107,7 +107,7 @@ class Register extends Component {
           />
           <TextInput
             placeholder="Password"
-            placeholderTextColor="#d1d1d1"
+            placeholderTextColor="#000000"
             returnKeyType="go"
             secureTextEntry
             autoCapitalize="none"
@@ -117,7 +117,7 @@ class Register extends Component {
           />
           <TextInput
             placeholder="Confirm Password"
-            placeholderTextColor="#d1d1d1"
+            placeholderTextColor="#000000"
             returnKeyType="go"
             secureTextEntry
             autoCapitalize="none"
@@ -174,15 +174,15 @@ const styles = StyleSheet.create({
   },
   registerInput: {
     height: 30,
-    backgroundColor: '#4C989F',
+    backgroundColor: '#80d6ff',
     marginBottom: 10,
-    color: '#FFFFFF',
+    color: '#000000',
     fontWeight: 'bold',
     paddingHorizontal: 10,
     width: 275
   },
   submitButtonContainer: {
-    backgroundColor: '#4C989F',
+    backgroundColor: '#80d6ff',
     borderWidth: 8,
     borderRadius: 40,
     borderColor: '#000000',
@@ -194,22 +194,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '900',
     textAlign: 'center',
-    color: '#FFFFFF'
-  title: {
-    color: 'white',
-    fontSize: 35,
-    fontWeight: 'bold'
-  },
-  subtitle: {
-    color: 'white',
-    fontWeight: 'normal',
-    paddingBottom: 15
-  },
-  input: {
-    width: 300,
-    paddingBottom: 10,
-    alignItems: 'flex-start',
-    backgroundColor: 'white'
+    color: '#000000'
   }
 });
 
