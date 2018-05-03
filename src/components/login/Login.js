@@ -14,6 +14,18 @@ class Login extends Component {
 		user: {}
 	}
 
+	setAuthCode(authCode) { // 2
+		this.setState({ authCode });
+	}
+
+	setUsername(username) {
+		this.setState({ username });
+	}
+
+	setPassword(password) {
+		this.setState({ password });
+	}
+
   onChangeText = (key, value) => {
     this.setState({
       [key]: value
@@ -23,7 +35,7 @@ class Login extends Component {
 	setError(error){
 		this.setState({error});
 	}
-	
+
 	clearError(){
 		this.setState({error: ''});
 	}
@@ -80,7 +92,7 @@ class Login extends Component {
 				<View style={styles.loginBottomGrid}>
 					<TouchableOpacity
 						style={styles.submitButtonContainer}
-						onPress={this.props.navigation.navigate('Home')}>
+						onPress={this.signIn.bind(this)}>
 						<Text style={styles.submitButtonText}>LOGIN</Text>
 					</TouchableOpacity>
 				</View>
