@@ -2,7 +2,44 @@ import React, { Component } from 'react';
 import { Image, View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
+import Amplify, { Auth } from 'aws-amplify'
+import config from '../../../aws-exports'
+Amplify.configure(config)
+
 class Login extends Component {
+	state = {
+		username: '',
+		password: '',
+		error: '',
+		user: {}
+	}
+
+  onChangeText = (key, value) => {
+    this.setState({
+      [key]: value
+    })
+	}
+
+	setError(error){
+		this.setState({error});
+	}
+	
+	signIn() { // 1
+		const {username, password} = this.state
+		Auth.signIn(username, password)
+			.then(user => {
+				console.log(user);
+			})
+			.catch(err => {
+				if (err.code === "UserNotConfirmedException") {
+					this.props.navigation.navigate('Verification', {username});
+				}
+				else {
+					this.setError(err.message);
+				}
+			})
+	}
+
 	render() {
     return (
 			<KeyboardAvoidingView behavior="padding" style={styles.loginWrapper}>
@@ -19,6 +56,7 @@ class Login extends Component {
 						autoCapitalize="none"
 						autoCorrect={false}
 						style={styles.loginInput}
+						onChangeText={(value) => this.onChangeText("username", value)}
 						/>
 					<TextInput
 						placeholder="Password"
@@ -29,12 +67,14 @@ class Login extends Component {
 						autoCorrect={false}
 						style={styles.loginInput}
 						ref={(input) => this.passwordInput = input}
+						onChangeText={(value) => this.onChangeText("password", value)}
 						/>
+						<Text>{this.state.error}</Text>
 				</View>
 				<View style={styles.loginBottomGrid}>
 					<TouchableOpacity
 						style={styles.submitButtonContainer}
-						onPress={() => this.props.navigation.navigate('Submit')}>
+						onPress={this.signIn.bind(this)}>
 						<Text style={styles.submitButtonText}>LOGIN</Text>
 					</TouchableOpacity>
 				</View>
