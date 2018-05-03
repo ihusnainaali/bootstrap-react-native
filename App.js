@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   Platform,
@@ -16,11 +10,16 @@ import Splash from './Splash';
 import Welcome from './src/components/welcome/Welcome';
 import Login from './src/components/login/Login';
 import Register from './src/components/register/Register';
+<<<<<<< HEAD
+=======
+import Home from './src/components/home/Home';
+>>>>>>> fe1e1f65940de344318eb1f4bb0dd96716f3dc17
 import Verification from './src/components/verification/Verification';
 
-class HomeScreen extends Component {
+// Initial Loading Screen
+class WelcomeScreen extends Component {
   static navigationOptions = {
-    title: 'Home',
+    title: 'Welcome',
   };
 
   render() {
@@ -30,6 +29,7 @@ class HomeScreen extends Component {
   }
 }
 
+// Log-in Screen
 class LoginScreen extends Component {
   static navigationOptions = {
     title: 'Login',
@@ -42,6 +42,7 @@ class LoginScreen extends Component {
   }
 }
 
+// Registration Screen
 class RegisterScreen extends Component {
   static navigationOptions = {
     title: 'Register',
@@ -54,6 +55,22 @@ class RegisterScreen extends Component {
   }
 }
 
+<<<<<<< HEAD
+=======
+// The Home Screen after Authenticated Log-in
+class HomeScreen extends Component {
+  static navigationOptions = {
+    title: 'Home',
+  };
+
+  render() {
+    return (
+      <Home />
+    );
+  }
+}
+
+>>>>>>> fe1e1f65940de344318eb1f4bb0dd96716f3dc17
 class VerificationScreen extends Component {
   static navigationOptions = {
     title: 'Verification',
@@ -68,8 +85,8 @@ class VerificationScreen extends Component {
 
 const RootStack = StackNavigator(
   {
-    Home: {
-      screen: HomeScreen,
+    Welcome: {
+      screen: WelcomeScreen,
     },
     Login: {
       screen: LoginScreen,
@@ -77,6 +94,13 @@ const RootStack = StackNavigator(
     Register: {
       screen: RegisterScreen,
     },
+<<<<<<< HEAD
+=======
+    Home: {
+      screen: HomeScreen,
+    },
+    // TODO Add Remaining Screens
+>>>>>>> fe1e1f65940de344318eb1f4bb0dd96716f3dc17
     Verification: {
       screen: VerificationScreen,
     },
@@ -85,7 +109,7 @@ const RootStack = StackNavigator(
     initialRouteName: 'Home',
     navigationOptions: {
       headerStyle: {
-        backgroundColor: '#4C989F',
+        backgroundColor: '#80d6ff',
       },
       headerTintColor: '#376569',
       headerTitleStyle: {

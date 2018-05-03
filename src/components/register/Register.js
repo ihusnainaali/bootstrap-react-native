@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, View, Text, StyleSheet, TextInput, Button, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { Image, View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import Amplify, { Auth } from 'aws-amplify'
@@ -195,6 +195,21 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     textAlign: 'center',
     color: '#FFFFFF'
+  title: {
+    color: 'white',
+    fontSize: 35,
+    fontWeight: 'bold'
+  },
+  subtitle: {
+    color: 'white',
+    fontWeight: 'normal',
+    paddingBottom: 15
+  },
+  input: {
+    width: 300,
+    paddingBottom: 10,
+    alignItems: 'flex-start',
+    backgroundColor: 'white'
   }
 });
 

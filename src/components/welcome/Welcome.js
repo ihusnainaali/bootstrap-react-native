@@ -32,7 +32,7 @@ class Welcome extends Component {
 
 const styles = StyleSheet.create({
 	welcomeWrapper: {
-		backgroundColor: '#4C989F',
+		backgroundColor: '#80d6ff',
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center'
