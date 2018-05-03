@@ -16,6 +16,7 @@ import Splash from './Splash';
 import Welcome from './src/components/welcome/Welcome';
 import Login from './src/components/login/Login';
 import Register from './src/components/register/Register';
+import Verification from './src/components/verification/Verification';
 
 class HomeScreen extends Component {
   static navigationOptions = {
@@ -53,6 +54,18 @@ class RegisterScreen extends Component {
   }
 }
 
+class VerificationScreen extends Component {
+  static navigationOptions = {
+    title: 'Verification',
+  };
+
+  render() {
+    return (
+      <Verification />
+    );
+  }
+}
+
 const RootStack = StackNavigator(
   {
     Home: {
@@ -63,6 +76,9 @@ const RootStack = StackNavigator(
     },
     Register: {
       screen: RegisterScreen,
+    },
+    Verification: {
+      screen: VerificationScreen,
     },
   },
   {

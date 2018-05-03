@@ -11,73 +11,65 @@ class Register extends Component {
     username: '',
     email: '',
     password: '',
-    passwordConfirmation: ''
+    passwordConfirmation: '',
+    error: null
   }
-  setAuthCode(authCode) { // 2
-    this.setState({ authCode });
+
+  onChangeText = (key, value) => {
+    this.setState({
+      [key]: value
+    })
   }
-  setUsername(username) {
-    this.setState({ username });
+
+  setError(error) {
+    this.setState({ error });
   }
-  setEmail(email) {
-    this.setState({ email });
-  }
-  setPassword(password) {
-    this.setState({ password });
-  }
-  setPasswordConfirmation(passwordConfirmation) {
-    this.setState({ passwordConfirmation });
-  }
-  validateEmail( email ) {
+
+  validateEmail(email) {
     var EmailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var eduEndingRegex = /^.*\.edu$|^.*\.edu\.[a-zA-Z]{2,}/
     var emailString = String(email).toLowerCase()
     return EmailRegex.test(emailString) && eduEndingRegex.test(emailString);
   }
-  confirmPassword( p1, p2 ) {
+
+  confirmPassword(p1, p2) {
     return p1 == p2;
   }
-  validatePassword( password ) {
+
+  validatePassword(password) {
     var strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
     return strongPasswordRegex.test(String(password));
   }
+
   signUp() {
-    if (!this.validateEmail(this.state.email)) {
-      console.log('Email has to be a school email address.');
+    const {username, email, password, passwordConfirmation} = this.state;
+    this.state.error = '';
+    if (!this.validateEmail(email)) {
+      this.setError('Please use the school email to register.');
       return;
     }
-    if (!this.confirmPassword(this.state.password, this.state.passwordConfirmation)) {
-      console.log('Passwords does not match');
+    if (!this.confirmPassword(password, passwordConfirmation)) {
+      this.setError('Passwords does not match');
       return;
     }
-    if (!this.validatePassword(this.state.password)) {
-      console.log('Password is too weak.');
+    if (!this.validatePassword(password)) {
+      this.setError('Password is too weak.');
       return;
     }
 
-    Auth.signUp({ // 3
-      username: this.state.username,
-      password: this.state.password,
+    Auth.signUp({
+      username: username,
+      password: password,
       attributes: {
-        phone_number: '+15555555555',
-        email: this.state.email
+        phone_number: '+11111111111',
+        email: email
       }
     })
       .then(res => {
-        console.log('successful signup: ', res)
+        this.props.navigation.navigate('Verification', { username });
       })
       .catch(err => {
-        console.log('error signing up: ', err)
-      })
-  }
-  confirmUser() { // 4
-    const { authCode } = this.state
-    Auth.confirmSignUp('myCoolUsername', authCode)
-      .then(res => {
-        console.log('successful confirmation: ', res)
-      })
-      .catch(err => {
-        console.log('error confirming user: ', err)
+        this.setError(JSON.stringify(err));
       })
   }
 
@@ -85,28 +77,35 @@ class Register extends Component {
     return (
       <View style={styles.wrapper}>
         <TextInput
-          placeholder='Username'
-          onChangeText={value => this.setUsername(value)}
+          placeholder="User Name"
+          autoCapitalize="none"
+          onChangeText={(value) => this.onChangeText("username", value)}
           style={styles.input}
         />
         <TextInput
-          placeholder='Email'
-          onChangeText={value => this.setEmail(value)}
+          placeholder="Email"
+          autoCapitalize="none"
+          onChangeText={(value) => this.onChangeText("email", value)}
           style={styles.input}
         />
         <TextInput
-          placeholder='Password'
-          onChangeText={value => this.setPassword(value)}
+          placeholder="Password"
+          autoCapitalize="none"
+          secureTextEntry
+          onChangeText={(value) => this.onChangeText("password", value)}
           style={styles.input}
         />
         <TextInput
-          placeholder='Confirm Password'
-          onChangeText={value => this.setPasswordConfirmation(value)}
+          placeholder="Confirm Password"
+          autoCapitalize="none"
+          secureTextEntry
+          onChangeText={(value) => this.onChangeText("passwordConfirmation", value)}
           style={styles.input}
         />
         <Button title='Sign Up' onPress={this.signUp.bind(this)} />
         <View style={styles.titleWrapper}>
           <Text style={styles.title}>Registration</Text>
+          <Text>{this.state.error}</Text>
         </View>
       </View>
     );
