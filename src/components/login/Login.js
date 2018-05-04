@@ -47,6 +47,7 @@ class Login extends Component {
 		Auth.signIn(username, password)
 			.then(user => {
 				console.log(user);
+				this.props.navigation.navigate('Home');
 			})
 			.catch(err => {
 				if (err.code === "UserNotConfirmedException") {
