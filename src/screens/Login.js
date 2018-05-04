@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Image, View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { COLOR_PRIMARY} from '../styles/common'
 
 import Amplify, { Auth } from 'aws-amplify'
-import config from '../../../aws-exports'
+import config from '../../aws-exports'
 Amplify.configure(config)
+
 
 class Login extends Component {
 	state = {
@@ -94,7 +96,7 @@ class Login extends Component {
 					<TouchableOpacity
 						style={styles.submitButtonContainer}
 						onPress={this.signIn.bind(this)}>
-						<Text style={styles.submitButtonText}>LOGIN</Text>
+						<Text style={styles.submitButtonText}>SUBMIT</Text>
 					</TouchableOpacity>
 				</View>
   		</KeyboardAvoidingView>
@@ -104,14 +106,14 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
 	loginWrapper: {
-		backgroundColor: '#FFFFFF',
+		backgroundColor: COLOR_PRIMARY,
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
   loginTopGrid: {
     flex: 1,
-		marginTop: 100,
+		marginTop: 75,
 		alignItems: 'center'
   },
 	loginMiddleGrid: {
@@ -137,24 +139,23 @@ const styles = StyleSheet.create({
   },
 	loginInput: {
 		height: 50,
-		backgroundColor: '#80d6ff',
+		backgroundColor: '#FFFFFF',
 		borderWidth:1,
 		borderColor: '#000000',
 		marginBottom: 30,
-		color: '#FFFFFF',
+		color: '#000000',
 		fontWeight: 'bold',
 		paddingHorizontal: 10,
 		paddingVertical: 10,
 		width: 275
 	},
 	submitButtonContainer: {
-		backgroundColor: '#80d6ff',
+		backgroundColor: '#FFFFFF',
 		borderWidth:1,
-		borderRadius: 40,
 		borderColor: '#000000',
 		marginBottom: 20,
 		paddingVertical: 10,
-		width: 250
+		width: 275
 	},
 	submitButtonText: {
 		fontSize: 28,

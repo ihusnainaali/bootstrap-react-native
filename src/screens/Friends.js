@@ -108,5 +108,4 @@ class Friends extends React.Component {
     }
   });
    
-
 export default withNavigation(Friends);

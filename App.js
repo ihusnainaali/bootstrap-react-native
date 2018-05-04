@@ -7,17 +7,13 @@ import {
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Splash from './Splash';
-import Welcome from './src/components/welcome/Welcome';
-import Login from './src/components/login/Login';
-import Register from './src/components/register/Register';
-import Home from './src/components/home/Home';
-import Verification from './src/components/verification/Verification';
+import Welcome from './src/screens/Welcome';
+import Login from './src/screens/Login';
+import Register from './src/screens/Register';
+import Home from './src/screens/Home';
+import Verification from './src/screens/Verification';
 
-// Initial Loading Screen
 class WelcomeScreen extends Component {
-  static navigationOptions = {
-    title: 'Welcome',
-  };
 
   render() {
     return (
@@ -97,15 +93,6 @@ const RootStack = StackNavigator(
   },
   {
     initialRouteName: 'Welcome',
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: '#ffffff',
-      },
-      headerTintColor: '#80d6ff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    },
   }
 );
 

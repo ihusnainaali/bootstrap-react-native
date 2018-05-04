@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Image, View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { COLOR_PRIMARY} from '../styles/common'
 
 class Welcome extends Component {
 	render() {
@@ -11,7 +12,7 @@ class Welcome extends Component {
 					<Text style={styles.welcomeTitle}>Pangyou</Text>
 					<Image
 						style={styles.welcomeLogo}
-						source={require('../../assets/pangyou_welcome.png')}/>
+						source={require('../assets/pangyou_welcome.png')}/>
         </View>
 				<View style={styles.welcomeBottomGrid}>
 					<TouchableOpacity
@@ -26,20 +27,21 @@ class Welcome extends Component {
 					</TouchableOpacity>
 				</View>
   		</View>
+			
     );
 	}
 }
 
 const styles = StyleSheet.create({
 	welcomeWrapper: {
-		backgroundColor: '#ffffff',
+		backgroundColor: COLOR_PRIMARY,
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
   welcomeTopGrid: {
     flex: 1,
-		marginTop: 100,
+		marginTop: 50,
 		alignItems: 'center'
   },
 	welcomeBottomGrid: {
@@ -49,9 +51,10 @@ const styles = StyleSheet.create({
 		alignItems: 'center'
   },
   welcomeTitle: {
-    color: 'white',
+		color: '#000000',
 		fontSize: 35,
-    fontWeight: 'bold',
+		fontWeight: 'bold',
+		textShadowColor: '#000000',
 		marginBottom: 30
   },
 	welcomeLogo: {
@@ -59,12 +62,10 @@ const styles = StyleSheet.create({
     height: 168
   },
 	loginButtonContainer: {
-		backgroundColor: '#80d6ff',
-		borderWidth:8,
-		borderRadius: 40,
-		borderColor: '#000000',
+		backgroundColor: '#ffffff',
 		marginBottom: 20,
 		paddingVertical: 10,
+		borderRadius: 10,
 		width: 250
 	},
 	loginButtonText: {
@@ -74,12 +75,10 @@ const styles = StyleSheet.create({
 		color: '#000000'
 	},
 	registerButtonContainer: {
-		backgroundColor: '#80d6ff',
-		borderWidth:8,
-		borderRadius: 40,
-		borderColor: '#000000',
+		backgroundColor: '#ffffff',
 		marginBottom: 20,
 		paddingVertical: 10,
+		borderRadius: 10,
 		width: 250
 	},
 	registerButtonText: {

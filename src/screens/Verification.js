@@ -3,7 +3,7 @@ import { Image, View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvo
 import { withNavigation } from 'react-navigation';
 
 import Amplify, { Auth } from 'aws-amplify'
-import config from '../../../aws-exports'
+import config from '../../aws-exports'
 Amplify.configure(config)
 
 class Verification extends Component {
