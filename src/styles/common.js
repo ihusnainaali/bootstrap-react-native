@@ -18,4 +18,7 @@ export const COLOR_SECONDARY_DARK = '#4ba3c7';
 export const FONT_NORMAL = 'Roboto';
 export const FONT_BOLD = 'Roboto-Bold';
 export const TEXT_COLOR = '#000000'
-export const BORDER_RADIUS = 1;
+
+// Borders
+export const BORDER_RADIUS = 10;
+export const BORDER_COLOR = '#000000'
