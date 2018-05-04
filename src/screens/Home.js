@@ -4,11 +4,11 @@ import { TabNavigator,TabBarBottom,withNavigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 // TODO Routing Handled Here
-import Pangyou from '../pangyou/Pangyou';
-import Friends from '../friends/Friends';
-import Journals from '../journals/Journals';
-import Profile from '../profile/Profile';
-import Settings from '../settings/Settings';
+import Pangyou from './Pangyou';
+import Friends from './Friends';
+import Journals from './Journals';
+import Profile from './Profile';
+import Settings from './Settings';
 
 class PangyouScreen extends React.Component {
   static navigationOptions = {

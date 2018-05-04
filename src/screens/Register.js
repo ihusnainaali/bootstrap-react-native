@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Image, View, Text, StyleSheet, TextInput, Button, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { COLOR_PRIMARY} from '../styles/common'
 
 import Amplify, { Auth } from 'aws-amplify'
-import config from '../../../aws-exports'
+import config from '../../aws-exports'
 Amplify.configure(config)
 
 class Register extends Component {
