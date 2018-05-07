@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { COLOR_PRIMARY} from '../styles/common'
+import { COLOR_PRIMARY, COLOR_PRIMARY_DARK, BORDER_RADIUS} from '../styles/common'
 
 import Amplify, { Auth } from 'aws-amplify'
 import config from '../../aws-exports'
@@ -70,7 +70,7 @@ class Login extends Component {
 				<View style={styles.loginMiddleGrid}>
 					<TextInput
 						placeholder="Username or Email"
-						placeholderTextColor="#000000"
+						placeholderTextColor={COLOR_PRIMARY_DARK}
 						returnKeyType="next"
 						onSubmitEditing={() => this.passwordInput.focus()}
 						keyboardType="email-address"
@@ -81,7 +81,7 @@ class Login extends Component {
 						/>
 					<TextInput
 						placeholder="Password"
-						placeholderTextColor="#000000"
+						placeholderTextColor={COLOR_PRIMARY_DARK}
 						returnKeyType="go"
 						secureTextEntry
 						autoCapitalize="none"
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
 	},
   loginTopGrid: {
     flex: 1,
-		marginTop: 75,
+		marginTop: 50,
 		alignItems: 'center'
   },
 	loginMiddleGrid: {
@@ -140,19 +140,17 @@ const styles = StyleSheet.create({
 	loginInput: {
 		height: 50,
 		backgroundColor: '#FFFFFF',
-		borderWidth:1,
-		borderColor: '#000000',
 		marginBottom: 30,
 		color: '#000000',
 		fontWeight: 'bold',
 		paddingHorizontal: 10,
 		paddingVertical: 10,
+		borderRadius: BORDER_RADIUS,
 		width: 275
 	},
 	submitButtonContainer: {
 		backgroundColor: '#FFFFFF',
-		borderWidth:1,
-		borderColor: '#000000',
+		borderRadius: BORDER_RADIUS,
 		marginBottom: 20,
 		paddingVertical: 10,
 		width: 275

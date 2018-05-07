@@ -1,27 +1,28 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
-  TouchableHighlight,
+  Platform,
+  StyleSheet,
   Text,
+  View,
+  TouchableOpacity
 } from 'react-native';
 import styles from './styles';
+import { withNavigation } from 'react-navigation';
 
-const Button = (
+class Button extends Component {
 
-    onPress,
-    buttonStyle = styles.container,
-    textColor = styles.text
+  render() {
 
-) => (
-  <TouchableHighlight style={buttonStyle}>
-    <Text style={textColor}>Click Me</Text>
-  </TouchableHighlight>
-)
+    let screen = this.props.screen;
 
-Button.propTypes = {
-    onPress: React.PropTypes.func.isRequired,
-    label: React.PropTypes.string,
-    buttonStyle: React.PropTypes.any,
-    textColor: React.PropTypes.any,
-};  
+    return (
+      <TouchableOpacity style={styles.container}
+        onPress={() => this.props.navigation.navigate(screen)}>
+          <Text style={styles.text}>{this.props.name}
+          </Text>
+      </TouchableOpacity>
+    );
+  }
+}
 
-export default Button
+export default withNavigation(Button);

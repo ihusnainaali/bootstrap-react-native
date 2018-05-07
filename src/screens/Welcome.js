@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Image, View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { COLOR_PRIMARY} from '../styles/common'
+import { COLOR_PRIMARY} from '../styles/common';
+
+import Button from '../components/Button/index'
 
 class Welcome extends Component {
 	render() {
@@ -15,16 +17,8 @@ class Welcome extends Component {
 						source={require('../assets/pangyou_welcome.png')}/>
         </View>
 				<View style={styles.welcomeBottomGrid}>
-					<TouchableOpacity
-						style={styles.loginButtonContainer}
-						onPress={() => this.props.navigation.navigate('Login')}>
-						<Text style={styles.loginButtonText}>LOGIN</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						style={styles.registerButtonContainer}
-						onPress={() => this.props.navigation.navigate('Register')}>
-						<Text style={styles.registerButtonText}t>REGISTER</Text>
-					</TouchableOpacity>
+					<Button name='Login' screen='Login'/>
+					<Button name='Register' screen='Register'/>
 				</View>
   		</View>
 			

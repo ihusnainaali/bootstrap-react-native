@@ -5,7 +5,7 @@
 */
 
 // Primary Colors
-export const COLOR_PRIMARY = '#eeeeee';
+export const COLOR_PRIMARY = '#81d4fa';
 export const COLOR_PRIMARY_LIGHT = '#ffffff';
 export const COLOR_PRIMARY_DARK = '#c7c7c7';
 
