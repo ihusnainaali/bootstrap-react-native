@@ -3,11 +3,10 @@ import { COLOR_PRIMARY_LIGHT, BORDER_RADIUS, TEXT_COLOR } from '../../styles/com
 
 export default StyleSheet.create({
   container: {
-    borderRadius: BORDER_RADIUS,
     backgroundColor: COLOR_PRIMARY_LIGHT,
 		marginBottom: 20,
 		paddingVertical: 10,
-		borderRadius: 10,
+		borderRadius: BORDER_RADIUS,
 		width: 250
   },
   text: {

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Image, View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import { Image, View, Text, StyleSheet, StatusBar } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { COLOR_PRIMARY} from '../../styles/common';
 
-import Button from '../../components/Button/index'
+import Button from '../../components/Button/Button.component';
 
 class Welcome extends Component {
 	render() {
     return (
-  		<View style={styles.welcomeWrapper}>
+			<View style={styles.welcomeWrapper}>
 				<StatusBar barStyle="light-content" />
         <View style={styles.welcomeTopGrid}>
 					<Text style={styles.welcomeTitle}>Pangyou</Text>
@@ -20,8 +20,7 @@ class Welcome extends Component {
 					<Button name='Login' screen='Login'/>
 					<Button name='Register' screen='Register'/>
 				</View>
-  		</View>
-			
+			</View>
     );
 	}
 }
@@ -54,33 +53,7 @@ const styles = StyleSheet.create({
 	welcomeLogo: {
     width: 168,
     height: 168
-  },
-	loginButtonContainer: {
-		backgroundColor: '#ffffff',
-		marginBottom: 20,
-		paddingVertical: 10,
-		borderRadius: 10,
-		width: 250
-	},
-	loginButtonText: {
-		fontSize: 28,
-    fontWeight: '900',
-		textAlign: 'center',
-		color: '#000000'
-	},
-	registerButtonContainer: {
-		backgroundColor: '#ffffff',
-		marginBottom: 20,
-		paddingVertical: 10,
-		borderRadius: 10,
-		width: 250
-	},
-	registerButtonText: {
-		fontSize: 28,
-    fontWeight: '900',
-		textAlign: 'center',
-		color: '#000000'
-	}
+  }
 });
 
 export default withNavigation(Welcome);

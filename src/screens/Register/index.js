@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Image, View, Text, StyleSheet, TextInput, Button, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { COLOR_PRIMARY, COLOR_PRIMARY_DARK, BORDER_RADIUS} from '../../styles/common'
+import { COLOR_PRIMARY, COLOR_PRIMARY_DARK } from '../../styles/common';
+import TextField from '../../components/Textfield/Textfield.component';
+import Button from '../../components/Button/Button.component';
 
-import Amplify, { Auth } from 'aws-amplify'
-import config from '../../../aws-exports'
-Amplify.configure(config)
+import Amplify, { Auth } from 'aws-amplify';
+import config from '../../../aws-exports';
+Amplify.configure(config);
 
 class Register extends Component {
   state = {
@@ -27,15 +29,15 @@ class Register extends Component {
   setEmail(email) {
     this.setState({ email });
   }
-  
-  setPassword(password) {	
+
+  setPassword(password) {
     this.setState({ password });
   }
 
   setPasswordConfirmation(passwordConfirmation) {
     this.setState({ passwordConfirmation });
   }
-  
+
   onChangeText = (key, value) => {
     this.setState({
       [key]: value
@@ -106,7 +108,7 @@ class Register extends Component {
           <Text style={styles.registerTitle}>Register</Text>
         </View>
         <View style={styles.registerMiddleGrid}>
-          <TextInput
+          <TextField
             placeholder="Username"
             placeholderTextColor={COLOR_PRIMARY_DARK}
             returnKeyType="next"
@@ -116,7 +118,7 @@ class Register extends Component {
             style={styles.registerInput}
             onChangeText={(value) => this.onChangeText("username", value)}
           />
-          <TextInput
+          <TextField
             placeholder="Email"
             placeholderTextColor={COLOR_PRIMARY_DARK}
             returnKeyType="next"
@@ -126,7 +128,7 @@ class Register extends Component {
             style={styles.registerInput}
             onChangeText={(value) => this.onChangeText("email", value)}
           />
-          <TextInput
+          <TextField
             placeholder="Password"
             placeholderTextColor={COLOR_PRIMARY_DARK}
             returnKeyType="go"
@@ -136,7 +138,7 @@ class Register extends Component {
             style={styles.registerInput}
             onChangeText={(value) => this.onChangeText("password", value)}
           />
-          <TextInput
+          <TextField
             placeholder="Confirm Password"
             placeholderTextColor={COLOR_PRIMARY_DARK}
             returnKeyType="go"
@@ -149,11 +151,10 @@ class Register extends Component {
           <Text>{this.state.error}</Text>
         </View>
         <View style={styles.registerBottomGrid}>
-          <TouchableOpacity
-            style={styles.submitButtonContainer}
-            onPress={this.signUp.bind(this)}>
-            <Text style={styles.submitButtonText}>Register</Text>
-          </TouchableOpacity>
+          <Button
+            onPress={this.signUp.bind(this)}
+            name='Register'
+            screen='Login'/>
         </View>
       </KeyboardAvoidingView>
     );
@@ -193,31 +194,6 @@ const styles = StyleSheet.create({
   registerLogo: {
     width: 168,
     height: 168
-  },
-  registerInput: {
-    height: 50,
-    backgroundColor: '#ffffff',
-    marginBottom: 10,
-    borderRadius: BORDER_RADIUS,
-    color: '#000000',
-    fontWeight: 'bold',
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    width: 275
-  },
-  submitButtonContainer: {
-    backgroundColor: '#ffffff',
-    borderRadius: BORDER_RADIUS,
-    borderColor: '#000000',
-    marginBottom: 10,
-    paddingVertical: 10,
-    width: 275
-  },
-  submitButtonText: {
-    fontSize: 28,
-    fontWeight: '900',
-    textAlign: 'center',
-    color: '#000000'
   }
 });
 

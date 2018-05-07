@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { TabNavigator,TabBarBottom,withNavigation } from 'react-navigation';
+import { TabNavigator, TabBarBottom, withNavigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 // TODO Routing Handled Here
@@ -95,7 +95,7 @@ export default TabNavigator(
           iconName = `library-books`;
 				} else if (routeName === 'Profile') {
 					iconName = `person${focused ? '' : '-outline'}`;
-				} 
+				}
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons
         return <MaterialIcons name={iconName} size={25} color={tintColor} />;

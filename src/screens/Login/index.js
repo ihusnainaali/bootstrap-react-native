@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Image, View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { COLOR_PRIMARY, COLOR_PRIMARY_DARK, BORDER_RADIUS} from '../../styles/common'
+import { COLOR_PRIMARY, COLOR_PRIMARY_DARK } from '../../styles/common';
+import TextField from '../../components/Textfield/Textfield.component';
+import Button from '../../components/Button/Button.component';
 
-import Amplify, { Auth } from 'aws-amplify'
-import config from '../../../aws-exports'
-Amplify.configure(config)
+import Amplify, { Auth } from 'aws-amplify';
+import config from '../../../aws-exports';
+Amplify.configure(config);
 
 
 class Login extends Component {
@@ -31,7 +33,7 @@ class Login extends Component {
   onChangeText = (key, value) => {
     this.setState({
       [key]: value
-    })
+    });
 	}
 
 	setError(error){
@@ -43,7 +45,7 @@ class Login extends Component {
 	}
 
 	signIn() {
-		const {username, password} = this.state
+		const {username, password} = this.state;
 		this.clearError();
 
 		Auth.signIn(username, password)
@@ -58,7 +60,7 @@ class Login extends Component {
 				else {
 					this.setError(err.message);
 				}
-			})
+			});
 	}
 
 	render() {
@@ -68,7 +70,7 @@ class Login extends Component {
 					<Text style={styles.loginTitle}>Login</Text>
         </View>
 				<View style={styles.loginMiddleGrid}>
-					<TextInput
+					<TextField
 						placeholder="Username or Email"
 						placeholderTextColor={COLOR_PRIMARY_DARK}
 						returnKeyType="next"
@@ -79,7 +81,7 @@ class Login extends Component {
 						style={styles.loginInput}
 						onChangeText={(value) => this.onChangeText("username", value)}
 						/>
-					<TextInput
+					<TextField
 						placeholder="Password"
 						placeholderTextColor={COLOR_PRIMARY_DARK}
 						returnKeyType="go"
@@ -93,13 +95,12 @@ class Login extends Component {
 						<Text>{this.state.error}</Text>
 				</View>
 				<View style={styles.loginBottomGrid}>
-					<TouchableOpacity
-						style={styles.submitButtonContainer}
-						onPress={this.signIn.bind(this)}>
-						<Text style={styles.submitButtonText}>SUBMIT</Text>
-					</TouchableOpacity>
+					<Button
+						onPress={this.signIn.bind(this)}
+						name='Submit'
+						screen='Home'/>
 				</View>
-  		</KeyboardAvoidingView>
+			</KeyboardAvoidingView>
     );
 	}
 }
@@ -136,31 +137,7 @@ const styles = StyleSheet.create({
 	loginLogo: {
     width: 168,
     height: 168
-  },
-	loginInput: {
-		height: 50,
-		backgroundColor: '#FFFFFF',
-		marginBottom: 30,
-		color: '#000000',
-		fontWeight: 'bold',
-		paddingHorizontal: 10,
-		paddingVertical: 10,
-		borderRadius: BORDER_RADIUS,
-		width: 275
-	},
-	submitButtonContainer: {
-		backgroundColor: '#FFFFFF',
-		borderRadius: BORDER_RADIUS,
-		marginBottom: 20,
-		paddingVertical: 10,
-		width: 275
-	},
-	submitButtonText: {
-		fontSize: 28,
-    fontWeight: '900',
-		textAlign: 'center',
-		color: '#000000'
-	}
+  }
 });
 
 export default withNavigation(Login);
