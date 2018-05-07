@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Image, View, Text, StyleSheet, TextInput, Button, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { COLOR_PRIMARY} from '../styles/common'
+import { COLOR_PRIMARY, COLOR_PRIMARY_DARK, BORDER_RADIUS} from '../../styles/common'
 
 import Amplify, { Auth } from 'aws-amplify'
-import config from '../../aws-exports'
+import config from '../../../aws-exports'
 Amplify.configure(config)
 
 class Register extends Component {
@@ -108,7 +108,7 @@ class Register extends Component {
         <View style={styles.registerMiddleGrid}>
           <TextInput
             placeholder="Username"
-            placeholderTextColor="#000000"
+            placeholderTextColor={COLOR_PRIMARY_DARK}
             returnKeyType="next"
             keyboardType="email-address"
             autoCapitalize="none"
@@ -118,7 +118,7 @@ class Register extends Component {
           />
           <TextInput
             placeholder="Email"
-            placeholderTextColor="#000000"
+            placeholderTextColor={COLOR_PRIMARY_DARK}
             returnKeyType="next"
             keyboardType="email-address"
             autoCapitalize="none"
@@ -128,7 +128,7 @@ class Register extends Component {
           />
           <TextInput
             placeholder="Password"
-            placeholderTextColor="#000000"
+            placeholderTextColor={COLOR_PRIMARY_DARK}
             returnKeyType="go"
             secureTextEntry
             autoCapitalize="none"
@@ -138,7 +138,7 @@ class Register extends Component {
           />
           <TextInput
             placeholder="Confirm Password"
-            placeholderTextColor="#000000"
+            placeholderTextColor={COLOR_PRIMARY_DARK}
             returnKeyType="go"
             secureTextEntry
             autoCapitalize="none"
@@ -162,54 +162,56 @@ class Register extends Component {
 
 const styles = StyleSheet.create({
   registerWrapper: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLOR_PRIMARY,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
   registerTopGrid: {
     flex: 1,
-    marginTop: 100,
+    marginTop: 50,
     alignItems: 'center'
   },
   registerMiddleGrid: {
     flex: 1,
-    marginTop: 20,
+    marginBottom: 70,
     alignItems: 'center'
   },
   registerBottomGrid: {
     flex: 1,
     marginTop: 125,
-    marginBottom: 100,
+    marginBottom: 50,
     alignItems: 'center'
   },
   registerTitle: {
+    flex: 1,
     color: 'black',
     fontSize: 35,
     fontWeight: 'bold',
-    marginBottom: 30
+    marginBottom: 20
   },
   registerLogo: {
     width: 168,
     height: 168
   },
   registerInput: {
-    height: 30,
-    backgroundColor: '#80d6ff',
+    height: 50,
+    backgroundColor: '#ffffff',
     marginBottom: 10,
+    borderRadius: BORDER_RADIUS,
     color: '#000000',
     fontWeight: 'bold',
     paddingHorizontal: 10,
+    paddingVertical: 10,
     width: 275
   },
   submitButtonContainer: {
-    backgroundColor: '#80d6ff',
-    borderWidth: 8,
-    borderRadius: 40,
+    backgroundColor: '#ffffff',
+    borderRadius: BORDER_RADIUS,
     borderColor: '#000000',
-    marginBottom: 20,
+    marginBottom: 10,
     paddingVertical: 10,
-    width: 250
+    width: 275
   },
   submitButtonText: {
     fontSize: 28,

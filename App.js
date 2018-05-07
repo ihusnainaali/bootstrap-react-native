@@ -6,12 +6,12 @@ import {
   View
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import Splash from './Splash';
-import Welcome from './src/screens/Welcome';
-import Login from './src/screens/Login';
-import Register from './src/screens/Register';
-import Home from './src/screens/Home';
-import Verification from './src/screens/Verification';
+import Splash from './src/screens/Splash/index';
+import Welcome from './src/screens/Welcome/index';
+import Login from './src/screens/Login/index';
+import Register from './src/screens/Register/index';
+import Home from './src/screens/Home/index';
+import Verification from './src/screens/Verification/index';
 
 class WelcomeScreen extends Component {
 
