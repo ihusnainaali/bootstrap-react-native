@@ -81,7 +81,6 @@ export default TabNavigator(
 		Friends: { screen: FriendsScreen },
 		Journals: {screen: JournalsScreen},
 		Profile: {screen: ProfileScreen},
-    Settings: { screen: SettingsScreen },
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -96,9 +95,7 @@ export default TabNavigator(
           iconName = `library-books`;
 				} else if (routeName === 'Profile') {
 					iconName = `person${focused ? '' : '-outline'}`;
-				} else if (routeName === 'Settings') {
-          iconName = `settings`;
-        }
+				} 
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons
         return <MaterialIcons name={iconName} size={25} color={tintColor} />;

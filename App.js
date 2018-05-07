@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import Splash from './Splash';
+import Splash from './src/screens/Splash';
 import Welcome from './src/screens/Welcome';
 import Login from './src/screens/Login';
 import Register from './src/screens/Register';
