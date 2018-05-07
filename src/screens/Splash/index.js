@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Image, View, Text, StyleSheet } from 'react-native';
-import { COLOR_PRIMARY, COLOR_SECONDARY, TEXT_COLOR } from '../styles/common'
+import { COLOR_PRIMARY, COLOR_SECONDARY, TEXT_COLOR } from '../../styles/common'
 
 export default class Splash extends Component {
 	render() {
@@ -9,7 +9,7 @@ export default class Splash extends Component {
         <View style={styles.titleWrapper}>
           <Image
             style={styles.titleLogo}
-            source={require('../assets/pangyou_logo.png')}/>
+            source={require('../../assets/pangyou_logo.png')}/>
         </View>
   			<View>
           <Text style={styles.subtitle}>Powered by Develoop</Text>
