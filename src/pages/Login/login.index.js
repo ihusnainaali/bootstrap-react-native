@@ -19,34 +19,22 @@ class Login extends Component {
 		user: {}
 	}
 
-	setAuthCode(authCode) { // 2
-		this.setState({ authCode });
-	}
-
-	setUsername(username) {
-		this.setState({ username });
-	}
-
-	setPassword(password) {
-		this.setState({ password });
-	}
-
-  onChangeText = (key, value) => {
-    this.setState({
+  onChangeText = (key) => {
+    return (value) => this.setState({
       [key]: value
     });
 	}
 
-	setError(error){
-		this.setState({error});
+  setError(error) {
+    this.setState({ error });
 	}
 
-	clearError(){
-		this.setState({error: ''});
+  clearError() {
+    this.setState({ error: '' });
 	}
 
 	signIn() {
-		const {username, password} = this.state;
+    const { username, password } = this.state;
 		this.clearError();
 
 		Auth.signIn(username, password)
@@ -56,7 +44,7 @@ class Login extends Component {
 			})
 			.catch(err => {
 				if (err.code === "UserNotConfirmedException") {
-					this.props.navigation.navigate('Verification', {username});
+          this.props.navigation.navigate('Verification', { username });
 				}
 				else {
 					this.setError(err.message);
@@ -79,8 +67,7 @@ class Login extends Component {
 						keyboardType="email-address"
 						autoCapitalize="none"
 						autoCorrect={false}
-						style={styles.loginInput}
-						onChangeText={(value) => this.onChangeText("username", value)}
+            onChangeText={this.onChangeText("username").bind(this)}
 						/>
 					<TextField
 						placeholder="Password"
@@ -89,9 +76,7 @@ class Login extends Component {
 						secureTextEntry
 						autoCapitalize="none"
 						autoCorrect={false}
-						style={styles.loginInput}
-						ref={(input) => this.passwordInput = input}
-						onChangeText={(value) => this.onChangeText("password", value)}
+            onChangeText={this.onChangeText("password").bind(this)}
 						/>
 						<Text>{this.state.error}</Text>
 				</View>
@@ -99,10 +84,10 @@ class Login extends Component {
 				<Button
 					onPress={this.signIn.bind(this)}
 					name='Submit'
-					screen='Home'/>
+            screen='Home' />
          		<Button
             		name='Forgot Password?'
-            		screen='ForgetPassword'/>
+            screen='ForgetPassword' />
 			</View>
 			</KeyboardAvoidingView>
     );

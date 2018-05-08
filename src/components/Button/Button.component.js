@@ -7,9 +7,10 @@ class Button extends Component {
   render() {
     let screen = this.props.screen;
     let name = this.props.name;
+    let onPress = this.props.onPress;
     return (
       <TouchableOpacity style={styles.container}
-        onPress={() => this.props.navigation.navigate(screen)}>
+        onPress={() => onPress ? onPress() : screen ? this.props.navigation.navigate(screen) : null}>
           <Text style={styles.text}>{name}</Text>
       </TouchableOpacity>
     );

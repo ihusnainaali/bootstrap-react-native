@@ -20,28 +20,8 @@ class Register extends Component {
     error: null
   }
 
-  setAuthCode(authCode) { // 2
-    this.setState({ authCode });
-  }
-
-  setUsername(username) {
-    this.setState({ username });
-  }
-
-  setEmail(email) {
-    this.setState({ email });
-  }
-
-  setPassword(password) {
-    this.setState({ password });
-  }
-
-  setPasswordConfirmation(passwordConfirmation) {
-    this.setState({ passwordConfirmation });
-  }
-
-  onChangeText = (key, value) => {
-    this.setState({
+  onChangeText = (key) => {
+    return (value) => this.setState({
       [key]: value
     })
   }
@@ -99,7 +79,8 @@ class Register extends Component {
         this.props.navigation.navigate('Verification', { username });
       })
       .catch(err => {
-        this.setError(JSON.stringify(err));
+        console.log(err);
+        this.setError(err.message);
       })
   }
 
@@ -117,7 +98,7 @@ class Register extends Component {
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
-            onChangeText={(value) => this.onChangeText("username", value)}
+            onChangeText={this.onChangeText("username").bind(this)}
           />
           <TextField
             placeholder="Email"
@@ -126,7 +107,7 @@ class Register extends Component {
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
-            onChangeText={(value) => this.onChangeText("email", value)}
+            onChangeText={this.onChangeText("email").bind(this)}
           />
           <TextField
             placeholder="Password"
@@ -135,7 +116,7 @@ class Register extends Component {
             secureTextEntry
             autoCapitalize="none"
             autoCorrect={false}
-            onChangeText={(value) => this.onChangeText("password", value)}
+            onChangeText={this.onChangeText("password").bind(this)}
           />
           <TextField
             placeholder="Confirm Password"
@@ -144,7 +125,7 @@ class Register extends Component {
             secureTextEntry
             autoCapitalize="none"
             autoCorrect={false}
-            onChangeText={(value) => this.onChangeText("passwordConfirmation", value)}
+            onChangeText={this.onChangeText("passwordConfirmation").bind(this)}
           />
           <Text>{this.state.error}</Text>
         </View>
