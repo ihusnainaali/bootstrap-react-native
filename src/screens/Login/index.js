@@ -99,6 +99,9 @@ class Login extends Component {
 						onPress={this.signIn.bind(this)}
 						name='Submit'
 						screen='Home'/>
+          <Button
+            name='Forget Password'
+            screen='ForgetPassword'/>
 				</View>
 			</KeyboardAvoidingView>
     );
