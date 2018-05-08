@@ -7,7 +7,7 @@ export default StyleSheet.create({
 		marginBottom: 20,
 		paddingVertical: 10,
 		borderRadius: BORDER_RADIUS,
-		width: 250
+		width: 275
   },
   text: {
     fontSize: 28,
