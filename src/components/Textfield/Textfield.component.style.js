@@ -1,16 +1,16 @@
 import { StyleSheet } from 'react-native';
-import { COLOR_PRIMARY_DARK, COLOR_PRIMARY_LIGHT, BORDER_RADIUS, TEXT_COLOR} from '../../styles/common';
+import theme from '../../styles/theme.style'
 
 export default StyleSheet.create({
   textField: {
     height: 50,
-		backgroundColor: COLOR_PRIMARY_LIGHT,
+		backgroundColor: theme.COLOR_PRIMARY_LIGHT,
 		marginBottom: 10,
-		color: TEXT_COLOR,
+		color: theme.TEXT_COLOR,
 		fontWeight: 'bold',
 		paddingHorizontal: 10,
 		paddingVertical: 10,
-		borderRadius: BORDER_RADIUS,
+		borderRadius: theme.BORDER_RADIUS,
 		width: 275
   }
 });

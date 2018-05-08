@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { COLOR_PRIMARY, COLOR_PRIMARY_DARK } from '../../styles/common';
-import TextField from '../../components/Textfield/Textfield.component';
+import TextField from '../../components/Textfield/TextField.component';
 import Button from '../../components/Button/Button.component';
+
+import styles from './register.style'
+import theme from '../../styles/theme.style'
 
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../../../aws-exports';
@@ -110,42 +112,38 @@ class Register extends Component {
         <View style={styles.registerMiddleGrid}>
           <TextField
             placeholder="Username"
-            placeholderTextColor={COLOR_PRIMARY_DARK}
+            placeholderTextColor={theme.COLOR_PRIMARY_DARK}
             returnKeyType="next"
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
-            style={styles.registerInput}
             onChangeText={(value) => this.onChangeText("username", value)}
           />
           <TextField
             placeholder="Email"
-            placeholderTextColor={COLOR_PRIMARY_DARK}
+            placeholderTextColor={theme.COLOR_PRIMARY_DARK}
             returnKeyType="next"
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
-            style={styles.registerInput}
             onChangeText={(value) => this.onChangeText("email", value)}
           />
           <TextField
             placeholder="Password"
-            placeholderTextColor={COLOR_PRIMARY_DARK}
+            placeholderTextColor={theme.COLOR_PRIMARY_DARK}
             returnKeyType="go"
             secureTextEntry
             autoCapitalize="none"
             autoCorrect={false}
-            style={styles.registerInput}
             onChangeText={(value) => this.onChangeText("password", value)}
           />
           <TextField
             placeholder="Confirm Password"
-            placeholderTextColor={COLOR_PRIMARY_DARK}
+            placeholderTextColor={theme.COLOR_PRIMARY_DARK}
             returnKeyType="go"
             secureTextEntry
             autoCapitalize="none"
             autoCorrect={false}
-            style={styles.registerInput}
             onChangeText={(value) => this.onChangeText("passwordConfirmation", value)}
           />
           <Text>{this.state.error}</Text>
@@ -160,41 +158,5 @@ class Register extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  registerWrapper: {
-    backgroundColor: COLOR_PRIMARY,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  registerTopGrid: {
-    flex: 1,
-    marginTop: 50,
-    alignItems: 'center'
-  },
-  registerMiddleGrid: {
-    flex: 1,
-    marginBottom: 70,
-    alignItems: 'center'
-  },
-  registerBottomGrid: {
-    flex: 1,
-    marginTop: 125,
-    marginBottom: 50,
-    alignItems: 'center'
-  },
-  registerTitle: {
-    flex: 1,
-    color: 'black',
-    fontSize: 35,
-    fontWeight: 'bold',
-    marginBottom: 20
-  },
-  registerLogo: {
-    width: 168,
-    height: 168
-  }
-});
 
 export default withNavigation(Register);

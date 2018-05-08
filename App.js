@@ -5,14 +5,15 @@ import {
   Text,
   View
 } from 'react-native';
+
 import { StackNavigator } from 'react-navigation';
-import Splash from './src/screens/Splash/index';
-import Welcome from './src/screens/Welcome/index';
-import Login from './src/screens/Login/index';
-import Register from './src/screens/Register/index';
-import Home from './src/screens/Home/index';
-import Verification from './src/screens/Verification/index';
-import ForgetPassword from './src/screens/ForgetPassword';
+import Splash from './src/pages/Splash/splash.index';
+import Welcome from './src/pages/Welcome/welcome.index';
+import Login from './src/pages/Login/login.index';
+import Register from './src/pages/Register/register.index';
+import Home from './src/pages/Home/home.index';
+import Verification from './src/pages/Verification/verification.index';
+import ForgetPassword from './src/pages/ForgetPassword/forgetPassword.index';
 
 class WelcomeScreen extends Component {
 
@@ -99,7 +100,6 @@ const RootStack = StackNavigator(
     Home: {
       screen: HomeScreen,
     },
-    // TODO Add Remaining Screens
     Verification: {
       screen: VerificationScreen,
     },

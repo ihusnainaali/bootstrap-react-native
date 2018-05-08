@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { COLOR_PRIMARY, COLOR_PRIMARY_DARK } from '../../styles/common';
-import TextField from '../../components/Textfield/Textfield.component';
+import TextField from '../../components/Textfield/TextField.component';
 import Button from '../../components/Button/Button.component';
+
+import styles from './login.style';
+import theme from '../../styles/theme.style';
 
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../../../aws-exports';
 Amplify.configure(config);
-
 
 class Login extends Component {
 	state = {
@@ -72,7 +73,7 @@ class Login extends Component {
 				<View style={styles.loginMiddleGrid}>
 					<TextField
 						placeholder="Username or Email"
-						placeholderTextColor={COLOR_PRIMARY_DARK}
+						placeholderTextColor={theme.COLOR_PRIMARY_DARK}
 						returnKeyType="next"
 						onSubmitEditing={() => this.passwordInput.focus()}
 						keyboardType="email-address"
@@ -83,7 +84,7 @@ class Login extends Component {
 						/>
 					<TextField
 						placeholder="Password"
-						placeholderTextColor={COLOR_PRIMARY_DARK}
+						placeholderTextColor={theme.COLOR_PRIMARY_DARK}
 						returnKeyType="go"
 						secureTextEntry
 						autoCapitalize="none"
@@ -94,53 +95,18 @@ class Login extends Component {
 						/>
 						<Text>{this.state.error}</Text>
 				</View>
-				<View style={styles.loginBottomGrid}>
-					<Button
-						onPress={this.signIn.bind(this)}
-						name='Submit'
-						screen='Home'/>
-          <Button
-            name='Forget Password'
-            screen='ForgetPassword'/>
-				</View>
+			<View style={styles.loginBottomGrid}>
+				<Button
+					onPress={this.signIn.bind(this)}
+					name='Submit'
+					screen='Home'/>
+         		<Button
+            		name='Forgot Password?'
+            		screen='ForgetPassword'/>
+			</View>
 			</KeyboardAvoidingView>
     );
 	}
 }
-
-const styles = StyleSheet.create({
-	loginWrapper: {
-		backgroundColor: COLOR_PRIMARY,
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-  loginTopGrid: {
-    flex: 1,
-		marginTop: 50,
-		alignItems: 'center'
-  },
-	loginMiddleGrid: {
-    flex: 1,
-		marginTop: 20,
-		alignItems: 'center'
-  },
-	loginBottomGrid: {
-    flex: 1,
-		marginTop: 125,
-		marginBottom: 100,
-		alignItems: 'center'
-  },
-  loginTitle: {
-    color: 'black',
-		fontSize: 35,
-    fontWeight: 'bold',
-		marginBottom: 30
-  },
-	loginLogo: {
-    width: 168,
-    height: 168
-  }
-});
 
 export default withNavigation(Login);
