@@ -30,7 +30,7 @@ export default StyleSheet.create({
 	},
 	registerTitle: {
 		flex: 1,
-		color: 'black',
+		color: theme.TEXT_COLOR,
 		fontSize: 35,
 		fontWeight: 'bold',
 		marginBottom: 20

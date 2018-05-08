@@ -28,7 +28,7 @@ export default StyleSheet.create({
 		alignItems: 'center'
 	},
 	forgetPasswordTitle: {
-		color: 'black',
+		color: theme.TEXT_COLOR,
 		fontSize: 35,
 		fontWeight: 'bold',
 		marginBottom: 30

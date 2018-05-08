@@ -1,35 +1,37 @@
-import {StyleSheet} from 'react-native';
+import {
+	StyleSheet
+} from 'react-native';
+
 import theme from '../../styles/theme.style';
 
 export default StyleSheet.create({
 
-    welcomeWrapper: {
+	welcomeWrapper: {
 		backgroundColor: theme.COLOR_PRIMARY,
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
-    welcomeTopGrid: {
-        flex: 1,
+	welcomeTopGrid: {
+		flex: 1,
 		marginTop: 50,
 		alignItems: 'center'
-    },
+	},
 	welcomeBottomGrid: {
-        flex: 1,
+		flex: 1,
 		marginTop: 125,
 		marginBottom: 100,
 		alignItems: 'center'
-  },
-    welcomeTitle: {
-		color: '#000000',
+	},
+	welcomeTitle: {
+		color: theme.TEXT_COLOR,
 		fontSize: 35,
 		fontWeight: 'bold',
-		textShadowColor: '#000000',
 		marginBottom: 30
-  },
+	},
 	welcomeLogo: {
-        width: 168,
-        height: 168
-  }
+		width: 168,
+		height: 168
+	}
 
 })
