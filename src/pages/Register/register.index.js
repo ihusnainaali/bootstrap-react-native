@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-n
 import { withNavigation } from 'react-navigation';
 import TextField from '../../components/TextField/TextField.component';
 import Button from '../../components/Button/Button.component';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './register.style'
 import theme from '../../styles/theme.style'
@@ -87,10 +88,8 @@ class Register extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.registerWrapper}>
-        <View style={styles.registerTopGrid}>
-          <Text style={styles.registerTitle}>Register</Text>
-        </View>
         <View style={styles.registerMiddleGrid}>
+          <MaterialIcons style={styles.icon} name="account-circle" size={20}/>
           <TextField
             placeholder="Username"
             placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -100,6 +99,7 @@ class Register extends Component {
             autoCorrect={false}
             onChangeText={this.onChangeText("username").bind(this)}
           />
+		  <MaterialIcons style={styles.icon} name="email" size={20}/>
           <TextField
             placeholder="Email"
             placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -109,6 +109,7 @@ class Register extends Component {
             autoCorrect={false}
             onChangeText={this.onChangeText("email").bind(this)}
           />
+		  <MaterialIcons style={styles.icon} name="vpn-key" size={20}/>
           <TextField
             placeholder="Password"
             placeholderTextColor={theme.COLOR_PRIMARY_DARK}

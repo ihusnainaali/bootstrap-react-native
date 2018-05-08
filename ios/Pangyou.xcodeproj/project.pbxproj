@@ -50,6 +50,10 @@
 		DE4F57B17EEF4EBAA4F79F42 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CADA03EC336A45C090229523 /* SimpleLineIcons.ttf */; };
 		DF254077699B4DDE835917D2 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57FEDDFE7A5548E8A00CE55F /* MaterialCommunityIcons.ttf */; };
 		E8A55C7AF1154185B1823C86 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F48EEFB780F4D4F94A7E6C1 /* FontAwesome.ttf */; };
+		2958F46F87E4412884D65417 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84D3133BFCB49CEA6DC0352 /* Quicksand-Bold.ttf */; };
+		9FECF460B4A24CA98622A864 /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00F414E9879F484690649B1F /* Quicksand-Light.ttf */; };
+		C3CECD3646E749C49EC16573 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8DB6E2AB7AA41A7B021852F /* Quicksand-Medium.ttf */; };
+		3E9A92FD1B5D4C3CBE6D4819 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 088853F034B744D4887452D3 /* Quicksand-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -384,6 +388,10 @@
 		CADA03EC336A45C090229523 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		D6F1FEF3ACE34D718EEC09CA /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		DC54D060C8D84A2693B3577C /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		F84D3133BFCB49CEA6DC0352 /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; name = "Quicksand-Bold.ttf"; path = "../src/assets/fonts/Quicksand-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		00F414E9879F484690649B1F /* Quicksand-Light.ttf */ = {isa = PBXFileReference; name = "Quicksand-Light.ttf"; path = "../src/assets/fonts/Quicksand-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A8DB6E2AB7AA41A7B021852F /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; name = "Quicksand-Medium.ttf"; path = "../src/assets/fonts/Quicksand-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		088853F034B744D4887452D3 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; name = "Quicksand-Regular.ttf"; path = "../src/assets/fonts/Quicksand-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -598,6 +606,10 @@
 				DC54D060C8D84A2693B3577C /* Octicons.ttf */,
 				CADA03EC336A45C090229523 /* SimpleLineIcons.ttf */,
 				41DE6656CF81476F8BAB1BEB /* Zocial.ttf */,
+				F84D3133BFCB49CEA6DC0352 /* Quicksand-Bold.ttf */,
+				00F414E9879F484690649B1F /* Quicksand-Light.ttf */,
+				A8DB6E2AB7AA41A7B021852F /* Quicksand-Medium.ttf */,
+				088853F034B744D4887452D3 /* Quicksand-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1173,6 +1185,10 @@
 				B8F7F5DBE2884C1FACBDFE3C /* Octicons.ttf in Resources */,
 				DE4F57B17EEF4EBAA4F79F42 /* SimpleLineIcons.ttf in Resources */,
 				ABAD56DF87F748A69E9A43CA /* Zocial.ttf in Resources */,
+				2958F46F87E4412884D65417 /* Quicksand-Bold.ttf in Resources */,
+				9FECF460B4A24CA98622A864 /* Quicksand-Light.ttf in Resources */,
+				C3CECD3646E749C49EC16573 /* Quicksand-Medium.ttf in Resources */,
+				3E9A92FD1B5D4C3CBE6D4819 /* Quicksand-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

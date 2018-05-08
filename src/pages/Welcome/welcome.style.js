@@ -14,7 +14,7 @@ export default StyleSheet.create({
 	},
 	welcomeTopGrid: {
 		flex: 1,
-		marginTop: 50,
+		marginTop: 100,
 		alignItems: 'center'
 	},
 	welcomeBottomGrid: {
@@ -22,12 +22,6 @@ export default StyleSheet.create({
 		marginTop: 125,
 		marginBottom: 100,
 		alignItems: 'center'
-	},
-	welcomeTitle: {
-		color: theme.TEXT_COLOR,
-		fontSize: 35,
-		fontWeight: 'bold',
-		marginBottom: 30
 	},
 	welcomeLogo: {
 		width: 168,

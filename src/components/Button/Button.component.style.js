@@ -1,18 +1,22 @@
-import { StyleSheet } from 'react-native';
+import {
+	StyleSheet
+} from 'react-native';
 import theme from '../../styles/theme.style'
 
 export default StyleSheet.create({
-  container: {
-    backgroundColor: theme.COLOR_PRIMARY_LIGHT,
+	container: {
+		backgroundColor: theme.COLOR_PRIMARY_LIGHT,
 		marginBottom: 20,
 		paddingVertical: 10,
 		borderRadius: theme.BORDER_RADIUS,
-		width: 275
-  },
-  text: {
-    fontSize: 28,
-    fontWeight: '900',
-	textAlign: 'center',
-	color: theme.TEXT_COLOR
-  }
+		borderColor: theme.COLOR_PRIMARY_DARK,
+		borderWidth: 1,
+		width: 200
+	},
+	text: {
+		fontSize: 20,
+		fontFamily: theme.FONT_BOLD,
+		textAlign: 'center',
+		color: theme.TEXT_COLOR
+	}
 });

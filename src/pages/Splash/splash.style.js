@@ -21,7 +21,7 @@ export default StyleSheet.create({
 	},
 	subtitle: {
 		color: theme.TEXT_COLOR,
-		fontWeight: 'normal',
+		fontFamily: 'Quicksand-Regular',
 		paddingBottom: 15
 	}
 

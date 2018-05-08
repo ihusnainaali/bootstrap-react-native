@@ -8,34 +8,23 @@ export default StyleSheet.create({
 	loginWrapper: {
 		backgroundColor: theme.COLOR_PRIMARY,
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	loginTopGrid: {
-		flex: 1,
-		marginTop: 50,
-		alignItems: 'center'
 	},
 	loginMiddleGrid: {
 		flex: 1,
-		marginTop: 20,
+		marginTop: 120,
+		marginBottom: 10,
 		alignItems: 'center'
 	},
 	loginBottomGrid: {
 		flex: 1,
-		marginTop: 125,
-		marginBottom: 100,
 		alignItems: 'center'
-	},
-	loginTitle: {
-		color: theme.TEXT_COLOR,
-		fontSize: 35,
-		fontWeight: 'bold',
-		marginBottom: 30
 	},
 	loginLogo: {
 		width: 168,
 		height: 168
-	}
+	},
+	icon: {
+		padding: 10,
+	},
 
 })

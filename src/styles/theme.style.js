@@ -7,7 +7,7 @@
 export default {
 
     // Primary Colors
-    COLOR_PRIMARY : '#81d4fa',
+    COLOR_PRIMARY : '#eeeeee',
     COLOR_PRIMARY_LIGHT : '#ffffff',
     COLOR_PRIMARY_DARK : '#c7c7c7',
 
@@ -21,8 +21,10 @@ export default {
     BORDER_COLOR : '#000000',
 
     // Font Definitions
-    FONT_NORMAL : 'Roboto',
-    FONT_BOLD : 'Roboto-Bold',
+    FONT_REGULAR : 'Quicksand-Regular',
+    FONT_BOLD : 'Quicksand-Bold',
+    FONT_LIGHT : 'Quicksand-Light',
+    FONT_MEDIUM : 'Quicksand-Medium',
     TEXT_COLOR : '#000000',
 
     // Font Sizes
@@ -34,7 +36,7 @@ export default {
     FONT_WEIGHT_LIGHT: 200,
     FONT_WEIGHT_MEDIUM: 600,
     FONT_WEIGHT_HEAVY: 800
-
+    
 }
 
 

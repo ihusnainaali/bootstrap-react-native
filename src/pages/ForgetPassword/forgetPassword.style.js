@@ -11,20 +11,15 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
-	forgetPasswordTopGrid: {
-		flex: 1,
-		marginTop: 50,
-		alignItems: 'center'
-	},
 	forgetPasswordMiddleGrid: {
 		flex: 1,
-		marginTop: 20,
+		marginTop: 125,
 		alignItems: 'center'
 	},
 	forgetPasswordBottomGrid: {
 		flex: 1,
-		marginTop: 125,
-		marginBottom: 100,
+		marginTop: 155,
+		marginBottom: 50,
 		alignItems: 'center'
 	},
 	forgetPasswordTitle: {
@@ -36,6 +31,9 @@ export default StyleSheet.create({
 	forgetPasswordLogo: {
 		width: 168,
 		height: 168
+	},
+	icon: {
+		padding: 10
 	}
 
 })
