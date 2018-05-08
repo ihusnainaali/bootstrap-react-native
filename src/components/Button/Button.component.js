@@ -11,7 +11,7 @@ class Button extends Component {
     return (
       <TouchableOpacity style={styles.container}
         onPress={() => onPress ? onPress() : screen ? this.props.navigation.navigate(screen) : null}>
-          <Text style={styles.text}>{name}</Text>
+        <Text style={styles.text}>{name}</Text>
       </TouchableOpacity>
     );
   }
