@@ -12,6 +12,7 @@ import Login from './src/screens/Login/index';
 import Register from './src/screens/Register/index';
 import Home from './src/screens/Home/index';
 import Verification from './src/screens/Verification/index';
+import ForgetPassword from './src/screens/ForgetPassword';
 
 class WelcomeScreen extends Component {
 
@@ -72,6 +73,18 @@ class VerificationScreen extends Component {
   }
 }
 
+class ForgetPasswordScreen extends Component {
+  static navigationOptions = {
+    title: 'ForgetPassword',
+  };
+
+  render() {
+    return (
+      <ForgetPassword />
+    );
+  }
+}
+
 const RootStack = StackNavigator(
   {
     Welcome: {
@@ -89,6 +102,9 @@ const RootStack = StackNavigator(
     // TODO Add Remaining Screens
     Verification: {
       screen: VerificationScreen,
+    },
+    ForgetPassword: {
+      screen: ForgetPasswordScreen,
     },
   },
   {
