@@ -6,7 +6,11 @@ import Amplify, { Auth } from 'aws-amplify'
 import config from '../../../aws-exports'
 Amplify.configure(config)
 
+import styles from './verification.style';
+import theme from '../../styles/theme.style';
+
 class Verification extends Component {
+    
     state = {
         username: this.props.navigation.state.params.username,
         verificationCode: '',
@@ -50,7 +54,7 @@ class Verification extends Component {
                 <View style={styles.verificationMiddleGrid}>
                     <TextInput
                         placeholder="Verification Code"
-                        placeholderTextColor="#d1d1d1"
+                        placeholderTextColor={theme.COLOR_PRIMARY_DARK}
                         returnKeyType="go"
                         autoCapitalize="none"
                         autoCorrect={false}

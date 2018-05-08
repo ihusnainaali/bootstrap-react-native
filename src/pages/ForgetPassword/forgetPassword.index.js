@@ -10,7 +10,7 @@ import Amplify, { Auth } from 'aws-amplify'
 import config from '../../../aws-exports';
 Amplify.configure(config);
 
-import TextField from '../../components/Textfield/TextField.component';
+import TextField from '../../components/TextField/TextField.component';
 import Button from '../../components/Button/Button.component';
 
 class ForgetPassword extends Component {

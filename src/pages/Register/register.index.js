@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import TextField from '../../components/Textfield/TextField.component';
+import TextField from '../../components/TextField/TextField.component';
 import Button from '../../components/Button/Button.component';
 
 import styles from './register.style'
