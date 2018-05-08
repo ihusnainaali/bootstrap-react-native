@@ -19,10 +19,6 @@ export default StyleSheet.create({
 		flex: 1,
 		alignItems: 'center'
 	},
-	loginLogo: {
-		width: 168,
-		height: 168
-	},
 	icon: {
 		padding: 10,
 	},

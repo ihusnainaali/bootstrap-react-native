@@ -1,6 +1,7 @@
 import {
 	StyleSheet
 } from 'react-native';
+
 import theme from '../../styles/theme.style';
 
 export default StyleSheet.create({
@@ -18,19 +19,9 @@ export default StyleSheet.create({
 	},
 	forgetPasswordBottomGrid: {
 		flex: 1,
-		marginTop: 155,
-		marginBottom: 50,
+		marginTop: 125,
+		marginBottom: 100,
 		alignItems: 'center'
-	},
-	forgetPasswordTitle: {
-		color: theme.TEXT_COLOR,
-		fontSize: 35,
-		fontWeight: 'bold',
-		marginBottom: 30
-	},
-	forgetPasswordLogo: {
-		width: 168,
-		height: 168
 	},
 	icon: {
 		padding: 10
