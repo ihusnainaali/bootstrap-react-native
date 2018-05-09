@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
-import styles from './forgetPassword.style';
+import styles from './forgetpassword.style';
 import theme from '../../styles/theme.style';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -10,8 +10,8 @@ import Amplify, { Auth } from 'aws-amplify'
 import config from '../../../aws-exports';
 Amplify.configure(config);
 
-import TextField from '../../components/TextField/TextField.component';
-import Button from '../../components/Button/Button.component';
+import TextField from '../../components/textfield/textfield.component';
+import Button from '../../components/button/button.component';
 
 class ForgetPassword extends Component {
 

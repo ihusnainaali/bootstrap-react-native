@@ -5,8 +5,8 @@ import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 import { onLogin } from '../../redux/actions/auth.actions'
 
-import TextField from '../../components/TextField/TextField.component';
-import Button from '../../components/Button/Button.component';
+import TextField from '../../components/textfield/textfield.component';
+import Button from '../../components/button/button.component';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './login.style';

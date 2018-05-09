@@ -10,12 +10,12 @@ import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import rootReducer from '../redux/reducers/index.reducer';
 
-import Splash from '../pages/Splash/splash.index';
-import Welcome from '../pages/Welcome/welcome.index';
-import Login from '../pages/Login/login.index';
-import Register from '../pages/Register/register.index';
-import Verification from '../pages/Verification/verification.index';
-import ForgetPassword from '../pages/ForgetPassword/forgetPassword.index';
+import Splash from '../pages/splash/splash.index';
+import Welcome from '../pages/welcome/welcome.index';
+import Login from '../pages/login/login.index';
+import Register from '../pages/register/register.index';
+import Verification from '../pages/verification/verification.index';
+import ForgetPassword from '../pages/forgetpassword/forgetpassword.index';
 
 // Log-in Screen
 class LoginScreen extends Component {

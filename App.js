@@ -5,10 +5,10 @@ import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import rootReducer from './src/redux/reducers/index.reducer';
 
-import AuthNavigator from './src/routes/AuthNavigator';
+import AuthNavigator from './src/routes/authnavigator';
 
-import Splash from './src/pages/Splash/splash.index';
-import Login from './src/pages/Login/login.index';
+import Splash from './src/pages/splash/splash.index';
+import Login from './src/pages/login/login.index';
 
 const store = createStore(rootReducer)
 

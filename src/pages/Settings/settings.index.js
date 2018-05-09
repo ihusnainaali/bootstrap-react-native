@@ -8,7 +8,7 @@ import config from '../../../aws-exports';
 Amplify.configure(config);
 
 import styles from "./settings.style";
-import ButtonComponent from '../../components/Button/Button.component';
+import ButtonComponent from '../../components/button/button.component';
 
 import { connect } from 'react-redux';
 import { onLogout } from '../../redux/actions/auth.actions'
