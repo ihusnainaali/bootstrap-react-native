@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TextInput } from 'react-native';
-import styles from './textfield.component.style';
+import styles from './TextField.component.style';
 
 class TextField extends Component {
   render() {

@@ -11,14 +11,14 @@ import { Provider, connect } from 'react-redux';
 import rootReducer from './src/redux/reducers/index.reducer';
 
 import { StackNavigator } from 'react-navigation';
-import Splash from './src/pages/splash/splash.index';
-import Welcome from './src/pages/welcome/welcome.index';
-import Login from './src/pages/login/login.index';
-import Register from './src/pages/register/register.index';
-import Home from './src/pages/home/home.index';
-import Verification from './src/pages/verification/verification.index';
-import ForgetPassword from './src/pages/forgetpassword/forgetpassword.index';
 
+import Splash from './src/pages/Splash/splash.index';
+import Welcome from './src/pages/Welcome/welcome.index';
+import Login from './src/pages/Login/login.index';
+import Register from './src/pages/Register/register.index';
+import Home from './src/pages/Home/home.index';
+import Verification from './src/pages/Verification/verification.index';
+import ForgetPassword from './src/pages/ForgetPassword/forgetPassword.index';
 
 const store = createStore(rootReducer)
 
@@ -131,6 +131,7 @@ const RootStack = StackNavigator(
 );
 
 type Props = {};
+
 export default class App extends Component {
   constructor(props){
     super(props);

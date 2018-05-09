@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import styles from './button.component.style';
+import styles from './Button.component.style';
 
 class Button extends Component {
   render() {

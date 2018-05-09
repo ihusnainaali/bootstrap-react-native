@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import TextField from '../../components/textfield/textfield.component';
-import Button from '../../components/button/button.component';
+import TextField from '../../components/TextField/TextField.component';
+import Button from '../../components/Button/Button.component';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './register.style'

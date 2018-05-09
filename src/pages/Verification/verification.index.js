@@ -10,8 +10,8 @@ import styles from './verification.style';
 import theme from '../../styles/theme.style';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import TextField from '../../components/textfield/textfield.component';
-import Button from '../../components/button/button.component';
+import TextField from '../../components/TextField/TextField.component';
+import Button from '../../components/Button/Button.component';
 
 class Verification extends Component {
 
