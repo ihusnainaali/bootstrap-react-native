@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, KeyboardAvoidingView, Icon } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import TextField from '../../components/TextField/TextField.component';
-import Button from '../../components/Button/Button.component';
+
+import { connect } from 'react-redux';
+import { onLogin } from '../../redux/actions/auth.actions'
+
+import TextField from '../../components/textfield/textfield.component';
+import Button from '../../components/button/button.component';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './login.style';
@@ -94,4 +98,4 @@ class Login extends Component {
 	}
 }
 
-export default withNavigation(Login);
+export default connect(undefined, { onLogin })(withNavigation(Login));

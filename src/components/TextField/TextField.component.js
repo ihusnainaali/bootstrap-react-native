@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TextInput } from 'react-native';
-import styles from './TextField.component.style';
+import styles from './textfield.component.style';
 
 class TextField extends Component {
   render() {
@@ -16,7 +16,7 @@ class TextField extends Component {
         onChangeText={(value) => onChangeText(value)}
         />
     );
-    
+
   }
 }
 export default TextField;

@@ -6,14 +6,21 @@ import {
   View
 } from 'react-native';
 
+import { createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
+import rootReducer from './src/redux/reducers/index.reducer';
+
 import { StackNavigator } from 'react-navigation';
-import Splash from './src/pages/Splash/splash.index';
-import Welcome from './src/pages/Welcome/welcome.index';
-import Login from './src/pages/Login/login.index';
-import Register from './src/pages/Register/register.index';
-import Home from './src/pages/Home/home.index';
-import Verification from './src/pages/Verification/verification.index';
-import ForgetPassword from './src/pages/ForgetPassword/forgetPassword.index';
+import Splash from './src/pages/splash/splash.index';
+import Welcome from './src/pages/welcome/welcome.index';
+import Login from './src/pages/login/login.index';
+import Register from './src/pages/register/register.index';
+import Home from './src/pages/home/home.index';
+import Verification from './src/pages/verification/verification.index';
+import ForgetPassword from './src/pages/forgetpassword/forgetpassword.index';
+
+
+const store = createStore(rootReducer)
 
 class WelcomeScreen extends Component {
 
@@ -31,11 +38,22 @@ class LoginScreen extends Component {
   };
 
   render() {
-    return (
-      <Login />
-    );
+    if (this.props.username) {
+      return (
+        <Home />
+      );
+    } else {
+      return (
+        <Login />
+      );
+    }
   }
 }
+
+// Connect Login Screen to State
+const ConnectLoginScreen = connect(state => ({
+  username: state.auth.username
+}))(LoginScreen)
 
 // Registration Screen
 class RegisterScreen extends Component {
@@ -92,7 +110,7 @@ const RootStack = StackNavigator(
       screen: WelcomeScreen,
     },
     Login: {
-      screen: LoginScreen,
+      screen: ConnectLoginScreen,
     },
     Register: {
       screen: RegisterScreen,
@@ -138,7 +156,9 @@ export default class App extends Component {
 	    );
 		} else {
       return (
-	  		<RootStack />
+        <Provider store={store}>
+	  		   <RootStack />
+        </Provider>
 	    );
 		}
   }

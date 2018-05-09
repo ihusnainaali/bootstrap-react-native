@@ -3,7 +3,7 @@ import { Image, View, Text, StyleSheet, StatusBar } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import styles from './welcome.style';
 
-import Button from '../../components/Button/Button.component';
+import Button from '../../components/button/button.component';
 
 class Welcome extends Component {
 	render() {
