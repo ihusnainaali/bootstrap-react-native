@@ -1,16 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import { TabNavigator,TabBarBottom,withNavigation } from 'react-navigation';
+import { TabNavigator, TabBarBottom, withNavigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-class Settings extends React.Component {
+import Amplify, { Auth } from 'aws-amplify';
+import config from '../../../aws-exports';
+Amplify.configure(config);
+
+import styles from "./settings.style";
+import ButtonComponent from '../../components/Button/Button.component';
+
+import { connect } from 'react-redux';
+import { onLogout } from '../../redux/actions/auth.actions'
+
+class Settings extends Component {
+    onPress() {
+        Auth.signOut()
+            .then(() => {
+                this.props.onLogout();
+                this.props.navigation.navigate('Login');
+            })
+            .catch(err => {
+                console.log("err: ", err);
+            });
+    }
+
     render() {
-      return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>Settings!</Text>
-        </View>
-      );
+        return (
+            <View style={styles.settingsWrapper}>
+                <ButtonComponent
+                    name="Logout"
+                    onPress={this.onPress.bind(this)} />
+            </View>
+        );
     }
 }
 
-export default withNavigation(Settings);
+export default connect(undefined, { onLogout })(withNavigation(Settings));

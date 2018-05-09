@@ -6,6 +6,12 @@ export default (state = {}, action) => {
         username: action.username,
         password: action.password
       }
+    case 'LOGOUT':
+      return {
+          ...state,
+          username: '',
+          password: ''
+      }
     default:
       return state
   }
