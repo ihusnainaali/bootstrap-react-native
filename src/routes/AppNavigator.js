@@ -4,18 +4,18 @@ import { TabNavigator, TabBarBottom, withNavigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 // TODO Routing Handled Here
-import Pangyou from '../Pangyou/pangyou.index';
-import Friends from '../Friends/friends.index';
-import Journals from '../Journals/journals.index';
-import Profile from '../Profile/profile.index';
-import Settings from '../Settings/settings.index';
+import Pangyou from '../pages/Pangyou/pangyou.index';
+import Friends from '../pages/Friends/friends.index';
+import Journals from '../pages/Journals/journals.index';
+import Profile from '../pages/Profile/profile.index';
+import Settings from '../pages/Settings/settings.index';
 
 export default TabNavigator(
   {
-		Pangyou: { screen: Pangyou },
-		Friends: { screen: Friends },
-		Journals: {screen: Journals },
-		Profile: {screen: Profile },
+		Pangyou: { screen: PangyouScreen },
+		Friends: { screen: FriendsScreen },
+		Journals: {screen: JournalsScreen},
+		Profile: { screen: ProfileScreen},
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -37,8 +37,8 @@ export default TabNavigator(
       },
     }),
     tabBarOptions: {
-      activeTintColor: '#80d6ff',
-      inactiveTintColor: 'gray',
+        activeTintColor: '#80d6ff',
+        inactiveTintColor: 'gray',
     },
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
