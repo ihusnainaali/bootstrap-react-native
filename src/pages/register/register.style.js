@@ -19,14 +19,10 @@ export default StyleSheet.create({
 	},
 	registerMiddleGrid: {
 		flex: 3,
-		marginTop: 50,
-		marginBottom: 100,
 		alignItems: 'center'
 	},
 	registerBottomGrid: {
 		flex: 2,
-		marginTop: 150,
-		marginBottom: 10,
 		alignItems: 'center'
 	},
 	icon: {
