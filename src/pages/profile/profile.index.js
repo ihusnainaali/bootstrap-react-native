@@ -73,6 +73,26 @@ const user = [
   }
 ]
 
+import styles from './profile.style';
+
+// declare a sample user here for testing
+const user = {
+  
+    name: 'Example Person',
+    status: 'I want Soup Dumplings',
+    location: 'Beijing, China',
+    basic: {
+      age: 'January 1, 1900',
+      gender: 'Male',
+      school: 'Peking University',
+      major: 'Underwater Basket Weaving',
+      language: 'English',
+    },
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+
+}
+
+
 class Profile extends React.Component {
 
   render() {
