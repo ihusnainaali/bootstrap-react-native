@@ -12,19 +12,27 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
-	forgetPasswordMiddleGrid: {
+	forgetPasswordTopGrid: {
 		flex: 1,
-		marginTop: 125,
+		marginTop: 50,
+		alignItems: 'center'
+	},
+	forgetPasswordMiddleGrid: {
+		flex: 2,
 		alignItems: 'center'
 	},
 	forgetPasswordBottomGrid: {
-		flex: 1,
-		marginTop: 125,
-		marginBottom: 100,
+		flex: 3,
 		alignItems: 'center'
 	},
 	icon: {
 		padding: 10
+	},
+	forgotHeaderText: {
+		fontSize: 35,
+		fontFamily: theme.FONT_BOLD,
+		textAlign: 'center',
+		color: theme.TEXT_COLOR
 	}
 
 })

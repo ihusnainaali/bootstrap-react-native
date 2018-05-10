@@ -107,7 +107,7 @@ class Login extends Component {
                     <Button
                         onPress={this.signIn.bind(this)}
                         name='Submit'
-                        screen='Home' />
+                        screen='Home'/>
                     <Button
                         name='Forgot?'
                         screen='ForgetPassword' />
