@@ -92,7 +92,6 @@ const user = {
 
 }
 
-
 class Profile extends React.Component {
 
   render() {
