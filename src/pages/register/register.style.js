@@ -12,20 +12,27 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
-	registerMiddleGrid: {
+	registerTopGrid: {
 		flex: 1,
 		marginTop: 50,
-		marginBottom: 100,
+		alignItems: 'center'
+	},
+	registerMiddleGrid: {
+		flex: 3,
 		alignItems: 'center'
 	},
 	registerBottomGrid: {
-		flex: 1,
-		marginTop: 150,
-		marginBottom: 10,
+		flex: 2,
 		alignItems: 'center'
 	},
 	icon: {
 		padding: 10,
-	}
+	},
+	registerHeaderText: {
+		fontSize: 35,
+		fontFamily: theme.FONT_BOLD,
+		textAlign: 'center',
+		color: theme.TEXT_COLOR
+	},
 
 })

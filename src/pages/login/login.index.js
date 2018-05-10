@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView, Icon } from 'react-native';
+import { View, Text, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import { onLogin } from '../../redux/actions/auth.actions'
 
 import TextField from '../../components/textfield/textfield.component';
 import Button from '../../components/button/button.component';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Icon } from 'react-native-elements'
 
 import styles from './login.style';
 import theme from '../../styles/theme.style';
@@ -46,6 +46,7 @@ class Login extends Component {
             .then(user => {
                 console.log(user);
                 this.props.onLogin(username, password);
+                this.props.navigation.navigate('Home');
             })
             .catch(err => {
                 if (err.code === "UserNotConfirmedException") {
@@ -60,8 +61,18 @@ class Login extends Component {
     render() {
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.loginWrapper}>
+                <View style={styles.loginTopGrid}>
+                  <Text style={styles.loginHeaderText}>Login:</Text>
+                </View>
                 <View style={styles.loginMiddleGrid}>
-                    <MaterialIcons style={styles.icon} name="account-circle" size={20} />
+                  <View style={{flexDirection: 'row'}}>
+                    <Icon
+                      iconStyle={styles.icon, {textAlign:'center', width: 40}}
+                      name='md-person'
+                      type='ionicon'
+                      color='#000000'
+                      size={30}
+                    />
                     <TextField
                         placeholder="Username or Email"
                         placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -72,7 +83,15 @@ class Login extends Component {
                         autoCorrect={false}
                         onChangeText={this.onChangeText("username").bind(this)}
                     />
-                    <MaterialIcons style={styles.icon} name="vpn-key" size={20} />
+                  </View>
+                  <View style={{flexDirection: 'row'}}>
+                    <Icon
+                      iconStyle={styles.icon, {textAlign:'center', width: 40}}
+                      name='md-lock'
+                      type='ionicon'
+                      color='#000000'
+                      size={30}
+                    />
                     <TextField
                         placeholder="Password"
                         placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -82,13 +101,14 @@ class Login extends Component {
                         autoCorrect={false}
                         onChangeText={this.onChangeText("password").bind(this)}
                     />
+                  </View>
                     <Text>{this.state.error}</Text>
                 </View>
                 <View style={styles.loginBottomGrid}>
                     <Button
                         onPress={this.signIn.bind(this)}
                         name='Submit'
-                        screen='Home' />
+                        screen='Home'/>
                     <Button
                         name='Forgot?'
                         screen='ForgetPassword' />

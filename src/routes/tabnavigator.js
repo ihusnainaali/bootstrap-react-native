@@ -12,10 +12,10 @@ import Settings from '../pages/settings/settings.index';
 
 export default TabNavigator(
   {
-		Pangyou: { screen: PangyouScreen },
-		Friends: { screen: FriendsScreen },
-		Journals: {screen: JournalsScreen},
-		Profile: { screen: ProfileScreen},
+		Pangyou: { screen: Pangyou },
+		Friends: { screen: Friends },
+		Journals: {screen: Journals },
+		Profile: { screen: Profile },
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -31,8 +31,6 @@ export default TabNavigator(
 				} else if (routeName === 'Profile') {
 					iconName = `person${focused ? '' : '-outline'}`;
 				}
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
         return <MaterialIcons name={iconName} size={25} color={tintColor} />;
       },
     }),

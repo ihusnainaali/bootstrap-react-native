@@ -8,19 +8,28 @@ export default StyleSheet.create({
 	loginWrapper: {
 		backgroundColor: theme.COLOR_PRIMARY,
 		flex: 1,
+		alignItems: 'center'
+	},
+	loginTopGrid: {
+		flex: 1,
+		marginTop: 50,
+		alignItems: 'center'
 	},
 	loginMiddleGrid: {
-		flex: 1,
-		marginTop: 120,
-		marginBottom: 10,
+		flex: 2,
 		alignItems: 'center'
 	},
 	loginBottomGrid: {
-		flex: 1,
+		flex: 3,
 		alignItems: 'center'
 	},
 	icon: {
-		padding: 10,
+		padding: 10
 	},
-
+	loginHeaderText: {
+		fontSize: 35,
+		fontFamily: theme.FONT_BOLD,
+		textAlign: 'center',
+		color: theme.TEXT_COLOR
+	},
 })

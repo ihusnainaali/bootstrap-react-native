@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-n
 import { withNavigation } from 'react-navigation';
 import TextField from '../../components/textfield/textfield.component';
 import Button from '../../components/button/button.component';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Icon } from 'react-native-elements'
 
 import styles from './register.style'
 import theme from '../../styles/theme.style'
@@ -88,8 +88,18 @@ class Register extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.registerWrapper}>
-        <View style={styles.registerMiddleGrid}>
-          <MaterialIcons style={styles.icon} name="account-circle" size={20}/>
+      <View style={styles.registerTopGrid}>
+        <Text style={styles.registerHeaderText}>Registration:</Text>
+      </View>
+      <View style={styles.registerMiddleGrid}>
+        <View style={{flexDirection: 'row'}}>
+          <Icon
+            iconStyle={styles.icon, {textAlign:'center', width: 40}}
+            name='md-person'
+            type='ionicon'
+            color='#000000'
+            size={30}
+          />
           <TextField
             placeholder="Username"
             placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -99,7 +109,15 @@ class Register extends Component {
             autoCorrect={false}
             onChangeText={this.onChangeText("username").bind(this)}
           />
-		  <MaterialIcons style={styles.icon} name="email" size={20}/>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Icon
+            iconStyle={styles.icon, {textAlign:'center', width: 40}}
+            name='md-mail'
+            type='ionicon'
+            color='#000000'
+            size={30}
+          />
           <TextField
             placeholder="Email"
             placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -109,7 +127,15 @@ class Register extends Component {
             autoCorrect={false}
             onChangeText={this.onChangeText("email").bind(this)}
           />
-		  <MaterialIcons style={styles.icon} name="vpn-key" size={20}/>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Icon
+            iconStyle={styles.icon, {textAlign:'center', width: 40}}
+            name='md-lock'
+            type='ionicon'
+            color='#000000'
+            size={30}
+          />
           <TextField
             placeholder="Password"
             placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -118,6 +144,15 @@ class Register extends Component {
             autoCapitalize="none"
             autoCorrect={false}
             onChangeText={this.onChangeText("password").bind(this)}
+          />
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Icon
+            iconStyle={styles.icon, {textAlign:'center', width: 40}}
+            name='md-lock'
+            type='ionicon'
+            color='#000000'
+            size={30}
           />
           <TextField
             placeholder="Confirm Password"
@@ -128,14 +163,15 @@ class Register extends Component {
             autoCorrect={false}
             onChangeText={this.onChangeText("passwordConfirmation").bind(this)}
           />
-          <Text>{this.state.error}</Text>
         </View>
-        <View style={styles.registerBottomGrid}>
-          <Button
-            onPress={this.signUp.bind(this)}
-            name='Register'
-            screen='Login'/>
-        </View>
+        <Text>{this.state.error}</Text>
+      </View>
+      <View style={styles.registerBottomGrid}>
+        <Button
+          onPress={this.signUp.bind(this)}
+          name='Register'
+          screen='Login'/>
+      </View>
       </KeyboardAvoidingView>
     );
   }

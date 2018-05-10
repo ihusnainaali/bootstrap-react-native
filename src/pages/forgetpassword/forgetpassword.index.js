@@ -4,7 +4,7 @@ import { withNavigation } from 'react-navigation';
 
 import styles from './forgetpassword.style';
 import theme from '../../styles/theme.style';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Icon } from 'react-native-elements'
 
 import Amplify, { Auth } from 'aws-amplify'
 import config from '../../../aws-exports';
@@ -91,16 +91,27 @@ class ForgetPassword extends Component {
 		{
 		  !this.state.authCodeSent ?
 			<View>
+        <View style={styles.forgetPasswordTopGrid}>
+          <Text style={styles.forgotHeaderText}>Forgot Password:</Text>
+        </View>
 			  <View style={styles.forgetPasswordMiddleGrid}>
-				<MaterialIcons style={styles.icon} name="account-circle" size={20}/>
-				<TextField
-				  placeholder="User Name"
-				  placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-				  returnKeyType="go"
-				  autoCapitalize="none"
-				  autoCorrect={false}
-				  onChangeText={this.onChangeText("username").bind(this)}
-				/>
+        <View style={{flexDirection: 'row'}}>
+          <Icon
+            iconStyle={styles.icon, {textAlign:'center', width: 40}}
+            name='md-person'
+            type='ionicon'
+            color='#000000'
+            size={30}
+          />
+  				<TextField
+  				  placeholder="User Name"
+  				  placeholderTextColor={theme.COLOR_PRIMARY_DARK}
+  				  returnKeyType="go"
+  				  autoCapitalize="none"
+  				  autoCorrect={false}
+  				  onChangeText={this.onChangeText("username").bind(this)}
+  				/>
+        </View>
 				<Text>{this.state.error}</Text>
 			  </View>
 			  <View style={styles.forgetPasswordBottomGrid}>
