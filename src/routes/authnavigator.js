@@ -11,6 +11,7 @@ import { Provider, connect } from 'react-redux';
 import rootReducer from '../redux/reducers/index.reducer';
 
 import Splash from '../pages/splash/splash.index';
+import Home from '../pages/home/home.index';
 import Welcome from '../pages/welcome/welcome.index';
 import Login from '../pages/login/login.index';
 import Register from '../pages/register/register.index';
@@ -40,6 +41,7 @@ const ConnectLoginScreen = connect(state => ({
 
 const AuthNavigator = StackNavigator({
     Welcome: { screen: Welcome },
+    Home: { screen: Home },
     Login: { screen: Login },
     Register: { screen: Register },
     Verification: { screen: Verification },
