@@ -23,7 +23,6 @@ const user = {
 
 }
 
-
 class Profile extends React.Component {
 
   render() {
@@ -31,9 +30,8 @@ class Profile extends React.Component {
       <ScrollView contentContainerStyle={styles.profileWrapper}>
         // Profile Box
         <View style={styles.profileCard}>
-          <Text style={styles.username}>{user.name}</Text>
           <Image
-          style={{width: 80, height: 80}}
+          style={{width: 120, height: 120}}
           source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
           />
           <Icon name='sms-failed' marginTop={15}/>
