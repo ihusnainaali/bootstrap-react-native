@@ -20,8 +20,6 @@
 		"react-apollo": "2.1.4",
 		"react-native": "0.55.4",
 		"react-native-elements": "0.19.1",
-		"react-native-material-design": "0.3.7",
-		"react-native-material-design-styles": "0.2.7",
 		"react-native-vector-icons": "4.6.0",
 		"react-navigation": "2.0.1",
 		"react-navigation-redux-helpers": "^1.0.6",
