@@ -14,7 +14,7 @@ const store = createStore(rootReducer)
 
 store.subscribe(()=>console.log(store.getState()))
 
-export default class App extends Component {
+class App extends Component {
 
     constructor(props) {
         super(props);
@@ -47,3 +47,5 @@ export default class App extends Component {
         }
     }
 }
+
+export default App;
