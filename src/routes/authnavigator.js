@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Platform, StyleSheet,Text, View } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { createSwitchNavigator, StackNavigator } from 'react-navigation';
 
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
@@ -40,12 +40,35 @@ const ConnectLoginScreen = connect(state => ({
 }))(LoginScreen)
 
 const AuthNavigator = StackNavigator({
-    Welcome: { screen: Welcome },
-    Home: { screen: Home },
-    Login: { screen: Login },
-    Register: { screen: Register },
-    Verification: { screen: Verification },
-    ForgetPassword: { screen: ForgetPassword }
+    Welcome: { 
+        screen: Welcome,
+        navigationOptions:() => ({
+            header: null
+        })
+    },
+    Login: { 
+        screen: Login ,
+        navigationOptions:() => ({
+            title: "Login"
+        })
+    },
+    Register: { 
+        screen: Register,
+        navigationOptions:() => ({
+            title: "Register"
+        }) 
+    },
+    Verification: { 
+        screen: Verification,
+        navigationOptions:() => ({
+            title: "Verification"
+        }) 
+    },
+    ForgetPassword: { 
+        screen: ForgetPassword,
+        navigationOptions:() => ({
+            title: "Forgot Password"
+        }) }
     },
     { initialRouteName: 'Welcome', }
 );

@@ -5,7 +5,8 @@ import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import rootReducer from './src/redux/reducers/index.reducer';
 
-import AuthNavigator from './src/routes/authnavigator';
+// import AuthNavigator from './src/routes/authnavigator';
+import AppNavigator from './src/routes/appnavigator';
 
 import Splash from './src/pages/splash/splash.index';
 import Login from './src/pages/login/login.index';
@@ -41,7 +42,7 @@ class App extends Component {
       } else {
           return (
             <Provider store={store}>
-              <AuthNavigator />
+              <AppNavigator />
             </Provider>
             );
         }

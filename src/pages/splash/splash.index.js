@@ -13,8 +13,8 @@ export default class Splash extends Component {
             source={require('../../assets/pangyou_logo.png')}/>
         </View>
   			<View>
-          		<Text style={styles.subtitle}>Powered by Develoop</Text>
-        	</View>
+          	<Text style={styles.subtitle}>Powered by Develoop</Text>
+        </View>
   		</View>
     );
 	}

@@ -92,7 +92,6 @@ class ForgetPassword extends Component {
 		  !this.state.authCodeSent ?
 			<View>
         <View style={styles.forgetPasswordTopGrid}>
-          <Text style={styles.forgotHeaderText}>Forgot Password:</Text>
         </View>
 			  <View style={styles.forgetPasswordMiddleGrid}>
         <View style={{flexDirection: 'row'}}>

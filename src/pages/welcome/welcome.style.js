@@ -14,7 +14,7 @@ export default StyleSheet.create({
 	},
 	welcomeTopGrid: {
 		flex: 1,
-		marginTop: 100,
+		marginTop: 120,
 		alignItems: 'center'
 	},
 	welcomeBottomGrid: {
