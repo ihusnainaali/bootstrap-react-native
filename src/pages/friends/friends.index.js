@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, ActivityIndicator } from 'react-native';
+import { KeyboardAvoidingView, View, Text, FlatList, ActivityIndicator } from 'react-native';
 import { List, ListItem, SearchBar } from 'react-native-elements';
 
 import { TabNavigator,TabBarBottom,withNavigation } from 'react-navigation';
@@ -106,6 +106,7 @@ class Friends extends React.Component {
 
   render() {
     return (
+      <KeyboardAvoidingView>
       <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
         <FlatList
           data={this.state.data}
@@ -113,7 +114,7 @@ class Friends extends React.Component {
             <ListItem
               roundAvatar
               title={`${item.name.first} ${item.name.last}`}
-              subtitle={item.email}
+              subtitle={item.location.city}
               avatar={{ uri: item.picture.thumbnail }}
               containerStyle={{ borderBottomWidth: 0 }}
             />
@@ -128,6 +129,7 @@ class Friends extends React.Component {
           onEndReachedThreshold={50}
         />
       </List>
+      </KeyboardAvoidingView>
     );
   }
 }
