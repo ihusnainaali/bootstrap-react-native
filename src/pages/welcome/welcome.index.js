@@ -6,6 +6,7 @@ import styles from './welcome.style';
 import Button from '../../components/button/button.component';
 
 class Welcome extends Component {
+
 	render() {
     return (
 		<View style={styles.welcomeWrapper}>
@@ -22,6 +23,7 @@ class Welcome extends Component {
 		</View>
     );
 	}
+	
 }
 
 export default withNavigation(Welcome);
