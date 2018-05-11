@@ -53,7 +53,7 @@ const JournalsStack = createStackNavigator({
 // Create Journals Stack
 const ProfileStack = createStackNavigator({
   profile: { 
-    screen: Settings,
+    screen: Profile,
     navigationOptions:() => ({
         title: "User Profile"
     })

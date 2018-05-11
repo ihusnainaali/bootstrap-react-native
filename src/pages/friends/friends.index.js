@@ -5,6 +5,7 @@ import { List, ListItem, SearchBar } from 'react-native-elements';
 import { TabNavigator,TabBarBottom,withNavigation } from 'react-navigation';
 
 import styles from './friends.style';
+import theme from '../../styles/theme.style';
 
 class Friends extends React.Component {
 
@@ -21,6 +22,11 @@ class Friends extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.makeRemoteRequest();
+  }
+  
+  // TODO ADD NETWORKING ROUTING FOR FRIENDS
   makeRemoteRequest = () => {
     const { page, seed } = this.state;
     const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
@@ -71,7 +77,7 @@ class Friends extends React.Component {
         style={{
           height: 1,
           width: "86%",
-          backgroundColor: "#CED0CE",
+          backgroundColor: theme.COLOR_PRIMARY_DARK,
           marginLeft: "14%"
         }}
       />
