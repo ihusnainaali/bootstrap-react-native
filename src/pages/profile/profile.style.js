@@ -19,36 +19,49 @@ export default StyleSheet.create({
         backgroundColor: theme.COLOR_PRIMARY
     },
     header: {
-        flex: 1,
         width: Dimensions.get('window').width,
         fontFamily: theme.FONT_BOLD,
     },
     profileCard: {
         width: Dimensions.get('window').width,
-        marginTop: 50,
+        marginTop: 20,
         height: 200,
         padding: 10,
         alignItems: 'center',
-        backgroundColor: theme.COLOR_PRIMARY_LIGHT
+        borderBottomLeftRadius: 25,
+        borderBottomRightRadius: 25,
+        backgroundColor: 'lightgrey'
+        // backgroundColor: theme.COLOR_PRIMARY_LIGHT
     },
     descriptionCard: {
-        flex: 1,
         width: Dimensions.get('window').width,
-        marginTop: 5,
         borderColor: theme.COLOR_PRIMARY_DARK,
-        alignItems: 'center',
-        backgroundColor: theme.COLOR_PRIMARY_LIGHT
+        alignItems: 'center'
+        // backgroundColor: theme.COLOR_PRIMARY_LIGHT
     },
     username: {
-		fontSize: 20,
-		fontFamily: theme.FONT_BOLD,
-		textAlign: 'center',
-		color: theme.TEXT_COLOR
+    		fontSize: 20,
+    		fontFamily: theme.FONT_BOLD,
+    		textAlign: 'center',
+    		color: theme.TEXT_COLOR
     },
     text: {
-		fontSize: 16,
-		fontFamily: theme.FONT_LIGHT,
-		textAlign: 'center',
-		color: theme.TEXT_COLOR
-	}
+    		fontSize: 16,
+    		fontFamily: theme.FONT_LIGHT,
+    		textAlign: 'center',
+    		color: theme.TEXT_COLOR
+    },
+  	profileBottomGrid: {
+      marginTop: 20,
+  		alignItems: 'center'
+  	},
+  	icon: {
+  		padding: 10,
+  	},
+  	profileHeaderText: {
+  		fontSize: 35,
+  		fontFamily: theme.FONT_BOLD,
+  		textAlign: 'center',
+  		color: theme.TEXT_COLOR
+  	},
 })
