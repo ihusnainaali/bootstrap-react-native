@@ -14,6 +14,7 @@ import Login from '../pages/login/login.index';
 import Register from '../pages/register/register.index';
 import Verification from '../pages/verification/verification.index';
 import ForgetPassword from '../pages/forgetpassword/forgetpassword.index';
+import EditProfile from '../pages/profile/profile.edit';
 
 // Log-in Screen
 class LoginScreen extends Component {
@@ -37,35 +38,13 @@ const ConnectLoginScreen = connect(state => ({
 }))(LoginScreen)
 
 const AuthNavigator = StackNavigator({
-    Welcome: { 
-        screen: Welcome,
-        navigationOptions:() => ({
-            header: null
-        })
-    },
-    Login: { 
-        screen: Login,
-        navigationOptions:() => ({
-            title: "Login"
-        })
-    },
-    Register: { 
-        screen: Register,
-        navigationOptions:() => ({
-            title: "Register"
-        }) 
-    },
-    Verification: { 
-        screen: Verification,
-        navigationOptions:() => ({
-            title: "Verification"
-        }) 
-    },
-    ForgetPassword: { 
-        screen: ForgetPassword,
-        navigationOptions:() => ({
-            title: "Forgot Password"
-        }) }
+    Welcome: { screen: Welcome },
+    Home: { screen: Home },
+    Login: { screen: Login },
+    Register: { screen: Register },
+    Verification: { screen: Verification },
+    ForgetPassword: { screen: ForgetPassword },
+    EditProfile: { screen: EditProfile }
     },
     // TODO Change back to Welcome
     { initialRouteName: 'Home', }
