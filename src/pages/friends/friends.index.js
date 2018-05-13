@@ -90,6 +90,35 @@ class Friends extends React.Component {
       </Container>
 
     );
+  };
+
+  render() {
+    return (
+      <KeyboardAvoidingView>
+      <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+        <FlatList
+          data={this.state.data}
+          renderItem={({ item }) => (
+            <ListItem
+              roundAvatar
+              title={`${item.name.first} ${item.name.last}`}
+              subtitle={item.location.city}
+              avatar={{ uri: item.picture.thumbnail }}
+              containerStyle={{ borderBottomWidth: 0 }}
+            />
+          )}
+          keyExtractor={item => item.email}
+          ItemSeparatorComponent={this.renderSeparator}
+          ListHeaderComponent={this.renderHeader}
+          ListFooterComponent={this.renderFooter}
+          onRefresh={this.handleRefresh}
+          refreshing={this.state.refreshing}
+          onEndReached={this.handleLoadMore}
+          onEndReachedThreshold={50}
+        />
+      </List>
+      </KeyboardAvoidingView>
+    );
   }
 
 }
