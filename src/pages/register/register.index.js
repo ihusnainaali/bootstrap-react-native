@@ -89,7 +89,6 @@ class Register extends Component {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.registerWrapper}>
       <View style={styles.registerTopGrid}>
-        <Text style={styles.registerHeaderText}>Registration:</Text>
       </View>
       <View style={styles.registerMiddleGrid}>
         <View style={{flexDirection: 'row'}}>

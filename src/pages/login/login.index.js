@@ -17,6 +17,7 @@ import config from '../../../aws-exports';
 Amplify.configure(config);
 
 class Login extends Component {
+    
     state = {
         username: '',
         password: '',
@@ -62,7 +63,6 @@ class Login extends Component {
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.loginWrapper}>
                 <View style={styles.loginTopGrid}>
-                  <Text style={styles.loginHeaderText}>Login:</Text>
                 </View>
                 <View style={styles.loginMiddleGrid}>
                   <View style={{flexDirection: 'row'}}>

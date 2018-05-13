@@ -14,7 +14,7 @@ export default StyleSheet.create({
 	},
 	registerTopGrid: {
 		flex: 1,
-		marginTop: 50,
+		marginTop: 30,
 		alignItems: 'center'
 	},
 	registerMiddleGrid: {
