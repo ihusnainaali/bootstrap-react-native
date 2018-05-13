@@ -88,8 +88,8 @@ class EditProfile extends Component {
             <View style={{flexDirection: 'row'}}>
               <Icon
                 iconStyle={styles.icon, {textAlign:'center', width: 40}}
-                name='md-person'
-                type='ionicon'
+                name='person'
+                type='MaterialIcons'
                 color='#000000'
                 size={30}
               />
@@ -107,7 +107,7 @@ class EditProfile extends Component {
               <Icon
                 iconStyle={styles.icon, {textAlign:'center', width: 40}}
                 name='sms-failed'
-                type='ionicon'
+                type='MaterialIcons'
                 color='#000000'
                 size={30}
               />
@@ -125,7 +125,7 @@ class EditProfile extends Component {
               <Icon
                 iconStyle={styles.icon, {textAlign:'center', width: 40}}
                 name='location-on'
-                type='ionicon'
+                type='MaterialIcons'
                 color='#000000'
                 size={30}
               />
@@ -143,7 +143,7 @@ class EditProfile extends Component {
               <Icon
                 iconStyle={styles.icon, {textAlign:'center', width: 40}}
                 name='cake'
-                type='ionicon'
+                type='MaterialIcons'
                 color='#000000'
                 size={30}
               />
@@ -161,7 +161,7 @@ class EditProfile extends Component {
               <Icon
                 iconStyle={styles.icon, {textAlign:'center', width: 40}}
                 name='wc'
-                type='ionicon'
+                type='MaterialIcons'
                 color='#000000'
                 size={30}
               />
@@ -179,7 +179,7 @@ class EditProfile extends Component {
               <Icon
                 iconStyle={styles.icon, {textAlign:'center', width: 40}}
                 name='school'
-                type='ionicon'
+                type='MaterialIcons'
                 color='#000000'
                 size={30}
               />
@@ -197,7 +197,7 @@ class EditProfile extends Component {
               <Icon
                 iconStyle={styles.icon, {textAlign:'center', width: 40}}
                 name=''
-                type='ionicon'
+                type='MaterialIcons'
                 color='#000000'
                 size={30}
               />
@@ -214,8 +214,8 @@ class EditProfile extends Component {
             <View style={{flexDirection: 'row'}}>
               <Icon
                 iconStyle={styles.icon, {textAlign:'center', width: 40}}
-                name='language-on'
-                type='ionicon'
+                name='language'
+                type='MaterialIcons'
                 color='#000000'
                 size={30}
               />

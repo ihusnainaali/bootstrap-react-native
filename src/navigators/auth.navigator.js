@@ -14,7 +14,6 @@ import Login from '../pages/login/login.index';
 import Register from '../pages/register/register.index';
 import Verification from '../pages/verification/verification.index';
 import ForgetPassword from '../pages/forgetpassword/forgetpassword.index';
-import EditProfile from '../pages/profile/profile.edit';
 
 // Log-in Screen
 class LoginScreen extends Component {
