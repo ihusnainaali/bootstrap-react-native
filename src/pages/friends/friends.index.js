@@ -2,7 +2,7 @@ import React from 'react';
 import { KeyboardAvoidingView, View, Text, FlatList, ActivityIndicator } from 'react-native';
 import { List, ListItem, SearchBar } from 'react-native-elements';
 
-import { TabNavigator,TabBarBottom,withNavigation } from 'react-navigation';
+import { withNavigation } from 'react-navigation';
 
 import styles from './friends.style';
 import theme from '../../styles/theme.style';

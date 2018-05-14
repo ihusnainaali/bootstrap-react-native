@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, View, Text, StyleSheet, AsyncStorage } from 'react-native';
+import { Image, View, Text, AsyncStorage } from 'react-native';
 
 import styles from './splash.style'
 
@@ -12,7 +12,6 @@ export default class Splash extends Component {
     // Fetch the token from storage then navigate to our appropriate place
     _bootstrapAsync = async () => {
         const username = await AsyncStorage.getItem('username');
-
         // This will switch to the Home screen or Welcome screen and this loading
         // screen will be unmounted and thrown away.
         this.props.navigation.navigate(username ? 'Home' : 'Welcome');

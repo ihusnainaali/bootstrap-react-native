@@ -2,15 +2,13 @@
 *   Auth Navigation
 */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Platform, StyleSheet,Text, View } from 'react-native';
-import { createSwitchNavigator, StackNavigator } from 'react-navigation';
+import { Platform,Text, View } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import rootReducer from '../redux/reducers/index.reducer';
 
-import Splash from '../pages/splash/splash.index';
 import Welcome from '../pages/welcome/welcome.index';
 import Login from '../pages/login/login.index';
 import Register from '../pages/register/register.index';
@@ -46,7 +44,7 @@ const AuthNavigator = StackNavigator({
         })
     },
     Login: { 
-        screen: Login ,
+        screen: Login,
         navigationOptions:() => ({
             title: "Login"
         })

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../../../aws-exports';
