@@ -56,6 +56,24 @@ features:
             tablePrivacy: private
           - !com.amazonaws.mobilehub.v0.NoSQLTable 
             attributes:
+              peerId: S
+              peerSDP: S
+              userId: S
+            hashKeyName: userId
+            hashKeyType: S
+            indexes:
+              - !com.amazonaws.mobilehub.v0.NoSQLIndex 
+                hashKeyName: userId
+                hashKeyType: S
+                indexName: userId-peerId
+                rangeKeyName: peerId
+                rangeKeyType: S
+            rangeKeyName: peerId
+            rangeKeyType: S
+            tableName: ___DYNAMIC_PREFIX___-PeerConnections
+            tablePrivacy: public
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
               content: S
               creationDate: N
               noteId: S
