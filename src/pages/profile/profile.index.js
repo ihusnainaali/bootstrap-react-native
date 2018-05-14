@@ -86,7 +86,7 @@ class Profile extends React.Component {
             <Button
                 onPress={this.props.navigation.navigate('EditProfile')}
                 name='Edit Profile'
-                screen='EditProfile'/>
+                screen='editprofile'/>
         </View>
       </ScrollView>
     );
