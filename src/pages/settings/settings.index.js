@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import { TabNavigator, TabBarBottom, withNavigation } from 'react-navigation';
+import { withNavigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import Amplify, { Auth } from 'aws-amplify';
@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import { onLogout } from '../../redux/actions/auth.actions'
 
 class Settings extends Component {
+
     onPress() {
         Auth.signOut()
             .then(() => {

@@ -8,6 +8,7 @@ import Friends from '../pages/friends/friends.index';
 import Journals from '../pages/journals/journals.index';
 import Profile from '../pages/profile/profile.index';
 import Settings from '../pages/settings/settings.index';
+import Matchmaking from '../pages/matchmaking/matchmaking.index'
 
 import theme from '../styles/theme.style';
 
@@ -18,6 +19,12 @@ const PangyouStack = createStackNavigator({
     screen: Pangyou,
     navigationOptions:() => ({
         title: "Pangyou"
+    })
+  },
+  matchmaking: { 
+    screen: Matchmaking,
+    navigationOptions:() => ({
+        title: "Matchmaking"
     })
   },
   settings: { 
