@@ -16,14 +16,7 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   avatar: {
-    width: 168,
-    height: 168
+    width: 200,
+    height: 200
   },
-  countContainer: {
-    alignItems: 'center',
-    padding: 10
-  },
-  countText: {
-    color: '#FF00FF'
-  }
 })

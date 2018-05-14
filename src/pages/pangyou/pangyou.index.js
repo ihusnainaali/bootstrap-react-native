@@ -20,8 +20,8 @@ class Pangyou extends React.Component {
   }
 
   static navigationOptions = ({ navigation }) => {
-    const params = navigation.state.params || {};
 
+    const params = navigation.state.params || {};
     return {
       headerTitle: 'Pangyou',
       headerRight: (
@@ -33,6 +33,7 @@ class Pangyou extends React.Component {
         </HeaderButtons>
       ),
     };
+    
   };
   
   render() {
