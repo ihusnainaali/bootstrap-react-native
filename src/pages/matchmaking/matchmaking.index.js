@@ -36,7 +36,14 @@ const cards = [
 
 class Matchmaking extends React.Component { 
 
-  
+  static navigationOptions = ({ navigation }) => {
+
+    const params = navigation.state.params || {};
+    return {
+      headerTitle: 'Matchmaking',
+    };
+    
+  };
 
   render() {
     return (

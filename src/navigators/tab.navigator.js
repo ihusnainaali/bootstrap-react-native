@@ -28,7 +28,7 @@ const PangyouStack = createStackNavigator({
   matchmaking: { 
     screen: Matchmaking,
     navigationOptions:() => ({
-        title: "Matchmaking"
+      
     })
   },
   settings: { 
