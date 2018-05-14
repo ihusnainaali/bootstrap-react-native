@@ -5,7 +5,6 @@ import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import rootReducer from './src/redux/reducers/index.reducer';
 
-// import AuthNavigator from './src/routes/authnavigator';
 import AppNavigator from './src/routes/appnavigator';
 
 import Splash from './src/pages/splash/splash.index';

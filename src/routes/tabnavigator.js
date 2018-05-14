@@ -13,6 +13,7 @@ import theme from '../styles/theme.style';
 
 // Create Pangyou Stack
 const PangyouStack = createStackNavigator({
+  
   pangyou: { 
     screen: Pangyou,
     navigationOptions:() => ({
@@ -52,7 +53,7 @@ const JournalsStack = createStackNavigator({
 // Create Journals Stack
 const ProfileStack = createStackNavigator({
   profile: { 
-    screen: Settings,
+    screen: Profile,
     navigationOptions:() => ({
         title: "User Profile"
     })
