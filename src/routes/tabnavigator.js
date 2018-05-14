@@ -8,19 +8,20 @@ import Friends from '../pages/friends/friends.index';
 import Journals from '../pages/journals/journals.index';
 import Profile from '../pages/profile/profile.index';
 import Settings from '../pages/settings/settings.index';
+import EditProfile from '../pages/profile/profile.edit'
 
 import theme from '../styles/theme.style';
 
 // Create Pangyou Stack
 const PangyouStack = createStackNavigator({
-  
-  pangyou: { 
+
+  pangyou: {
     screen: Pangyou,
     navigationOptions:() => ({
         title: "Pangyou"
     })
   },
-  settings: { 
+  settings: {
     screen: Settings,
     navigationOptions:() => ({
         title: "Settings"
@@ -30,7 +31,7 @@ const PangyouStack = createStackNavigator({
 
 // Create Friends Stack
 const FriendsStack = createStackNavigator({
-  friends: { 
+  friends: {
     screen: Friends,
     navigationOptions:() => ({
         title: "Friend List"
@@ -41,7 +42,7 @@ const FriendsStack = createStackNavigator({
 
 // Create Journals Stack
 const JournalsStack = createStackNavigator({
-  journals: { 
+  journals: {
     screen: Journals,
     navigationOptions:() => ({
         title: "Journal List"
@@ -52,13 +53,18 @@ const JournalsStack = createStackNavigator({
 
 // Create Journals Stack
 const ProfileStack = createStackNavigator({
-  profile: { 
+  profile: {
     screen: Profile,
     navigationOptions:() => ({
         title: "User Profile"
     })
   },
-  // TODO add edit profile screen redirection
+  editprofile: {
+    screen: EditProfile,
+    navigationOptions:() => ({
+        title: "Edit Profile"
+    })
+  },
 })
 
 export default TabNavigator(

@@ -72,7 +72,7 @@ class EditProfile extends Component {
       language: language
     })
       .then(res => {
-        // this.props.navigation.navigate('Profile');
+        this.props.navigation.navigate('Profile');
       })
       .catch(err => {
         console.log(err);
