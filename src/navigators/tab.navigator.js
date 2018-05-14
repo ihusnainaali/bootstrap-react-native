@@ -1,7 +1,9 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { createStackNavigator, TabNavigator, TabBarBottom, withNavigation } from 'react-navigation';
+import { Text, View, Button} from 'react-native';
+import { navigation, createStackNavigator, TabNavigator, TabBarBottom, withNavigation } from 'react-navigation';
+
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import HeaderButtons from 'react-navigation-header-buttons'
 
 import Pangyou from '../pages/pangyou/pangyou.index';
 import Friends from '../pages/friends/friends.index';
@@ -10,15 +12,17 @@ import Profile from '../pages/profile/profile.index';
 import Settings from '../pages/settings/settings.index';
 import Matchmaking from '../pages/matchmaking/matchmaking.index'
 
+import { route } from '../routes/routes.constants';
+
 import theme from '../styles/theme.style';
 
 // Create Pangyou Stack
 const PangyouStack = createStackNavigator({
-  
+
   pangyou: { 
     screen: Pangyou,
     navigationOptions:() => ({
-        title: "Pangyou"
+
     })
   },
   matchmaking: { 
