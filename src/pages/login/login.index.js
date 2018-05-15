@@ -7,7 +7,7 @@ import { onLogin } from '../../redux/actions/auth.actions'
 
 import TextField from '../../components/textfield/textfield.component';
 import Button from '../../components/button/button.component';
-import { Icon } from 'react-native-elements'
+import { Icon } from 'native-base'
 
 import styles from './login.style';
 import theme from '../../styles/theme.style';
@@ -67,11 +67,8 @@ class Login extends Component {
                 <View style={styles.loginMiddleGrid}>
                   <View style={{flexDirection: 'row'}}>
                     <Icon
-                      iconStyle={styles.icon, {textAlign:'center', width: 40}}
                       name='md-person'
-                      type='ionicon'
-                      color='#000000'
-                      size={30}
+                      style={styles.icon}
                     />
                     <TextField
                         placeholder="Username or Email"
@@ -86,11 +83,8 @@ class Login extends Component {
                   </View>
                   <View style={{flexDirection: 'row'}}>
                     <Icon
-                      iconStyle={styles.icon, {textAlign:'center', width: 40}}
+                      style={styles.icon}
                       name='md-lock'
-                      type='ionicon'
-                      color='#000000'
-                      size={30}
                     />
                     <TextField
                         placeholder="Password"

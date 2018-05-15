@@ -3,7 +3,7 @@ import { View, Text, TextInput, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import TextField from '../../components/textfield/textfield.component';
 import Button from '../../components/button/button.component';
-import { Icon } from 'react-native-elements'
+import { Icon } from 'native-base'
 
 import styles from './register.style'
 import theme from '../../styles/theme.style'
@@ -93,11 +93,8 @@ class Register extends Component {
       <View style={styles.registerMiddleGrid}>
         <View style={{flexDirection: 'row'}}>
           <Icon
-            iconStyle={styles.icon, {textAlign:'center', width: 40}}
             name='md-person'
-            type='ionicon'
-            color='#000000'
-            size={30}
+            style={styles.icon}
           />
           <TextField
             placeholder="Username"
@@ -111,11 +108,8 @@ class Register extends Component {
         </View>
         <View style={{flexDirection: 'row'}}>
           <Icon
-            iconStyle={styles.icon, {textAlign:'center', width: 40}}
             name='md-mail'
-            type='ionicon'
-            color='#000000'
-            size={30}
+            style={styles.icon}
           />
           <TextField
             placeholder="Email"
@@ -129,11 +123,8 @@ class Register extends Component {
         </View>
         <View style={{flexDirection: 'row'}}>
           <Icon
-            iconStyle={styles.icon, {textAlign:'center', width: 40}}
             name='md-lock'
-            type='ionicon'
-            color='#000000'
-            size={30}
+            style={styles.icon}
           />
           <TextField
             placeholder="Password"
@@ -147,11 +138,8 @@ class Register extends Component {
         </View>
         <View style={{flexDirection: 'row'}}>
           <Icon
-            iconStyle={styles.icon, {textAlign:'center', width: 40}}
             name='md-lock'
-            type='ionicon'
-            color='#000000'
-            size={30}
+            style={styles.icon}
           />
           <TextField
             placeholder="Confirm Password"

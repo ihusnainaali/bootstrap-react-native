@@ -39,7 +39,7 @@ class Pangyou extends React.Component {
       <View style={styles.wrapper}>
         <View style={styles.avatarGrid}>
           <TouchableOpacity 
-            onPress={() => { this.navigateToMatchmaking() }}>
+            onPress={() => { this.navigateToSettings() }}>
 		        <Image
 			        style={styles.avatar}
 			          source={require('../../assets/pangyou_welcome.png')}/>

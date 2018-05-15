@@ -26,7 +26,9 @@ export default StyleSheet.create({
 		alignItems: 'center'
 	},
 	icon: {
-		padding: 10
+		padding: 10,
+		fontSize: 24,
+		color: theme.COLOR_PRIMARY_DARK
 	},
 	forgotHeaderText: {
 		fontSize: 35,
