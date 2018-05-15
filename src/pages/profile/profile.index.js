@@ -94,36 +94,67 @@ const user = {
 
 const list = [
   {
+    key: 'name',
     title: 'Example Person',
-    icon: 'child-care'
+    iosicon: 'ios-contact',
+    androidicon: 'md-contact',
+    color: 'black'
   },
   {
+    key: 'description',
+    title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    iosicon: 'ios-clipboard',
+    androidicon: 'md-clipboard',
+    color: '#eeeeee'
+  },
+  {
+    key: 'status',
     title: 'I want Soup Dumplings',
-    icon: 'sms-failed'
+    iosicon: 'ios-heart',
+    androidicon: 'md-heart',
+    color: 'black'
   },
   {
+    key: 'location',
     title: 'Beijing, China',
-    icon: 'location-on'
+    iosicon: 'ios-pin',
+    androidicon: 'md-person',
+    color: 'black'
   },
   {
+    key: 'age',
     title: 'January 1, 1900',
-    icon: 'cake'
+    iosicon: 'ios-calendar',
+    androidicon: 'md-calendar',
+    color: 'black'
   },
   {
+    key: 'gender',
     title: 'Male',
-    icon: 'wc'
+    iosicon: 'ios-contacts',
+    androidicon: 'md-contacts',
+    color: 'black'
   },
   {
+    key: 'school',
     title: 'Peking University',
-    icon: 'school'
+    iosicon: 'ios-school',
+    androidicon: 'md-school',
+    color: 'black'
   },
   {
+    key: 'major',
     title: 'Underwater Basket Weaving',
-    icon: 'school'
+    iosicon: 'ios-book',
+    androidicon: 'md-book',
+    color: 'black'
   },
   {
+    key: 'language',
     title: 'English',
-    icon: 'language'
+    iosicon: 'ios-globe',
+    androidicon: 'md-globe',
+    color: 'black'
   }
 ]
 
