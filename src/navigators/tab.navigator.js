@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Button} from 'react-native';
-import { navigation, createStackNavigator, TabNavigator, TabBarBottom, withNavigation } from 'react-navigation';
+import { navigation, createStackNavigator, createBottomTabNavigator, withNavigation } from 'react-navigation';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import HeaderButtons from 'react-navigation-header-buttons'
@@ -19,61 +19,65 @@ import theme from '../styles/theme.style';
 // Create Pangyou Stack
 const PangyouStack = createStackNavigator({
 
-  pangyou: { 
-    screen: Pangyou,
-    navigationOptions:() => ({
-
-    })
+    pangyou: {
+      screen: Pangyou,
+      navigationOptions: ({ navigation }) => ({ 
+        tabBarVisible: false
+      })
+    },
+    matchmaking: { 
+      screen: Matchmaking,
+    },
+    settings: { 
+      screen: Settings 
+    }
   },
-  matchmaking: { 
-    screen: Matchmaking,
-    navigationOptions:() => ({
-      
-    })
-  },
-  settings: { 
-    screen: Settings,
-    navigationOptions:() => ({
-        title: "Settings"
-    })
-  },
-})
+  {
+    initialRouteName: 'pangyou',
+  }
+  
+)
 
 // Create Friends Stack
 const FriendsStack = createStackNavigator({
-  friends: { 
-    screen: Friends,
-    navigationOptions:() => ({
-        title: "Friend List"
-    })
-  },
-  // TODO add friend screen redirection
-})
 
+    friends: { 
+      screen: Friends
+    }
+  },
+  {
+    initialRouteName: 'friends',
+  }
+)
+  
 // Create Journals Stack
 const JournalsStack = createStackNavigator({
-  journals: { 
-    screen: Journals,
-    navigationOptions:() => ({
-        title: "Journal List"
-    })
-  },
-  // TODO add journal screen redirection
-})
 
-// Create Journals Stack
-const ProfileStack = createStackNavigator({
-  profile: { 
-    screen: Profile,
-    navigationOptions:() => ({
-        title: "User Profile"
-    })
+    journals: { 
+      screen: Journals
+    }
   },
-  // TODO add edit profile screen redirection
-})
-
-export default TabNavigator(
   {
+    initialRouteName: 'journals'
+  }
+  // TODO add journal screen redirection
+)
+
+// Create Profile Stack
+const ProfileStack = createStackNavigator({
+
+    profile: { 
+      screen: Profile,
+    }
+  },
+  {
+    initialRouteName: 'profile'
+  }
+  // TODO add edit profile screen redirection
+)
+
+const TabNavigator = createBottomTabNavigator({
+  
 		Pangyou: PangyouStack,
 		Friends: FriendsStack,
 		Journals: JournalsStack,
@@ -97,12 +101,12 @@ export default TabNavigator(
       },
     }),
     tabBarOptions: {
-        activeTintColor: theme.COLOR_SECONDARY,
-        inactiveTintColor: theme.COLOR_PRIMARY_DARK,
+      activeTintColor: theme.COLOR_SECONDARY,
+      inactiveTintColor: theme.COLOR_PRIMARY_DARK,
     },
-    tabBarComponent: TabBarBottom,
-    tabBarPosition: 'bottom',
     animationEnabled: true,
     swipeEnabled: false,
   }
 );
+
+export default TabNavigator;

@@ -20,10 +20,11 @@ class Pangyou extends React.Component {
   }
 
   static navigationOptions = ({ navigation }) => {
-
+    
     const params = navigation.state.params || {};
+
     return {
-      headerTitle: 'Pangyou',
+      title: 'Pangyou',
       headerRight: (
         <HeaderButtons IconComponent={MaterialIcons} iconSize={23} color={theme.COLOR_PRIMARY_DARK}>
         <HeaderButtons.Item 
@@ -31,9 +32,8 @@ class Pangyou extends React.Component {
           iconName='settings'
           onPress={() => { this.navigateToSettings() }}/>
         </HeaderButtons>
-      ),
+      )
     };
-    
   };
   
   render() {
