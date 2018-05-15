@@ -22,14 +22,20 @@ const PangyouStack = createStackNavigator({
     pangyou: {
       screen: Pangyou,
       navigationOptions: ({ navigation }) => ({ 
-        tabBarVisible: false
+        title: 'Pangyou'
       })
     },
     matchmaking: { 
       screen: Matchmaking,
+      navigationOptions: ({ navigation }) => ({ 
+        title: 'Matchmaking'
+      })
     },
     settings: { 
-      screen: Settings 
+      screen: Settings,
+      navigationOptions: ({ navigation }) => ({ 
+        title: 'Settings'
+      }) 
     }
   },
   {
@@ -42,8 +48,13 @@ const PangyouStack = createStackNavigator({
 const FriendsStack = createStackNavigator({
 
     friends: { 
-      screen: Friends
+      screen: Friends,
+      navigationOptions: ({ navigation }) => ({ 
+        title: 'Friend List'
+      }) 
     }
+    // TODO add Friend Redirection Profile
+    // TODO add Edit Friends List
   },
   {
     initialRouteName: 'friends',
@@ -54,8 +65,12 @@ const FriendsStack = createStackNavigator({
 const JournalsStack = createStackNavigator({
 
     journals: { 
-      screen: Journals
+      screen: Journals,
+      navigationOptions: ({ navigation }) => ({ 
+        title: 'Journal List'
+      }) 
     }
+    // TODO add Specific Journal Redirection
   },
   {
     initialRouteName: 'journals'
@@ -68,6 +83,9 @@ const ProfileStack = createStackNavigator({
 
     profile: { 
       screen: Profile,
+      navigationOptions: ({ navigation }) => ({ 
+        title: 'User Profile'
+      }) 
     }
   },
   {
@@ -81,7 +99,8 @@ const TabNavigator = createBottomTabNavigator({
 		Pangyou: PangyouStack,
 		Friends: FriendsStack,
 		Journals: JournalsStack,
-		Profile: ProfileStack
+    Profile: ProfileStack
+    
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -107,6 +126,7 @@ const TabNavigator = createBottomTabNavigator({
     animationEnabled: true,
     swipeEnabled: false,
   }
+
 );
 
 export default TabNavigator;

@@ -19,12 +19,10 @@ class Pangyou extends React.Component {
     this.props.navigation.navigate(route.SETTINGS)
   }
 
+  // Declare Settings Icon
   static navigationOptions = ({ navigation }) => {
-    
     const params = navigation.state.params || {};
-
     return {
-      title: 'Pangyou',
       headerRight: (
         <HeaderButtons IconComponent={MaterialIcons} iconSize={23} color={theme.COLOR_PRIMARY_DARK}>
         <HeaderButtons.Item 

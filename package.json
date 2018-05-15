@@ -5,7 +5,9 @@
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
 		"test": "jest",
-		"ios": "react-native run-ios --simulator=\"iPhone 7\"",
+		"ios-7": "react-native run-ios --simulator=\"iPhone 7\"",
+		"ios-8": "react-native run-ios --simulator=\"iPhone 8\"",
+		"ios-X": "react-native run-ios --simulator=\"iPhone X\"",
 		"android": "react-native run-android"
 	},
 	"dependencies": {
