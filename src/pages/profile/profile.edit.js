@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
+import { View, ScrollView, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import TextField from '../../components/textfield/textfield.component';
 import Button from '../../components/button/button.component';
-import { Icon } from 'react-native-elements'
+import { Container, Header, Text, Content, Icon, List, ListItem } from 'native-base';
 
 import styles from './profile.style'
 import theme from '../../styles/theme.style'
@@ -15,6 +15,7 @@ import theme from '../../styles/theme.style'
 class EditProfile extends Component {
   state = {
     name: '',
+    description: '',
     status: '',
     location: '',
     age: '',
@@ -45,7 +46,7 @@ class EditProfile extends Component {
   // }
 
   editProfile() {
-    const { name, status, location, age, gender, school, major, language } = this.state;
+    const { name, description, status, location, age, gender, school, major, language } = this.state;
     this.clearError();
 
     // if (!this.validateEmail(email)) {
@@ -83,160 +84,175 @@ class EditProfile extends Component {
   render() {
     return (
       <ScrollView>
-        <KeyboardAvoidingView behavior="padding" style={styles.profileWrapper}>
-          <View style={styles.profileMiddleGrid}>
-            <View style={{flexDirection: 'row'}}>
-              <Icon
-                iconStyle={styles.icon, {textAlign:'center', width: 40}}
-                name='person'
-                type='MaterialIcons'
-                color='#000000'
-                size={30}
-              />
-              <TextField
-                placeholder="Name"
-                placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                returnKeyType="next"
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoCorrect={false}
-                onChangeText={this.onChangeText("name").bind(this)}
-              />
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <Icon
-                iconStyle={styles.icon, {textAlign:'center', width: 40}}
-                name='sms-failed'
-                type='MaterialIcons'
-                color='#000000'
-                size={30}
-              />
-              <TextField
-                placeholder="Status"
-                placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                returnKeyType="next"
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoCorrect={false}
-                onChangeText={this.onChangeText("status").bind(this)}
-              />
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <Icon
-                iconStyle={styles.icon, {textAlign:'center', width: 40}}
-                name='location-on'
-                type='MaterialIcons'
-                color='#000000'
-                size={30}
-              />
-              <TextField
-                placeholder="Location"
-                placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                returnKeyType="go"
-                secureTextEntry
-                autoCapitalize="none"
-                autoCorrect={false}
-                onChangeText={this.onChangeText("location").bind(this)}
-              />
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <Icon
-                iconStyle={styles.icon, {textAlign:'center', width: 40}}
-                name='cake'
-                type='MaterialIcons'
-                color='#000000'
-                size={30}
-              />
-              <TextField
-                placeholder="Age"
-                placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                returnKeyType="go"
-                secureTextEntry
-                autoCapitalize="none"
-                autoCorrect={false}
-                onChangeText={this.onChangeText("age").bind(this)}
-              />
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <Icon
-                iconStyle={styles.icon, {textAlign:'center', width: 40}}
-                name='wc'
-                type='MaterialIcons'
-                color='#000000'
-                size={30}
-              />
-              <TextField
-                placeholder="Gender"
-                placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                returnKeyType="go"
-                secureTextEntry
-                autoCapitalize="none"
-                autoCorrect={false}
-                onChangeText={this.onChangeText("gender").bind(this)}
-              />
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <Icon
-                iconStyle={styles.icon, {textAlign:'center', width: 40}}
-                name='school'
-                type='MaterialIcons'
-                color='#000000'
-                size={30}
-              />
-              <TextField
-                placeholder="School"
-                placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                returnKeyType="go"
-                secureTextEntry
-                autoCapitalize="none"
-                autoCorrect={false}
-                onChangeText={this.onChangeText("school").bind(this)}
-              />
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <Icon
-                iconStyle={styles.icon, {textAlign:'center', width: 40}}
-                name=''
-                type='MaterialIcons'
-                color='#000000'
-                size={30}
-              />
-              <TextField
-                placeholder="Major"
-                placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                returnKeyType="go"
-                secureTextEntry
-                autoCapitalize="none"
-                autoCorrect={false}
-                onChangeText={this.onChangeText("major").bind(this)}
-              />
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <Icon
-                iconStyle={styles.icon, {textAlign:'center', width: 40}}
-                name='language'
-                type='MaterialIcons'
-                color='#000000'
-                size={30}
-              />
-              <TextField
-                placeholder="Language"
-                placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                returnKeyType="go"
-                secureTextEntry
-                autoCapitalize="none"
-                autoCorrect={false}
-                onChangeText={this.onChangeText("language").bind(this)}
-              />
-            </View>
-            <Text>{this.state.error}</Text>
-          </View>
-          <View style={styles.profileBottomGrid}>
-            <Button
-              onPress={this.props.navigation.navigate('Profile')}
-              name='Submit'
-              screen=''/>
-          </View>
+        <KeyboardAvoidingView behavior='padding' style={styles.profileWrapper}>
+          <Container>
+            <Content>
+              <View style={styles.profileTopGrid}>
+              </View>
+              <View style={styles.profileBottomGrid}>
+                <View style={{flexDirection: 'row'}}>
+                  <Icon
+                    type='Ionicons'
+                    name='ios-contact'
+                    ios='ios-contact'
+                    md='md-contact'
+                    style={{fontSize: 30, color: 'black', textAlign:'center', marginTop: 10, width: 40}} />
+                  <TextField
+                    placeholder='Name'
+                    placeholderTextColor={theme.COLOR_PRIMARY_DARK}
+                    returnKeyType='next'
+                    keyboardType='email-address'
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    onChangeText={this.onChangeText('name').bind(this)}
+                  />
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <Icon
+                    type='Ionicons'
+                    name='ios-clipboard'
+                    ios='ios-clipboard'
+                    md='md-clipboard'
+                    style={{fontSize: 30, color: 'black', textAlign:'center', marginTop: 10, width: 40}} />
+                  <TextField
+                    placeholder='Description'
+                    placeholderTextColor={theme.COLOR_PRIMARY_DARK}
+                    returnKeyType='next'
+                    keyboardType='email-address'
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    onChangeText={this.onChangeText('description').bind(this)}
+                  />
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <Icon
+                    type='Ionicons'
+                    name='ios-heart'
+                    ios='ios-heart'
+                    md='md-heart'
+                    style={{fontSize: 30, color: 'black', textAlign:'center', marginTop: 10, width: 40}} />
+                  <TextField
+                    placeholder='Status'
+                    placeholderTextColor={theme.COLOR_PRIMARY_DARK}
+                    returnKeyType='next'
+                    keyboardType='email-address'
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    onChangeText={this.onChangeText('status').bind(this)}
+                  />
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <Icon
+                    type='Ionicons'
+                    name='ios-pin'
+                    ios='ios-pin'
+                    md='md-pin'
+                    style={{fontSize: 30, color: 'black', textAlign:'center', marginTop: 10, width: 40}} />
+                  <TextField
+                    placeholder='Location'
+                    placeholderTextColor={theme.COLOR_PRIMARY_DARK}
+                    returnKeyType='go'
+                    secureTextEntry
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    onChangeText={this.onChangeText('location').bind(this)}
+                  />
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <Icon
+                    type='Ionicons'
+                    name='ios-calendar'
+                    ios='ios-calendar'
+                    md='md-calendar'
+                    style={{fontSize: 30, color: 'black', textAlign:'center', marginTop: 10, width: 40}} />
+                  <TextField
+                    placeholder='Age'
+                    placeholderTextColor={theme.COLOR_PRIMARY_DARK}
+                    returnKeyType='go'
+                    secureTextEntry
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    onChangeText={this.onChangeText('age').bind(this)}
+                  />
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <Icon
+                    type='Ionicons'
+                    name='ios-contacts'
+                    ios='ios-contacts'
+                    md='md-contacts'
+                    style={{fontSize: 30, color: 'black', textAlign:'center', marginTop: 10, width: 40}} />
+                  <TextField
+                    placeholder='Gender'
+                    placeholderTextColor={theme.COLOR_PRIMARY_DARK}
+                    returnKeyType='go'
+                    secureTextEntry
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    onChangeText={this.onChangeText('gender').bind(this)}
+                  />
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <Icon
+                    type='Ionicons'
+                    name='ios-school'
+                    ios='ios-school'
+                    md='md-school'
+                    style={{fontSize: 30, color: 'black', textAlign:'center', marginTop: 10, width: 40}} />
+                  <TextField
+                    placeholder='School'
+                    placeholderTextColor={theme.COLOR_PRIMARY_DARK}
+                    returnKeyType='go'
+                    secureTextEntry
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    onChangeText={this.onChangeText('school').bind(this)}
+                  />
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <Icon
+                    type='Ionicons'
+                    name='ios-book'
+                    ios='ios-book'
+                    md='md-book'
+                    style={{fontSize: 30, color: 'black', textAlign:'center', marginTop: 10, width: 40}} />
+                  <TextField
+                    placeholder='Major'
+                    placeholderTextColor={theme.COLOR_PRIMARY_DARK}
+                    returnKeyType='go'
+                    secureTextEntry
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    onChangeText={this.onChangeText('major').bind(this)}
+                  />
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <Icon
+                    type='Ionicons'
+                    name='ios-globe'
+                    ios='ios-globe'
+                    md='md-globe'
+                    style={{fontSize: 30, color: 'black', textAlign:'center', marginTop: 10, width: 40}} />
+                  <TextField
+                    placeholder='Language'
+                    placeholderTextColor={theme.COLOR_PRIMARY_DARK}
+                    returnKeyType='go'
+                    secureTextEntry
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    onChangeText={this.onChangeText('language').bind(this)}
+                  />
+                </View>
+                <Text>{this.state.error}</Text>
+              </View>
+              <View style={styles.profileBottomGrid}>
+                <Button
+                  onPress={this.props.navigation.navigate('Profile')}
+                  name='Submit'
+                  screen='profile'/>
+              </View>
+            </Content>
+          </Container>
         </KeyboardAvoidingView>
       </ScrollView>
     );

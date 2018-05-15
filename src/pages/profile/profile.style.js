@@ -1,18 +1,11 @@
-import React from 'react';
 import {
-    Text,
-    View,
-    StyleSheet,
-    Dimensions
+  Dimensions,
+	StyleSheet
 } from 'react-native';
-import {
-    withNavigation
-} from 'react-navigation';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
 import theme from '../../styles/theme.style';
 
 export default StyleSheet.create({
+
     profileWrapper: {
         flex: 1,
         alignItems: 'center',
@@ -22,21 +15,22 @@ export default StyleSheet.create({
         width: Dimensions.get('window').width,
         fontFamily: theme.FONT_BOLD,
     },
+    profileTopGrid: {
+  		flex: 1,
+  		marginTop: 30,
+  		alignItems: 'center'
+  	},
     profileCard: {
         width: Dimensions.get('window').width,
-        marginTop: 20,
-        height: 200,
+        height: 320,
         padding: 10,
         alignItems: 'center',
-        borderBottomLeftRadius: 25,
-        borderBottomRightRadius: 25,
-        backgroundColor: 'lightgrey'
+        backgroundColor: 'grey'
         // backgroundColor: theme.COLOR_PRIMARY_LIGHT
     },
     descriptionCard: {
         width: Dimensions.get('window').width,
-        borderColor: theme.COLOR_PRIMARY_DARK,
-        alignItems: 'center'
+        borderColor: theme.COLOR_PRIMARY_DARK
         // backgroundColor: theme.COLOR_PRIMARY_LIGHT
     },
     username: {
@@ -52,7 +46,9 @@ export default StyleSheet.create({
     		color: theme.TEXT_COLOR
     },
   	profileBottomGrid: {
-      marginTop: 20,
+      width: Dimensions.get('window').width,
+      borderColor: theme.COLOR_PRIMARY,
+      marginTop: 30,
   		alignItems: 'center'
   	},
   	icon: {
