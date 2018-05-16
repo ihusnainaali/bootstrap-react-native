@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { withNavigation , navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import HeaderButtons from 'react-navigation-header-buttons'
+import HeaderButtons from 'react-navigation-header-buttons';
+import { Icon } from 'native-base';
 
 import { route } from '../../routes/routes.constants';
 
@@ -21,8 +22,10 @@ class Pangyou extends React.Component {
 
   // Declare Settings Icon
   static navigationOptions = ({ navigation }) => {
-    const params = navigation.state.params || {};
+
+    // TODO Move Settings Gear to Header
     return {
+      title: 'Pangyou',
       headerRight: (
         <HeaderButtons IconComponent={MaterialIcons} iconSize={23} color={theme.COLOR_PRIMARY_DARK}>
         <HeaderButtons.Item 
@@ -30,16 +33,17 @@ class Pangyou extends React.Component {
           iconName='settings'
           onPress={() => { this.navigateToSettings() }}/>
         </HeaderButtons>
-      )
+      ),
     };
   };
   
   render() {
+
     return (
       <View style={styles.wrapper}>
         <View style={styles.avatarGrid}>
           <TouchableOpacity 
-            onPress={() => { this.navigateToSettings() }}>
+            onPress={() => { this.navigateToMatchmaking() }}>
 		        <Image
 			        style={styles.avatar}
 			          source={require('../../assets/pangyou_welcome.png')}/>

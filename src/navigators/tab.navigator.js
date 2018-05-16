@@ -21,22 +21,12 @@ const PangyouStack = createStackNavigator({
 
     pangyou: {
       screen: Pangyou,
-      navigationOptions: ({ navigation }) => ({ 
-        title: 'Pangyou'
-      }),
-      tabBarVisible: false,
     },
     matchmaking: { 
       screen: Matchmaking,
-      navigationOptions: ({ navigation }) => ({ 
-        title: 'Matchmaking'
-      })
     },
-    settings: { 
+    settings: {
       screen: Settings,
-      navigationOptions: ({ navigation }) => ({ 
-        title: 'Settings'
-      }) 
     }
   },
   {
@@ -50,9 +40,6 @@ const FriendsStack = createStackNavigator({
 
     friends: { 
       screen: Friends,
-      navigationOptions: ({ navigation }) => ({ 
-        title: 'Friend List'
-      }) 
     }
     // TODO add Friend Redirection Profile
     // TODO add Edit Friends List
@@ -67,9 +54,6 @@ const JournalsStack = createStackNavigator({
 
     journals: { 
       screen: Journals,
-      navigationOptions: ({ navigation }) => ({ 
-        title: 'Journal List'
-      }) 
     }
     // TODO add Specific Journal Redirection
   },
@@ -84,9 +68,6 @@ const ProfileStack = createStackNavigator({
 
     profile: { 
       screen: Profile,
-      navigationOptions: ({ navigation }) => ({ 
-        title: 'User Profile'
-      }) 
     }
   },
   {

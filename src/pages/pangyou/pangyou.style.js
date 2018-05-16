@@ -12,11 +12,13 @@ export default StyleSheet.create({
   },
   avatarGrid: {
     flex: 1,
+    marginTop: 50,
+    marginBottom: 50,
     justifyContent: 'center',
     alignItems: 'center'
   },
   avatar: {
-    width: 200,
-    height: 200
+    width: 220,
+    height: 220
   },
 })
