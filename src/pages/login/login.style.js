@@ -14,7 +14,7 @@ export default StyleSheet.create({
 	},
 	loginTopGrid: {
 		flex: 1,
-		marginTop: 100,
+		marginTop: 75,
 		alignItems: 'center'
 	},
 	loginMiddleGrid: {

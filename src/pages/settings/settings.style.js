@@ -6,11 +6,14 @@ import theme from '../../styles/theme.style';
 
 export default StyleSheet.create({
 
-	settingsWrapper: {
+	wrapper: {
 		backgroundColor: theme.COLOR_PRIMARY,
+	},
+	middleGrid: {
 		flex: 1,
+		marginTop: 250,
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	icon: {
 			color: theme.COLOR_SECONDARY_DARK,

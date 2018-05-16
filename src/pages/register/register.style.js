@@ -14,18 +14,14 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
-	registerTopGrid: {
-		flex: 1,
-		marginTop: 100,
-		paddingBottom: 10,
-		alignItems: 'center'
-	},
 	registerMiddleGrid: {
-		flex: 3,
+		flex: 1,
+		marginTop: 50,
+		paddingBottom: 1,
 		alignItems: 'center'
 	},
 	registerBottomGrid: {
-		flex: 2,
+		flex: 3,
 		alignItems: 'center'
 	},
 	icon: {

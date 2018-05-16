@@ -60,7 +60,7 @@ class Verification extends Component {
 	render() {
 		return (
 
-			<Container>
+			<Container style={styles.wrapper}>
 			
 			<Header>
 				<Left>
@@ -75,10 +75,10 @@ class Verification extends Component {
       			<Right/>
       		</Header>
 
-				<Content>
-					<KeyboardAvoidingView behavior="padding" style={styles.verificationWrapper}>
-					<View style={styles.verificationMiddleGrid}>
-				 <MaterialIcons style={styles.icon} name="beenhere" size={20}/>
+			<Content>
+				<KeyboardAvoidingView behavior="padding" style={styles.verificationWrapper}>
+				<View style={styles.verificationMiddleGrid}>
+				<MaterialIcons style={styles.icon} name="beenhere" size={20}/>
 					<TextField
 						placeholder="Verification Code"
 						placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -96,7 +96,7 @@ class Verification extends Component {
 						name="Verify"/>
 				</View>
 			</KeyboardAvoidingView>
-				</Content>
+			</Content>
 
 			</Container>
 

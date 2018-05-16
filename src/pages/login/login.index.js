@@ -72,6 +72,7 @@ class Login extends Component {
         return (
 
             <Container style={styles.wrapper}>
+            
             <Header>
                 <Left>
                 <Button transparent
@@ -80,12 +81,11 @@ class Login extends Component {
                 </Button>
                 </Left>
                   <Body>
-                   <Title style={{fontFamily: theme.FONT_LIGHT}}>Verification</Title>
+                   <Title style={{fontFamily: theme.FONT_LIGHT}}>Login</Title>
                   </Body>
                   <Right/>
               </Header>
 
-            <Content>
             <KeyboardAvoidingView behavior="padding" style={styles.loginWrapper}>
                 <View style={styles.loginTopGrid}>
                 </View>
@@ -133,7 +133,6 @@ class Login extends Component {
                         screen='ForgetPassword' />
                 </View>
             </KeyboardAvoidingView>
-            </Content>
             </Container>
 
         );

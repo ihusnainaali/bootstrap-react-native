@@ -6,15 +6,13 @@ import theme from '../../styles/theme.style';
 
 export default StyleSheet.create({
 
-	verificationWrapper: {
+	wrapper: {
 		backgroundColor: theme.COLOR_PRIMARY,
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
 	},
 	verificationMiddleGrid: {
 		flex: 1,
 		marginTop: 125,
+		justifyContent: 'center',
 		alignItems: 'center'
 	},
 	verificationBottomGrid: {
