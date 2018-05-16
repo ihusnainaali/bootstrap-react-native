@@ -37,7 +37,7 @@ class Settings extends Component {
 
 		render() {
 				return (
-			<Container>
+			<Container style={{backgroundColor: theme.COLOR_PRIMARY}}>
 
 				<Header>
 					<Left>

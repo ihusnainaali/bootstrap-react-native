@@ -42,7 +42,7 @@ class Pangyou extends React.Component {
 
     return (
       
-      <Container>
+      <Container style={{backgroundColor: theme.COLOR_PRIMARY}}>
 
       <Header>
       <Left/>

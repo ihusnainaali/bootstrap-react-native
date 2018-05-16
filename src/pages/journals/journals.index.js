@@ -35,7 +35,7 @@ class Journals extends React.Component {
 
     return (
 
-      <Container>
+      <Container style={{backgroundColor: theme.COLOR_PRIMARY}}>
 
         <Header>
           <Left/>
@@ -68,8 +68,8 @@ class Journals extends React.Component {
               <Icon name="book" style={styles.icon} />
             </Left>
             <Body>
-              <Text>{item.name}</Text>
-              <Text note style={{color:theme.COLOR_PRIMARY_DARK}}>{item.date}</Text>
+              <Text style={styles.text_name}>{item.name}</Text>
+              <Text note style={styles.text_subtitle}>{item.date}</Text>
             </Body>
             <Right>
               <Icon name="arrow-forward" style={styles.icon} />

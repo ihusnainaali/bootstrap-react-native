@@ -38,7 +38,7 @@ class Friends extends React.Component {
 
     return (
 
-      <Container>
+      <Container style={styles.container}>
 
         <Header>
           <Left/>
@@ -73,8 +73,8 @@ class Friends extends React.Component {
               <Thumbnail source={{ uri: item.avatar_url }} />
             </Left>
             <Body>
-              <Text>{item.name}</Text>
-              <Text note>{item.subtitle}</Text>
+              <Text style={styles.text_name}>{item.name}</Text>
+              <Text style={styles.text_subtitle} note>{item.subtitle}</Text>
             </Body>
             <Right>
             </Right>
