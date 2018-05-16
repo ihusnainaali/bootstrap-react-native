@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import TextField from '../../components/textfield/textfield.component';
-import Button from '../../components/button/button.component';
-import { Icon } from 'native-base'
+import ButtonComponent from '../../components/button/button.component';
+import { Container, Button, Header , Left, Right, Title, Content, Icon, Body} from 'native-base';
 
 import styles from './register.style'
 import theme from '../../styles/theme.style'
@@ -85,8 +85,34 @@ class Register extends Component {
       })
   }
 
+
+	static navigationOptions = ({ navigation }) => {
+
+    return {
+        header: null
+    };
+
+  }; 
+
   render() {
     return (
+
+    <Container style={styles.wrapper}>
+
+      <Header>
+        <Left>
+          <Button transparent
+            onPress={() => {this.props.navigation.goBack()}}>
+            <Icon name='arrow-back' style={styles.icon} />
+          </Button>
+        </Left>
+        <Body>
+            <Title style={{fontFamily: theme.FONT_LIGHT}}>Register</Title>
+        </Body>
+        <Right/>
+      </Header>
+
+      <Content>
       <KeyboardAvoidingView behavior="padding" style={styles.registerWrapper}>
       <View style={styles.registerTopGrid}>
       </View>
@@ -154,12 +180,17 @@ class Register extends Component {
         <Text>{this.state.error}</Text>
       </View>
       <View style={styles.registerBottomGrid}>
-        <Button
+        <ButtonComponent
           onPress={this.signUp.bind(this)}
           name='Register'
           screen='Login'/>
       </View>
       </KeyboardAvoidingView>
+      </Content>
+
+    </Container>
+
+      
     );
   }
 }

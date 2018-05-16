@@ -5,14 +5,16 @@ import theme from '../../styles/theme.style';
 
 export default StyleSheet.create({
 
-	loginWrapper: {
+	wrapper: {
 		backgroundColor: theme.COLOR_PRIMARY,
+	},
+	loginWrapper: {
 		flex: 1,
 		alignItems: 'center'
 	},
 	loginTopGrid: {
 		flex: 1,
-		marginTop: 50,
+		marginTop: 100,
 		alignItems: 'center'
 	},
 	loginMiddleGrid: {
@@ -21,12 +23,13 @@ export default StyleSheet.create({
 	},
 	loginBottomGrid: {
 		flex: 3,
+		marginTop: 50,
 		alignItems: 'center'
 	},
 	icon: {
 		padding: 10,
 		fontSize: 24,
-		color: theme.COLOR_PRIMARY_DARK
+		color: theme.COLOR_SECONDARY_DARK
 	},
 	loginHeaderText: {
 		fontSize: 35,

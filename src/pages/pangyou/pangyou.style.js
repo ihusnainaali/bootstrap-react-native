@@ -7,8 +7,6 @@ export default StyleSheet.create({
 
   wrapper: {
     backgroundColor: theme.COLOR_PRIMARY,
-    flex: 1,
-    alignItems: 'center'
   },
   avatarGrid: {
     flex: 1,

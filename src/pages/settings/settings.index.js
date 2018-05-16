@@ -28,7 +28,7 @@ class Settings extends Component {
 				Auth.signOut()
 						.then(() => {
 								this.props.onLogout();
-								this.props.navigation.navigate('Login');
+								this.props.navigation.navigate('Welcome');
 						})
 						.catch(err => {
 								console.log("err: ", err);

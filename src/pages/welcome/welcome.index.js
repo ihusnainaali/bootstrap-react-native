@@ -4,23 +4,34 @@ import { withNavigation } from 'react-navigation';
 import styles from './welcome.style';
 
 import Button from '../../components/button/button.component';
+import { Container, Header , Left, Right, Title, Content , Icon, Body, Footer} from 'native-base';
 
 class Welcome extends Component {
 
 	render() {
     return (
-		<View style={styles.welcomeWrapper}>
+		
+		<Container style={styles.wrapper}>
+			
+		<Content>
 			<StatusBar barStyle="light-content" />
-        <View style={styles.welcomeTopGrid}>
+        	<View style={styles.welcomeTopGrid}>
 			<Image
 				style={styles.welcomeLogo}
 				source={require('../../assets/pangyou_welcome.png')}/>
-        </View>
+        	</View>
 			<View style={styles.welcomeBottomGrid}>
 				<Button name='Login' screen='Login'/>
 				<Button name='Register' screen='Register'/>
 			</View>
-		</View>
+			<Text style={styles.subtitle}>Pangyou International © 2018</Text>
+		</Content>
+			
+		</Container>
+
+
+
+
     );
 	}
 	

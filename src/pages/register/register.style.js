@@ -6,15 +6,18 @@ import theme from '../../styles/theme.style';
 
 export default StyleSheet.create({
 
-	registerWrapper: {
+	wrapper: {
 		backgroundColor: theme.COLOR_PRIMARY,
+	},
+	registerWrapper: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
 	registerTopGrid: {
 		flex: 1,
-		marginTop: 30,
+		marginTop: 100,
+		paddingBottom: 10,
 		alignItems: 'center'
 	},
 	registerMiddleGrid: {
@@ -28,7 +31,7 @@ export default StyleSheet.create({
 	icon: {
 		padding: 10,
 		fontSize: 24,
-		color: theme.COLOR_PRIMARY_DARK
+		color: theme.COLOR_SECONDARY_DARK
 	},
 	registerHeaderText: {
 		fontSize: 35,

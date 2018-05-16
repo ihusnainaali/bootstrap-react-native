@@ -6,7 +6,7 @@ import theme from '../../styles/theme.style';
 
 export default StyleSheet.create({
 
-	welcomeWrapper: {
+	wrapper: {
 		backgroundColor: theme.COLOR_PRIMARY,
 		flex: 1,
 		justifyContent: 'center',
@@ -26,6 +26,11 @@ export default StyleSheet.create({
 	welcomeLogo: {
 		width: 168,
 		height: 168
+	},
+	subtitle: {
+		color: theme.TEXT_COLOR,
+		fontFamily: theme.FONT_REGULAR,
+		paddingBottom: 20
 	}
 
 })
