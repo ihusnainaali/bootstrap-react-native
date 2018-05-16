@@ -1,10 +1,11 @@
 import React from 'react';
-import { Image } from 'react-native';
-
-import { withNavigation } from 'react-navigation';
-import { Container, Button, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { withNavigation , navigation } from 'react-navigation';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { DeckSwiper, Card, CardItem, Thumbnail, Container, Header , Left, Right, Title, Content, Button , Icon, Body} from 'native-base';
 
 import styles from './matchmaking.style';
+import theme from '../../styles/theme.style';
 
 // Load the Possible Matches in this table
 const cards = [
@@ -39,15 +40,29 @@ class Matchmaking extends React.Component {
   // Declare Navigation Options Here :|
   static navigationOptions = ({ navigation }) => {
     
-    return {
-      title: 'Matchmaking',
-    };
-    
+    return { 
+      header: null
+    }
+
   };
 
   render() {
     return (
       <Container>
+        
+        <Header>
+          <Left>
+            <Button transparent
+              onPress={() => {this.props.navigation.goBack()}}>
+              <Icon name='arrow-back' />
+            </Button>
+          </Left>
+          <Body>
+            <Title style={{fontFamily: theme.FONT_LIGHT}}>Matchmaking</Title>
+          </Body>
+          <Right/>
+        </Header>
+
         <View>
           <DeckSwiper
             dataSource={cards}

@@ -3,7 +3,7 @@ import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { withNavigation , navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import HeaderButtons from 'react-navigation-header-buttons';
-import { Icon } from 'native-base';
+import { Container, Header , Left, Right, Title, Content, Button , Icon, Body} from 'native-base';
 
 import { route } from '../../routes/routes.constants';
 
@@ -25,22 +25,42 @@ class Pangyou extends React.Component {
 
     // TODO Move Settings Gear to Header
     return {
-      title: 'Pangyou',
-      headerRight: (
-        <HeaderButtons IconComponent={MaterialIcons} iconSize={23} color={theme.COLOR_PRIMARY_DARK}>
-        <HeaderButtons.Item 
-          title= 'SettingsRedirect' 
-          iconName='settings'
-          onPress={() => { this.navigateToSettings() }}/>
-        </HeaderButtons>
-      ),
+      // title: 'Pangyou',
+      // headerRight: (
+      //   <HeaderButtons IconComponent={MaterialIcons} iconSize={23} color={theme.COLOR_PRIMARY_DARK}>
+      //   <HeaderButtons.Item 
+      //     title= 'SettingsRedirect' 
+      //     iconName='settings'
+      //     onPress={() => { this.navigateToSettings() }}/>
+      //   </HeaderButtons>
+      // ),
+      header: null
     };
   };
   
   render() {
 
     return (
-      <View style={styles.wrapper}>
+      
+      <Container>
+
+      <Header>
+      <Left/>
+      <Body>
+        <Title style={{fontFamily: theme.FONT_LIGHT}}>Pangyou</Title>
+      </Body>
+      <Right>
+        <Button 
+          transparent
+          onPress={() => {this.navigateToSettings()}}>
+          <Icon 
+            name='settings'
+            type="MaterialIcons"
+            style={ {color: theme.COLOR_SECONDARY} } />
+        </Button>
+      </Right>
+      </Header>
+
         <View style={styles.avatarGrid}>
           <TouchableOpacity 
             onPress={() => { this.navigateToMatchmaking() }}>
@@ -49,7 +69,8 @@ class Pangyou extends React.Component {
 			          source={require('../../assets/pangyou_welcome.png')}/>
           </TouchableOpacity>
         </View>
-      </View>
+
+      </Container>
       );
     }
 }
