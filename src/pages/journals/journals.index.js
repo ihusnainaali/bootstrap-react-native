@@ -2,29 +2,30 @@ import React from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { withNavigation , navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Container, Header , Left, Right, Title, Content, Button , Icon, Body} from 'native-base';
+import { List, ListItem, Item, Input, Container, Header , Left, Right, Title, Content, Button , Icon, Body} from 'native-base';
 
 import styles from './journals.style';
 import theme from '../../styles/theme.style';
 
 // TODO Add Backend Data Implementation to Populate Data
+const list = [
+  {
+    name: 'Chinese Lesson 1',
+    date: '01/16/2017'
+  },
+  {
+    name: 'Chinese Lesson 2',
+    date: '04/05/2019'
+  },
+]
+
 
 class Journals extends React.Component {
   
   // Declare Settings Icon
   static navigationOptions = ({ navigation }) => {
 
-    // TODO Move Journals to Header
     return {
-      // title: 'Journals',
-      // headerRight: (
-      //   <HeaderButtons IconComponent={MaterialIcons} iconSize={23} color={theme.COLOR_PRIMARY_DARK}>
-      //   <HeaderButtons.Item 
-      //     title='EditJournals'
-      //     iconName='book'
-      //     onPress={() => { /*TODO Add Edit Journal Functionality*/ }}/>
-      //   </HeaderButtons>
-      // ),
       header: null
     };
 
@@ -52,9 +53,32 @@ class Journals extends React.Component {
           </Right>
         </Header>
 
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Journals!</Text>
-        </View>
+        // TODO Add Search Functionality
+        <Item regular style={{paddingLeft:10}}>
+          <Icon name="ios-search" 
+            style={styles.icon}/>
+          <Input placeholder="Search" />
+        </Item>
+        
+       <List dataArray={list}
+
+          renderRow={(item) =>
+            <ListItem avatar onPress={()=>{}}>
+            <Left>
+              <Icon name="book" style={styles.icon} />
+            </Left>
+            <Body>
+              <Text>{item.name}</Text>
+              <Text note style={{color:theme.COLOR_PRIMARY_DARK}}>{item.date}</Text>
+            </Body>
+            <Right>
+              <Icon name="arrow-forward" style={styles.icon} />
+            </Right>
+          </ListItem>
+          }>
+
+        </List>
+
       </Container>
 
     );

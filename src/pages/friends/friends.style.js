@@ -15,7 +15,7 @@ export default StyleSheet.create({
         height: 44,
     },
     icon: {
-        color: theme.COLOR_PRIMARY_DARK,
+        color: theme.COLOR_SECONDARY_DARK,
         fontSize: theme.HEADER_ICON_SIZE
     }
 
