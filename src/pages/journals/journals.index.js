@@ -47,7 +47,7 @@ class Journals extends React.Component {
               <Icon 
                 name='library-add'
                 type="MaterialIcons"
-                style={ {color: theme.COLOR_SECONDARY} } />
+                style={ styles.icon } />
             </Button>
           </Right>
         </Header>

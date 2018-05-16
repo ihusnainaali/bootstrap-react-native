@@ -13,7 +13,9 @@ export default StyleSheet.create({
 		alignItems: 'center'
 	},
 	icon: {
-		padding: 10,
+			color: theme.COLOR_PRIMARY_DARK,
+			fontSize: theme.HEADER_ICON_SIZE
 	}
+
 
 })

@@ -43,7 +43,7 @@ class Settings extends Component {
 					<Left>
 						<Button transparent
 								onPress={() => {this.props.navigation.goBack()}}>
-								<Icon name='arrow-back' />
+								<Icon name='arrow-back' style={styles.icon} />
 						</Button>
 					</Left>
 					<Body>

@@ -37,14 +37,17 @@ class Friends extends React.Component {
               <Icon 
                 name='person-add'
                 type="MaterialIcons"
-                style={ {color: theme.COLOR_SECONDARY } } />
+                style={ styles.icon } />
             </Button>
           </Right>
         </Header>
-
+        
+        <Content> 
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Friends!</Text>
         </View>
+        </Content>
+
 
       </Container>
 

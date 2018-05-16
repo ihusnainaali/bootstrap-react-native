@@ -56,7 +56,7 @@ class Pangyou extends React.Component {
           <Icon 
             name='settings'
             type="MaterialIcons"
-            style={ {color: theme.COLOR_SECONDARY} } />
+            style={ styles.icon } />
         </Button>
       </Right>
       </Header>
