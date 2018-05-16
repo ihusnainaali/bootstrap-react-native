@@ -1,137 +1,96 @@
 import React from 'react';
-import { KeyboardAvoidingView, View, Text, FlatList, ActivityIndicator } from 'react-native';
-import { List, ListItem, SearchBar } from 'react-native-elements';
-
-import { TabNavigator,TabBarBottom,withNavigation } from 'react-navigation';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { withNavigation , navigation } from 'react-navigation';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Thumbnail, Item, List, ListItem, Input, Container, Header , Left, Right, Title, Content, Button , Icon, Body} from 'native-base';
 
 import styles from './friends.style';
 import theme from '../../styles/theme.style';
 
+let items = ['Simon Mignolet','Nathaniel Clyne','Dejan Lovren','Mama Sakho','Emre Can'];
+
+// TODO Add Backend Retrieval
+const list = [
+  {
+    name: 'Amy Farha',
+    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+    subtitle: 'Beijing, China\n'
+  },
+  {
+    name: 'Chris Jackson',
+    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+    subtitle: 'New York, New York\n'
+  },
+]
+
 class Friends extends React.Component {
 
-  constructor(props) {
-    super(props);
+    // Declare Edit Friend Icon
+    static navigationOptions = ({ navigation }) => {
 
-    this.state = {
-      loading: false,
-      data: [],
-      page: 1,
-      seed: 1,
-      error: null,
-      refreshing: false
+      // TODO Move Edit Friend to Header
+      return {
+        header: null
+      };
     };
-  }
-
-  componentDidMount() {
-    this.makeRemoteRequest();
-  }
-  
-  // TODO ADD NETWORKING ROUTING FOR FRIENDS
-  makeRemoteRequest = () => {
-    const { page, seed } = this.state;
-    const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
-    this.setState({ loading: true });
-
-    fetch(url)
-      .then(res => res.json())
-      .then(res => {
-        this.setState({
-          data: page === 1 ? res.results : [...this.state.data, ...res.results],
-          error: res.error || null,
-          loading: false,
-          refreshing: false
-        });
-      })
-      .catch(error => {
-        this.setState({ error, loading: false });
-      });
-  };
-
-  handleRefresh = () => {
-    this.setState(
-      {
-        page: 1,
-        seed: this.state.seed + 1,
-        refreshing: true
-      },
-      () => {
-        this.makeRemoteRequest();
-      }
-    );
-  };
-
-  handleLoadMore = () => {
-    this.setState(
-      {
-        page: this.state.page + 1
-      },
-      () => {
-        this.makeRemoteRequest();
-      }
-    );
-  };
-
-  renderSeparator = () => {
-    return (
-      <View
-        style={{
-          height: 1,
-          width: "86%",
-          backgroundColor: theme.COLOR_PRIMARY_DARK,
-          marginLeft: "14%"
-        }}
-      />
-    );
-  };
-
-  renderHeader = () => {
-    return <SearchBar placeholder="Type Here..." lightTheme round />;
-  };
-
-  renderFooter = () => {
-    if (!this.state.loading) return null;
-
-    return (
-      <View
-        style={{
-          paddingVertical: 20,
-          borderTopWidth: 1,
-          borderColor: "#CED0CE"
-        }}
-      >
-        <ActivityIndicator animating size="large" />
-      </View>
-    );
-  };
 
   render() {
+
     return (
-      <KeyboardAvoidingView>
-      <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
-        <FlatList
-          data={this.state.data}
-          renderItem={({ item }) => (
-            <ListItem
-              roundAvatar
-              title={`${item.name.first} ${item.name.last}`}
-              subtitle={item.location.city}
-              avatar={{ uri: item.picture.thumbnail }}
-              containerStyle={{ borderBottomWidth: 0 }}
-            />
-          )}
-          keyExtractor={item => item.email}
-          ItemSeparatorComponent={this.renderSeparator}
-          ListHeaderComponent={this.renderHeader}
-          ListFooterComponent={this.renderFooter}
-          onRefresh={this.handleRefresh}
-          refreshing={this.state.refreshing}
-          onEndReached={this.handleLoadMore}
-          onEndReachedThreshold={50}
-        />
-      </List>
-      </KeyboardAvoidingView>
+
+      <Container style={styles.container}>
+
+        <Header>
+          <Left/>
+          <Body>
+            <Title style={{fontFamily: theme.FONT_LIGHT}}>Friend List</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+              // TODO Add Edit Friend Functionality
+              <Icon 
+                name='person-add'
+                type="MaterialIcons"
+                style={ styles.icon } />
+            </Button>
+          </Right>
+        </Header>
+        
+        // TODO Add Search Functionality
+        <Item regular style={{paddingLeft:10}}>
+          <Icon name="ios-search" 
+            style={styles.icon}/>
+          <Input placeholder="Search" />
+        </Item>
+        
+        <Content> 
+
+        <List dataArray={list}
+
+          renderRow={(item) =>
+            <ListItem avatar onPress={()=>{}}>
+            <Left>
+              <Thumbnail source={{ uri: item.avatar_url }} />
+            </Left>
+            <Body>
+              <Text style={styles.text_name}>{item.name}</Text>
+              <Text style={styles.text_subtitle} note>{item.subtitle}</Text>
+            </Body>
+            <Right>
+            </Right>
+          </ListItem>
+          }>
+
+        </List>
+
+        </Content>
+
+
+      </Container>
+
     );
   }
+
 }
 
 export default withNavigation(Friends);

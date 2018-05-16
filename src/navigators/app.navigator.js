@@ -2,12 +2,10 @@
 *   Application Navigator
 */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import { createSwitchNavigator, StackNavigator } from 'react-navigation';
+import { createSwitchNavigator } from 'react-navigation';
 
-import TabNavigator from './tabnavigator';
-import AuthNavigator from './authnavigator';
+import TabNavigator from './tab.navigator';
+import AuthNavigator from './auth.navigator';
 import Splash from '../pages/splash/splash.index';
 
 const AppNavigator = createSwitchNavigator(

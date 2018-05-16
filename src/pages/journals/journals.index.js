@@ -1,145 +1,89 @@
 import React from 'react';
-import { KeyboardAvoidingView, View, Text, FlatList, ActivityIndicator } from 'react-native';
-import { List, ListItem, SearchBar } from 'react-native-elements';
-
-import { TabNavigator,TabBarBottom,withNavigation } from 'react-navigation';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { withNavigation , navigation } from 'react-navigation';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { List, ListItem, Item, Input, Container, Header , Left, Right, Title, Content, Button , Icon, Body} from 'native-base';
 
 import styles from './journals.style';
 import theme from '../../styles/theme.style';
 
+// TODO Add Backend Data Implementation to Populate Data
+const list = [
+  {
+    name: 'Chinese Lesson 1',
+    date: '01/16/2017'
+  },
+  {
+    name: 'Chinese Lesson 2',
+    date: '04/05/2019'
+  },
+]
+
+
 class Journals extends React.Component {
-
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     loading: false,
-  //     data: [],
-  //     page: 1,
-  //     seed: 1,
-  //     error: null,
-  //     refreshing: false
-  //   };
-  // }
-
-  // componentDidMount() {
-  //   this.makeRemoteRequest();
-  // }
   
-  // // TODO ADD NETWORKING ROUTING FOR FRIENDS
-  // makeRemoteRequest = () => {
-  //   const { page, seed } = this.state;
-  //   const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
-  //   this.setState({ loading: true });
+  // Declare Settings Icon
+  static navigationOptions = ({ navigation }) => {
 
-  //   fetch(url)
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       this.setState({
-  //         data: page === 1 ? res.results : [...this.state.data, ...res.results],
-  //         error: res.error || null,
-  //         loading: false,
-  //         refreshing: false
-  //       });
-  //     })
-  //     .catch(error => {
-  //       this.setState({ error, loading: false });
-  //     });
-  // };
+    return {
+      header: null
+    };
 
-  // handleRefresh = () => {
-  //   this.setState(
-  //     {
-  //       page: 1,
-  //       seed: this.state.seed + 1,
-  //       refreshing: true
-  //     },
-  //     () => {
-  //       this.makeRemoteRequest();
-  //     }
-  //   );
-  // };
-
-  // handleLoadMore = () => {
-  //   this.setState(
-  //     {
-  //       page: this.state.page + 1
-  //     },
-  //     () => {
-  //       this.makeRemoteRequest();
-  //     }
-  //   );
-  // };
-
-  // renderSeparator = () => {
-  //   return (
-  //     <View
-  //       style={{
-  //         height: 1,
-  //         width: "86%",
-  //         backgroundColor: theme.COLOR_PRIMARY_DARK,
-  //         marginLeft: "14%"
-  //       }}
-  //     />
-  //   );
-  // };
-
-  // renderHeader = () => {
-  //   return <SearchBar placeholder="Type Here..." lightTheme round />;
-  // };
-
-  // renderFooter = () => {
-  //   if (!this.state.loading) return null;
-
-  //   return (
-  //     <View
-  //       style={{
-  //         paddingVertical: 20,
-  //         borderTopWidth: 1,
-  //         borderColor: "#CED0CE"
-  //       }}
-  //     >
-  //       <ActivityIndicator animating size="large" />
-  //     </View>
-  //   );
-  // };
-
-  // render() {
-  //   return (
-  //     <KeyboardAvoidingView>
-  //     <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
-  //       <FlatList
-  //         data={this.state.data}
-  //         renderItem={({ item }) => (
-  //           <ListItem
-  //             roundAvatar
-  //             title={`${item.name.first} ${item.name.last}`}
-  //             subtitle={item.email}
-  //             avatar={{ uri: item.picture.thumbnail }}
-  //             containerStyle={{ borderBottomWidth: 0 }}
-  //           />
-  //         )}
-  //         keyExtractor={item => item.email}
-  //         ItemSeparatorComponent={this.renderSeparator}
-  //         ListHeaderComponent={this.renderHeader}
-  //         ListFooterComponent={this.renderFooter}
-  //         onRefresh={this.handleRefresh}
-  //         refreshing={this.state.refreshing}
-  //         onEndReached={this.handleLoadMore}
-  //         onEndReachedThreshold={20}
-  //       />
-  //     </List>
-  //     </KeyboardAvoidingView>
-  //   );
-  // }
+  };
 
   render() {
+
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Journals!</Text>
-      </View>
+
+      <Container style={{backgroundColor: theme.COLOR_PRIMARY}}>
+
+        <Header>
+          <Left/>
+          <Body>
+            <Title style={{fontFamily: theme.FONT_LIGHT}}>Journal List</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+            // TODO Add Edit Journal List Functionality
+              <Icon 
+                name='library-add'
+                type="MaterialIcons"
+                style={ styles.icon } />
+            </Button>
+          </Right>
+        </Header>
+
+        // TODO Add Search Functionality
+        <Item regular style={{paddingLeft:10}}>
+          <Icon name="ios-search" 
+            style={styles.icon}/>
+          <Input placeholder="Search" />
+        </Item>
+        
+       <List dataArray={list}
+
+          renderRow={(item) =>
+            <ListItem avatar onPress={()=>{}}>
+            <Left>
+              <Icon name="book" style={styles.icon} />
+            </Left>
+            <Body>
+              <Text style={styles.text_name}>{item.name}</Text>
+              <Text note style={styles.text_subtitle}>{item.date}</Text>
+            </Body>
+            <Right>
+              <Icon name="arrow-forward" style={styles.icon} />
+            </Right>
+          </ListItem>
+          }>
+
+        </List>
+
+      </Container>
+
     );
   }
+
 }
 
 export default withNavigation(Journals);

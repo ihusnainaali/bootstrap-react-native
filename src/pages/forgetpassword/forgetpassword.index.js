@@ -4,7 +4,7 @@ import { withNavigation } from 'react-navigation';
 
 import styles from './forgetpassword.style';
 import theme from '../../styles/theme.style';
-import { Icon } from 'react-native-elements'
+import { Icon } from 'native-base'
 
 import Amplify, { Auth } from 'aws-amplify'
 import config from '../../../aws-exports';
@@ -96,11 +96,8 @@ class ForgetPassword extends Component {
 			  <View style={styles.forgetPasswordMiddleGrid}>
         <View style={{flexDirection: 'row'}}>
           <Icon
-            iconStyle={styles.icon, {textAlign:'center', width: 40}}
-            name='md-person'
-            type='ionicon'
-            color='#000000'
-            size={30}
+						name='md-person'
+						style={styles.icon}
           />
   				<TextField
   				  placeholder="User Name"
@@ -122,7 +119,10 @@ class ForgetPassword extends Component {
 			:
 			<View>
 			  <View style={styles.forgetPasswordMiddleGrid}>
-				<MaterialIcons style={styles.icon} name="beenhere" size={20}/>
+				<Icon 
+					name="beenhere" 
+					style={styles.icon}
+				/>
 				<TextField
 				  placeholder="Authentication Code"
 				  placeholderTextColor="#d1d1d1"

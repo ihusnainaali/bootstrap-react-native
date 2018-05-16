@@ -35,7 +35,10 @@ export default {
     // Font Weights
     FONT_WEIGHT_LIGHT: 200,
     FONT_WEIGHT_MEDIUM: 600,
-    FONT_WEIGHT_HEAVY: 800
+    FONT_WEIGHT_HEAVY: 800,
+
+    // Icon Options
+    HEADER_ICON_SIZE: 22
     
 }
 

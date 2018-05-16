@@ -1,14 +1,64 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { TabNavigator,TabBarBottom,withNavigation } from 'react-navigation';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { withNavigation , navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Container, Header , Left, Right, Title, Content, Button , Icon, Body} from 'native-base';
+
+import { route } from '../../routes/routes.constants';
+
+import styles from './pangyou.style';
+import theme from '../../styles/theme.style';
 
 class Pangyou extends React.Component {
-    render() {
-      return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>Pangyou!</Text>
+
+  navigateToMatchmaking = () => {
+    this.props.navigation.navigate(route.MATCHMAKING)
+  }
+
+  navigateToSettings = () => {
+    this.props.navigation.navigate(route.SETTINGS)
+  }
+
+  static navigationOptions = ({ navigation }) => {
+
+    return {
+      header: null
+    };
+  };
+  
+  render() {
+
+    return (
+      
+      <Container style={styles.wrapper}>
+
+      <Header>
+      <Left/>
+      <Body>
+        <Title style={{fontFamily: theme.FONT_LIGHT}}>Pangyou</Title>
+      </Body>
+      <Right>
+        <Button 
+          transparent
+          onPress={() => {this.navigateToSettings()}}>
+          <Icon 
+            name='settings'
+            type="MaterialIcons"
+            style={ styles.icon } />
+        </Button>
+      </Right>
+      </Header>
+
+        <View style={styles.avatarGrid}>
+          <TouchableOpacity 
+            onPress={() => { this.navigateToMatchmaking() }}>
+		        <Image
+			        style={styles.avatar}
+			          source={require('../../assets/pangyou_welcome.png')}/>
+          </TouchableOpacity>
         </View>
+
+      </Container>
       );
     }
 }

@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import { onLogin } from '../../redux/actions/auth.actions'
 
 import TextField from '../../components/textfield/textfield.component';
-import Button from '../../components/button/button.component';
-import { Icon } from 'react-native-elements'
+import ButtonComponent from '../../components/button/button.component';
+import { Container, Button, Header , Left, Right, Title, Content, Icon, Body} from 'native-base';
 
 import styles from './login.style';
 import theme from '../../styles/theme.style';
@@ -17,7 +17,7 @@ import config from '../../../aws-exports';
 Amplify.configure(config);
 
 class Login extends Component {
-    
+
     state = {
         username: '',
         password: '',
@@ -59,19 +59,41 @@ class Login extends Component {
             });
     }
 
+
+    static navigationOptions = ({ navigation }) => {
+
+        return {
+            header: null
+        };
+
+    };
+
     render() {
         return (
+
+            <Container style={styles.wrapper}>
+            
+            <Header>
+                <Left>
+                <Button transparent
+                    onPress={() => {this.props.navigation.goBack()}}>
+                    <Icon name='arrow-back' style={styles.icon} />
+                </Button>
+                </Left>
+                  <Body>
+                   <Title style={{fontFamily: theme.FONT_LIGHT}}>Login</Title>
+                  </Body>
+                  <Right/>
+              </Header>
+
             <KeyboardAvoidingView behavior="padding" style={styles.loginWrapper}>
                 <View style={styles.loginTopGrid}>
                 </View>
                 <View style={styles.loginMiddleGrid}>
                   <View style={{flexDirection: 'row'}}>
                     <Icon
-                      iconStyle={styles.icon, {textAlign:'center', width: 40}}
                       name='md-person'
-                      type='ionicon'
-                      color='#000000'
-                      size={30}
+                      style={styles.icon}
                     />
                     <TextField
                         placeholder="Username or Email"
@@ -86,11 +108,8 @@ class Login extends Component {
                   </View>
                   <View style={{flexDirection: 'row'}}>
                     <Icon
-                      iconStyle={styles.icon, {textAlign:'center', width: 40}}
+                      style={styles.icon}
                       name='md-lock'
-                      type='ionicon'
-                      color='#000000'
-                      size={30}
                     />
                     <TextField
                         placeholder="Password"
@@ -105,15 +124,17 @@ class Login extends Component {
                     <Text>{this.state.error}</Text>
                 </View>
                 <View style={styles.loginBottomGrid}>
-                    <Button
+                    <ButtonComponent
                         onPress={this.signIn.bind(this)}
                         name='Submit'
                         screen='Home'/>
-                    <Button
+                    <ButtonComponent
                         name='Forgot?'
                         screen='ForgetPassword' />
                 </View>
             </KeyboardAvoidingView>
+            </Container>
+
         );
     }
 }
