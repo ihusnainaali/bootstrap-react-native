@@ -17,16 +17,24 @@
 		"graphql": "0.13.2",
 		"graphql-tag": "2.9.2",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"native-base": "2.4.4",
 =======
 		"native-base": "^2.4.4",
 >>>>>>> Fixed Navigation Issues to Edit
+=======
+		"native-base": "^2.4.4",
+>>>>>>> 17d7aa0d678b917fbc6bb145e6e01ffeeff094e3
 		"react": "16.3.1",
 		"react-native": "0.55.4",
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 		"react-native-elements": "^0.19.0",
 >>>>>>> Changed version of React Native Elements back to 0.19.0
+=======
+		"react-native-elements": "^0.19.0",
+>>>>>>> 17d7aa0d678b917fbc6bb145e6e01ffeeff094e3
 		"react-native-vector-icons": "4.6.0",
 		"react-navigation": "2.0.1",
 		"react-navigation-header-buttons": "0.0.8",
