@@ -14,6 +14,7 @@ import Login from '../pages/login/login.index';
 import Register from '../pages/register/register.index';
 import Verification from '../pages/verification/verification.index';
 import ForgetPassword from '../pages/forgetpassword/forgetpassword.index';
+import Pangyou from '../pages/pangyou/pangyou.index';
 
 // Log-in Screen
 class LoginScreen extends Component {
@@ -21,7 +22,7 @@ class LoginScreen extends Component {
     render() {
         if (this.props.username) {
             return (
-                <Home />
+                <Pangyou />
             );
         } else {
             return (
@@ -38,14 +39,14 @@ const ConnectLoginScreen = connect(state => ({
 
 const AuthNavigator = StackNavigator({
     Welcome: { screen: Welcome },
-    Home: { screen: Home },
+    Pangyou: { screen: Pangyou },
     Login: { screen: Login },
     Register: { screen: Register },
     Verification: { screen: Verification },
     ForgetPassword: { screen: ForgetPassword }
     },
     // TODO Change back to Welcome
-    { initialRouteName: 'Home', }
+    { initialRouteName: 'Welcome', }
 );
 
 export default AuthNavigator;
