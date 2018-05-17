@@ -12,13 +12,12 @@
 	},
 	"dependencies": {
 		"amazon-cognito-identity-js": "2.0.3",
-		"aws-amplify": "0.3.3",
-		"aws-amplify-react-native": "0.2.9",
+		"aws-amplify": "^0.4.0",
+		"aws-amplify-react-native": "^0.2.11",
 		"graphql": "0.13.2",
 		"graphql-tag": "2.9.2",
-		"lottie-react-native": "^2.5.0",
 		"native-base": "2.4.4",
-		"react": "16.3.2",
+		"react": "16.3.1",
 		"react-native": "0.55.4",
 		"react-native-vector-icons": "4.6.0",
 		"react-navigation": "2.0.1",
@@ -41,7 +40,7 @@
 	},
 	"rnpm": {
 		"assets": [
-			"./src/assets/fonts/"
+			"./src/assets/fonts"
 		]
 	}
 }
