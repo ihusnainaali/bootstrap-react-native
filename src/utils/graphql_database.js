@@ -11,6 +11,7 @@ mutation createPangyouMobilehub1098576098UserProfile($userId: String!, $userName
 			userSchool: $userSchool,
 			userMajor: $userMajor,
 			userLanguage: $userLanguage,
+			userLearnLanguage: userLearnLanguage,
 			userImageUrl: $userImageUrl
 		}) {
 			userId
@@ -23,6 +24,7 @@ mutation createPangyouMobilehub1098576098UserProfile($userId: String!, $userName
 			userSchool
 			userMajor
 			userLanguage
+			userLearnLanguage
 			userImageUrl
 		}
 	}
@@ -42,6 +44,7 @@ query getPangyouMobilehub1098576098UserProfile {
 				userSchool
 				userMajor
 				userLanguage
+				userLearnLanguage
 				userImageUrl
 			}
 		}
