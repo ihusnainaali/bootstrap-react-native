@@ -4108,7 +4108,7 @@ native-base-shoutem-theme@0.2.2:
     lodash "^4.10.1"
     prop-types "^15.5.10"
 
-native-base@2.4.4:
+native-base@^2.4.4:
   version "2.4.4"
   resolved "https://registry.yarnpkg.com/native-base/-/native-base-2.4.4.tgz#a677c6c0b4ef2e3e76b8274d67f9b4cc775397f2"
   dependencies:

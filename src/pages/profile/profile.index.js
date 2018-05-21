@@ -6,6 +6,11 @@ import Button from '../../components/button/button.component';
 
 import styles from './profile.style';
 
+import { CreateProfile, ListProfile, SubscribeToProfile } from '../../utils/graphql_database';
+import { API, graphqlOperation } from 'aws-amplify';
+
+
+
 // declare a sample user here for testing
 const user = [
   {
@@ -74,6 +79,19 @@ const user = [
 ]
 
 class Profile extends React.Component {
+
+  state = {
+    profile: []
+  }
+
+  async componentDidMount() {
+    try {
+      const profile = await API.graphql(graphqlOperation(ListProfile))
+      console.log('My Profile: ', profile)
+    } catch (err) {
+      console.log('This is the Error: ', err)
+    }
+  }
 
   render() {
     return (
