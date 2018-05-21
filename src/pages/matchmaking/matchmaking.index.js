@@ -3,6 +3,7 @@ import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { withNavigation, navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { DeckSwiper, Card, CardItem, Thumbnail, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
+import Loader from '../../components/loader/loader.component'
 
 import styles from './matchmaking.style';
 import theme from '../../styles/theme.style';
@@ -16,21 +17,19 @@ class Matchmaking extends React.Component {
         this.state = {
             dataReady: false,
             cards: [
-                // {userId:"placeholder"}
             ],
-            counter:0
+            counter: 0
         };
         this.swipedLeft = this.swipedLeft.bind(this);
         this.swipedRight = this.swipedRight.bind(this);
         this.fetchData = this.fetchData.bind(this);
+        this.rendHeader = this.rendHeader.bind(this);
+        this.rendLoading = this.rendLoading.bind(this);
+        this.rendDeckSwiper = this.rendDeckSwiper.bind(this);
     }
 
     componentDidMount() {
         this.fetchData("Chinese")
-    }
-
-    componentWillUnmount() {
-        console.log("will unmount");
     }
 
     fetchData(language = "Chinese") {
@@ -44,7 +43,7 @@ class Matchmaking extends React.Component {
                 console.log("data fetched.")
                 this.setState({ dataReady: true });
             })
-            .catch(console.log);
+            .catch((err) => { console.log(err); this.props.navigation.goBack(); });
     }
 
     //TODO yes/no button will not triger onSwipe subscription. Need to fix it.
@@ -76,24 +75,60 @@ class Matchmaking extends React.Component {
 
     };
 
+    rendHeader() {
+        return (
+            <Header>
+                <Left>
+                    <Button transparent
+                        onPress={() => { this.props.navigation.goBack() }}>
+                        <Icon
+                            name='arrow-back'
+                            style={styles.icon} />
+                    </Button>
+                </Left>
+                <Body>
+                    <Title style={{ fontFamily: theme.FONT_LIGHT }}>Matchmaking</Title>
+                </Body>
+                <Right />
+            </Header>
+        );
+    }
+
+    rendDeckSwiper() {
+        return (
+            <DeckSwiper
+                ref={(c) => this._deckSwiper = c}
+                onSwipeLeft={(index) => this.swipedLeft(index)}
+                onSwipeRight={(index) => this.swipedRight(index)}
+                dataSource={this.state.cards}
+                looping={true}
+                renderItem={item =>
+                    <Card style={{ elevation: 3 }}>
+                        <CardItem>
+                            <Left>
+                                <Thumbnail source={item.image} />
+                                <Body>
+                                    <Text>{item.userId}</Text>
+                                    <Text>{item.nativeLanguage}</Text>
+                                    <Text>{item.country}</Text>
+                                    <Text note>NativeBase</Text>
+                                </Body>
+                            </Left>
+                        </CardItem>
+                        <CardItem cardBody>
+                            <Image style={{ height: 400, flex: 1 }} source={item.image} />
+                        </CardItem>
+                    </Card>
+                }
+            />
+        );
+    }
+
     rendLoading() {
         return (
             <Container>
-                <Header>
-                    <Left>
-                        <Button transparent
-                            onPress={() => { this.props.navigation.goBack() }}>
-                            <Icon
-                                name='arrow-back'
-                                style={styles.icon} />
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title style={{ fontFamily: theme.FONT_LIGHT }}>Matchmaking</Title>
-                    </Body>
-                    <Right />
-                </Header>
-                <Text> Loading... </Text>
+                {this.rendHeader()}
+                <Loader />
             </Container>
         );
     }
@@ -101,8 +136,6 @@ class Matchmaking extends React.Component {
     render() {
         console.log("render");
         console.log(this.state.cards);
-        const cards = this.state.cards;
-        const self = this;
 
         if (!this.state.dataReady) {
             return this.rendLoading();
@@ -110,53 +143,14 @@ class Matchmaking extends React.Component {
 
         return (
             <Container>
-                <Header>
-                    <Left>
-                        <Button transparent
-                            onPress={() => { this.props.navigation.goBack() }}>
-                            <Icon
-                                name='arrow-back'
-                                style={styles.icon} />
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title style={{ fontFamily: theme.FONT_LIGHT }}>Matchmaking</Title>
-                    </Body>
-                    <Right />
-                </Header>
-                <View>
-                    <DeckSwiper
-                        ref={(c) => this._deckSwiper = c}
-                        onSwipeLeft={(index) => self.swipedLeft(index)}
-                        onSwipeRight={(index) => self.swipedRight(index)}
-                        dataSource={cards}
-                        looping={true}
-                        renderItem={item =>
-                            <Card style={{ elevation: 3 }}>
-                                <CardItem>
-                                    <Left>
-                                        <Thumbnail source={item.image} />
-                                        <Body>
-                                            <Text>{item.userId}</Text>
-                                            <Text>{item.nativeLanguage}</Text>
-                                            <Text>{item.country}</Text>
-                                            <Text note>NativeBase</Text>
-                                        </Body>
-                                    </Left>
-                                </CardItem>
-                                <CardItem cardBody>
-                                    <Image style={{ height: 400, flex: 1 }} source={item.image} />
-                                </CardItem>
-                            </Card>
-                        }
-                    />
-                </View>
+                {this.rendHeader()}
+                {this.rendDeckSwiper()}
                 <View style={{ flexDirection: "row", flex: 1, position: "absolute", bottom: 0, left: 0, right: 0, justifyContent: 'space-between', padding: 15 }}>
-                    <Button iconLeft onPress={() => {this._deckSwiper._root.swipeLeft(); console.log(this._deckSwiper); this.swipedLeft()}}>
+                    <Button iconLeft onPress={() => { this._deckSwiper._root.swipeLeft(); this.swipedLeft() }}>
                         <Icon name="arrow-back" />
                         <Text>Yes</Text>
                     </Button>
-                    <Button iconRight onPress={() => {this._deckSwiper._root.swipeRight(); this.swipedRight()}}>
+                    <Button iconRight onPress={() => { this._deckSwiper._root.swipeRight(); this.swipedRight() }}>
                         <Text>No</Text>
                         <Icon name="arrow-forward" />
                     </Button>
