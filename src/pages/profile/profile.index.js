@@ -9,7 +9,14 @@ import styles from './profile.style';
 import { CreateProfile, ListProfile, SubscribeToProfile } from '../../utils/graphql_database';
 import { API, graphqlOperation } from 'aws-amplify';
 
+import uuidV4 from 'uuid/v4'
 
+console.log('This is the List: ', ListProfile)
+console.log('This is the uuid: ', this.uuidV4)
+
+// import Amplify, { Auth } from 'aws-amplify';
+// import config from '../../../aws-exports';
+// Amplify.configure(config);
 
 // declare a sample user here for testing
 const user = [
@@ -81,7 +88,7 @@ const user = [
 class Profile extends React.Component {
 
   state = {
-    profile: []
+    profile: {}
   }
 
   async componentDidMount() {
