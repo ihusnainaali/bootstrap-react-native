@@ -1,9 +1,9 @@
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
-import { AppSyncConfig } from './appsync'
+import { myAppAWSUserProfileConfig } from './graphql_data'
 import { aws_config } from '../../../aws-exports'
 
 const CONDITIONAL_ERROR = "DynamoDB:ConditionalCheckFailedException"
-const USERS_BY_LANGUAGE_KEY = "queryPangyouMobilehub1098576098UserProfilesByUserLanguage"
+const USERS_BY_LANGUAGE_KEY = "getPangyouMobilehub1098576098UserProfile"
 
 Amplify.configure(aws_config);
 Amplify.configure(AppSyncConfig);
@@ -64,7 +64,7 @@ mutation createPangyouMobilehub1098576098UserProfile($userId: String!, $userName
 			userLanguage: $userLanguage,
 			userLearnLanguage: userLearnLanguage,
 			userImageUrl: $userImageUrl
-		}) {
+		})  {
 			userId
 			userName
 			userDescription
