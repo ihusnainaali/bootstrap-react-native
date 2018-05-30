@@ -13,6 +13,6 @@ export const route = {
     SETTINGS: 'settings',
     SPLASH: 'splash',
     VERIFICATION: 'verification',
-    WELCOME: 'welcome'
-
+    WELCOME: 'welcome',
+    CHAT: 'chat'
 }

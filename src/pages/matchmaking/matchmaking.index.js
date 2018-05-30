@@ -33,7 +33,7 @@ class Matchmaking extends React.Component {
     }
 
     fetchData(language = "Chinese") {
-        operations.GetUsersByLanguage(language, 20, null)
+        operations.GetUsersByLanguage("Chinese", 20, null)
             .then(resp => {
                 const data = resp.data[operations.USERS_BY_LANGUAGE_KEY];
                 this.setState({
@@ -109,8 +109,8 @@ class Matchmaking extends React.Component {
                                 <Thumbnail source={item.image} />
                                 <Body>
                                     <Text>{item.userId}</Text>
-                                    <Text>{item.nativeLanguage}</Text>
-                                    <Text>{item.country}</Text>
+                                    <Text>{item.userLanguage}</Text>
+                                    <Text>{item.userCountry}</Text>
                                     <Text note>NativeBase</Text>
                                 </Body>
                             </Left>

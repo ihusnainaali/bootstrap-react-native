@@ -1,95 +1,142 @@
 import React from 'react';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
-import { withNavigation , navigation } from 'react-navigation';
+import { Text, View, Image, TouchableOpacity, AsyncStorage } from 'react-native';
+import { withNavigation, navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Thumbnail, Item, List, ListItem, Input, Container, Header , Left, Right, Title, Content, Button , Icon, Body} from 'native-base';
+import { Thumbnail, Item, List, ListItem, Input, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
+import ChatClientHelper from '../../utils/twilio'
 
 import styles from './friends.style';
 import theme from '../../styles/theme.style';
 
-let items = ['Simon Mignolet','Nathaniel Clyne','Dejan Lovren','Mama Sakho','Emre Can'];
+import { route } from '../../routes/routes.constants';
+import Example from './example';
+
+let items = ['Simon Mignolet', 'Nathaniel Clyne', 'Dejan Lovren', 'Mama Sakho', 'Emre Can'];
 
 // TODO Add Backend Retrieval
 const list = [
-  {
-    name: 'Amy Farha',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    subtitle: 'Beijing, China\n'
-  },
-  {
-    name: 'Chris Jackson',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-    subtitle: 'New York, New York\n'
-  },
+    {
+        name: 'Amy Farha',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+        subtitle: 'Beijing, China\n'
+    },
+    {
+        name: 'Chris Jackson',
+        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+        subtitle: 'New York, New York\n'
+    },
 ]
 
 class Friends extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            chatClientHelper: null,
+        };
+        this.flag = true;
+    }
+
     // Declare Edit Friend Icon
     static navigationOptions = ({ navigation }) => {
 
-      // TODO Move Edit Friend to Header
-      return {
-        header: null
-      };
+        // TODO Move Edit Friend to Header
+        return {
+            header: null
+        };
     };
 
-  render() {
+    componentWillMount() {
+        chatClientHelper = ChatClientHelper.getInstance();
+        // chatClientHelper.login('Yuhong');
+        this.setState({ chatClientHelper });
+    }
 
-    return (
+    // get the channel name for specific friend
+    fetchChannelName(friend) {
+        return "Test1";
+    }
 
-      <Container style={styles.container}>
+    chatWithFriend(friend, avatar) {
+        this.props.navigation.navigate("video");
+        return;
+        client = this.state.chatClientHelper.client;
+        user = 'Yuhong';
+        client && client.getChannelByUniqueName(this.fetchChannelName(friend))
+            .then(channel => {
+                if (channel.state.status !== 'joined') {
+                    channel.join()
+                        .then(channel => channel.getMessages()
+                            .then(messages => this.props.navigation.navigate(route.CHAT, { friend, messages, avatar, channel, user }))
+                        )
+                }
+                channel.getMessages()
+                    .then(messages => this.props.navigation.navigate(route.CHAT, { friend, messages, avatar, channel, user }));
 
-        <Header>
-          <Left/>
-          <Body>
-            <Title style={{fontFamily: theme.FONT_LIGHT}}>Friend List</Title>
-          </Body>
-          <Right>
-            <Button transparent>
-              // TODO Add Edit Friend Functionality
-              <Icon 
-                name='person-add'
-                type="MaterialIcons"
-                style={ styles.icon } />
-            </Button>
-          </Right>
-        </Header>
-        
-        // TODO Add Search Functionality
-        <Item regular style={{paddingLeft:10}}>
-          <Icon name="ios-search" 
-            style={styles.icon}/>
-          <Input placeholder="Search" />
-        </Item>
-        
-        <Content> 
+            })
+            .catch(console.log);
+    }
 
-        <List dataArray={list}
+    render() {
+        // return (
+        //     <Container>
+        //         <Example/>
+        //     </Container>
+        // )
+        return (
 
-          renderRow={(item) =>
-            <ListItem avatar onPress={()=>{}}>
-            <Left>
-              <Thumbnail source={{ uri: item.avatar_url }} />
-            </Left>
-            <Body>
-              <Text style={styles.text_name}>{item.name}</Text>
-              <Text style={styles.text_subtitle} note>{item.subtitle}</Text>
-            </Body>
-            <Right>
-            </Right>
-          </ListItem>
-          }>
+            <Container style={styles.container}>
 
-        </List>
+                <Header>
+                    <Left />
+                    <Body>
+                        <Title style={{ fontFamily: theme.FONT_LIGHT }}>Friend List</Title>
+                    </Body>
+                    <Right>
+                        <Button transparent>
+                            // TODO Add Edit Friend Functionality
+                            <Icon
+                                name='person-add'
+                                type="MaterialIcons"
+                                style={styles.icon} />
+                        </Button>
+                    </Right>
+                </Header>
 
-        </Content>
+                // TODO Add Search Functionality
+                <Item regular style={{ paddingLeft: 10 }}>
+                    <Icon name="ios-search"
+                        style={styles.icon} />
+                    <Input placeholder="Search" />
+                </Item>
+
+                <Content>
+
+                    <List dataArray={list}
+
+                        renderRow={(item) =>
+                            <ListItem avatar onPress={() => { this.chatWithFriend(item.name, item.avatar_url); }}>
+                                <Left>
+                                    <Thumbnail source={{ uri: item.avatar_url }} />
+                                </Left>
+                                <Body>
+                                    <Text style={styles.text_name}>{item.name}</Text>
+                                    <Text style={styles.text_subtitle} note>{item.subtitle}</Text>
+                                </Body>
+                                <Right>
+                                </Right>
+                            </ListItem>
+                        }>
+
+                    </List>
+
+                </Content>
 
 
-      </Container>
+            </Container>
 
-    );
-  }
+        );
+    }
 
 }
 

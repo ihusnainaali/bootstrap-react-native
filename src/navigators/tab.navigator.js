@@ -10,7 +10,9 @@ import Friends from '../pages/friends/friends.index';
 import Journals from '../pages/journals/journals.index';
 import Profile from '../pages/profile/profile.index';
 import Settings from '../pages/settings/settings.index';
-import Matchmaking from '../pages/matchmaking/matchmaking.index'
+import Matchmaking from '../pages/matchmaking/matchmaking.index';
+import Chat from '../pages/chat/chat.index';
+import Video from '../pages/video/video.index';
 
 import { route } from '../routes/routes.constants';
 
@@ -22,12 +24,6 @@ const PangyouStack = createStackNavigator({
     pangyou: {
       screen: Pangyou,
     },
-    matchmaking: { 
-      screen: Matchmaking,
-    },
-    settings: {
-      screen: Settings,
-    }
   },
   {
     initialRouteName: 'pangyou',
@@ -40,7 +36,7 @@ const FriendsStack = createStackNavigator({
 
     friends: { 
       screen: Friends,
-    }
+    },
     // TODO add Friend Redirection Profile
     // TODO add Edit Friends List
   },
@@ -76,7 +72,7 @@ const ProfileStack = createStackNavigator({
   // TODO add edit profile screen redirection
 )
 
-const TabNavigator = createBottomTabNavigator({
+const Tabs = createBottomTabNavigator({
   
 		Pangyou: PangyouStack,
 		Friends: FriendsStack,
@@ -110,5 +106,25 @@ const TabNavigator = createBottomTabNavigator({
   }
 
 );
+
+Tabs.navigationOptions = {
+    header: null,
+};
+
+const TabNavigator = createStackNavigator({
+    Tabs,
+    chat: {
+        screen: Chat,
+    },
+    matchmaking: { 
+        screen: Matchmaking,
+    },
+    settings: {
+        screen: Settings,
+    },
+    video: {
+        screen: Video,
+    }
+})
 
 export default TabNavigator;
