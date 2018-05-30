@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 import styles from './profile.style';
 
-import { GetProfile } from './graphql_query';
+import { GetProfile, ListProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
 
 import uuidV4 from 'uuid/v4'
@@ -26,11 +26,11 @@ class Profile extends Component {
 
   async componentDidMount() {
     try {
-      // const profile = await API.graphql(graphqlOperation(GetProfile, {userId: 'test3'}))
-      const profile = await API.graphql(graphqlOperation(GetProfile: "test3"))
-      // console.log('My Profile: ', profile)
+      // const profile = await API.graphql(graphqlOperation(ListProfile))
+      const profile = await API.graphql(graphqlOperation(GetProfile, {userId: "test3"}))
+      console.log('My Profile: ', profile)
     } catch (err) {
-      // console.log('This is the Error: ', err)
+      console.log('This is the Error: ', err)
     }
   }
 
@@ -44,7 +44,6 @@ class Profile extends Component {
       //     </View>
       //   );
       // });
-      console.log("FUCK YOU!!!")
   }
 
   render() {
