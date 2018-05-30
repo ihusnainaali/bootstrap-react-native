@@ -1,7 +1,7 @@
 import React from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { withNavigation } from 'react-navigation';
-import { AsyncStorage, Text } from 'react-native';
+import { AsyncStorage, Text, TouchableOpacity } from 'react-native';
 
 class Chat extends React.Component {
     constructor(props) {

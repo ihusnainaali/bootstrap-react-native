@@ -8,7 +8,7 @@ export default class ChatClientHelper {
     client = null;
     accessManager = null;
 
-    constructor(tokenAndConfigurationProviderHost = "http://localhost:3002") {
+    constructor(tokenAndConfigurationProviderHost = "http://54.164.94.85:9527") { //54.164.94.85
         this.host = tokenAndConfigurationProviderHost;
         this.client = null;
         this.accessManager = null;
@@ -51,7 +51,7 @@ export default class ChatClientHelper {
     };
 
     getToken(identity) {
-        return fetch(`${this.host}/token?identity=${identity}`)
+        return fetch(`${this.host}/chat?identity=${identity}`)
             .then(response => {
                 return response.text();
             });
