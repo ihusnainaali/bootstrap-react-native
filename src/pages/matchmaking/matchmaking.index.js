@@ -36,6 +36,7 @@ class Matchmaking extends React.Component {
         operations.GetUsersByLanguage(language, 20, null)
             .then(resp => {
                 const data = resp.data[operations.USERS_BY_LANGUAGE_KEY];
+                console.log(data)
                 this.setState({
                     cards: this.state.cards.concat(data.items),
                     nextToken: data.nextToken

@@ -14,50 +14,40 @@ features:
         tables:
           - !com.amazonaws.mobilehub.v0.NoSQLTable 
             attributes:
-              age: S
-              country: S
-              description: S
-              desiredLanguage: L
-              gender: S
-              major: S
-              nativeLanguage: S
-              profilePicture: S
-              school: S
+              userCountry: S
+              userDescription: S
+              userDob: S
+              userGender: S
               userId: S
+              userImageUrl: S
+              userLanguage: S
+              userLearnLanguage: S
+              userMajor: S
+              userName: S
+              userSchool: S
+              userStatus: S
             hashKeyName: userId
             hashKeyType: S
             indexes:
               - !com.amazonaws.mobilehub.v0.NoSQLIndex 
-                hashKeyName: nativeLanguage
+                hashKeyName: userLanguage
                 hashKeyType: S
-                indexName: nativeLanguage-useId
+                indexName: userLanguage
                 rangeKeyName: userId
                 rangeKeyType: S
-              - !com.amazonaws.mobilehub.v0.NoSQLIndex 
-                hashKeyName: userId
-                hashKeyType: S
-                indexName: userId-nativeLanguage
-                rangeKeyName: nativeLanguage
-                rangeKeyType: S
-            rangeKeyName: country
-            rangeKeyType: S
+            rangeKeyName: ''
+            rangeKeyType: ''
             tableName: ___DYNAMIC_PREFIX___-UserProfile
             tablePrivacy: protected
           - !com.amazonaws.mobilehub.v0.NoSQLTable 
             attributes:
               friendId: S
               userId: S
+              uuid: S
             hashKeyName: userId
             hashKeyType: S
-            indexes:
-              - !com.amazonaws.mobilehub.v0.NoSQLIndex 
-                hashKeyName: userId
-                hashKeyType: S
-                indexName: userId-friendId
-                rangeKeyName: friendId
-                rangeKeyType: S
-            rangeKeyName: friendId
-            rangeKeyType: S
+            rangeKeyName: ''
+            rangeKeyType: ''
             tableName: ___DYNAMIC_PREFIX___-Friends
             tablePrivacy: private
           - !com.amazonaws.mobilehub.v0.NoSQLTable 
@@ -93,7 +83,7 @@ features:
           alias-attributes:
             - email
             - phone_number
-          mfa-configuration: ON
+          mfa-configuration: OFF
           name: userpool
           password-policy: !com.amazonaws.mobilehub.ConvertibleMap 
             min-length: '8'

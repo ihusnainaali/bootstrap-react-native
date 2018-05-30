@@ -1,0 +1,6 @@
+framework module react_native_twilio_video_webrtc {
+  umbrella header "react-native-twilio-video-webrtc-umbrella.h"
+
+  export *
+  module * { export * }
+}
