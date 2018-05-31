@@ -8,32 +8,16 @@ import { Container, Header, Text, Content, Icon, List, ListItem } from 'native-b
 import { GetProfile, ListProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
 
-// import { connect } from 'react-redux';
-// import { editProfile } from '../../redux/actions/profile.actions'
-
-// import uuidV4 from 'uuid/v4'
-
 import styles from './profile.style'
 import theme from '../../styles/theme.style'
 
 
 class EditProfile extends Component {
 
-    state = {
-        userId: '',
-        userName: '',
-        userDescription: '',
-        userStatus: '',
-        userCountry: '',
-        userDob: '',
-        userGender: '',
-        userSchool: '',
-        userMajor: '',
-        userLanguage: '',
-        userLearnLanguage: '',
-        userImageUrl: '',
-        error: null
-    }
+  state = {
+    profile: {},
+    error: null
+  }
 
   onChangeText = (key) => {
     return (value) => this.setState({
@@ -48,6 +32,19 @@ class EditProfile extends Component {
   clearError(){
 		this.setState({error: ''});
 	}
+
+  async componentDidMount() {
+      try {
+          const profile = await API.graphql(graphqlOperation(GetProfile, {userId: "12345678"}))
+          // console.log('My Profile: ', profile)
+          this.setState({
+            profile: profile.data.getPangyouMobilehub1098576098UserProfile
+          })
+          // console.log('This is the Render Container: ', this.state.profile.userId)
+      } catch (err) {
+          console.log('This is the Error: ', err)
+      }
+  }
 
   updateProfile() {
       const { userId, userName, userDescription, userStatus, userCountry, userDob, userGender, userSchool, userMajor, userLanguage, userLearnLanguage, userImageUrl } = this.state;
@@ -89,6 +86,7 @@ class EditProfile extends Component {
                             autoCapitalize='none'
                             autoCorrect={false}
                             onChangeText={this.onChangeText('userName').bind(this)}
+                            value={this.state.profile.userName}
                           />
                       </ListItem>
                 </View>
@@ -108,6 +106,7 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userDescription').bind(this)}
+                          value={this.state.profile.userDescription}
                         />
                     </ListItem>
                 </View>
@@ -127,6 +126,7 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userStatus').bind(this)}
+                          value={this.state.profile.userStatus}
                         />
                     </ListItem>
                 </View>
@@ -145,6 +145,7 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userCountry').bind(this)}
+                          value={this.state.profile.userCountry}
                         />
                     </ListItem>
                 </View>
@@ -163,6 +164,7 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userDob').bind(this)}
+                          value={this.state.profile.userDob}
                         />
                     </ListItem>
                 </View>
@@ -181,6 +183,7 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userGender').bind(this)}
+                          value={this.state.profile.userGender}
                         />
                     </ListItem>
                 </View>
@@ -199,6 +202,7 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userSchool').bind(this)}
+                          value={this.state.profile.userSchool}
                         />
                     </ListItem>
                 </View>
@@ -217,6 +221,7 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userMajor').bind(this)}
+                          value={this.state.profile.userMajor}
                         />
                     </ListItem>
                 </View>
@@ -235,6 +240,7 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userLanguage').bind(this)}
+                          value={this.state.profile.userLanguage}
                         />
                     </ListItem>
                 </View>
@@ -253,6 +259,7 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userLearnLanguage').bind(this)}
+                          value={this.state.profile.userLearnLanguage}
                         />
                     </ListItem>
                 </View>
@@ -271,6 +278,7 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userImageUrl').bind(this)}
+                          value={this.state.profile.userImageUrl}
                         />
                     </ListItem>
                 </View>

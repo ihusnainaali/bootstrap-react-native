@@ -18,12 +18,13 @@ import uuidV4 from 'uuid/v4'
 class Profile extends Component {
 
   state = {
-    profile: {}
+    profile: {},
+    error: null
   }
 
   async componentDidMount() {
       try {
-          const profile = await API.graphql(graphqlOperation(GetProfile, {userId: "test3"}))
+          const profile = await API.graphql(graphqlOperation(GetProfile, {userId: "12345678"}))
           // console.log('My Profile: ', profile)
           this.setState({
             profile: profile.data.getPangyouMobilehub1098576098UserProfile
