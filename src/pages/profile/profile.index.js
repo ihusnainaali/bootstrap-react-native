@@ -9,7 +9,7 @@ import Button from '../../components/button/button.component';
 
 import styles from './profile.style';
 
-import { GetProfile, ListProfile } from './graphql_query';
+import { CreateProfile, GetProfile, UpdateProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
 
 import uuidV4 from 'uuid/v4'

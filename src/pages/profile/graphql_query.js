@@ -66,6 +66,38 @@ export const ListProfile = `query listUserProfiles {
   }
 }`;
 
+export const UpdateProfile = `
+mutation updateUserProfile($userId: String!, $userName: String!, $userDescription: String!, $userStatus: String!, $userCountry: String!, $userDob: String!, $userGender: String!, $userSchool: String!, $userMajor: String!, $userLanguage: String!, $userImageUrl: String!) {
+		updatePangyouMobilehub1098576098UserProfile(input: {
+			userId: $userId,
+			userName: $userName,
+			userDescription: $userDescription,
+			userStatus: $userStatus,
+			userCountry: $userCountry,
+			userDob: $userDob,
+			userGender: $userGender,
+			userSchool: $userSchool,
+			userMajor: $userMajor,
+			userLanguage: $userLanguage,
+			userLearnLanguage: userLearnLanguage,
+			userImageUrl: $userImageUrl
+		})  {
+			userId
+			userName
+			userDescription
+			userStatus
+			userCountry
+			userDob
+			userGender
+			userSchool
+			userMajor
+			userLanguage
+			userLearnLanguage
+			userImageUrl
+		}
+	}
+`
+
 export const SubscribeToProfile = `
 subscription onCreateUserProfile {
 		onCreatePangyouMobilehub1098576098UserProfile {

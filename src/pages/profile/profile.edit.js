@@ -5,7 +5,7 @@ import TextField from '../../components/textfield/textfield.component';
 import Button from '../../components/button/button.component';
 import { Container, Header, Text, Content, Icon, List, ListItem } from 'native-base';
 
-import { GetProfile, ListProfile } from './graphql_query';
+import { CreateProfile, GetProfile, UpdateProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
 
 import styles from './profile.style'
