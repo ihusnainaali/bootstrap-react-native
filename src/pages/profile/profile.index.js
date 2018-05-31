@@ -4,8 +4,8 @@ import { Container, Header, Text, Content, Icon, List, ListItem } from 'native-b
 import { withNavigation } from 'react-navigation';
 import Button from '../../components/button/button.component';
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
 
 import styles from './profile.style';
 
@@ -14,9 +14,6 @@ import { API, graphqlOperation } from 'aws-amplify';
 
 import uuidV4 from 'uuid/v4'
 
-// import Amplify, { Auth } from 'aws-amplify';
-// import config from '../../../aws-exports';
-// Amplify.configure(config);
 
 class Profile extends Component {
 
@@ -25,25 +22,16 @@ class Profile extends Component {
   }
 
   async componentDidMount() {
-    try {
-      // const profile = await API.graphql(graphqlOperation(ListProfile))
-      const profile = await API.graphql(graphqlOperation(GetProfile, {userId: "test3"}))
-      console.log('My Profile: ', profile)
-    } catch (err) {
-      console.log('This is the Error: ', err)
-    }
-  }
-
-  createUserProfile() {
-    // console.log(this.props.profile);
-      // return this.props.profile.map((user) => {
-      //   return (
-      //     <View style={{flexDirection: 'row'}}>
-      //       <Icon type="Ionicons" name='ios-clipboard' ios='ios-clipboard' md='md-clipboard' style={{fontSize: 30, color: black, textAlign:'center', width: 40}} />
-      //       <Text key={user.userId}>{user.userName}</Text>
-      //     </View>
-      //   );
-      // });
+      try {
+          const profile = await API.graphql(graphqlOperation(GetProfile, {userId: "test3"}))
+          // console.log('My Profile: ', profile)
+          this.setState({
+            profile: profile.data.getPangyouMobilehub1098576098UserProfile
+          })
+          // console.log('This is the Render Container: ', this.state.profile.userId)
+      } catch (err) {
+          console.log('This is the Error: ', err)
+      }
   }
 
   render() {
@@ -51,13 +39,78 @@ class Profile extends Component {
       <ScrollView>
         <Container>
           <Content>
-            <View style={styles.profileCard}>
-              <Icon type="Ionicons" name='ios-contact' ios="ios-contact" md="md-contact" style={{fontSize: 300, color: 'lightgrey', textAlign:'center'}} />
+            <View style={styles.indexProfileCard}>
+              <Icon type="Ionicons" name='ios-contact' ios="ios-contact" md="md-contact" style={{fontSize: 300, color: 'white', textAlign:'center'}} />
             </View>
-            <View style={styles.descriptionCard}>
-              // {this.createUserProfile()}
+            <View style={styles.indexDescriptionCard}>
+                <View style={{flexDirection: 'row'}}>
+                    <ListItem style={styles.layoutItem}>
+                        <Icon type="Ionicons" name='ios-contact' ios='ios-contact' md='md-contact' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
+                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userName}</Text>
+                    </ListItem>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <ListItem style={styles.layoutItem}>
+                        <Icon type="Ionicons" name='ios-clipboard' ios='ios-clipboard' md='md-clipboard' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
+                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userDescription}</Text>
+                    </ListItem>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <ListItem style={styles.layoutItem}>
+                        <Icon type="Ionicons" name='ios-heart' ios='ios-heart' md='md-heart' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
+                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userStatus}</Text>
+                    </ListItem>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <ListItem style={styles.layoutItem}>
+                        <Icon type="Ionicons" name='ios-pin' ios='ios-pin' md='md-pin' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
+                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userCountry}</Text>
+                    </ListItem>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <ListItem style={styles.layoutItem}>
+                        <Icon type="Ionicons" name='ios-calendar' ios='ios-calendar' md='md-calendar' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
+                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userDob}</Text>
+                    </ListItem>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <ListItem style={styles.layoutItem}>
+                        <Icon type="Ionicons" name='ios-contacts' ios='ios-contacts' md='md-contacts' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
+                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userGender}</Text>
+                    </ListItem>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <ListItem style={styles.layoutItem}>
+                        <Icon type="Ionicons" name='ios-school' ios='ios-school' md='md-school' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
+                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userSchool}</Text>
+                    </ListItem>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <ListItem style={styles.layoutItem}>
+                        <Icon type="Ionicons" name='ios-book' ios='ios-book' md='md-book' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
+                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userMajor}</Text>
+                    </ListItem>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <ListItem style={styles.layoutItem}>
+                        <Icon type="Ionicons" name='ios-globe' ios='ios-globe' md='md-globe' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
+                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userLanguage}</Text>
+                    </ListItem>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <ListItem style={styles.layoutItem}>
+                        <Icon type="Ionicons" name='ios-globe' ios='ios-globe' md='md-globe' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
+                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userLearnLanguage}</Text>
+                    </ListItem>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <ListItem style={styles.layoutItem}>
+                        <Icon type="Ionicons" name='ios-globe' ios='ios-globe' md='md-globe' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
+                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userImageUrl}</Text>
+                    </ListItem>
+                </View>
             </View>
-            <View style={styles.profileBottomGrid}>
+            <View style={styles.indexProfileBottomGrid}>
                 <Button
                     onPress={this.props.navigation.navigate('EditProfile')}
                     name='Edit Profile'
@@ -70,10 +123,12 @@ class Profile extends Component {
   }
 }
 
-function mapStateToProps(state) {
-    return {
-        profile: state.profile
-    }
-}
+export default withNavigation(Profile);
 
-export default connect(mapStateToProps)(withNavigation(Profile));
+// function mapStateToProps(state) {
+//     return {
+//         profile: state.profile
+//     }
+// }
+
+// export default connect(mapStateToProps)(withNavigation(Profile));

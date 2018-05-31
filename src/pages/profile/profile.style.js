@@ -15,23 +15,50 @@ export default StyleSheet.create({
         width: Dimensions.get('window').width,
         fontFamily: theme.FONT_BOLD,
     },
-    profileTopGrid: {
+    indexProfileTopGrid: {
   		flex: 1,
   		marginTop: 30,
   		alignItems: 'center'
   	},
-    profileCard: {
+    editProfileTopGrid: {
+  		flex: 1,
+  		marginTop: 30,
+  		alignItems: 'center',
+      backgroundColor: '#90CAF9'
+  	},
+    indexProfileCard: {
         width: Dimensions.get('window').width,
         height: 320,
         padding: 10,
         alignItems: 'center',
-        backgroundColor: 'grey'
+        backgroundColor: '#81C784'
         // backgroundColor: theme.COLOR_PRIMARY_LIGHT
     },
-    descriptionCard: {
+    editProfileCard: {
         width: Dimensions.get('window').width,
-        borderColor: theme.COLOR_PRIMARY_DARK
+        height: 160,
+        padding: 10,
+        alignItems: 'center',
+        backgroundColor: '#90CAF9'
         // backgroundColor: theme.COLOR_PRIMARY_LIGHT
+    },
+    indexDescriptionCard: {
+        width: Dimensions.get('window').width,
+        borderColor: theme.COLOR_PRIMARY_DARK,
+        alignItems: 'center',
+        backgroundColor: '#FFFFFF'
+    },
+    editDescriptionCard: {
+        width: Dimensions.get('window').width,
+        borderColor: theme.COLOR_PRIMARY_DARK,
+        alignItems: 'center',
+        backgroundColor: '#FFFFFF'
+    },
+    layoutItem: {
+      width: Dimensions.get('window').width,
+      borderColor: theme.COLOR_PRIMARY_DARK,
+      alignItems: 'center',
+      marginTop: 7
     },
     username: {
     		fontSize: 20,
@@ -45,11 +72,21 @@ export default StyleSheet.create({
     		textAlign: 'center',
     		color: theme.TEXT_COLOR
     },
-  	profileBottomGrid: {
+  	indexProfileBottomGrid: {
       width: Dimensions.get('window').width,
       borderColor: theme.COLOR_PRIMARY,
-      marginTop: 30,
-  		alignItems: 'center'
+      paddingTop: 30,
+      paddingBottom: 30,
+  		alignItems: 'center',
+      backgroundColor: '#81C784'
+  	},
+    editProfileBottomGrid: {
+      width: Dimensions.get('window').width,
+      borderColor: theme.COLOR_PRIMARY,
+      paddingTop: 30,
+      paddingBottom: 30,
+  		alignItems: 'center',
+      backgroundColor: '#90CAF9'
   	},
   	icon: {
   		padding: 10,
