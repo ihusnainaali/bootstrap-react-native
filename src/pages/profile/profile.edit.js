@@ -15,7 +15,18 @@ import theme from '../../styles/theme.style'
 class EditProfile extends Component {
 
   state = {
-    profile: {},
+    editProfile: {},
+    userName: '',
+    userDescription: '',
+    userStatus: '',
+    userCountry: '',
+    userDob: '',
+    userGender: '',
+    userSchool: '',
+    userMajor: '',
+    userLanguage: '',
+    userLearnLanguage: '',
+    userImageUrl: '',
     error: null
   }
 
@@ -35,30 +46,56 @@ class EditProfile extends Component {
 
   async componentDidMount() {
       try {
-          const profile = await API.graphql(graphqlOperation(GetProfile, {userId: "12345678"}))
-          // console.log('My Profile: ', profile)
+          const editProfile = await API.graphql(graphqlOperation(GetProfile, {userId: "12345678"}))
           this.setState({
-            profile: profile.data.getPangyouMobilehub1098576098UserProfile
+            editProfile: editProfile.data.getPangyouMobilehub1098576098UserProfile
           })
-          // console.log('This is the Render Container: ', this.state.profile.userId)
       } catch (err) {
           console.log('This is the Error: ', err)
       }
   }
 
-  updateProfile() {
-      const { userId, userName, userDescription, userStatus, userCountry, userDob, userGender, userSchool, userMajor, userLanguage, userLearnLanguage, userImageUrl } = this.state;
-      this.clearError();
+  async updateProfile() {
 
-      try {
-          console.log(this.state);
-          // this.props.editProfile(this.state);
-          this.props.navigation.navigate('profile');
-      } catch (err) {
-          console.log('These are the Errors: ', err);
+      const userNameProp = (this.state.userName == "") ? this.state.editProfile.userName : this.state.userName;
+      const userDescriptionProp = (this.state.userDescription == "") ? this.state.editProfile.userDescription : this.state.userDescription;
+      const userStatusProp = (this.state.userStatus == "") ? this.state.editProfile.userStatus : this.state.userStatus;
+      const userCountryProp = (this.state.userCountry == "") ? this.state.editProfile.userCountry : this.state.userCountry;
+      const userDobProp = (this.state.userDob == "") ? this.state.editProfile.userDob : this.state.userDob;
+      const userGenderProp = (this.state.userGender == "") ? this.state.editProfile.userGender : this.state.userGender;
+      const userSchoolProp = (this.state.userSchool == "") ? this.state.editProfile.userSchool : this.state.userSchool;
+      const userMajorProp = (this.state.userMajor == "") ? this.state.editProfile.userMajor : this.state.userMajor;
+      const userLanguageProp = (this.state.userLanguage == "") ? this.state.editProfile.userLanguage : this.state.userLanguage;
+      const userLearnLanguageProp = (this.state.userLearnLanguage == "") ? this.state.editProfile.userLearnLanguage : this.state.userLearnLanguage;
+      const userImageUrlProp = (this.state.userImageUrl == "") ? this.state.editProfile.userImageUrl : this.state.userImageUrl;
+
+    	try {
+      		editProfile = {
+              userId: '12345678',
+    			    userName: userNameProp,
+              userDescription: userDescriptionProp,
+              userStatus: userStatusProp,
+              userCountry: userCountryProp,
+              userDob: userDobProp,
+              userGender: userGenderProp,
+              userSchool: userSchoolProp,
+              userMajor: userMajorProp,
+              userLanguage: userLanguageProp,
+              userLearnLanguage: userLearnLanguageProp,
+              userImageUrl: userImageUrlProp
+    		  }
+          this.setState({
+              editProfile: {...this.state.profile, editProfile}
+          })
+          console.log('Updated Profile Stuff: ', editProfile)
+    		  await API.graphql(graphqlOperation(UpdateProfile, editProfile));
+          this.props.navigation.navigate('Profile');
+    	} catch (err) {
+          console.log("Update Error: ", err);
           this.setError(err.message);
-      }
-  }
+    	}
+
+}
 
   render() {
     return (
@@ -67,11 +104,11 @@ class EditProfile extends Component {
           <Container>
             <Content>
               <View style={styles.editProfileCard}>
-                  <Text style={styles.profileHeaderText}>Edit Your Profile</Text>
+                  <Text style={styles.profileHeaderText}>Add/Edit Profile</Text>
               </View>
               <View style={styles.editDescriptionCard}>
                   <View style={{flexDirection: 'row'}}>
-                      <ListItem style={styles.layoutItem}>
+                      <ListItem style={styles.editLayoutItem}>
                           <Icon
                             type='Ionicons'
                             name='ios-contact'
@@ -85,13 +122,15 @@ class EditProfile extends Component {
                             keyboardType='email-address'
                             autoCapitalize='none'
                             autoCorrect={false}
-                            onChangeText={this.onChangeText('userName').bind(this)}
-                            value={this.state.profile.userName}
+                            onChangeText={(userName) => this.setState({userName})}
+                            name='userName'
+                            value={this.state.editProfile.userName}
+                            style={styles.input}
                           />
                       </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.layoutItem}>
+                    <ListItem style={styles.editLayoutItem}>
                         <Icon
                           type='Ionicons'
                           name='ios-clipboard'
@@ -106,12 +145,13 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userDescription').bind(this)}
-                          value={this.state.profile.userDescription}
+                          value={this.state.editProfile.userDescription}
+                          style={styles.input}
                         />
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.layoutItem}>
+                    <ListItem style={styles.editLayoutItem}>
                         <Icon
                           type='Ionicons'
                           name='ios-heart'
@@ -126,12 +166,13 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userStatus').bind(this)}
-                          value={this.state.profile.userStatus}
+                          value={this.state.editProfile.userStatus}
+                          style={styles.input}
                         />
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.layoutItem}>
+                    <ListItem style={styles.editLayoutItem}>
                         <Icon
                           type='Ionicons'
                           name='ios-pin'
@@ -145,12 +186,13 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userCountry').bind(this)}
-                          value={this.state.profile.userCountry}
+                          value={this.state.editProfile.userCountry}
+                          style={styles.input}
                         />
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.layoutItem}>
+                    <ListItem style={styles.editLayoutItem}>
                         <Icon
                           type='Ionicons'
                           name='ios-calendar'
@@ -164,12 +206,13 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userDob').bind(this)}
-                          value={this.state.profile.userDob}
+                          value={this.state.editProfile.userDob}
+                          style={styles.input}
                         />
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.layoutItem}>
+                    <ListItem style={styles.editLayoutItem}>
                         <Icon
                           type='Ionicons'
                           name='ios-contacts'
@@ -183,12 +226,13 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userGender').bind(this)}
-                          value={this.state.profile.userGender}
+                          value={this.state.editProfile.userGender}
+                          style={styles.input}
                         />
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.layoutItem}>
+                    <ListItem style={styles.editLayoutItem}>
                         <Icon
                           type='Ionicons'
                           name='ios-school'
@@ -202,12 +246,13 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userSchool').bind(this)}
-                          value={this.state.profile.userSchool}
+                          value={this.state.editProfile.userSchool}
+                          style={styles.input}
                         />
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.layoutItem}>
+                    <ListItem style={styles.editLayoutItem}>
                         <Icon
                           type='Ionicons'
                           name='ios-book'
@@ -221,12 +266,13 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userMajor').bind(this)}
-                          value={this.state.profile.userMajor}
+                          value={this.state.editProfile.userMajor}
+                          style={styles.input}
                         />
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.layoutItem}>
+                    <ListItem style={styles.editLayoutItem}>
                         <Icon
                           type='Ionicons'
                           name='ios-globe'
@@ -240,12 +286,13 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userLanguage').bind(this)}
-                          value={this.state.profile.userLanguage}
+                          value={this.state.editProfile.userLanguage}
+                          style={styles.input}
                         />
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.layoutItem}>
+                    <ListItem style={styles.editLayoutItem}>
                         <Icon
                           type='Ionicons'
                           name='ios-globe'
@@ -259,12 +306,13 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userLearnLanguage').bind(this)}
-                          value={this.state.profile.userLearnLanguage}
+                          value={this.state.editProfile.userLearnLanguage}
+                          style={styles.input}
                         />
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.layoutItem}>
+                    <ListItem style={styles.editLayoutItem}>
                         <Icon
                           type='Ionicons'
                           name='ios-globe'
@@ -278,7 +326,8 @@ class EditProfile extends Component {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={this.onChangeText('userImageUrl').bind(this)}
-                          value={this.state.profile.userImageUrl}
+                          value={this.state.editProfile.userImageUrl}
+                          style={styles.input}
                         />
                     </ListItem>
                 </View>
@@ -299,4 +348,3 @@ class EditProfile extends Component {
 }
 
 export default withNavigation(EditProfile);
-// export default connect(undefined, { editProfile })(withNavigation(EditProfile));

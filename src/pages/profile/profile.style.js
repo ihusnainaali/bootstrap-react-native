@@ -54,9 +54,15 @@ export default StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#FFFFFF'
     },
-    layoutItem: {
+    indexLayoutItem: {
       width: Dimensions.get('window').width,
       borderColor: theme.COLOR_PRIMARY_DARK,
+      alignItems: 'center',
+      marginTop: 7
+    },
+    editLayoutItem: {
+      width: Dimensions.get('window').width,
+      borderColor: 'transparent',
       alignItems: 'center',
       marginTop: 7
     },
@@ -71,6 +77,13 @@ export default StyleSheet.create({
     		fontFamily: theme.FONT_LIGHT,
     		textAlign: 'center',
     		color: theme.TEXT_COLOR
+    },
+    input: {
+      borderRadius: 0,
+      borderTopColor: 'transparent',
+      borderLeftColor: 'transparent',
+      borderRightColor: 'transparent',
+      borderBottomColor: '#90CAF9'
     },
   	indexProfileBottomGrid: {
       width: Dimensions.get('window').width,
@@ -95,6 +108,6 @@ export default StyleSheet.create({
   		fontSize: 35,
   		fontFamily: theme.FONT_BOLD,
   		textAlign: 'center',
-  		color: theme.TEXT_COLOR
+  		color: '#FFFFFF'
   	},
 })

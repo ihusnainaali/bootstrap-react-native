@@ -1,5 +1,5 @@
 export const CreateProfile = `
-mutation createUserProfile($userId: String!, $userName: String!, $userDescription: String!, $userStatus: String!, $userCountry: String!, $userDob: String!, $userGender: String!, $userSchool: String!, $userMajor: String!, $userLanguage: String!, $userImageUrl: String!) {
+	mutation createUserProfile($userId: String!, $userName: String!, $userDescription: String!, $userStatus: String!, $userCountry: String!, $userDob: String!, $userGender: String!, $userSchool: String!, $userMajor: String!, $userLanguage: String!, $userLearnLanguage: String!, $userImageUrl: String!) {
 		createPangyouMobilehub1098576098UserProfile(input: {
 			userId: $userId,
 			userName: $userName,
@@ -11,7 +11,7 @@ mutation createUserProfile($userId: String!, $userName: String!, $userDescriptio
 			userSchool: $userSchool,
 			userMajor: $userMajor,
 			userLanguage: $userLanguage,
-			userLearnLanguage: userLearnLanguage,
+			userLearnLanguage: $userLearnLanguage,
 			userImageUrl: $userImageUrl
 		})  {
 			userId
@@ -67,8 +67,8 @@ export const ListProfile = `query listUserProfiles {
 }`;
 
 export const UpdateProfile = `
-mutation updateUserProfile($userId: String!, $userName: String!, $userDescription: String!, $userStatus: String!, $userCountry: String!, $userDob: String!, $userGender: String!, $userSchool: String!, $userMajor: String!, $userLanguage: String!, $userImageUrl: String!) {
-		updatePangyouMobilehub1098576098UserProfile(input: {
+	mutation updateUserProfile($userId: String!, $userName: String!, $userDescription: String!, $userStatus: String!, $userCountry: String!, $userDob: String!, $userGender: String!, $userSchool: String!, $userMajor: String!, $userLanguage: String!, $userLearnLanguage: String!, $userImageUrl: String!) {
+	  updatePangyouMobilehub1098576098UserProfile(input: {
 			userId: $userId,
 			userName: $userName,
 			userDescription: $userDescription,
@@ -79,7 +79,7 @@ mutation updateUserProfile($userId: String!, $userName: String!, $userDescriptio
 			userSchool: $userSchool,
 			userMajor: $userMajor,
 			userLanguage: $userLanguage,
-			userLearnLanguage: userLearnLanguage,
+			userLearnLanguage: $userLearnLanguage,
 			userImageUrl: $userImageUrl
 		})  {
 			userId
@@ -99,15 +99,22 @@ mutation updateUserProfile($userId: String!, $userName: String!, $userDescriptio
 `
 
 export const SubscribeToProfile = `
-subscription onCreateUserProfile {
-		onCreatePangyouMobilehub1098576098UserProfile {
+subscription onCreateUserProfile($userId: String!) {
+		onUpdatePangyouMobilehub1098576098UserProfile(userId: $userId) {
 			items {
 				userId
 				userName
 				userDescription
 				userStatus
 				userCountry
-			}
+				userDob
+				userGender
+				userSchool
+				userMajor
+				userLanguage
+				userLearnLanguage
+				userImageUrl
+	    }
 		}
 	}
 `
