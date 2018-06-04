@@ -89,7 +89,7 @@ class EditProfile extends Component {
           })
           console.log('Updated Profile Stuff: ', editProfile)
     		  await API.graphql(graphqlOperation(UpdateProfile, editProfile));
-          this.props.navigation.navigate('Profile');
+          this.props.navigation.navigate('profile');
     	} catch (err) {
           console.log("Update Error: ", err);
           this.setError(err.message);
