@@ -4,7 +4,7 @@ import { withNavigation, navigation } from 'react-navigation';
 
 import { TwilioVideoLocalView, TwilioVideoParticipantView, TwilioVideo } from 'react-native-twilio-video-webrtc';
 import Loader from '../../components/loader/loader.component';
-import MovableView from 'react-native-movable-view';
+import { CallButton } from './callbutton';
 
 import { styles } from './video.style';
 
@@ -15,13 +15,19 @@ class Video extends Component {
         this.state = {
             isAudioEnabled: true,
             isVideoEnabled: true,
-            status: 'disconnected',
+            status: props.navigation.getParam('status') || 'disconnected',
             participant: null,
             videoTrack: null,
             host: 'http://54.164.94.85:9527',
-            roomName: 'test',
+            roomName: props.navigation.getParam('roomName') || 'test',
             token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzQ5Mzk1ZWQxMTdjNjU4ZmQ5ZjRjYmYxYmFmM2JiMmE3LTE1Mjc2NDkyNzciLCJncmFudHMiOnsiaWRlbnRpdHkiOiJIb2x5U2FtYW50aGFaaW1tZXJtYW4iLCJ2aWRlbyI6e319LCJpYXQiOjE1Mjc2NDkyNzcsImV4cCI6MTUyNzY1Mjg3NywiaXNzIjoiU0s0OTM5NWVkMTE3YzY1OGZkOWY0Y2JmMWJhZjNiYjJhNyIsInN1YiI6IkFDYjNkYmExY2NhZGYzMjk3M2VhYmQ5OTBjMGZhMTdmMzEifQ.j2blfm8iLV66dPc853VhA2wbiCNMPXb9B5GSYWACB2M'
         };
+    }
+
+    componentDidMount() {
+        if (this.state.status === 'calling') {
+            this._onConnectButtonPress();
+        }
     }
 
     // Declare Navigation Options Here :|
@@ -41,6 +47,7 @@ class Video extends Component {
     }
 
     _onConnectButtonPress = () => {
+        console.log(this.state);
         this.getToken('Yuhong')
             .then(token => {
                 console.log("token: ", token);
@@ -72,7 +79,7 @@ class Video extends Component {
     _onRoomDidDisconnect = ({ roomName, error }) => {
         console.log("ERROR: ", error)
 
-        this.setState({ status: 'disconnected' })
+        // this.setState({ status: 'disconnected' })
         this.props.navigation.goBack();
     }
 
@@ -80,15 +87,16 @@ class Video extends Component {
         console.log("ERROR: ", error)
 
         this.setState({ status: 'disconnected' })
+        this.props.navigation.goBack();
     }
 
     _onParticipantAddedVideoTrack = ({ participant, track }) => {
         console.log("onParticipantAddedVideoTrack: ", participant, track)
-
         this.setState({
             participant: participant.identity,
             videoTrack: track.trackId
         });
+        console.log(this.state);
     }
 
     _onParticipantRemovedVideoTrack = ({ participant, track }) => {
@@ -99,63 +107,58 @@ class Video extends Component {
     }
 
     render() {
+        callControls = (
+            <View style={styles.optionsContainer}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-around', backgroundColor: 'transparent' }}>
+                    {this.state.isAudioEnabled ? (
+                        <CallButton icon_name='mic-off' color='#0C90E7' buttonPressed={this._onMuteButtonPress} />
+                    ) : (
+                            <CallButton icon_name='mic' color='#0C90E7' buttonPressed={this._onMuteButtonPress} />
+                        )}
+                    <CallButton icon_name='switch-camera' color='#0C90E7' buttonPressed={this._onFlipButtonPress} />
+                    <CallButton icon_name='call-end' color='#FF3B30' buttonPressed={this._onEndButtonPress} />
+                </View>
+            </View>
+        );
         trackId = this.state.videoTrack;
         identity = this.state.participant;
         return (
             <View style={styles.container}>
                 {
+                    (this.state.status === 'incoming') &&
+                    <View style={styles.connect}>
+                        <Text>Incoming Call</Text>
+                        <CallButton icon_name='videocam' color='#0C90E7' buttonPressed={this._onConnectButtonPress} />
+                    </View>
+                }
+
+                {
                     (this.state.status === 'disconnected') &&
-                    <TouchableOpacity
-                        style={styles.connect}
-                        onPress={this._onConnectButtonPress}>
-                        <Text>connect</Text>
-                    </TouchableOpacity>
+                    <View
+                        style={styles.connect}>
+                        <Text>Failed to Connect</Text>
+                    </View>
                 }
 
                 {
                     (this.state.status === 'connected' || this.state.status === 'connecting') &&
                     <View style={styles.callContainer}>
                         {
-                            this.state.status === 'connected' &&
-                            <View style={styles.videoContainer}>
-                                {
-                                    trackId &&
-                                    <TwilioVideoParticipantView
-                                        style={styles.fullScreenVideo}
-                                        key={trackId}
-                                        trackIdentifier={{
-                                            participantIdentity: identity,
-                                            videoTrackId: trackId
-                                        }}
-                                    />
-                                }
-                            </View>
-                        }
-                        <View
-                            style={styles.optionsContainer}>
-                            <TouchableOpacity
-                                style={styles.optionButton}
-                                onPress={this._onEndButtonPress}>
-                                <Text style={{ fontSize: 12 }}>End</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={styles.optionButton}
-                                onPress={this._onMuteButtonPress}>
-                                <Text style={{ fontSize: 12 }}>{this.state.isAudioEnabled ? "Mute" : "Unmute"}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={styles.optionButton}
-                                onPress={this._onFlipButtonPress}>
-                                <Text style={{ fontSize: 12 }}>Flip</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <MovableView
-                            style={styles.container}>
-                            <TwilioVideoLocalView
-                                enabled={true}
-                                style={styles.smallScreenVideo}
+                            this.state.status === 'connected' && trackId &&
+                            <TwilioVideoParticipantView
+                                style={styles.fullScreenVideo}
+                                key={trackId}
+                                trackIdentifier={{
+                                    participantIdentity: identity,
+                                    videoTrackId: trackId
+                                }}
                             />
-                        </MovableView>
+                        }
+                        {callControls}
+                        <TwilioVideoLocalView
+                            enabled={true}
+                            style={styles.smallScreenVideo}
+                        />
                     </View>
                 }
 

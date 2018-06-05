@@ -24,12 +24,25 @@ const GetUsersByLanguage = `query QueryUsersByLanguage($userLanguage: String!, $
     }
 }`
 
-const Test1 = `query Q {
-    getPangyouMobilehub1098576098UserProfile(userId:"test1"){
-      userId
-    }
-  }
-`
+const CreateFriend = `mutation CreateFriend($userId: String!, $friendId: String!, $uuid: String){
+    createPangyouMobilehub1098576098Friends(input:{
+        userId: $userId
+        friendId: $friendId
+        uuid: $uuid
+      }){
+        userId
+      }   
+}`
+
+const GetFriend = `query GetFriend($userId: String!, $friendId: String!){
+    createPangyouMobilehub1098576098Friends(input:{
+        userId: $userId
+        friendId: $friendId
+        uuid: $uuid
+      }){
+        userId
+      }   
+}`
 
 const GetProfile = `query getUserProfile($userId: String!) {
     getPangyouMobilehub1098576098UserProfile(userId: $userId) {

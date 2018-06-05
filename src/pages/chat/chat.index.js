@@ -3,6 +3,7 @@ import { GiftedChat, Send, Actions } from 'react-native-gifted-chat';
 import { withNavigation } from 'react-navigation';
 import { AsyncStorage, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './chat.style';
+import { isUUID } from 'validator';
 
 class Chat extends React.Component {
     constructor(props) {
@@ -93,7 +94,7 @@ class Chat extends React.Component {
     renderCustomActions(props) {
         const options = {
             'Video Chat': (props) => {
-                props.navigation.navigate('video');
+                props.navigation.navigate('video', {status: 'calling', roomName: 'test1'});
             },
             'Cancel': () => { },
         };

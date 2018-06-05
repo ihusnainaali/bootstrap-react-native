@@ -18,14 +18,14 @@ export const styles = StyleSheet.create({
     },
     smallScreenVideo: {
         flex: 1,
-        width: 100,
-        height: 150,
+        width: 75,
+        height: 120,
         position: "absolute",
-        right: 50,
+        right: 30,
         top: 100,
         borderWidth: 1,
         borderColor: 'black',
-        backgroundColor: 'green',
+        backgroundColor: 'black',
     },
     fullScreenVideo: {
         flex: 1,
@@ -38,17 +38,7 @@ export const styles = StyleSheet.create({
         bottom: 0,
         right: 0,
         height: 100,
-        flexDirection: "row",
-        alignItems: "center"
-    },
-    optionButton: {
-        width: 60,
-        height: 60,
-        marginLeft: 10,
-        marginRight: 10,
-        borderRadius: 100 / 2,
-        backgroundColor: 'grey',
-        justifyContent: 'center',
+        // flexDirection: "row",
         alignItems: "center"
     },
     connect: {
