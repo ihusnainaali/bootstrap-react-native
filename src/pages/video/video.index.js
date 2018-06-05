@@ -44,6 +44,10 @@ class Video extends Component {
             .then(response => {
                 return response.text();
             });
+    };
+
+    navigateBack() {
+        this.props.navigation.goBack();
     }
 
     _onConnectButtonPress = () => {
@@ -61,6 +65,7 @@ class Video extends Component {
 
     _onEndButtonPress = () => {
         this.refs.twilioVideo.disconnect()
+        this.navigateBack();
     }
 
     _onMuteButtonPress = () => {
@@ -80,14 +85,13 @@ class Video extends Component {
         console.log("ERROR: ", error)
 
         // this.setState({ status: 'disconnected' })
-        this.props.navigation.goBack();
     }
 
     _onRoomDidFailToConnect = (error) => {
         console.log("ERROR: ", error)
 
         this.setState({ status: 'disconnected' })
-        this.props.navigation.goBack();
+        this.navigateBack();
     }
 
     _onParticipantAddedVideoTrack = ({ participant, track }) => {
@@ -128,7 +132,15 @@ class Video extends Component {
                     (this.state.status === 'incoming') &&
                     <View style={styles.connect}>
                         <Text>Incoming Call</Text>
-                        <CallButton icon_name='videocam' color='#0C90E7' buttonPressed={this._onConnectButtonPress} />
+                    </View>
+                }
+                {
+                    (this.state.status === 'incoming') &&
+                    <View style={styles.optionsContainer}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', backgroundColor: 'transparent' }}>
+                            <CallButton icon_name='call-end' backgroundColor='#FF3B30' color='#FFFFFF' buttonPressed={this._onEndButtonPress} />
+                            <CallButton icon_name='call' backgroundColor='#0BD926' color='#FFFFFF' buttonPressed={this._onConnectButtonPress} />
+                        </View>
                     </View>
                 }
 

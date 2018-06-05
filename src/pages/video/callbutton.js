@@ -18,12 +18,12 @@ class CallButton extends Component {
   render() {
     return (
       <TouchableOpacity onPress={ () => this.handleButtonPressed() }>
-        <View style={ [styles.icon, { borderColor: this.props.color }] }>
+        <View style={ [styles.icon, { borderColor: this.props.color, backgroundColor: this.props.backgroundColor }] }>
           <Icon 
               name={ this.props.icon_name } 
               color={ this.props.color }
               size={ 35 } 
-              backgroundColor='transparent' />
+              backgroundColor={ 'transparent' }/>
         </View>
       </TouchableOpacity>
     );

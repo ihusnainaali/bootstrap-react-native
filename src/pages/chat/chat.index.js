@@ -94,7 +94,7 @@ class Chat extends React.Component {
     renderCustomActions(props) {
         const options = {
             'Video Chat': (props) => {
-                props.navigation.navigate('video', {status: 'calling', roomName: 'test1'});
+                props.navigation.navigate('video', {status: 'incoming', roomName: 'test1'});
             },
             'Cancel': () => { },
         };
