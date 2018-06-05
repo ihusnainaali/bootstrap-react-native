@@ -1,19 +1,18 @@
 import React, {Component} from 'react';
 import { View, Image, ScrollView, FlatList, StyleSheet, SectionList } from 'react-native';
 import { Container, Header, Text, Content, Icon, List, ListItem } from 'native-base';
-import { withNavigation } from 'react-navigation';
+import { withNavigation, navigation } from 'react-navigation';
 import Button from '../../components/button/button.component';
 
-// import { bindActionCreators } from 'redux';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import styles from './profile.style';
 
 import { CreateProfile, GetProfile, UpdateProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
 
-import uuidV4 from 'uuid/v4'
-
+// const myImportantData = () => store.getState().my.deep.data;
+// console.log(store.getState().auth)
 
 class Profile extends Component {
 

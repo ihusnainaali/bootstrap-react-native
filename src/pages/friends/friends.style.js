@@ -1,5 +1,8 @@
 import React , { Component } from 'react';
-import {StyleSheet} from 'react-native';
+import {
+  Dimensions,
+	StyleSheet
+} from 'react-native';
 
 import theme from '../../styles/theme.style';
 
@@ -22,5 +25,11 @@ export default StyleSheet.create({
     },
     text_subtitle: {
         fontFamily: theme.FONT_LIGHT
-    }
+    },
+    indexLayoutItem: {
+      width: Dimensions.get('window').width,
+      borderColor: theme.COLOR_PRIMARY_DARK,
+      alignItems: 'center',
+      marginTop: 7
+    },
 })
