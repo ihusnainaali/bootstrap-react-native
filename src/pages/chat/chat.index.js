@@ -1,7 +1,8 @@
 import React from 'react';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { GiftedChat, Send, Actions } from 'react-native-gifted-chat';
 import { withNavigation } from 'react-navigation';
-import { AsyncStorage, Text, TouchableOpacity } from 'react-native';
+import { AsyncStorage, Text, TouchableOpacity, View } from 'react-native';
+import { styles } from './chat.style';
 
 class Chat extends React.Component {
     constructor(props) {
@@ -13,11 +14,13 @@ class Chat extends React.Component {
             channel: props.navigation.getParam('channel'),
             avatar: props.navigation.getParam('avatar'),
             messages: [],
+            text: "",
         }
-        console.log(this.state);
+        console.log(this.props);
         this.onSend.bind(this);
         this.parseMessage.bind(this);
         this.setMessages.bind(this);
+        this.renderCustomActions.bind(this);
     }
 
     componentDidMount() {
@@ -79,15 +82,33 @@ class Chat extends React.Component {
         this.state.channel.sendMessage(messages[0].text);
     }
 
+    renderCustomActions(props) {
+        const options = {
+            'Video Chat': (props) => {
+                props.navigation.navigate('video');
+            },
+            'Cancel': () => { },
+        };
+        return (
+            <Actions
+                {...props}
+                options={options}
+            />
+        );
+    }
+
     render() {
         return (
             <GiftedChat
                 messages={this.state.messages}
                 onSend={messages => this.onSend(messages)}
+                onInputTextChanged={text => this.setState({ text })}
                 user={{
                     _id: 1,
                     name: "Jeff",
                 }}
+                renderActions={this.renderCustomActions}
+                navigation={this.props.navigation}
             />
         )
     }

@@ -48,7 +48,7 @@ class Friends extends React.Component {
 
     componentWillMount() {
         chatClientHelper = ChatClientHelper.getInstance();
-        chatClientHelper.login('Yuhong');
+        // chatClientHelper.login('Yuhong');
         this.setState({ chatClientHelper });
     }
 
@@ -58,6 +58,8 @@ class Friends extends React.Component {
     }
 
     chatWithFriend(friend, avatar) {
+        // this.props.navigation.navigate('video');
+        // return;
         client = this.state.chatClientHelper.client;
         user = 'Yuhong';
         client && client.getChannelByUniqueName(this.fetchChannelName(friend))

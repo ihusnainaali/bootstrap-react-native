@@ -24,14 +24,8 @@ export const styles = StyleSheet.create({
         right: 50,
         top: 100,
         borderWidth: 1,
-        borderColor: 'grey',
-        borderRadius: 10,
+        borderColor: 'black',
         backgroundColor: 'green',
-    },
-    videoContainer: {
-        flex: 1,
-        flexDirection: "row",
-        flexWrap: 'wrap'
     },
     fullScreenVideo: {
         flex: 1,

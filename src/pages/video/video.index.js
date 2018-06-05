@@ -4,6 +4,7 @@ import { withNavigation, navigation } from 'react-navigation';
 
 import { TwilioVideoLocalView, TwilioVideoParticipantView, TwilioVideo } from 'react-native-twilio-video-webrtc';
 import Loader from '../../components/loader/loader.component';
+import MovableView from 'react-native-movable-view';
 
 import { styles } from './video.style';
 
@@ -16,8 +17,8 @@ class Video extends Component {
             isVideoEnabled: true,
             status: 'disconnected',
             participant: null,
-            videoTrack: true,
-            host: 'http://http://54.164.94.85:9527',
+            videoTrack: null,
+            host: 'http://54.164.94.85:9527',
             roomName: 'test',
             token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzQ5Mzk1ZWQxMTdjNjU4ZmQ5ZjRjYmYxYmFmM2JiMmE3LTE1Mjc2NDkyNzciLCJncmFudHMiOnsiaWRlbnRpdHkiOiJIb2x5U2FtYW50aGFaaW1tZXJtYW4iLCJ2aWRlbyI6e319LCJpYXQiOjE1Mjc2NDkyNzcsImV4cCI6MTUyNzY1Mjg3NywiaXNzIjoiU0s0OTM5NWVkMTE3YzY1OGZkOWY0Y2JmMWJhZjNiYjJhNyIsInN1YiI6IkFDYjNkYmExY2NhZGYzMjk3M2VhYmQ5OTBjMGZhMTdmMzEifQ.j2blfm8iLV66dPc853VhA2wbiCNMPXb9B5GSYWACB2M'
         };
@@ -41,9 +42,12 @@ class Video extends Component {
 
     _onConnectButtonPress = () => {
         this.getToken('Yuhong')
-            .then(resp => {
-                token = JSON.parse(resp).token;
+            .then(token => {
+                console.log("token: ", token);
                 this.refs.twilioVideo.connect({ roomName: this.state.roomName, accessToken: token })
+            })
+            .catch(err => {
+                console.log(err);
             })
         this.setState({ status: 'connecting' })
     }
@@ -145,10 +149,13 @@ class Video extends Component {
                                 <Text style={{ fontSize: 12 }}>Flip</Text>
                             </TouchableOpacity>
                         </View>
-                        <TwilioVideoLocalView
-                            enabled={true}
-                            style={styles.smallScreenVideo}
-                        />
+                        <MovableView
+                            style={styles.container}>
+                            <TwilioVideoLocalView
+                                enabled={true}
+                                style={styles.smallScreenVideo}
+                            />
+                        </MovableView>
                     </View>
                 }
 

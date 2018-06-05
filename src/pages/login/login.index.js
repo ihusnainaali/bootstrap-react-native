@@ -8,6 +8,7 @@ import { onLogin } from '../../redux/actions/auth.actions'
 import TextField from '../../components/textfield/textfield.component';
 import ButtonComponent from '../../components/button/button.component';
 import { Container, Button, Header , Left, Right, Title, Content, Icon, Body} from 'native-base';
+import ChatClientHelper from '../../utils/twilio';
 
 import styles from './login.style';
 import theme from '../../styles/theme.style';
@@ -47,6 +48,7 @@ class Login extends Component {
             .then(user => {
                 console.log(user);
                 this.props.onLogin(username, password);
+                ChatClientHelper.getInstance().login(username);
                 this.props.navigation.navigate('Home');
             })
             .catch(err => {

@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -56,6 +55,8 @@
 		968E773D20BF1E84003FB23E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968E773C20BF1E83003FB23E /* CoreMedia.framework */; };
 		968E773F20BF1E8D003FB23E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968E773E20BF1E8D003FB23E /* SystemConfiguration.framework */; };
 		968E774120BF1E9A003FB23E /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 968E774020BF1E9A003FB23E /* libc++.tbd */; };
+		96D7596F20C04F53000049C1 /* TwilioVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968E773020BF1E0B003FB23E /* TwilioVideo.framework */; };
+		96D7597020C04F53000049C1 /* TwilioVideo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 968E773020BF1E0B003FB23E /* TwilioVideo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		98621AFAB7D74B3B83F6799D /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 821B4ACB214E4EFC8F390235 /* FontAwesome.ttf */; };
 		9AAFBB73DFA14E54BAE0A32F /* libRNTwilioVideoWebRTC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B66534253AC4438095ACC4BE /* libRNTwilioVideoWebRTC.a */; };
 		9ABEB584C72F4E5895BE0015 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 728C333A722A404C806B1876 /* SimpleLineIcons.ttf */; };
@@ -367,6 +368,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		96D7599820C04F54000049C1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				96D7597020C04F53000049C1 /* TwilioVideo.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
@@ -446,6 +461,7 @@
 				968E773F20BF1E8D003FB23E /* SystemConfiguration.framework in Frameworks */,
 				968E773D20BF1E84003FB23E /* CoreMedia.framework in Frameworks */,
 				968E773B20BF1E7E003FB23E /* GLKit.framework in Frameworks */,
+				96D7596F20C04F53000049C1 /* TwilioVideo.framework in Frameworks */,
 				968E773920BF1E74003FB23E /* CoreTelephony.framework in Frameworks */,
 				968E773720BF1E69003FB23E /* AVFoundation.framework in Frameworks */,
 				968E773420BF1E60003FB23E /* VideoToolbox.framework in Frameworks */,
@@ -802,6 +818,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				96D7599820C04F54000049C1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1670,6 +1687,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1712,6 +1730,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
