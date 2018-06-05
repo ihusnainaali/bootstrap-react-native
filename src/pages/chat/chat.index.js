@@ -23,6 +23,14 @@ class Chat extends React.Component {
         this.renderCustomActions.bind(this);
     }
 
+    static navigationOptions = ({ navigation }) => ({
+        title: navigation.state.params.friend,
+        headerTitleStyle: { textAlign: 'center', alignSelf: 'center' },
+        headerStyle: {
+            backgroundColor: 'white',
+        },
+    });
+
     componentDidMount() {
         messages = [];
         this.state.history.items.forEach(item => {

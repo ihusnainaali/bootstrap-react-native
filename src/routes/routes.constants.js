@@ -14,5 +14,6 @@ export const route = {
     SPLASH: 'splash',
     VERIFICATION: 'verification',
     WELCOME: 'welcome',
-    CHAT: 'chat'
+    CHAT: 'chat',
+    VIDEO: 'video'
 }
