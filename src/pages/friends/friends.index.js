@@ -33,6 +33,7 @@ class Friends extends React.Component {
         super(props);
         this.state = {
             chatClientHelper: null,
+            friendsChannel: {}
         };
         this.flag = true;
     }
@@ -50,6 +51,9 @@ class Friends extends React.Component {
         chatClientHelper = ChatClientHelper.getInstance();
         // chatClientHelper.login('Yuhong');
         this.setState({ chatClientHelper });
+
+        //TODO get friends info and channel info from friends table.
+        // and store it into state.friendsChannel.
     }
 
     // get the channel name for specific friend
@@ -57,11 +61,28 @@ class Friends extends React.Component {
         return "Test1";
     }
 
+    fetchChannelSID(friend) {
+        return this.state.friendsChannel[friend];
+    }
+
     chatWithFriend(friend, avatar) {
         // this.props.navigation.navigate('video');
         // return;
         client = this.state.chatClientHelper.client;
         user = 'Yuhong';
+        // client.createChannel({
+        //     uniqueName: 'test9'
+        // })
+        // .then(channel => {
+        //     console.log(channel);
+        //     // TODO add channel.sid to friends table.
+        //     channel.add('yuhong').catch(err => console.log(err));
+        //     channel.add('test1').catch(err => console.log(err));
+        // })
+        // .catch(err => console.log(err));
+        // return;
+
+        //TODO: change to getChannelBySid(this.fetchChannelSid(friend));
         client && client.getChannelByUniqueName(this.fetchChannelName(friend))
             .then(channel => {
                 if (channel.state.status !== 'joined') {
