@@ -19,6 +19,13 @@ class Friends extends React.Component {
     error: null
   }
 
+  static navigationOptions = ({ navigation }) => {
+
+    return {
+      header: null
+    };
+  };
+
   async componentDidMount() {
       try {
           const friends = await API.graphql(graphqlOperation(ListProfile))

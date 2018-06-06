@@ -36,7 +36,7 @@ export default StyleSheet.create({
     },
     editProfileCard: {
         width: Dimensions.get('window').width,
-        height: 160,
+        height: 320,
         padding: 10,
         alignItems: 'center',
         backgroundColor: '#90CAF9'
@@ -79,6 +79,7 @@ export default StyleSheet.create({
     		color: theme.TEXT_COLOR
     },
     input: {
+      fontSize: 18,
       borderRadius: 0,
       borderTopColor: 'transparent',
       borderLeftColor: 'transparent',
@@ -110,4 +111,23 @@ export default StyleSheet.create({
   		textAlign: 'center',
   		color: '#FFFFFF'
   	},
+    ScrollView: {
+      flexWrap: 'wrap',
+      flexDirection: 'row'
+    },
+    modal: {
+      paddingTop: 20,
+      flex: 1
+    },
+    shareButton: {
+      position: 'absolute',
+      width: Dimensions.get('window').width,
+      padding: 10,
+      bottom: 0,
+      left: 0
+    },
+    icon: {
+      color: theme.COLOR_SECONDARY_DARK,
+      fontSize: theme.HEADER_ICON_SIZE
+    }
 })

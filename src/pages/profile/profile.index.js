@@ -1,20 +1,36 @@
 import React, {Component} from 'react';
-import { View, Image, ScrollView, FlatList, StyleSheet, SectionList } from 'react-native';
-import { Container, Header, Text, Content, Icon, List, ListItem } from 'native-base';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Image
+} from 'react-native';
+import { Container, Header, Left, Right, Title, Body, Button, Text, Content, Icon, List, ListItem } from 'native-base';
 import { withNavigation, navigation } from 'react-navigation';
-import Button from '../../components/button/button.component';
 
 import { connect } from 'react-redux';
 
 import styles from './profile.style';
 
-import { CreateProfile, GetProfile, UpdateProfile } from './graphql_query';
+import { GetProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
 
-// const myImportantData = () => store.getState().my.deep.data;
-// console.log(store.getState().auth)
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { route } from '../../routes/routes.constants';
+import theme from '../../styles/theme.style';
 
 class Profile extends Component {
+
+  navigateToSettings = () => {
+    this.props.navigation.navigate(route.PROFILEEDIT)
+  }
+
+  static navigationOptions = ({ navigation }) => {
+
+    return {
+      header: null
+    };
+  };
 
   state = {
     profile: {},
@@ -23,7 +39,7 @@ class Profile extends Component {
 
   async componentDidMount() {
       try {
-          const profile = await API.graphql(graphqlOperation(GetProfile, {userId: "12345678"}))
+          const profile = await API.graphql(graphqlOperation(GetProfile, {userId: "test1"}))
           this.setState({
             profile: profile.data.getPangyouMobilehub1098576098UserProfile
           })
@@ -34,11 +50,35 @@ class Profile extends Component {
 
   render() {
     return (
+
       <ScrollView>
         <Container>
+          <Header>
+          <Left/>
+          <Body>
+            <Title style={{fontFamily: theme.FONT_LIGHT}}>Profile</Title>
+          </Body>
+          <Right>
+            <Button
+              transparent
+              onPress={() => {this.navigateToSettings()}}>
+              <Icon
+                name='create'
+                type="MaterialIcons"
+                style={ styles.icon } />
+            </Button>
+          </Right>
+          </Header>
           <Content>
             <View style={styles.indexProfileCard}>
-              <Icon type="Ionicons" name='ios-contact' ios="ios-contact" md="md-contact" style={{fontSize: 300, color: 'white', textAlign:'center'}} />
+                if ({!this.state.profile.userImageUrl == ""}) {
+                  <Image
+                    style={{width: 290, borderRadius: 145, height: 290}}
+                    source={{uri: this.state.profile.userImageUrl}}
+                  />
+                } else {
+                    <Icon type="Ionicons" name='ios-contact' ios="ios-contact" md="md-contact" style={{fontSize: 300, color: 'white', textAlign:'center'}} />
+                }
             </View>
             <View style={styles.indexDescriptionCard}>
                 <View style={{flexDirection: 'row'}}>
@@ -101,18 +141,9 @@ class Profile extends Component {
                         <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userLearnLanguage}</Text>
                     </ListItem>
                 </View>
-                <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.indexLayoutItem}>
-                        <Icon type="Ionicons" name='ios-globe' ios='ios-globe' md='md-globe' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userImageUrl}</Text>
-                    </ListItem>
+                <View style={styles.indexProfileBottomGrid}>
+                  <Text>&nbsp;</Text>
                 </View>
-            </View>
-            <View style={styles.indexProfileBottomGrid}>
-                <Button
-                    onPress={this.props.navigation.navigate('EditProfile')}
-                    name='Edit Profile'
-                    screen='editprofile'/>
             </View>
           </Content>
         </Container>

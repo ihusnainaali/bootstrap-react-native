@@ -1,5 +1,19 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
+import {
+  View,
+  TouchableHighlight,
+  TouchableOpacity,
+  Modal,
+  StyleSheet,
+  CameraRoll,
+  Image,
+  Dimensions,
+  ScrollView,
+  RefreshControl,
+  FlatList,
+  SectionList,
+  KeyboardAvoidingView
+} from 'react-native';
 import { withNavigation } from 'react-navigation';
 import TextField from '../../components/textfield/textfield.component';
 import Button from '../../components/button/button.component';
@@ -8,11 +22,14 @@ import { Container, Header, Text, Content, Icon, List, ListItem } from 'native-b
 import { CreateProfile, GetProfile, UpdateProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
 
+import ImagePicker from 'react-native-image-picker';
+import { RNS3 } from 'react-native-aws3';
+
 import styles from './profile.style'
 import theme from '../../styles/theme.style'
 
-
-class EditProfile extends Component {
+type Props = {};
+class EditProfile extends Component<Props> {
 
   state = {
     editProfile: {},
@@ -46,7 +63,7 @@ class EditProfile extends Component {
 
   async componentDidMount() {
       try {
-          const editProfile = await API.graphql(graphqlOperation(GetProfile, {userId: "12345678"}))
+          const editProfile = await API.graphql(graphqlOperation(GetProfile, {userId: "test1"}))
           this.setState({
             editProfile: editProfile.data.getPangyouMobilehub1098576098UserProfile
           })
@@ -68,10 +85,10 @@ class EditProfile extends Component {
       const userLanguageProp = (this.state.userLanguage == "") ? this.state.editProfile.userLanguage : this.state.userLanguage;
       const userLearnLanguageProp = (this.state.userLearnLanguage == "") ? this.state.editProfile.userLearnLanguage : this.state.userLearnLanguage;
       const userImageUrlProp = (this.state.userImageUrl == "") ? this.state.editProfile.userImageUrl : this.state.userImageUrl;
-
+      console.log('This is the userImageUrlProp: ', userImageUrlProp);
     	try {
       		editProfile = {
-              userId: '12345678',
+              userId: 'test1',
     			    userName: userNameProp,
               userDescription: userDescriptionProp,
               userStatus: userStatusProp,
@@ -95,16 +112,62 @@ class EditProfile extends Component {
           this.setError(err.message);
     	}
 
-}
+  }
+
+  getImage() {
+    let options = {
+      title: 'Select Your Photo',
+      mediaType: 'photo',
+
+    };
+    ImagePicker.showImagePicker(options, (response) => {
+        if (response.error) {
+            console.log('ImagePicker Error: ', response.error);
+        } else {
+            const file = {
+                uri: response.uri,
+                name: response.fileName,
+                type: 'image/png'
+            }
+            console.log(file);
+            const config = {
+              keyPrefix: "uploads/",
+              bucket: "pangyou-userfiles-mobilehub-1098576098",
+              region: "us-east-1",
+              accessKey: "AKIAI6ZHQBOJGPBSYPMQ",
+              secretKey: "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",
+              successActionStatus: 201
+            }
+            RNS3.put(file, config).then(response => {
+              if (response.status !== 201) {
+                throw new Error("Failed to upload image to S3");
+              } else {
+                this.setState({userImageUrl : response.body.postResponse.location});
+                console.log(this.state.userImageUrl);
+                alert('Your Profile Picture was Uploaded Successfully!');
+              }
+            });
+        }
+    });
+  }
 
   render() {
+
     return (
       <ScrollView>
         <KeyboardAvoidingView behavior='padding' style={styles.profileWrapper}>
           <Container>
-            <Content>
               <View style={styles.editProfileCard}>
-                  <Text style={styles.profileHeaderText}>Add/Edit Profile</Text>
+                  if ({this.state.editProfile.userImageUrl != ""}) {
+                    <TouchableOpacity activeOpacity = { .5 } onPress={ this.getImage.bind(this) }>
+                        <Image
+                          style={{width: 290, borderRadius: 145, height: 290}}
+                          source={{uri: this.state.editProfile.userImageUrl}}
+                        />
+                    </TouchableOpacity>
+                  } else {
+                      <Icon onPress={this.getImage.bind(this)} type="Ionicons" name='ios-contact' ios="ios-contact" md="md-contact" style={{fontSize: 300, color: 'white', textAlign:'center'}} />
+                  }
               </View>
               <View style={styles.editDescriptionCard}>
                   <View style={{flexDirection: 'row'}}>
@@ -114,7 +177,7 @@ class EditProfile extends Component {
                             name='ios-contact'
                             ios='ios-contact'
                             md='md-contact'
-                            style={{fontSize: 30, color: 'black', textAlign:'center', width: 60}} />
+                            style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
                           <TextField
                             placeholder='Name'
                             placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -136,7 +199,7 @@ class EditProfile extends Component {
                           name='ios-clipboard'
                           ios='ios-clipboard'
                           md='md-clipboard'
-                          style={{fontSize: 30, color: 'black', textAlign:'center', width: 60}} />
+                          style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
                         <TextField
                           placeholder='Description'
                           placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -157,7 +220,7 @@ class EditProfile extends Component {
                           name='ios-heart'
                           ios='ios-heart'
                           md='md-heart'
-                          style={{fontSize: 30, color: 'black', textAlign:'center', width: 60}} />
+                          style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
                         <TextField
                           placeholder='Status'
                           placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -178,7 +241,7 @@ class EditProfile extends Component {
                           name='ios-pin'
                           ios='ios-pin'
                           md='md-pin'
-                          style={{fontSize: 30, color: 'black', textAlign:'center', width: 60}} />
+                          style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
                         <TextField
                           placeholder='Location'
                           placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -198,7 +261,7 @@ class EditProfile extends Component {
                           name='ios-calendar'
                           ios='ios-calendar'
                           md='md-calendar'
-                          style={{fontSize: 30, color: 'black', textAlign:'center', width: 60}} />
+                          style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
                         <TextField
                           placeholder='Date of Birth'
                           placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -218,7 +281,7 @@ class EditProfile extends Component {
                           name='ios-contacts'
                           ios='ios-contacts'
                           md='md-contacts'
-                          style={{fontSize: 30, color: 'black', textAlign:'center', width: 60}} />
+                          style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
                         <TextField
                           placeholder='Gender'
                           placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -238,7 +301,7 @@ class EditProfile extends Component {
                           name='ios-school'
                           ios='ios-school'
                           md='md-school'
-                          style={{fontSize: 30, color: 'black', textAlign:'center', width: 60}} />
+                          style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
                         <TextField
                           placeholder='School'
                           placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -258,7 +321,7 @@ class EditProfile extends Component {
                           name='ios-book'
                           ios='ios-book'
                           md='md-book'
-                          style={{fontSize: 30, color: 'black', textAlign:'center', width: 60}} />
+                          style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
                         <TextField
                           placeholder='Major'
                           placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -278,7 +341,7 @@ class EditProfile extends Component {
                           name='ios-globe'
                           ios='ios-globe'
                           md='md-globe'
-                          style={{fontSize: 30, color: 'black', textAlign:'center', width: 60}} />
+                          style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
                         <TextField
                           placeholder='Language'
                           placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -298,7 +361,7 @@ class EditProfile extends Component {
                           name='ios-globe'
                           ios='ios-globe'
                           md='md-globe'
-                          style={{fontSize: 30, color: 'black', textAlign:'center', width: 60}} />
+                          style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
                         <TextField
                           placeholder='Language Interested in Learning'
                           placeholderTextColor={theme.COLOR_PRIMARY_DARK}
@@ -311,26 +374,6 @@ class EditProfile extends Component {
                         />
                     </ListItem>
                 </View>
-                <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.editLayoutItem}>
-                        <Icon
-                          type='Ionicons'
-                          name='ios-globe'
-                          ios='ios-globe'
-                          md='md-globe'
-                          style={{fontSize: 30, color: 'black', textAlign:'center', width: 60}} />
-                        <TextField
-                          placeholder='Profile Image'
-                          placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                          returnKeyType='go'
-                          autoCapitalize='none'
-                          autoCorrect={false}
-                          onChangeText={this.onChangeText('userImageUrl').bind(this)}
-                          value={this.state.editProfile.userImageUrl}
-                          style={styles.input}
-                        />
-                    </ListItem>
-                </View>
                 <Text>{this.state.error}</Text>
               </View>
               <View style={styles.editProfileBottomGrid}>
@@ -339,7 +382,6 @@ class EditProfile extends Component {
                   name='Submit'
                   screen='profile'/>
               </View>
-            </Content>
           </Container>
         </KeyboardAvoidingView>
       </ScrollView>
