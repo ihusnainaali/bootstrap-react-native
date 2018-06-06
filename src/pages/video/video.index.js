@@ -15,12 +15,13 @@ class Video extends Component {
         this.state = {
             isAudioEnabled: true,
             isVideoEnabled: true,
-            status: props.navigation.getParam('status') || 'disconnected',
             participant: null,
             videoTrack: null,
             host: 'http://54.164.94.85:9527',
+            status: props.navigation.getParam('status') || 'disconnected',
+            friend: props.navigation.getParam('friend'),
             roomName: props.navigation.getParam('roomName') || 'test',
-            token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzQ5Mzk1ZWQxMTdjNjU4ZmQ5ZjRjYmYxYmFmM2JiMmE3LTE1Mjc2NDkyNzciLCJncmFudHMiOnsiaWRlbnRpdHkiOiJIb2x5U2FtYW50aGFaaW1tZXJtYW4iLCJ2aWRlbyI6e319LCJpYXQiOjE1Mjc2NDkyNzcsImV4cCI6MTUyNzY1Mjg3NywiaXNzIjoiU0s0OTM5NWVkMTE3YzY1OGZkOWY0Y2JmMWJhZjNiYjJhNyIsInN1YiI6IkFDYjNkYmExY2NhZGYzMjk3M2VhYmQ5OTBjMGZhMTdmMzEifQ.j2blfm8iLV66dPc853VhA2wbiCNMPXb9B5GSYWACB2M'
+            token: ''
         };
     }
 

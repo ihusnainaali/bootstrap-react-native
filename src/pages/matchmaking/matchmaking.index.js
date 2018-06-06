@@ -15,7 +15,7 @@ class Matchmaking extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataReady: false,
+            dataReady: true,
             cards: [
             ],
             counter: 0
@@ -29,7 +29,9 @@ class Matchmaking extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchData("Chinese")
+        operations.CreateFriend("RN1", "RN2").then(console.log).catch(console.log);
+        operations.UpdateFriend("RN1", "RN2").then(console.log).catch(console.log);
+        // this.fetchData("Chinese")
     }
 
     fetchData(language = "Chinese") {
