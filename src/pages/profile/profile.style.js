@@ -129,5 +129,8 @@ export default StyleSheet.create({
     icon: {
       color: theme.COLOR_SECONDARY_DARK,
       fontSize: theme.HEADER_ICON_SIZE
+    },
+    containerHeight: {
+      height: 400
     }
 })

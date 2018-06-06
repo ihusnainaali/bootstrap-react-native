@@ -154,9 +154,9 @@ class EditProfile extends Component<Props> {
   render() {
 
     return (
-      <ScrollView>
-        <KeyboardAvoidingView behavior='padding' style={styles.profileWrapper}>
-          <Container>
+      <Container style={styles.containerHeight}>
+        <ScrollView>
+          <KeyboardAvoidingView behavior='padding' style={styles.profileWrapper}>
               <View style={styles.editProfileCard}>
                   if ({this.state.editProfile.userImageUrl != ""}) {
                     <TouchableOpacity activeOpacity = { .5 } onPress={ this.getImage.bind(this) }>
@@ -382,9 +382,9 @@ class EditProfile extends Component<Props> {
                   name='Submit'
                   screen='profile'/>
               </View>
-          </Container>
-        </KeyboardAvoidingView>
-      </ScrollView>
+          </KeyboardAvoidingView>
+        </ScrollView>
+      </Container>
     );
   }
 }

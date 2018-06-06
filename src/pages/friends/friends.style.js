@@ -9,7 +9,7 @@ import theme from '../../styles/theme.style';
 export default StyleSheet.create({
 
     container: {
-        backgroundColor: theme.COLOR_PRIMARY,
+        backgroundColor: "#FFFFFF",
     },
     item: {
         padding: 10,
