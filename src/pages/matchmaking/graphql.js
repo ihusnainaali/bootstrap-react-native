@@ -3,50 +3,39 @@ import { AppSyncConfig } from './appsync'
 import { aws_config } from '../../../aws-exports'
 
 const CONDITIONAL_ERROR = "DynamoDB:ConditionalCheckFailedException"
-const USERS_BY_LANGUAGE_KEY = "queryPangyouMobilehub1098576098UserProfilesByUserLanguage"
+const USERS_BY_LANGUAGE_KEY = "queryPangyouMobilehub1098576098UserProfilesByNativeLanguage"
 
 Amplify.configure(aws_config);
 Amplify.configure(AppSyncConfig);
 
-const GetUsersByLanguage = `query QueryUsersByLanguage($userLanguage: String!, $first: Int, $after: String) {
-    queryPangyouMobilehub1098576098UserProfilesByUserLanguage(
-        userLanguage: $userLanguage,
+const GetUsersByLanguage = `query QueryUsersByLanguage($nativeLanguage: String!, $first: Int, $after: String) {
+    queryPangyouMobilehub1098576098UserProfilesByNativeLanguage(
+        nativeLanguage: $nativeLanguage,
         first: $first,
         after: $after
     ){
         items{
             userId
-            userName
-            userLanguage
-            userSchool
+            country
+            nativeLanguage
         }
         nextToken
     }
 }`
 
-const Test1 = `query Q {
-    getPangyouMobilehub1098576098UserProfile(userId:"test1"){
-      userId
-    }
-  }
-`
+const Test1 = `query Test1 {
 
-const GetProfile = `query getUserProfile($userId: String!) {
-    getPangyouMobilehub1098576098UserProfile(userId: $userId) {
-              userId
-              userName
-              userDescription
-              userStatus
-              userCountry
-              userDob
-              userGender
-              userSchool
-              userMajor
-              userLanguage
-              userLearnLanguage
-              userImageUrl
-    }
-  }`;
+    queryPangyouMobilehub1098576098UserProfilesByNativeLanguage(
+        nativeLanguage:"Chinese"
+      ){
+        items{
+          userId
+          country
+          nativeLanguage
+        }
+        nextToken
+      }
+}`
 
 const Test = `query Q {
 
@@ -62,10 +51,7 @@ const Test = `query Q {
 
 export default {
     USERS_BY_LANGUAGE_KEY,
-    GetUsersByLanguage(userLanguage, first, after){
-        return API.graphql(graphqlOperation(GetUsersByLanguage, {userLanguage, first, after}));
-    },
-    Test(){
-        return API.graphql(graphqlOperation(GetProfile, {userId: 'test3'}));
+    GetUsersByLanguage(nativeLanguage, first, after){
+        return API.graphql(graphqlOperation(GetUsersByLanguage, {nativeLanguage, first, after}));
     }
 }

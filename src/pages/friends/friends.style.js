@@ -1,15 +1,12 @@
 import React , { Component } from 'react';
-import {
-  Dimensions,
-	StyleSheet
-} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 import theme from '../../styles/theme.style';
 
 export default StyleSheet.create({
 
     container: {
-        backgroundColor: "#FFFFFF",
+        backgroundColor: theme.COLOR_PRIMARY,
     },
     item: {
         padding: 10,
@@ -25,11 +22,5 @@ export default StyleSheet.create({
     },
     text_subtitle: {
         fontFamily: theme.FONT_LIGHT
-    },
-    indexLayoutItem: {
-      width: Dimensions.get('window').width,
-      borderColor: theme.COLOR_PRIMARY_DARK,
-      alignItems: 'center',
-      marginTop: 7
-    },
+    }
 })

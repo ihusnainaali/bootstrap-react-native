@@ -10,8 +10,7 @@ import Friends from '../pages/friends/friends.index';
 import Journals from '../pages/journals/journals.index';
 import Profile from '../pages/profile/profile.index';
 import Settings from '../pages/settings/settings.index';
-import Matchmaking from '../pages/matchmaking/matchmaking.index';
-import EditProfile from '../pages/profile/profile.edit';
+import Matchmaking from '../pages/matchmaking/matchmaking.index'
 
 import { route } from '../routes/routes.constants';
 
@@ -69,10 +68,7 @@ const ProfileStack = createStackNavigator({
 
     profile: { 
       screen: Profile,
-    },
-    editprofile: {
-      screen: EditProfile,
-    },
+    }
   },
   {
     initialRouteName: 'profile'
