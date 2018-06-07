@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { Text, View, Image, TouchableOpacity, AsyncStorage } from 'react-native';
 import { withNavigation, navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { DeckSwiper, Card, CardItem, Thumbnail, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
@@ -18,7 +18,7 @@ class Matchmaking extends React.Component {
             dataReady: false,
             cards: [
             ],
-            counter: 0
+            curIndex: 0
         };
         this.swipedLeft = this.swipedLeft.bind(this);
         this.swipedRight = this.swipedRight.bind(this);
@@ -29,11 +29,13 @@ class Matchmaking extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchData("Chinese")
+        // operations.CreateFriend("RN1", "RN2", "oops").then(resp => console.log(resp)).catch(err => console.log(err));
+        // operations.UpdateFriend("RN1", "RN2", "CHid").then(resp => console.log(resp)).catch(err => console.log(err));
+        this.fetchData("Chinese");
     }
 
     fetchData(language = "Chinese") {
-        operations.GetUsersByLanguage(language, 20, null)
+        operations.GetUsersByLanguage("Chinese", 20, null)
             .then(resp => {
                 const data = resp.data[operations.USERS_BY_LANGUAGE_KEY];
                 this.setState({
@@ -59,6 +61,7 @@ class Matchmaking extends React.Component {
     swipedRight(index) {
         console.log(index);
         console.log("swipe right");
+
         // console.log(this.state.cards.length - this.state.cards.indexOf(index));
         // if (this.state.cards.length - this.state.cards.indexOf(index) <= 5) {
         //     this.fetchData("Chinese");
@@ -94,6 +97,14 @@ class Matchmaking extends React.Component {
         );
     }
 
+    renderEmpty() {
+        return (
+            <View style={styles.empty}>
+                <Text>Please come back later!</Text>
+            </View>
+        )
+    }
+
     rendDeckSwiper() {
         return (
             <DeckSwiper
@@ -101,7 +112,8 @@ class Matchmaking extends React.Component {
                 onSwipeLeft={(index) => this.swipedLeft(index)}
                 onSwipeRight={(index) => this.swipedRight(index)}
                 dataSource={this.state.cards}
-                looping={true}
+                looping={false}
+                renderEmpty={this.renderEmpty}
                 renderItem={item =>
                     <Card style={{ elevation: 3 }}>
                         <CardItem>
@@ -109,8 +121,8 @@ class Matchmaking extends React.Component {
                                 <Thumbnail source={item.image} />
                                 <Body>
                                     <Text>{item.userId}</Text>
-                                    <Text>{item.nativeLanguage}</Text>
-                                    <Text>{item.country}</Text>
+                                    <Text>{item.userLanguage}</Text>
+                                    <Text>{item.userCountry}</Text>
                                     <Text note>NativeBase</Text>
                                 </Body>
                             </Left>

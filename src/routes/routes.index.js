@@ -12,6 +12,8 @@ import Settings from '../pages/settings/settings.index';
 import Splash from '../pages/splash/splash.index';
 import Verification from '../pages/verification/verification.index';
 import Welcome from '../pages/welcome/welcome.index';
+import Chat from '../pages/chat/chat.index';
+import Video from '../pages/video/video.index';
 
 import { routeNames } from './routes.constants';
 
@@ -28,7 +30,8 @@ const {
     SETTINGS,
     SPLASH,
     VERIFICATION,
-    WELCOME
+    WELCOME,
+    CHAT
 
 } = routeNames
 
@@ -80,6 +83,14 @@ const routes = [
     {
         name: WELCOME,
         component: Welcome
+    },
+    {
+        name: CHAT,
+        component: Chat
+    },
+    {
+        name: VIDEO,
+        component: Video
     },
 
 ]

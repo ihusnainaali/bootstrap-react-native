@@ -9,6 +9,11 @@ export default StyleSheet.create({
     icon: {
         color: theme.COLOR_PRIMARY_DARK,
         fontSize: theme.HEADER_ICON_SIZE
+    },
+    empty: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: 'center',
     }
       
 })
