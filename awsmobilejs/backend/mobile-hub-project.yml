@@ -43,11 +43,17 @@ features:
             attributes:
               friendId: S
               userId: S
-              uuid: S
             hashKeyName: userId
             hashKeyType: S
-            rangeKeyName: ''
-            rangeKeyType: ''
+            indexes:
+              - !com.amazonaws.mobilehub.v0.NoSQLIndex 
+                hashKeyName: userId
+                hashKeyType: S
+                indexName: userId-friendId
+                rangeKeyName: friendId
+                rangeKeyType: S
+            rangeKeyName: friendId
+            rangeKeyType: S
             tableName: ___DYNAMIC_PREFIX___-Friends
             tablePrivacy: private
           - !com.amazonaws.mobilehub.v0.NoSQLTable 
