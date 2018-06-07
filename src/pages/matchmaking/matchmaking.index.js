@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { Text, View, Image, TouchableOpacity, AsyncStorage } from 'react-native';
 import { withNavigation, navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { DeckSwiper, Card, CardItem, Thumbnail, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
@@ -18,6 +18,7 @@ class Matchmaking extends React.Component {
             dataReady: false,
             cards: [
             ],
+            curIndex: 0
         };
         this.swipedLeft = this.swipedLeft.bind(this);
         this.swipedRight = this.swipedRight.bind(this);
@@ -60,6 +61,7 @@ class Matchmaking extends React.Component {
     swipedRight(index) {
         console.log(index);
         console.log("swipe right");
+
         // console.log(this.state.cards.length - this.state.cards.indexOf(index));
         // if (this.state.cards.length - this.state.cards.indexOf(index) <= 5) {
         //     this.fetchData("Chinese");

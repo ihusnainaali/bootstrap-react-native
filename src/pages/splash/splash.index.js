@@ -15,7 +15,7 @@ export default class Splash extends Component {
     _bootstrapAsync = async () => {
         const username = await AsyncStorage.getItem('username');
         if (username) {
-            ChatClientHelper.getInstance().login(username);
+            ChatClientHelper.getInstance().login("Yuhong");
             operations.SubVideoChannel(username).subscribe({
                 next: (eventData) => {
                     data = eventData.value.data[operations.SUB_VIDEO_CHANNEL_KEY];
