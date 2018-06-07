@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Image, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
-import { withNavigation, navigation } from 'react-navigation';
+import { View, Text, KeyboardAvoidingView } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 import Amplify, { Auth } from 'aws-amplify'
 import config from '../../../aws-exports'
@@ -11,8 +11,8 @@ import theme from '../../styles/theme.style';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import TextField from '../../components/textfield/textfield.component';
-import Button from '../../components/button/button.component';
-import { Container, Header , Left, Right, Title, Content , Icon, Body} from 'native-base';
+import ButtonComponent from '../../components/button/button.component';
+import { Container, Button, Header , Left, Right, Title, Content, Icon, Body} from 'native-base';
 
 class Verification extends Component {
 
@@ -51,7 +51,6 @@ class Verification extends Component {
 	}
 
 	static navigationOptions = ({ navigation }) => {
-
 		return {
 		  header: null
 		};
@@ -63,17 +62,17 @@ class Verification extends Component {
 			<Container style={styles.wrapper}>
 			
 			<Header>
-				<Left>
-				<Button transparent
-					onPress={() => {this.props.navigation.goBack()}}>
-					<Icon name='arrow-back' style={styles.icon} />
-				</Button>
-				</Left>
-      			<Body>
-       			<Title style={{fontFamily: theme.FONT_LIGHT}}>Verification</Title>
-      			</Body>
-      			<Right/>
-      		</Header>
+                <Left>
+                <Button transparent
+                    onPress={() => {this.props.navigation.goBack()}}>
+                    <Icon name='arrow-back' style={styles.icon} />
+                </Button>
+                </Left>
+                  <Body>
+                   <Title style={{fontFamily: theme.FONT_LIGHT}}>Verification</Title>
+                  </Body>
+                  <Right/>
+              </Header>
 
 			<Content>
 				<KeyboardAvoidingView behavior="padding" style={styles.verificationWrapper}>
@@ -91,7 +90,7 @@ class Verification extends Component {
 					<Text>{this.state.error}</Text>
 					</View>
 				<View style={styles.verificationBottomGrid}>
-					<Button
+					<ButtonComponent
 						onPress={this.confirmSignUp.bind(this)}
 						name="Verify"/>
 				</View>
