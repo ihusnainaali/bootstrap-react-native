@@ -15,10 +15,9 @@ class Matchmaking extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataReady: true,
+            dataReady: false,
             cards: [
             ],
-            counter: 0
         };
         this.swipedLeft = this.swipedLeft.bind(this);
         this.swipedRight = this.swipedRight.bind(this);
@@ -29,9 +28,9 @@ class Matchmaking extends React.Component {
     }
 
     componentDidMount() {
-        operations.CreateFriend("RN1", "RN2").then(console.log).catch(console.log);
-        operations.UpdateFriend("RN1", "RN2").then(console.log).catch(console.log);
-        // this.fetchData("Chinese")
+        // operations.CreateFriend("RN1", "RN2", "oops").then(resp => console.log(resp)).catch(err => console.log(err));
+        // operations.UpdateFriend("RN1", "RN2", "CHid").then(resp => console.log(resp)).catch(err => console.log(err));
+        this.fetchData("Chinese");
     }
 
     fetchData(language = "Chinese") {
@@ -96,6 +95,14 @@ class Matchmaking extends React.Component {
         );
     }
 
+    renderEmpty() {
+        return (
+            <View style={styles.empty}>
+                <Text>Please come back later!</Text>
+            </View>
+        )
+    }
+
     rendDeckSwiper() {
         return (
             <DeckSwiper
@@ -103,7 +110,8 @@ class Matchmaking extends React.Component {
                 onSwipeLeft={(index) => this.swipedLeft(index)}
                 onSwipeRight={(index) => this.swipedRight(index)}
                 dataSource={this.state.cards}
-                looping={true}
+                looping={false}
+                renderEmpty={this.renderEmpty}
                 renderItem={item =>
                     <Card style={{ elevation: 3 }}>
                         <CardItem>

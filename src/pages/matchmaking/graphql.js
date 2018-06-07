@@ -5,6 +5,8 @@ import { aws_config } from '../../../aws-exports';
 const CONDITIONAL_ERROR = "DynamoDB:ConditionalCheckFailedException";
 const USERS_BY_LANGUAGE_KEY = "queryPangyouMobilehub1098576098UserProfilesByUserLanguage";
 const GET_FRIENDS_KEY = "getPangyouMobilehub1098576098Friends";
+const UPDATE_FRIENDS_KEY = "updatePangyouMobilehub1098576098Friends";
+const CREATE_FRIENDS_KEY = "createPangyouMobilehub1098576098Friends";
 const SUB_VIDEO_CHANNEL_KEY = "onUpdatePangyouMobilehub1098576098UserVideoChannel";
 
 
@@ -27,11 +29,11 @@ const GetUsersByLanguage = `query QueryUsersByLanguage($userLanguage: String!, $
     }
 }`
 
-const CreateFriend = `mutation CreateFriend($userId: String!, $friendId: String!, $uuid: String){
+const CreateFriend = `mutation CreateFriend($userId: String!, $friendId: String!, $channelSid: String){
     createPangyouMobilehub1098576098Friends(input:{
         userId: $userId
         friendId: $friendId
-        uuid: $uuid
+        channelSid: $channelSid
       }){
         userId
       }   
@@ -104,6 +106,8 @@ export default {
     USERS_BY_LANGUAGE_KEY,
     GET_FRIENDS_KEY,
     SUB_VIDEO_CHANNEL_KEY,
+    UPDATE_FRIENDS_KEY,
+    CREATE_FRIENDS_KEY,
     GetUsersByLanguage(userLanguage, first, after){
         return API.graphql(graphqlOperation(GetUsersByLanguage, {userLanguage, first, after}));
     },
@@ -116,11 +120,11 @@ export default {
     UpdateVideoChannel(userId, friendId, channelName){
         return API.graphql(graphqlOperation(UpdateVideoChannel, {userId, friendId, channelName}));
     },
-    CreateFriend(userId, friendId){
-        return API.graphql(graphqlOperation(CreateFriend, {userId, friendId}));
+    CreateFriend(userId, friendId, channelSid=''){
+        return API.graphql(graphqlOperation(CreateFriend, {userId, friendId, channelSid}));
     },
     UpdateFriend(userId, friendId, channelSid){
-        return API.graphql(graphqlOperation, {userId, friendId, channelSid});
+        return API.graphql(graphqlOperation(UpdateFriend, {userId, friendId, channelSid}));
     },
     Test(){
         return API.graphql(graphqlOperation(GetProfile, {userId: 'test3'}));
