@@ -53,7 +53,6 @@ class Chat extends React.Component {
             .then(count => console.log("unconsumed messages count: ", count));
 
         this.state.channel.on('messageAdded', (message) => {
-            console.log("got message: ", message);
             if (message.state.author != this.state.user) {
                 this.setMessages(this.parseMessage(message));
             }
@@ -61,7 +60,6 @@ class Chat extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log("component will unmount.");
         // unsubscribe to messageAdded event when unmounted.
         this.state.channel._events.messageAdded.pop();
     }
@@ -74,8 +72,7 @@ class Chat extends React.Component {
             text: message.state.body,
             createdAt: message.state.timestamp,
             user: {
-                _id: message.state.author === this.state.user ? 1 : 2,
-                name: message.state.author,
+                user: message.state.author,
                 avatar: this.state.avatar,
             }
         }]);
@@ -88,6 +85,7 @@ class Chat extends React.Component {
     }
 
     onSend(messages = []) {
+        console.log(messages);
         this.setMessages(messages);
         this.state.channel.sendMessage(messages[0].text);
     }
@@ -101,7 +99,7 @@ class Chat extends React.Component {
                 friend = props.friend;
                 // notify the friend to join the call.
                 operations.UpdateVideoChannel(friend, user, roomName);
-                props.navigation.navigate('video', {friend, status, roomName});
+                props.navigation.navigate('video', { friend, status, roomName });
             },
             'Cancel': () => { },
         };
@@ -121,12 +119,12 @@ class Chat extends React.Component {
                 onInputTextChanged={text => this.setState({ text })}
                 user={{
                     _id: 1,
-                    name: "Jeff",
+                    name: this.state.user,
                 }}
                 renderActions={this.renderCustomActions}
                 navigation={this.props.navigation}
-                friend={{friend: this.state.friend}}
-                user={{user:this.state.user}}
+                friend={{ friend: this.state.friend }}
+                user={{ user: this.state.user }}
             />
         )
     }

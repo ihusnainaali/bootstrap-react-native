@@ -3,7 +3,8 @@ import { Text, View, Image, TouchableOpacity, AsyncStorage } from 'react-native'
 import { withNavigation, navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Thumbnail, Item, List, ListItem, Input, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
-import ChatClientHelper from '../../utils/twilio'
+import ChatClientHelper from '../../utils/twilio';
+import operations from '../matchmaking/graphql';
 
 import styles from './friends.style';
 import theme from '../../styles/theme.style';
@@ -21,7 +22,7 @@ const list = [
         subtitle: 'Beijing, China\n'
     },
     {
-        name: 'Chris Jackson',
+        name: 'test4',
         avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
         subtitle: 'New York, New York\n'
     },
@@ -50,49 +51,45 @@ class Friends extends React.Component {
 
     async componentWillMount() {
         chatClientHelper = ChatClientHelper.getInstance();
-        // chatClientHelper.login('Yuhong');
         this.setState({ chatClientHelper });
 
         const username = await AsyncStorage.getItem('username');
-        this.setState({user: username});
-        //TODO get friends info and channel info from friends table.
-        // and store it into state.friendsChannel.
+        this.setState({ user: username });
+
+        // get all channel sids and store them in state.
+        const res = await operations.ListFriends(username);
+        friends = {};
+        res.data[operations.LIST_FRIENDS_KEY].items.forEach(friend => {
+            if (friend.channelSid) {
+                friends[friend.friendId] = friend.channelSid;
+            }
+        })
+        this.setState({ user: username, friendsChannel: friends });
     }
 
     // get the channel name for specific friend
     fetchChannelName(friend) {
-        return "Test1";
+        // const resp = await operations.GetFriend(this.state.user, friend);
+        // return resp.data[operations.GET_FRIENDS_KEY];
+        return "Test1"
     }
 
     fetchChannelSID(friend) {
+        console.log(friend, this.state.friendsChannel[friend]);
         return this.state.friendsChannel[friend];
     }
 
     chatWithFriend(friend, avatar) {
-        // this.props.navigation.navigate('video');
-        // return;
         client = this.state.chatClientHelper.client;
         user = this.state.user;
-        // client.createChannel({
-        //     uniqueName: 
-        // })
-        // .then(channel => {
-        //     console.log(channel);
-        //     // TODO add channel.sid to friends table.
-        //     channel.add(user).catch(err => console.log(err));
-        //     channel.add(friend).catch(err => console.log(err));
-        // })
-        // .catch(err => console.log(err));
-        // return;
-
-        //TODO: change to getChannelBySid(this.fetchChannelSid(friend));
-        client && client.getChannelByUniqueName(this.fetchChannelName(friend))
+        client && client.getChannelBySid(this.fetchChannelSID(friend))
             .then(channel => {
                 if (channel.state.status !== 'joined') {
                     channel.join()
-                        .then(channel => channel.getMessages()
-                            .then(messages => this.props.navigation.navigate(route.CHAT, { user, friend, messages, avatar, channel, user }))
-                        )
+                        .then(channel => {
+                            channel.getMessages()
+                                .then(messages => this.props.navigation.navigate(route.CHAT, { user, friend, messages, avatar, channel, user }))
+                        })
                 }
                 channel.getMessages()
                     .then(messages => this.props.navigation.navigate(route.CHAT, { user, friend, messages, avatar, channel, user }));
@@ -105,7 +102,6 @@ class Friends extends React.Component {
         return (
 
             <Container style={styles.container}>
-
                 <Header>
                     <Left />
                     <Body>
@@ -130,9 +126,7 @@ class Friends extends React.Component {
                 </Item>
 
                 <Content>
-
                     <List dataArray={list}
-
                         renderRow={(item) =>
                             <ListItem avatar onPress={() => { this.chatWithFriend(item.name, item.avatar_url); }}>
                                 <Left>
@@ -146,12 +140,8 @@ class Friends extends React.Component {
                                 </Right>
                             </ListItem>
                         }>
-
                     </List>
-
                 </Content>
-
-
             </Container>
 
         );

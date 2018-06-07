@@ -7,6 +7,7 @@ const USERS_BY_LANGUAGE_KEY = "queryPangyouMobilehub1098576098UserProfilesByUser
 const GET_FRIENDS_KEY = "getPangyouMobilehub1098576098Friends";
 const UPDATE_FRIENDS_KEY = "updatePangyouMobilehub1098576098Friends";
 const CREATE_FRIENDS_KEY = "createPangyouMobilehub1098576098Friends";
+const LIST_FRIENDS_KEY = "queryPangyouMobilehub1098576098FriendsByUserId";
 const SUB_VIDEO_CHANNEL_KEY = "onUpdatePangyouMobilehub1098576098UserVideoChannel";
 
 
@@ -29,24 +30,31 @@ const GetUsersByLanguage = `query QueryUsersByLanguage($userLanguage: String!, $
     }
 }`
 
-const CreateFriend = `mutation CreateFriend($userId: String!, $friendId: String!, $channelSid: String){
+const CreateFriend = `mutation CreateFriend($userId: String!, $friendId: String!){
     createPangyouMobilehub1098576098Friends(input:{
         userId: $userId
         friendId: $friendId
-        channelSid: $channelSid
-      }){
+    }){
         userId
-      }   
+    }   
 }`
 
-const GetFriend = `query GetFriend($userId: String!, $friendId: String!){
-    createPangyouMobilehub1098576098Friends(input:{
-        userId: $userId
-        friendId: $friendId
-        uuid: $uuid
-      }){
+const GetFriend = `query GetFriend($userId: String!, $friendId: String!) {
+	getPangyouMobilehub1098576098Friends(userId: $userId, friendId: $friendId){
         userId
-      }   
+        friendId
+        channelSid
+    }
+}`
+
+const ListFriends = `query ListFriends($userId: String!) {
+    queryPangyouMobilehub1098576098FriendsByUserId(userId: $userId){
+        items{
+            userId
+            friendId
+            channelSid
+        }
+    }
 }`
 
 const UpdateFriend = `mutation UpdateFriend($userId: String!, $friendId: String!, $channelSid: String) {
@@ -108,8 +116,15 @@ export default {
     SUB_VIDEO_CHANNEL_KEY,
     UPDATE_FRIENDS_KEY,
     CREATE_FRIENDS_KEY,
+    LIST_FRIENDS_KEY,
     GetUsersByLanguage(userLanguage, first, after){
         return API.graphql(graphqlOperation(GetUsersByLanguage, {userLanguage, first, after}));
+    },
+    GetFriend(userId, friendId){
+        return API.graphql(graphqlOperation(GetFriend, {userId, friendId}));
+    },
+    ListFriends(userId){
+        return API.graphql(graphqlOperation(ListFriends, {userId}));
     },
     SubVideoChannel(userId){
         return API.graphql(graphqlOperation(SubVideoChannel, {userId}));

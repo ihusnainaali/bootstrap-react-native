@@ -9,7 +9,7 @@ import TextField from '../../components/textfield/textfield.component';
 import ButtonComponent from '../../components/button/button.component';
 import { Container, Button, Header , Left, Right, Title, Content, Icon, Body} from 'native-base';
 import ChatClientHelper from '../../utils/twilio';
-import opertaions from '../matchmaking/graphql';
+import operations from '../matchmaking/graphql';
 
 import styles from './login.style';
 import theme from '../../styles/theme.style';
