@@ -12,7 +12,8 @@ import {
   RefreshControl,
   FlatList,
   SectionList,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  AsyncStorage
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import TextField from '../../components/textfield/textfield.component';
@@ -25,14 +26,17 @@ import { API, graphqlOperation } from 'aws-amplify';
 import ImagePicker from 'react-native-image-picker';
 import { RNS3 } from 'react-native-aws3';
 
-import styles from './profile.style'
-import theme from '../../styles/theme.style'
+import styles from './profile.style';
+import theme from '../../styles/theme.style';
+
 
 type Props = {};
 class EditProfile extends Component<Props> {
 
   state = {
     editProfile: {},
+    refreshData: '',
+    storeUsername: '',
     userName: '',
     userDescription: '',
     userStatus: '',
@@ -62,8 +66,15 @@ class EditProfile extends Component<Props> {
 	}
 
   async componentDidMount() {
+      // Get username from Store
       try {
-          const editProfile = await API.graphql(graphqlOperation(GetProfile, {userId: "test1"}))
+        this.storeUsername = await AsyncStorage.getItem('username');
+      } catch (err) {
+          console.log('This is the Store Username Error: ', err)
+      }
+      // Get Profile from GraphQL
+      try {
+          const editProfile = await API.graphql(graphqlOperation(GetProfile, {userId: this.storeUsername}))
           this.setState({
             editProfile: editProfile.data.getPangyouMobilehub1098576098UserProfile
           })
@@ -85,10 +96,10 @@ class EditProfile extends Component<Props> {
       const userLanguageProp = (this.state.userLanguage == "") ? this.state.editProfile.userLanguage : this.state.userLanguage;
       const userLearnLanguageProp = (this.state.userLearnLanguage == "") ? this.state.editProfile.userLearnLanguage : this.state.userLearnLanguage;
       const userImageUrlProp = (this.state.userImageUrl == "") ? this.state.editProfile.userImageUrl : this.state.userImageUrl;
-      console.log('This is the userImageUrlProp: ', userImageUrlProp);
+
     	try {
       		editProfile = {
-              userId: 'test1',
+              userId: this.storeUsername,
     			    userName: userNameProp,
               userDescription: userDescriptionProp,
               userStatus: userStatusProp,
@@ -104,7 +115,6 @@ class EditProfile extends Component<Props> {
           this.setState({
               editProfile: {...this.state.profile, editProfile}
           })
-          console.log('Updated Profile Stuff: ', editProfile)
     		  await API.graphql(graphqlOperation(UpdateProfile, editProfile));
           this.props.navigation.navigate('profile');
     	} catch (err) {
@@ -123,13 +133,14 @@ class EditProfile extends Component<Props> {
     ImagePicker.showImagePicker(options, (response) => {
         if (response.error) {
             console.log('ImagePicker Error: ', response.error);
+        } else if (response.didCancel) {
+            alert('You Have Cancelled the File Upload!');
         } else {
             const file = {
                 uri: response.uri,
                 name: response.fileName,
                 type: 'image/png'
             }
-            console.log(file);
             const config = {
               keyPrefix: "uploads/",
               bucket: "pangyou-userfiles-mobilehub-1098576098",
@@ -143,7 +154,6 @@ class EditProfile extends Component<Props> {
                 throw new Error("Failed to upload image to S3");
               } else {
                 this.setState({userImageUrl : response.body.postResponse.location});
-                console.log(this.state.userImageUrl);
                 alert('Your Profile Picture was Uploaded Successfully!');
               }
             });
@@ -154,9 +164,11 @@ class EditProfile extends Component<Props> {
   render() {
 
     return (
-      <Container style={styles.containerHeight}>
-        <ScrollView>
-          <KeyboardAvoidingView behavior='padding' style={styles.profileWrapper}>
+
+      <ScrollView>
+        <KeyboardAvoidingView behavior='padding' style={styles.profileWrapper}>
+          <Container>
+            <Content>
               <View style={styles.editProfileCard}>
                   if ({this.state.editProfile.userImageUrl != ""}) {
                     <TouchableOpacity activeOpacity = { .5 } onPress={ this.getImage.bind(this) }>
@@ -382,9 +394,10 @@ class EditProfile extends Component<Props> {
                   name='Submit'
                   screen='profile'/>
               </View>
-          </KeyboardAvoidingView>
-        </ScrollView>
-      </Container>
+            </Content>
+          </Container>
+        </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
 }

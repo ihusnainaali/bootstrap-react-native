@@ -14,7 +14,7 @@ import Login from './src/pages/login/login.index';
 const store = createStore(rootReducer, devToolsEnhancer({ realtime: true }))
 
 store.subscribe(() => {
-    var state = store.getState();
+    const state = store.getState();
     AsyncStorage.setItem('username', state.auth.username);
 })
 

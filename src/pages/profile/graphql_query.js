@@ -99,22 +99,20 @@ export const UpdateProfile = `
 `
 
 export const SubscribeToProfile = `
-subscription onCreateUserProfile($userId: String!) {
+subscription onUpdateUserProfile($userId: String!) {
 		onUpdatePangyouMobilehub1098576098UserProfile(userId: $userId) {
-			items {
-				userId
-				userName
-				userDescription
-				userStatus
-				userCountry
-				userDob
-				userGender
-				userSchool
-				userMajor
-				userLanguage
-				userLearnLanguage
-				userImageUrl
-	    }
+			userId
+			userName
+			userDescription
+			userStatus
+			userCountry
+			userDob
+			userGender
+			userSchool
+			userMajor
+			userLanguage
+			userLearnLanguage
+			userImageUrl
 		}
 	}
 `

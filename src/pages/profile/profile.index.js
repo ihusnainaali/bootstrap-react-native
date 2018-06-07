@@ -3,21 +3,21 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  Image
+  Image,
+  AsyncStorage
 } from 'react-native';
 import { Container, Header, Left, Right, Title, Body, Button, Text, Content, Icon, List, ListItem } from 'native-base';
 import { withNavigation, navigation } from 'react-navigation';
 
 import { connect } from 'react-redux';
 
-import styles from './profile.style';
-
-import { GetProfile } from './graphql_query';
+import { GetProfile, SubscribeToProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { route } from '../../routes/routes.constants';
 import theme from '../../styles/theme.style';
+import styles from './profile.style';
 
 class Profile extends Component {
 
@@ -26,7 +26,6 @@ class Profile extends Component {
   }
 
   static navigationOptions = ({ navigation }) => {
-
     return {
       header: null
     };
@@ -34,23 +33,48 @@ class Profile extends Component {
 
   state = {
     profile: {},
+    newData: 0,
+    storeUsername: '',
     error: null
   }
 
+  updateScreen = () => {
+    this.setState({ newData: Math.random() });
+  }
+
   async componentDidMount() {
+      // Get username from Store
       try {
-          const profile = await API.graphql(graphqlOperation(GetProfile, {userId: "test1"}))
+        this.storeUsername = await AsyncStorage.getItem('username');
+      } catch (err) {
+          console.log('This is the Store Username Error: ', err)
+      }
+      // Get Profile from GraphQL
+      try {
+
+          const profile = await API.graphql(graphqlOperation(GetProfile, {userId: this.storeUsername}))
           this.setState({
             profile: profile.data.getPangyouMobilehub1098576098UserProfile
           })
+
       } catch (err) {
           console.log('This is the Error: ', err)
       }
+      // Subscribe Profile from GraphQL
+      API.graphql(graphqlOperation(SubscribeToProfile, {userId: this.storeUsername})).subscribe({
+          next: (eventData) => {
+              this.setState({
+                profile: eventData.value.data.onUpdatePangyouMobilehub1098576098UserProfile
+              })
+          }
+      })
+
   }
 
-  render() {
-    return (
 
+  render() {
+
+    return (
       <ScrollView>
         <Container>
           <Header>
@@ -71,14 +95,14 @@ class Profile extends Component {
           </Header>
           <Content>
             <View style={styles.indexProfileCard}>
-                if ({!this.state.profile.userImageUrl == ""}) {
-                  <Image
-                    style={{width: 290, borderRadius: 145, height: 290}}
-                    source={{uri: this.state.profile.userImageUrl}}
-                  />
-                } else {
-                    <Icon type="Ionicons" name='ios-contact' ios="ios-contact" md="md-contact" style={{fontSize: 300, color: 'white', textAlign:'center'}} />
-                }
+              if ({ this.state.profile.userImageUrl }) {
+                <Image
+                  style={{width: 300, borderRadius: 150, height: 300}}
+                  source={{uri: this.state.profile.userImageUrl}}
+                />
+              } else {
+                  <Icon type="Ionicons" name='ios-contact' ios="ios-contact" md="md-contact" style={{fontSize: 300, color: 'white', textAlign:'center'}} />
+              }
             </View>
             <View style={styles.indexDescriptionCard}>
                 <View style={{flexDirection: 'row'}}>
@@ -152,12 +176,12 @@ class Profile extends Component {
   }
 }
 
-export default withNavigation(Profile);
+// export default withNavigation(Profile);
 
-// function mapStateToProps(state) {
-//     return {
-//         profile: state.profile
-//     }
-// }
+function mapStateToProps(store) {
+    return {
+        username: store.auth.username
+    }
+}
 
-// export default connect(mapStateToProps)(withNavigation(Profile));
+export default connect(mapStateToProps)(withNavigation(Profile));
