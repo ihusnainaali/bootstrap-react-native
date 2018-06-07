@@ -33,7 +33,8 @@ class Friends extends React.Component {
         super(props);
         this.state = {
             chatClientHelper: null,
-            friendsChannel: {}
+            friendsChannel: {},
+            user: null,
         };
         this.flag = true;
     }
@@ -47,11 +48,13 @@ class Friends extends React.Component {
         };
     };
 
-    componentWillMount() {
+    async componentWillMount() {
         chatClientHelper = ChatClientHelper.getInstance();
         // chatClientHelper.login('Yuhong');
         this.setState({ chatClientHelper });
 
+        const username = await AsyncStorage.getItem('username');
+        this.setState({user: username});
         //TODO get friends info and channel info from friends table.
         // and store it into state.friendsChannel.
     }
@@ -69,15 +72,15 @@ class Friends extends React.Component {
         // this.props.navigation.navigate('video');
         // return;
         client = this.state.chatClientHelper.client;
-        user = 'Yuhong';
+        user = this.state.user;
         // client.createChannel({
-        //     uniqueName: 'test9'
+        //     uniqueName: 
         // })
         // .then(channel => {
         //     console.log(channel);
         //     // TODO add channel.sid to friends table.
-        //     channel.add('yuhong').catch(err => console.log(err));
-        //     channel.add('test1').catch(err => console.log(err));
+        //     channel.add(user).catch(err => console.log(err));
+        //     channel.add(friend).catch(err => console.log(err));
         // })
         // .catch(err => console.log(err));
         // return;
@@ -88,11 +91,11 @@ class Friends extends React.Component {
                 if (channel.state.status !== 'joined') {
                     channel.join()
                         .then(channel => channel.getMessages()
-                            .then(messages => this.props.navigation.navigate(route.CHAT, { friend, messages, avatar, channel, user }))
+                            .then(messages => this.props.navigation.navigate(route.CHAT, { user, friend, messages, avatar, channel, user }))
                         )
                 }
                 channel.getMessages()
-                    .then(messages => this.props.navigation.navigate(route.CHAT, { friend, messages, avatar, channel, user }));
+                    .then(messages => this.props.navigation.navigate(route.CHAT, { user, friend, messages, avatar, channel, user }));
 
             })
             .catch(console.log);

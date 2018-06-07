@@ -95,11 +95,13 @@ class Chat extends React.Component {
     renderCustomActions(props) {
         const options = {
             'Video Chat': (props) => {
-                status = 'calling',
+                status = 'calling';
                 roomName = uuidv4();
+                user = props.user;
+                friend = props.friend;
                 // notify the friend to join the call.
-                operations.UpdateVideoChannel(this.state.friend, this.state.user, roomName);
-                props.navigation.navigate('video', {status, roomName});
+                operations.UpdateVideoChannel(friend, user, roomName);
+                props.navigation.navigate('video', {friend, status, roomName});
             },
             'Cancel': () => { },
         };
@@ -123,6 +125,8 @@ class Chat extends React.Component {
                 }}
                 renderActions={this.renderCustomActions}
                 navigation={this.props.navigation}
+                friend={{friend: this.state.friend}}
+                user={{user:this.state.user}}
             />
         )
     }
