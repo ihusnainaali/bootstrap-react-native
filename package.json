@@ -16,9 +16,13 @@
 		"aws-amplify-react-native": "^0.2.11",
 		"graphql": "0.13.2",
 		"graphql-tag": "2.9.2",
-		"native-base": "2.4.4",
+		"native-base": "^2.4.4",
 		"react": "16.3.1",
 		"react-native": "0.55.4",
+		"react-native-aws3": "0.0.8",
+		"react-native-fetch-blob": "^0.10.8",
+		"react-native-image-picker": "^0.25.6",
+		"react-native-share": "^1.0.27",
 		"react-native-vector-icons": "4.6.0",
 		"react-navigation": "2.0.1",
 		"react-navigation-header-buttons": "0.0.8",
@@ -26,14 +30,16 @@
 		"react-redux": "5.0.7",
 		"redux": "^4.0.0",
 		"redux-form": "^7.3.0",
-		"redux-thunk": "2.2.0"
+		"redux-thunk": "2.2.0",
+		"uuid": "^3.2.1"
 	},
 	"devDependencies": {
 		"babel-jest": "22.4.3",
 		"babel-preset-react-native": "4.0.0",
 		"eslint": "4.19.1",
 		"jest": "22.4.3",
-		"react-test-renderer": "16.3.1"
+		"react-test-renderer": "16.3.1",
+		"remote-redux-devtools": "^0.5.12"
 	},
 	"jest": {
 		"preset": "react-native"

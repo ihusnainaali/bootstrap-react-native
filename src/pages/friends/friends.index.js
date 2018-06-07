@@ -1,40 +1,61 @@
+
 import React from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { withNavigation , navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Thumbnail, Item, List, ListItem, Input, Container, Header , Left, Right, Title, Content, Button , Icon, Body} from 'native-base';
 
+import { ListProfile } from './graphql_query';
+import { API, graphqlOperation } from 'aws-amplify';
+
 import styles from './friends.style';
 import theme from '../../styles/theme.style';
 
-let items = ['Simon Mignolet','Nathaniel Clyne','Dejan Lovren','Mama Sakho','Emre Can'];
-
-// TODO Add Backend Retrieval
-const list = [
-  {
-    name: 'Amy Farha',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    subtitle: 'Beijing, China\n'
-  },
-  {
-    name: 'Chris Jackson',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-    subtitle: 'New York, New York\n'
-  },
-]
 
 class Friends extends React.Component {
 
-    // Declare Edit Friend Icon
-    static navigationOptions = ({ navigation }) => {
+  state = {
+    friends: [],
+    error: null
+  }
 
-      // TODO Move Edit Friend to Header
-      return {
-        header: null
-      };
+  static navigationOptions = ({ navigation }) => {
+
+    return {
+      header: null
     };
+  };
+
+  async componentDidMount() {
+      try {
+          const friends = await API.graphql(graphqlOperation(ListProfile))
+          this.setState({
+            friends: friends.data.listPangyouMobilehub1098576098UserProfiles.items
+          })
+          console.log(this.state.friends)
+      } catch (err) {
+          console.log('This is the Error: ', err)
+      }
+  }
+
+  goToViewProfile = (friend) => {
+      this.props.navigation.navigate('Profile', {friend});
+  }
+
+  // And then access them in this.props.navigation.state.params. For example in your DetailsPage:
+  // <Text style={styles.myStyle}>{this.props.navigation.state.params.user.name}</Text>
+
 
   render() {
+
+    const friendsList = this.state.friends.map((friend, i) => {
+      return (
+        <ListItem style={styles.indexLayoutItem} key={i} button onPress={() => {this.goToViewProfile(friend.userId)}}>
+          <Icon type="Ionicons" name='ios-contact' ios='ios-contact' md='md-contact' style={{fontSize: 90, color: 'grey', textAlign:'center', width: 100}} />
+          <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{friend.userName}</Text>
+        </ListItem>
+      )
+    })
 
     return (
 
@@ -48,48 +69,29 @@ class Friends extends React.Component {
           <Right>
             <Button transparent>
               // TODO Add Edit Friend Functionality
-              <Icon 
+              <Icon
                 name='person-add'
                 type="MaterialIcons"
                 style={ styles.icon } />
             </Button>
           </Right>
         </Header>
-        
+
         // TODO Add Search Functionality
         <Item regular style={{paddingLeft:10}}>
-          <Icon name="ios-search" 
+          <Icon name="ios-search"
             style={styles.icon}/>
           <Input placeholder="Search" />
         </Item>
-        
-        <Content> 
 
-        <List dataArray={list}
-
-          renderRow={(item) =>
-            <ListItem avatar onPress={()=>{}}>
-            <Left>
-              <Thumbnail source={{ uri: item.avatar_url }} />
-            </Left>
-            <Body>
-              <Text style={styles.text_name}>{item.name}</Text>
-              <Text style={styles.text_subtitle} note>{item.subtitle}</Text>
-            </Body>
-            <Right>
-            </Right>
-          </ListItem>
-          }>
-
-        </List>
-
+        <Content>
+            {friendsList}
         </Content>
-
 
       </Container>
 
     );
-  }
+  };
 
 }
 

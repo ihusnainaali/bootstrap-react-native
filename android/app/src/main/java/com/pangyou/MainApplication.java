@@ -3,6 +3,9 @@ package com.pangyou;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.imagepicker.ImagePickerPackage;
+import cl.json.RNSharePackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.amazonaws.amplify.pushnotification.RNPushNotificationPackage;
 import com.amazonaws.RNAWSCognitoPackage;
@@ -26,6 +29,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ImagePickerPackage(),
+            new RNSharePackage(),
+            new RNFetchBlobPackage(),
             new VectorIconsPackage(),
             new RNPushNotificationPackage(),
             new RNAWSCognitoPackage()
