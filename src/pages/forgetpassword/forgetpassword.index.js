@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { View, Text , KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './forgetpassword.style';
 import theme from '../../styles/theme.style';
@@ -119,10 +120,7 @@ class ForgetPassword extends Component {
 			:
 			<View>
 			  <View style={styles.forgetPasswordMiddleGrid}>
-				<Icon 
-					name="beenhere" 
-					style={styles.icon}
-				/>
+				<MaterialIcons style={styles.icon} name="beenhere" size={20}/>
 				<TextField
 				  placeholder="Authentication Code"
 				  placeholderTextColor="#d1d1d1"
@@ -151,8 +149,6 @@ class ForgetPassword extends Component {
 				  onChangeText={this.onChangeText("confirmPassword").bind(this)}
 				/>
 				<Text>{this.state.error}</Text>
-			  </View>
-			  <View style={styles.forgetPasswordBottomGrid}>
 				<Button
 				  onPress={this.forgetPasswordSubmit.bind(this)}
 				  name="Submit" />

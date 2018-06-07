@@ -28,7 +28,7 @@ export default StyleSheet.create({
 	icon: {
 		padding: 10,
 		fontSize: 24,
-		color: theme.COLOR_PRIMARY_DARK
+		color: theme.COLOR_SECONDARY_DARK
 	},
 	forgotHeaderText: {
 		fontSize: 35,
