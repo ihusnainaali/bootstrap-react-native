@@ -8,8 +8,6 @@ import { onLogin } from '../../redux/actions/auth.actions'
 import TextField from '../../components/textfield/textfield.component';
 import ButtonComponent from '../../components/button/button.component';
 import { Container, Button, Header , Left, Right, Title, Content, Icon, Body} from 'native-base';
-import ChatClientHelper from '../../utils/twilio';
-import operations from '../matchmaking/graphql';
 
 import styles from './login.style';
 import theme from '../../styles/theme.style';
@@ -49,16 +47,6 @@ class Login extends Component {
             .then(user => {
                 console.log(user);
                 this.props.onLogin(username, password);
-                //set up twilio video and chat
-                ChatClientHelper.getInstance().login(username);
-                operations.SubVideoChannel(username).subscribe({
-                    next: (eventData) => {
-                        data = eventData.value.data[operations.SUB_VIDEO_CHANNEL_KEY];
-                        if (data.username !== "") {
-                            this.props.navigation.navigate('video', {status: 'incoming', friend: data.username, roomName: data.channelName});
-                        }
-                    }
-                })
                 this.props.navigation.navigate('Home');
             })
             .catch(err => {
@@ -84,7 +72,7 @@ class Login extends Component {
         return (
 
             <Container style={styles.wrapper}>
-            
+
             <Header>
                 <Left>
                 <Button transparent

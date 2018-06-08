@@ -1660,7 +1660,7 @@ buffer-from@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.0.0.tgz#4cb8832d23612589b0406e9e2956c17f06fdf531"
 
-buffer@4.9.1:
+buffer@4.9.1, buffer@^4.5.1:
   version "4.9.1"
   resolved "https://registry.yarnpkg.com/buffer/-/buffer-4.9.1.tgz#6d1bb601b07a4efced97094132093027c95bc298"
   dependencies:
@@ -2081,6 +2081,10 @@ cryptiles@3.x.x:
 crypto-browserify@1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/crypto-browserify/-/crypto-browserify-1.0.9.tgz#cc5449685dfb85eb11c9828acc7cb87ab5bbfcc0"
+
+crypto-js@^3.1.6:
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.8.tgz#715f070bf6014f2ae992a98b3929258b713f08d5"
 
 cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   version "0.3.2"
@@ -3040,7 +3044,6 @@ glob-parent@^2.0.0:
   dependencies:
     is-glob "^2.0.0"
 
-<<<<<<< HEAD
 glob-stream@^3.1.5:
   version "3.1.18"
   resolved "https://registry.yarnpkg.com/glob-stream/-/glob-stream-3.1.18.tgz#9170a5f12b790306fdfe598f313f8f7954fd143b"
@@ -3073,8 +3076,6 @@ glob@^4.3.1:
     minimatch "^2.0.1"
     once "^1.3.0"
 
-=======
->>>>>>> Added New Profile Layout
 glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
@@ -4116,6 +4117,10 @@ jest-mock@^22.4.3:
   version "22.4.3"
   resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-22.4.3.tgz#f63ba2f07a1511772cdc7979733397df770aabc7"
 
+jest-react-native@^18.0.0:
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/jest-react-native/-/jest-react-native-18.0.0.tgz#77dd909f069324599f227c58c61c2e62168726ba"
+
 jest-regex-util@^22.4.3:
   version "22.4.3"
   resolved "https://registry.yarnpkg.com/jest-regex-util/-/jest-regex-util-22.4.3.tgz#a826eb191cdf22502198c5401a1fc04de9cef5af"
@@ -5063,14 +5068,15 @@ native-base-shoutem-theme@0.2.2:
     lodash "^4.10.1"
     prop-types "^15.5.10"
 
-native-base@2.4.4:
-  version "2.4.4"
-  resolved "https://registry.yarnpkg.com/native-base/-/native-base-2.4.4.tgz#a677c6c0b4ef2e3e76b8274d67f9b4cc775397f2"
+native-base@^2.4.5:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/native-base/-/native-base-2.5.1.tgz#31759f977b70abfcecaedeb81bad97512559803b"
   dependencies:
     blueimp-md5 "^2.5.0"
     clamp "^1.0.1"
     color "~1.0.3"
     fs-extra "^2.0.0"
+    jest-react-native "^18.0.0"
     lodash "~4.11.1"
     native-base-shoutem-theme "0.2.2"
     print-message "^2.1.0"
@@ -5850,6 +5856,13 @@ react-lifecycles-compat@^3:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.2.tgz#7279047275bd727a912e25f734c0559527e84eff"
 
+react-native-aws3@0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/react-native-aws3/-/react-native-aws3-0.0.8.tgz#9a18789ae0cedfb40d29b1f69799a8af4f9927e8"
+  dependencies:
+    buffer "^4.5.1"
+    crypto-js "^3.1.6"
+
 react-native-communications@2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
@@ -5883,7 +5896,6 @@ react-native-easy-grid@0.1.17:
   dependencies:
     lodash "^4.11.1"
 
-<<<<<<< HEAD
 react-native-gifted-chat@^0.4.3:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/react-native-gifted-chat/-/react-native-gifted-chat-0.4.3.tgz#25b4da866c802e407c06e589495f421f7dcdf70a"
@@ -5899,6 +5911,10 @@ react-native-gifted-chat@^0.4.3:
     shallowequal "1.0.2"
     uuid "3.2.1"
 
+react-native-image-picker@^0.25.6:
+  version "0.25.7"
+  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.25.7.tgz#1475fd72111a74f434598f2c99453998ac21b599"
+
 react-native-invertible-scroll-view@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-native-invertible-scroll-view/-/react-native-invertible-scroll-view-1.1.1.tgz#43039037e6537dc8c4f29baae1cd1a223bc25d81"
@@ -5907,11 +5923,6 @@ react-native-invertible-scroll-view@^1.1.0:
     prop-types "^15.5.10"
     react-clone-referenced-element "^1.0.1"
     react-native-scrollable-mixin "^1.0.1"
-=======
-react-native-image-picker@^0.25.6:
-  version "0.25.7"
-  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.25.7.tgz#1475fd72111a74f434598f2c99453998ac21b599"
->>>>>>> Added New Profile Layout
 
 react-native-iphone-x-helper@^1.0.1:
   version "1.0.3"
@@ -5930,10 +5941,6 @@ react-native-lightbox@^0.7.0:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-movable-view@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-movable-view/-/react-native-movable-view-1.0.3.tgz#f87cd77aaae20b049fb95153fc0ebb87d9cfc71b"
-
 react-native-parsed-text@^0.0.20:
   version "0.0.20"
   resolved "https://registry.yarnpkg.com/react-native-parsed-text/-/react-native-parsed-text-0.0.20.tgz#7bd35fec88c3ca0eb0e8250a98e24092b4ee7fef"
@@ -5951,13 +5958,10 @@ react-native-safe-area-view@^0.7.0:
   dependencies:
     hoist-non-react-statics "^2.3.1"
 
-<<<<<<< HEAD
 react-native-scrollable-mixin@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-native-scrollable-mixin/-/react-native-scrollable-mixin-1.0.1.tgz#34a32167b64248594154fd0d6a8b03f22740548e"
 
-=======
->>>>>>> Added New Profile Layout
 react-native-tab-view@^0.0.74:
   version "0.0.74"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.74.tgz#62c0c882d9232b461ce181d440d683b4f99d1bd8"
@@ -7483,6 +7487,10 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+validator@^10.3.0:
+  version "10.3.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-10.3.0.tgz#157a8c0981858cff381f59aabcdb8f83b57317cc"
 
 vary@~1.1.2:
   version "1.1.2"

@@ -57,8 +57,7 @@ export default StyleSheet.create({
       width: Dimensions.get('window').width,
       borderColor: theme.COLOR_PRIMARY_DARK,
       marginTop: 7,
-      paddingRight: 40,
-      borderStyle: 'dashed'
+      paddingRight: 40
     },
     editLayoutItem: {
       width: Dimensions.get('window').width,

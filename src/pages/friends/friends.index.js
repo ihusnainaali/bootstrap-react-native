@@ -5,15 +5,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Thumbnail, Item, List, ListItem, Input, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
 import ChatClientHelper from '../../utils/twilio';
 import operations from '../matchmaking/graphql';
-
 import styles from './friends.style';
 import theme from '../../styles/theme.style';
-
 import { route } from '../../routes/routes.constants';
 import Example from './example';
-
 let items = ['Simon Mignolet', 'Nathaniel Clyne', 'Dejan Lovren', 'Mama Sakho', 'Emre Can'];
-
 // TODO Add Backend Retrieval
 const list = [
     {
@@ -27,9 +23,7 @@ const list = [
         subtitle: 'New York, New York\n'
     },
 ]
-
 class Friends extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -40,24 +34,18 @@ class Friends extends React.Component {
         };
         this.flag = true;
     }
-
     // Declare Edit Friend Icon
     static navigationOptions = ({ navigation }) => {
-
         // TODO Move Edit Friend to Header
         return {
             header: null
         };
     };
-<<<<<<< HEAD
-
     async componentWillMount() {
         chatClientHelper = ChatClientHelper.getInstance();
         this.setState({ chatClientHelper });
-
         const username = await AsyncStorage.getItem('username');
         this.setState({ user: username });
-
         // get all channel sids and store them in state.
         const res = await operations.ListFriends(username);
         friends = {};
@@ -69,7 +57,6 @@ class Friends extends React.Component {
             }
         });
         this.setState({ user: username, friendsChannel: friends });
-
         // subscribe to new friends
         operations.SubFriends(username).subscribe({
             next: (eventData) => {
@@ -82,19 +69,16 @@ class Friends extends React.Component {
             }
         })
     }
-
     // get the channel name for specific friend
     fetchChannelName(friend) {
         // const resp = await operations.GetFriend(this.state.user, friend);
         // return resp.data[operations.GET_FRIENDS_KEY];
         return "Test1"
     }
-
     fetchChannelSID(friend) {
         console.log(friend, this.state.friendsChannel[friend]);
         return this.state.friendsChannel[friend];
     }
-
     chatWithFriend(friend, avatar) {
         client = this.state.chatClientHelper.client;
         user = this.state.user;
@@ -109,14 +93,11 @@ class Friends extends React.Component {
                 }
                 channel.getMessages()
                     .then(messages => this.props.navigation.navigate(route.CHAT, { user, friend, messages, avatar, channel, user }));
-
             })
             .catch(console.log);
     }
-
     render() {
         return (
-
             <Container style={styles.container}>
                 <Header>
                     <Left />
@@ -133,14 +114,12 @@ class Friends extends React.Component {
                         </Button>
                     </Right>
                 </Header>
-
                 // TODO Add Search Functionality
                 <Item regular style={{ paddingLeft: 10 }}>
                     <Icon name="ios-search"
                         style={styles.icon} />
                     <Input placeholder="Search" />
                 </Item>
-
                 <Content>
                     <List dataArray={list}
                         renderRow={(item) =>
@@ -159,76 +138,7 @@ class Friends extends React.Component {
                     </List>
                 </Content>
             </Container>
-
         );
     }
-=======
-  };
-
-  async componentDidMount() {
-      try {
-          const friends = await API.graphql(graphqlOperation(ListProfile))
-          this.setState({
-            friends: friends.data.listPangyouMobilehub1098576098UserProfiles.items
-          })
-          console.log(this.state.friends)
-      } catch (err) {
-          console.log('This is the Error: ', err)
-      }
-  }
-
-  goToViewProfile = (friend) => {
-      this.props.navigation.navigate('Profile', {friend});
-  }
-
-  render() {
-
-    const friendsList = this.state.friends.map((friend, i) => {
-      return (
-        <ListItem style={styles.indexLayoutItem} key={i} button onPress={() => {this.goToViewProfile(friend.userId)}}>
-          <Icon type="Ionicons" name='ios-contact' ios='ios-contact' md='md-contact' style={{fontSize: 90, color: 'grey', textAlign:'center', width: 100}} />
-          <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{friend.userName}</Text>
-        </ListItem>
-      )
-    })
-
-    return (
-
-      <Container style={styles.container}>
-
-        <Header>
-          <Left/>
-          <Body>
-            <Title style={{fontFamily: theme.FONT_LIGHT}}>Friend List</Title>
-          </Body>
-          <Right>
-            <Button transparent>
-              // TODO Add Edit Friend Functionality
-              <Icon
-                name='person-add'
-                type="MaterialIcons"
-                style={ styles.icon } />
-            </Button>
-          </Right>
-        </Header>
-
-        // TODO Add Search Functionality
-        <Item regular style={{paddingLeft:10}}>
-          <Icon name="ios-search"
-            style={styles.icon}/>
-          <Input placeholder="Search" />
-        </Item>
-
-        <Content>
-            {friendsList}
-        </Content>
-
-      </Container>
-
-    );
-  };
->>>>>>> Added New Profile Layout
-
 }
-
 export default withNavigation(Friends);

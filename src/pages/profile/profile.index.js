@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import { Text, View } from 'react-native';
-import { TabNavigator,TabBarBottom,withNavigation } from 'react-navigation';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
-class Profile extends React.Component {
-    render() {
-      return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>Profile!</Text>
-        </View>
-      );
-    }
-}
-
-export default withNavigation(Profile);
-=======
 import React, {Component} from 'react';
 import {
   View,
@@ -129,10 +111,7 @@ class Profile extends Component {
               <View style={{flexDirection: 'row'}}>
                 <View style={{flexDirection: 'column'}}>
                   <ListItem style={styles.indexLayoutItem}>
-                      <Image
-                        style={{width: 100, borderRadius: 50, height: 100}}
-                        source={{uri: this.state.profile.userImageUrl}}
-                      />
+
                       <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userName}</Text>
                   </ListItem>
 
@@ -209,4 +188,3 @@ class Profile extends Component {
 }
 
 export default withNavigation(Profile);
->>>>>>> Added New Profile Layout
