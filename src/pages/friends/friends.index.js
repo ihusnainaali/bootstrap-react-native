@@ -50,7 +50,7 @@ class Friends extends React.Component {
         };
     };
 
-    async componentWillMount() {
+    async componentDidMount() {
         chatClientHelper = ChatClientHelper.getInstance();
         this.setState({ chatClientHelper });
 
@@ -80,7 +80,7 @@ class Friends extends React.Component {
             });
         });
         this.setState({ user, friendsChannel, friends });
-
+        
         // subscribe to new friends
         operations.SubFriends(user).subscribe({
             next: async (eventData) => {
@@ -104,6 +104,18 @@ class Friends extends React.Component {
                 }
             }
         })
+
+        this._sub = this.props.navigation.addListener(
+            'didFocus',
+            () => {
+                console.log("didFocus");
+                this.setState({friends: this.state.friends});
+            }
+        );
+    }
+
+    componentWillUnmount() {
+        this._sub.remove();
     }
 
     // get the channel name for specific friend
@@ -139,6 +151,7 @@ class Friends extends React.Component {
 
     render() {
         console.log("render: ", this.state);
+        console.log("friends: ", this.state.friends);
         return (
             <Container style={styles.container}>
                 <Header>
