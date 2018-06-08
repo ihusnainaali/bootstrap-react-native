@@ -111,7 +111,14 @@ class Profile extends Component {
               <View style={{flexDirection: 'row'}}>
                 <View style={{flexDirection: 'column'}}>
                   <ListItem style={styles.indexLayoutItem}>
+<<<<<<< HEAD
 
+=======
+                      <Image
+                        style={{width: 100, borderRadius: 50, height: 100}}
+                        source={{uri: this.state.profile.userImageUrl}}
+                      />
+>>>>>>> 599495dfa706f32b448bf361ec7a30159362b76d
                       <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userName}</Text>
                   </ListItem>
 
