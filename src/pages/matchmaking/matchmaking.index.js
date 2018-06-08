@@ -34,7 +34,7 @@ class Matchmaking extends React.Component {
     async componentDidMount() {
         // operations.CreateFriend("RN1", "RN2", "oops").then(resp => console.log(resp)).catch(err => console.log(err));
         // operations.UpdateFriend("RN1", "RN2", "CHid").then(resp => console.log(resp)).catch(err => console.log(err));
-        this.fetchData("Chinese");
+        this.fetchData("English");
         const user = await AsyncStorage.getItem("username");
         this.setState({ user });
     }

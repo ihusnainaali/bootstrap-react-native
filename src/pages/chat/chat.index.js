@@ -2,6 +2,8 @@ import React from 'react';
 import { GiftedChat, Send, Actions } from 'react-native-gifted-chat';
 import { withNavigation } from 'react-navigation';
 import { AsyncStorage, Text, TouchableOpacity, View } from 'react-native';
+import { Button, Icon} from 'native-base';
+
 import { styles } from './chat.style';
 import uuidv4 from 'uuid/v4';
 import operations from '../matchmaking/graphql';
@@ -26,12 +28,25 @@ class Chat extends React.Component {
     }
 
     static navigationOptions = ({ navigation }) => ({
+        headerRight: 
+                <Button transparent
+                    onPress={() => console.log("navigate to profile page.")}>
+                    <Icon
+                        name='person'
+                        type="MaterialIcons"
+                        style={styles.icon} />
+                </Button>
+        ,
         title: navigation.state.params.friend,
         headerTitleStyle: { textAlign: 'center', alignSelf: 'center' },
         headerStyle: {
             backgroundColor: 'white',
         },
     });
+
+    navigateToProfile() {
+        this.props.navigation.navigate('profile');
+    }
 
     componentDidMount() {
         messages = [];
@@ -117,6 +132,7 @@ class Chat extends React.Component {
                 messages={this.state.messages}
                 onSend={messages => this.onSend(messages)}
                 onInputTextChanged={text => this.setState({ text })}
+                onPressAvatar={() => console.log('hello avatar')}
                 user={{
                     _id: 1,
                     name: this.state.user,

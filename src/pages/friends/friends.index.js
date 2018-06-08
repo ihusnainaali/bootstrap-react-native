@@ -35,6 +35,7 @@ class Friends extends React.Component {
         this.state = {
             chatClientHelper: null,
             friendsChannel: {},
+            friends: [],
             user: null,
         };
         this.flag = true;
@@ -59,12 +60,26 @@ class Friends extends React.Component {
         // get all channel sids and store them in state.
         const res = await operations.ListFriends(username);
         friends = {};
-        res.data[operations.LIST_FRIENDS_KEY].items.forEach(friend => {
-            if (friend.channelSid) {
-                friends[friend.friendId] = friend.channelSid;
+        const items = res.data[operations.LIST_FRIENDS_KEY].items.forEach(friend => {
+            channelSid = friend.channelSid;
+            friendId = friend.friendId;
+            if (channelSid && channelSid !== "") {
+                friends[friendId] = channelSid;
+            }
+        });
+        this.setState({ user: username, friendsChannel: friends });
+
+        // subscribe to new friends
+        operations.SubFriends(username).subscribe({
+            next: (eventData) => {
+                friend = eventData.value.data[operations.SUB_FRIENDS_KEY];
+                if (friend.channelSid) {
+                    this.setState(previousState => ({
+                        friendsChannel: previousState.friendsChannel[friend.friendId] = friend.channelSid
+                    }))
+                }
             }
         })
-        this.setState({ user: username, friendsChannel: friends });
     }
 
     // get the channel name for specific friend
