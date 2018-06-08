@@ -42,10 +42,6 @@ class Friends extends React.Component {
       this.props.navigation.navigate('Profile', {friend});
   }
 
-  // And then access them in this.props.navigation.state.params. For example in your DetailsPage:
-  // <Text style={styles.myStyle}>{this.props.navigation.state.params.user.name}</Text>
-
-
   render() {
 
     const friendsList = this.state.friends.map((friend, i) => {

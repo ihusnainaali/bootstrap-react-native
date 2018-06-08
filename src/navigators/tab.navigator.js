@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View, Button} from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, Button, AsyncStorage} from 'react-native';
 import { navigation, createStackNavigator, createBottomTabNavigator, withNavigation } from 'react-navigation';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -12,10 +12,12 @@ import Profile from '../pages/profile/profile.index';
 import Settings from '../pages/settings/settings.index';
 import Matchmaking from '../pages/matchmaking/matchmaking.index';
 import EditProfile from '../pages/profile/profile.edit';
+import AddProfile from '../pages/profile/profile.add';
 
 import { route } from '../routes/routes.constants';
 
 import theme from '../styles/theme.style';
+
 
 // Create Pangyou Stack
 const PangyouStack = createStackNavigator({
@@ -23,7 +25,7 @@ const PangyouStack = createStackNavigator({
     pangyou: {
       screen: Pangyou,
     },
-    matchmaking: { 
+    matchmaking: {
       screen: Matchmaking,
     },
     settings: {
@@ -33,13 +35,13 @@ const PangyouStack = createStackNavigator({
   {
     initialRouteName: 'pangyou',
   }
-  
+
 )
 
 // Create Friends Stack
 const FriendsStack = createStackNavigator({
 
-    friends: { 
+    friends: {
       screen: Friends,
     }
     // TODO add Friend Redirection Profile
@@ -49,11 +51,11 @@ const FriendsStack = createStackNavigator({
     initialRouteName: 'friends',
   }
 )
-  
+
 // Create Journals Stack
 const JournalsStack = createStackNavigator({
 
-    journals: { 
+    journals: {
       screen: Journals,
     }
     // TODO add Specific Journal Redirection
@@ -67,8 +69,11 @@ const JournalsStack = createStackNavigator({
 // Create Profile Stack
 const ProfileStack = createStackNavigator({
 
-    profile: { 
+    profile: {
       screen: Profile,
+    },
+    addprofile: {
+      screen: AddProfile,
     },
     editprofile: {
       screen: EditProfile,
@@ -77,16 +82,16 @@ const ProfileStack = createStackNavigator({
   {
     initialRouteName: 'profile'
   }
-  // TODO add edit profile screen redirection
+
 )
 
 const TabNavigator = createBottomTabNavigator({
-  
+
 		Pangyou: PangyouStack,
 		Friends: FriendsStack,
 		Journals: JournalsStack,
     Profile: ProfileStack
-    
+
   },
   {
     navigationOptions: ({ navigation }) => ({

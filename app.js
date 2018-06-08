@@ -9,7 +9,6 @@ import rootReducer from './src/redux/reducers/index.reducer';
 import AppNavigator from './src/navigators/app.navigator';
 
 import Splash from './src/pages/splash/splash.index';
-import Login from './src/pages/login/login.index';
 
 const store = createStore(rootReducer, devToolsEnhancer({ realtime: true }))
 

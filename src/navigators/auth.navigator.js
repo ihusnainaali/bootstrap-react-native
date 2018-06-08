@@ -16,6 +16,7 @@ import Verification from '../pages/verification/verification.index';
 import ForgetPassword from '../pages/forgetpassword/forgetpassword.index';
 import Pangyou from '../pages/pangyou/pangyou.index';
 
+
 // Log-in Screen
 class LoginScreen extends Component {
 
@@ -45,7 +46,6 @@ const AuthNavigator = StackNavigator({
     Verification: { screen: Verification },
     ForgetPassword: { screen: ForgetPassword }
     },
-    // TODO Change back to Welcome
     { initialRouteName: 'Welcome', }
 );
 

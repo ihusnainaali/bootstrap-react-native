@@ -16,8 +16,8 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 	},
 	titleLogo: {
-		width: 200,
-		height: 450
+		width: 300,
+		height: 532
 	},
 	subtitle: {
 		color: theme.TEXT_COLOR,

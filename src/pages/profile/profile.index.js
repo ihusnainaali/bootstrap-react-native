@@ -9,8 +9,6 @@ import {
 import { Container, Header, Left, Right, Title, Body, Button, Text, Content, Icon, List, ListItem } from 'native-base';
 import { withNavigation, navigation } from 'react-navigation';
 
-import { connect } from 'react-redux';
-
 import { GetProfile, SubscribeToProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
 
@@ -32,14 +30,21 @@ class Profile extends Component {
   };
 
   state = {
-    profile: {},
-    newData: 0,
+    profile: {
+      userName: '',
+      userDescription: '',
+      userStatus: '',
+      userCountry: '',
+      userDob: '',
+      userGender: '',
+      userSchool: '',
+      userMajor: '',
+      userLanguage: '',
+      userLearnLanguage: '',
+      userImageUrl: '',
+    },
     storeUsername: '',
     error: null
-  }
-
-  updateScreen = () => {
-    this.setState({ newData: Math.random() });
   }
 
   async componentDidMount() {
@@ -57,6 +62,10 @@ class Profile extends Component {
             profile: profile.data.getPangyouMobilehub1098576098UserProfile
           })
 
+          if (profile.data.getPangyouMobilehub1098576098UserProfile == null) {
+            this.props.navigation.navigate('editprofile');
+          }
+
       } catch (err) {
           console.log('This is the Error: ', err)
       }
@@ -67,6 +76,7 @@ class Profile extends Component {
                 profile: eventData.value.data.onUpdatePangyouMobilehub1098576098UserProfile
               })
           }
+
       })
 
   }
@@ -95,21 +105,25 @@ class Profile extends Component {
           </Header>
           <Content>
             <View style={styles.indexProfileCard}>
-              if ({ this.state.profile.userImageUrl }) {
-                <Image
-                  style={{width: 300, borderRadius: 150, height: 300}}
-                  source={{uri: this.state.profile.userImageUrl}}
-                />
-              } else {
-                  <Icon type="Ionicons" name='ios-contact' ios="ios-contact" md="md-contact" style={{fontSize: 300, color: 'white', textAlign:'center'}} />
-              }
+              <View style={{flexDirection: 'row'}}>
+                  <Text style={{fontSize: 24, color: 'black', textAlign:'left'}}>{this.state.profile.userName}</Text>
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <View style={{flexDirection: 'column'}}>
+                  <ListItem style={styles.indexLayoutItem}>
+                      <Image
+                        style={{width: 100, borderRadius: 50, height: 100}}
+                        source={{uri: this.state.profile.userImageUrl}}
+                      />
+                      <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userName}</Text>
+                  </ListItem>
+
+                </View>
+              </View>
             </View>
             <View style={styles.indexDescriptionCard}>
                 <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.indexLayoutItem}>
-                        <Icon type="Ionicons" name='ios-contact' ios='ios-contact' md='md-contact' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userName}</Text>
-                    </ListItem>
+
                 </View>
                 <View style={{flexDirection: 'row'}}>
                     <ListItem style={styles.indexLayoutItem}>
@@ -176,12 +190,4 @@ class Profile extends Component {
   }
 }
 
-// export default withNavigation(Profile);
-
-function mapStateToProps(store) {
-    return {
-        username: store.auth.username
-    }
-}
-
-export default connect(mapStateToProps)(withNavigation(Profile));
+export default withNavigation(Profile);

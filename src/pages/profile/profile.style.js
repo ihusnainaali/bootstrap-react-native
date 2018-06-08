@@ -30,8 +30,7 @@ export default StyleSheet.create({
         width: Dimensions.get('window').width,
         height: 320,
         padding: 10,
-        alignItems: 'center',
-        backgroundColor: '#81C784'
+        backgroundColor: '#FFFFFF'
         // backgroundColor: theme.COLOR_PRIMARY_LIGHT
     },
     editProfileCard: {
@@ -57,8 +56,9 @@ export default StyleSheet.create({
     indexLayoutItem: {
       width: Dimensions.get('window').width,
       borderColor: theme.COLOR_PRIMARY_DARK,
-      alignItems: 'center',
-      marginTop: 7
+      marginTop: 7,
+      paddingRight: 40,
+      borderStyle: 'dashed'
     },
     editLayoutItem: {
       width: Dimensions.get('window').width,

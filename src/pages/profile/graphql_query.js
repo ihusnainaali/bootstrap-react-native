@@ -1,5 +1,5 @@
 export const CreateProfile = `
-	mutation createUserProfile($userId: String!, $userName: String!, $userDescription: String!, $userStatus: String!, $userCountry: String!, $userDob: String!, $userGender: String!, $userSchool: String!, $userMajor: String!, $userLanguage: String!, $userLearnLanguage: String!, $userImageUrl: String) {
+	mutation createUserProfile($userId: String!, $userName: String!, $userDescription: String!, $userStatus: String!, $userCountry: String!, $userDob: String!, $userGender: String!, $userSchool: String!, $userMajor: String!, $userLanguage: String!, $userLearnLanguage: String!, $userImageUrl: String!) {
 		createPangyouMobilehub1098576098UserProfile(input: {
 			userId: $userId,
 			userName: $userName,
