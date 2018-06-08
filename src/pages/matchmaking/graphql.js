@@ -7,7 +7,9 @@ const USERS_BY_LANGUAGE_KEY = "queryPangyouMobilehub1098576098UserProfilesByUser
 const GET_FRIENDS_KEY = "getPangyouMobilehub1098576098Friends";
 const UPDATE_FRIENDS_KEY = "updatePangyouMobilehub1098576098Friends";
 const CREATE_FRIENDS_KEY = "createPangyouMobilehub1098576098Friends";
+const LIST_FRIENDS_KEY = "queryPangyouMobilehub1098576098FriendsByUserId";
 const SUB_VIDEO_CHANNEL_KEY = "onUpdatePangyouMobilehub1098576098UserVideoChannel";
+const SUB_FRIENDS_KEY = "onUpdatePangyouMobilehub1098576098Friends";
 
 
 Amplify.configure(aws_config);
@@ -29,24 +31,31 @@ const GetUsersByLanguage = `query QueryUsersByLanguage($userLanguage: String!, $
     }
 }`
 
-const CreateFriend = `mutation CreateFriend($userId: String!, $friendId: String!, $channelSid: String){
+const CreateFriend = `mutation CreateFriend($userId: String!, $friendId: String!){
     createPangyouMobilehub1098576098Friends(input:{
         userId: $userId
         friendId: $friendId
-        channelSid: $channelSid
-      }){
+    }){
         userId
-      }   
+    }   
 }`
 
-const GetFriend = `query GetFriend($userId: String!, $friendId: String!){
-    createPangyouMobilehub1098576098Friends(input:{
-        userId: $userId
-        friendId: $friendId
-        uuid: $uuid
-      }){
+const GetFriend = `query GetFriend($userId: String!, $friendId: String!) {
+	getPangyouMobilehub1098576098Friends(userId: $userId, friendId: $friendId){
         userId
-      }   
+        friendId
+        channelSid
+    }
+}`
+
+const ListFriends = `query ListFriends($userId: String!) {
+    queryPangyouMobilehub1098576098FriendsByUserId(userId: $userId){
+        items{
+            userId
+            friendId
+            channelSid
+        }
+    }
 }`
 
 const UpdateFriend = `mutation UpdateFriend($userId: String!, $friendId: String!, $channelSid: String) {
@@ -90,6 +99,14 @@ const CreateVideoChannel = `mutation CreateVideoChannel($userId: String!) {
     }
 }`
 
+const SubFriends = `subscription SubFriends($userId: String!) {
+    onUpdatePangyouMobilehub1098576098Friends(userId: $userId){
+        userId
+        friendId
+        channelSid
+    }
+}`
+
 const Test = `query Q {
 
     queryPangyouMobilehub1098576098UserProfilesByUserIdNativeLanguage(userId:"test1", first:10, after:""){
@@ -108,25 +125,36 @@ export default {
     SUB_VIDEO_CHANNEL_KEY,
     UPDATE_FRIENDS_KEY,
     CREATE_FRIENDS_KEY,
-    GetUsersByLanguage(userLanguage, first, after){
-        return API.graphql(graphqlOperation(GetUsersByLanguage, {userLanguage, first, after}));
+    LIST_FRIENDS_KEY,
+    SUB_FRIENDS_KEY,
+    GetUsersByLanguage(userLanguage, first, after) {
+        return API.graphql(graphqlOperation(GetUsersByLanguage, { userLanguage, first, after }));
     },
-    SubVideoChannel(userId){
-        return API.graphql(graphqlOperation(SubVideoChannel, {userId}));
+    GetFriend(userId, friendId) {
+        return API.graphql(graphqlOperation(GetFriend, { userId, friendId }));
     },
-    CreateVideoChannel(userId){
-        return API.graphql(graphqlOperation(CreateVideoChannel, {userId}));
+    ListFriends(userId) {
+        return API.graphql(graphqlOperation(ListFriends, { userId }));
     },
-    UpdateVideoChannel(userId, friendId, channelName){
-        return API.graphql(graphqlOperation(UpdateVideoChannel, {userId, friendId, channelName}));
+    SubVideoChannel(userId) {
+        return API.graphql(graphqlOperation(SubVideoChannel, { userId }));
     },
-    CreateFriend(userId, friendId, channelSid=''){
-        return API.graphql(graphqlOperation(CreateFriend, {userId, friendId, channelSid}));
+    CreateVideoChannel(userId) {
+        return API.graphql(graphqlOperation(CreateVideoChannel, { userId }));
     },
-    UpdateFriend(userId, friendId, channelSid){
-        return API.graphql(graphqlOperation(UpdateFriend, {userId, friendId, channelSid}));
+    UpdateVideoChannel(userId, friendId, channelName) {
+        return API.graphql(graphqlOperation(UpdateVideoChannel, { userId, friendId, channelName }));
     },
-    Test(){
-        return API.graphql(graphqlOperation(GetProfile, {userId: 'test3'}));
+    CreateFriend(userId, friendId, channelSid = '') {
+        return API.graphql(graphqlOperation(CreateFriend, { userId, friendId, channelSid }));
+    },
+    UpdateFriend(userId, friendId, channelSid) {
+        return API.graphql(graphqlOperation(UpdateFriend, { userId, friendId, channelSid }));
+    },
+    SubFriends(userId) {
+        return API.graphql(graphqlOperation(SubFriends, { userId }));
+    },
+    Test() {
+        return API.graphql(graphqlOperation(GetProfile, { userId: 'test3' }));
     }
 }
