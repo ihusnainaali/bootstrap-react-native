@@ -25,8 +25,6 @@ class Login extends Component {
         username: '',
         password: '',
         error: '',
-        profileValid: '',
-        profile: {},
         user: {}
     }
 
@@ -46,10 +44,9 @@ class Login extends Component {
 
     signIn() {
         const { username, password } = this.state;
-        const profileStatus = 0;
         this.clearError();
 
-        const profile = API.graphql(graphqlOperation(GetProfile, {userId: this.state.username}))
+        const profileValid = API.graphql(graphqlOperation(GetProfile, {userId: this.state.username}))
           .then(profile => {
             if (!profile.data.getPangyouMobilehub1098576098UserProfile) {
                 this.props.navigation.navigate('AddProfile');
