@@ -5,9 +5,9 @@ import React, { Component } from 'react';
 import { createSwitchNavigator } from 'react-navigation';
 
 import Splash from '../pages/splash/splash.index';
+import AddProfile from '../pages/profile/profile.add';
 import AuthNavigator from './auth.navigator';
 import TabNavigator from './tab.navigator';
-import AddProfile from '../pages/profile/profile.add'
 
 const AppNavigator = createSwitchNavigator(
     {

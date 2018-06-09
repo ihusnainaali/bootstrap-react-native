@@ -7,6 +7,8 @@ import Login from '../pages/login/login.index';
 import Matchmaking from '../pages/matchmaking/matchmaking.index';
 import Pangyou from '../pages/pangyou/pangyou.index';
 import Profile from '../pages/profile/profile.index';
+import AddProfile from '../pages/profile/profile.add';
+import EditProfile from '../pages/profile/profile.edit';
 import Register from '../pages/register/register.index';
 import Settings from '../pages/settings/settings.index';
 import Splash from '../pages/splash/splash.index';
@@ -26,6 +28,8 @@ const {
     MATCHMAKING,
     PANGYOU,
     PROFILE,
+    PROFILEADD,
+    PROFILEEDIT,
     REGISTER,
     SETTINGS,
     SPLASH,
@@ -63,6 +67,14 @@ const routes = [
     {
         name: PROFILE,
         component: Profile
+    },
+    {
+        name: PROFILEADD,
+        component: AddProfile
+    },
+    {
+        name: PROFILEEDIT,
+        component: EditProfile
     },
     {
         name: REGISTER,

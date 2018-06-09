@@ -4,7 +4,8 @@ import {
   StyleSheet,
   ScrollView,
   Image,
-  AsyncStorage
+  AsyncStorage,
+  Dimensions
 } from 'react-native';
 import { Container, Header, Left, Right, Title, Body, Button, Text, Content, Icon, List, ListItem } from 'native-base';
 import { withNavigation, navigation } from 'react-navigation';
@@ -50,7 +51,7 @@ class Profile extends Component {
   async componentDidMount() {
       // Get username from Store
       try {
-        this.storeUsername = await AsyncStorage.getItem('username');
+          this.storeUsername = await AsyncStorage.getItem('username');
       } catch (err) {
           console.log('This is the Store Username Error: ', err)
       }
@@ -84,6 +85,11 @@ class Profile extends Component {
 
   render() {
 
+    const LangTrunc = this.state.profile.userLanguage;
+    const shortLang = LangTrunc.slice(0, 2);
+    const LangLearnTrunc = this.state.profile.userLearnLanguage;
+    const shortLangLearn = LangLearnTrunc.slice(0, 2);
+
     return (
       <ScrollView>
         <Container>
@@ -105,86 +111,137 @@ class Profile extends Component {
           </Header>
           <Content>
             <View style={styles.indexProfileCard}>
-              <View style={{flexDirection: 'row'}}>
-                  <Text style={{fontSize: 24, color: 'black', textAlign:'left'}}>{this.state.profile.userName}</Text>
+              <View style={{flexDirection: 'row', marginTop: 20}}>
+                  <View style={{flexDirection: 'row', justifyContent: 'center', width: Dimensions.get('window').width}}>
+                      <View style={{justifyContent: 'center'}}>
+                          <Text style={styles.topText}>{this.state.profile.userName}</Text>
+                      </View>
+                  </View>
               </View>
-              <View style={{flexDirection: 'row'}}>
-                <View style={{flexDirection: 'column'}}>
-                  <ListItem style={styles.indexLayoutItem}>
-<<<<<<< HEAD
-
-=======
-                      <Image
-                        style={{width: 100, borderRadius: 50, height: 100}}
-                        source={{uri: this.state.profile.userImageUrl}}
-                      />
->>>>>>> 599495dfa706f32b448bf361ec7a30159362b76d
-                      <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userName}</Text>
-                  </ListItem>
-
-                </View>
+              <View style={{flexDirection: 'row', marginTop: 15}}>
+                  <View style={{flexDirection: 'row', justifyContent: 'center', width: Dimensions.get('window').width}}>
+                      <View style={{justifyContent: 'center'}}>
+                          <Image
+                            style={{width: 140, borderRadius: 70, height: 140}}
+                            source={{uri: this.state.profile.userImageUrl}}
+                          />
+                      </View>
+                  </View>
+              </View>
+              <View style={{flexDirection: 'row', marginTop: 8, marginBottom: 20}}>
+                  <View style={{flexDirection: 'row', justifyContent: 'center', width: Dimensions.get('window').width}}>
+                      <View style={{justifyContent: 'center'}}>
+                          <View style={{flexDirection: 'column'}}>
+                              <Text style={{fontSize: 18, color: 'black'}}>{this.state.profile.userGender}</Text>
+                              <View style={{flexDirection: 'row'}}>
+                                  <Text style={{fontSize: 13, color: 'blue'}}>{shortLang}</Text>
+                                  <Text style={{fontSize: 13, color: 'black'}}>/</Text>
+                                  <Text style={{fontSize: 13, color: 'blue'}}>{shortLangLearn}</Text>
+                              </View>
+                              <Text style={{fontSize: 13, color: 'green'}}>{this.state.profile.userStatus}</Text>
+                          </View>
+                      </View>
+                  </View>
+              </View>
+              <View style={{marginTop: 20, marginBottom: 25}}>
+                  <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                      <View style={{width: 140}}><Text style={{fontSize: 16, color: 'grey', textAlign: 'center'}}>Spoken Language</Text></View>
+                      <View style={{width: 140}}><Text style={{fontSize: 16, color: 'grey', textAlign: 'center'}}>Desired Language</Text></View>
+                  </View>
+                  <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                      <View style={{width: 140}}><Text style={{fontSize: 24, color: 'black', fontWeight: 'bold', textAlign: 'center'}}>{this.state.profile.userLanguage}</Text></View>
+                      <View style={{width: 140}}><Text style={{fontSize: 24, color: 'black', fontWeight: 'bold', textAlign: 'center'}}>{this.state.profile.userLearnLanguage}</Text></View>
+                  </View>
               </View>
             </View>
-            <View style={styles.indexDescriptionCard}>
-                <View style={{flexDirection: 'row'}}>
 
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.indexLayoutItem}>
-                        <Icon type="Ionicons" name='ios-clipboard' ios='ios-clipboard' md='md-clipboard' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userDescription}</Text>
-                    </ListItem>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.indexLayoutItem}>
-                        <Icon type="Ionicons" name='ios-heart' ios='ios-heart' md='md-heart' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userStatus}</Text>
-                    </ListItem>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.indexLayoutItem}>
-                        <Icon type="Ionicons" name='ios-pin' ios='ios-pin' md='md-pin' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userCountry}</Text>
-                    </ListItem>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.indexLayoutItem}>
-                        <Icon type="Ionicons" name='ios-calendar' ios='ios-calendar' md='md-calendar' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userDob}</Text>
-                    </ListItem>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.indexLayoutItem}>
-                        <Icon type="Ionicons" name='ios-contacts' ios='ios-contacts' md='md-contacts' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userGender}</Text>
-                    </ListItem>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.indexLayoutItem}>
-                        <Icon type="Ionicons" name='ios-school' ios='ios-school' md='md-school' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userSchool}</Text>
-                    </ListItem>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.indexLayoutItem}>
-                        <Icon type="Ionicons" name='ios-book' ios='ios-book' md='md-book' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userMajor}</Text>
-                    </ListItem>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.indexLayoutItem}>
-                        <Icon type="Ionicons" name='ios-globe' ios='ios-globe' md='md-globe' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userLanguage}</Text>
-                    </ListItem>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                    <ListItem style={styles.indexLayoutItem}>
-                        <Icon type="Ionicons" name='ios-globe' ios='ios-globe' md='md-globe' style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <Text style={{fontSize: 18, color: 'black', textAlign:'left'}}>{this.state.profile.userLearnLanguage}</Text>
-                    </ListItem>
-                </View>
-                <View style={styles.indexProfileBottomGrid}>
-                  <Text>&nbsp;</Text>
+            <View style={{height: 8}}></View>
+
+            <View style={styles.indexProfileCard}>
+              <View style={{marginTop: 15, marginBottom: 15}}>
+                  <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                      <View style={{width: 250}}><Text style={{fontSize: 18, color: 'grey', fontWeight: 'bold', textAlign: 'center'}}>Record a voice message:</Text></View>
+                      <View style={{width: 80}}><Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{fontSize: 30, color: 'red', textAlign: 'center'}} /></View>
+                  </View>
+              </View>
+            </View>
+
+            <View style={{height: 8}}></View>
+
+            <View style={styles.indexProfileCard}>
+              <View style={{flexDirection: 'row', marginTop: 30, marginBottom: 30}}>
+                  <View style={{justifyContent: 'flex-start', marginLeft: 20, marginRight: 15}}>
+                      <View style={{justifyContent: 'center'}}>
+                          <Text style={{fontSize: 16, color: 'black'}}>
+                            {this.state.profile.userDescription}
+                          </Text>
+                      </View>
+                  </View>
+              </View>
+            </View>
+
+            <View style={{height: 8}}></View>
+
+            <View style={styles.indexProfileCard}>
+              <View style={{flexDirection: 'row', marginTop: 20, marginBottom: 20}}>
+                  <View style={{flexDirection: 'row', justifyContent: 'center', width: Dimensions.get('window').width}}>
+                      <View style={{justifyContent: 'center'}}>
+                          <Icon type="Ionicons" name='ios-pin' ios='ios-pin' md='md-pin' style={{fontSize: 30, color: 'grey', textAlign: 'center'}} />
+                          <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>
+                            Location: {this.state.profile.userCountry}
+                          </Text>
+                      </View>
+                  </View>
+              </View>
+            </View>
+
+            <View style={{height: 1}}></View>
+
+            <View style={styles.indexProfileCard}>
+              <View style={{flexDirection: 'row', marginTop: 20, marginBottom: 20}}>
+                  <View style={{flexDirection: 'row', justifyContent: 'center', width: Dimensions.get('window').width}}>
+                      <View style={{justifyContent: 'center'}}>
+                          <Icon type="Ionicons" name='ios-calendar' ios='ios-calendar' md='md-calendar' style={{fontSize: 30, color: 'grey', textAlign: 'center'}} />
+                          <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>
+                            Date of Birth: {this.state.profile.userDob}
+                          </Text>
+                      </View>
+                  </View>
+              </View>
+            </View>
+
+            <View style={{height: 1}}></View>
+
+            <View style={styles.indexProfileCard}>
+              <View style={{flexDirection: 'row', marginTop: 20, marginBottom: 20}}>
+                  <View style={{flexDirection: 'row', justifyContent: 'center', width: Dimensions.get('window').width}}>
+                      <View style={{justifyContent: 'center'}}>
+                          <Icon type="Ionicons" name='ios-school' ios='ios-school' md='md-school' style={{fontSize: 30, color: 'grey', textAlign: 'center'}} />
+                          <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>
+                            School: {this.state.profile.userSchool}
+                          </Text>
+                      </View>
+                  </View>
+              </View>
+            </View>
+
+            <View style={{height: 1}}></View>
+
+            <View style={styles.indexProfileCard}>
+              <View style={{flexDirection: 'row', marginTop: 20, marginBottom: 20}}>
+                  <View style={{flexDirection: 'row', justifyContent: 'center', width: Dimensions.get('window').width}}>
+                      <View style={{justifyContent: 'center'}}>
+                          <Icon type="Ionicons" name='ios-book' ios='ios-book' md='md-book' style={{fontSize: 30, color: 'grey', textAlign: 'center'}} />
+                          <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>
+                            Major: {this.state.profile.userMajor}
+                          </Text>
+                      </View>
+                  </View>
+              </View>
+            </View>
+            <View>
+                <View style={styles.indexProfileCard}>
+                    <View style={{height: 40}}></View>
                 </View>
             </View>
           </Content>

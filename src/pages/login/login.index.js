@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, KeyboardAvoidingView, AsyncStorage} from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import { connect } from 'react-redux';
@@ -12,6 +12,9 @@ import { Container, Button, Header , Left, Right, Title, Content, Icon, Body} fr
 import styles from './login.style';
 import theme from '../../styles/theme.style';
 
+import { GetProfile } from '../profile/graphql_query';
+import { API, graphqlOperation } from 'aws-amplify';
+
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../../../aws-exports';
 Amplify.configure(config);
@@ -22,6 +25,8 @@ class Login extends Component {
         username: '',
         password: '',
         error: '',
+        profileValid: '',
+        profile: {},
         user: {}
     }
 
@@ -41,22 +46,29 @@ class Login extends Component {
 
     signIn() {
         const { username, password } = this.state;
+        const profileStatus = 0;
         this.clearError();
 
-        Auth.signIn(username, password)
-            .then(user => {
-                console.log(user);
-                this.props.onLogin(username, password);
-                this.props.navigation.navigate('Home');
-            })
-            .catch(err => {
-                if (err.code === "UserNotConfirmedException") {
-                    this.props.navigation.navigate('Verification', { username });
-                }
-                else {
-                    this.setError(err.message);
-                }
-            });
+        const profile = API.graphql(graphqlOperation(GetProfile, {userId: this.state.username}))
+          .then(profile => {
+            if (!profile.data.getPangyouMobilehub1098576098UserProfile) {
+                this.props.navigation.navigate('AddProfile');
+            } else {
+              Auth.signIn(username, password)
+                  .then(user => {
+                      this.props.onLogin(username, password);
+                      this.props.navigation.navigate('Home');
+                  })
+                  .catch(err => {
+                      if (err.code === "UserNotConfirmedException") {
+                          this.props.navigation.navigate('Verification', { username });
+                      }
+                      else {
+                          this.setError(err.message);
+                      }
+                  });
+            }
+          });
     }
 
 

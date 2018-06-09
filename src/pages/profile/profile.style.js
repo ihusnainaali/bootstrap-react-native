@@ -28,8 +28,6 @@ export default StyleSheet.create({
   	},
     indexProfileCard: {
         width: Dimensions.get('window').width,
-        height: 320,
-        padding: 10,
         backgroundColor: '#FFFFFF'
         // backgroundColor: theme.COLOR_PRIMARY_LIGHT
     },
@@ -56,13 +54,8 @@ export default StyleSheet.create({
     indexLayoutItem: {
       width: Dimensions.get('window').width,
       borderColor: theme.COLOR_PRIMARY_DARK,
-      marginTop: 7,
-<<<<<<< HEAD
-      paddingRight: 40
-=======
-      paddingRight: 40,
-      borderStyle: 'dashed'
->>>>>>> 599495dfa706f32b448bf361ec7a30159362b76d
+      marginTop: 5,
+      alignItems: 'flex-start'
     },
     editLayoutItem: {
       width: Dimensions.get('window').width,
@@ -82,6 +75,12 @@ export default StyleSheet.create({
     		textAlign: 'center',
     		color: theme.TEXT_COLOR
     },
+    topText: {
+        fontFamily: theme.FONT_BOLD,
+        fontSize: 28,
+        fontWeight: 'bold',
+        color: 'black'
+    },
     input: {
       fontSize: 18,
       borderRadius: 0,
@@ -95,8 +94,7 @@ export default StyleSheet.create({
       borderColor: theme.COLOR_PRIMARY,
       paddingTop: 30,
       paddingBottom: 30,
-  		alignItems: 'center',
-      backgroundColor: '#81C784'
+  		alignItems: 'center'
   	},
     editProfileBottomGrid: {
       width: Dimensions.get('window').width,
