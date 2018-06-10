@@ -18,7 +18,7 @@ import {
 import { withNavigation } from 'react-navigation';
 import TextField from '../../components/textfield/textfield.component';
 import Button from '../../components/button/button.component';
-import { Container, Header, Text, Content, Icon, List, ListItem } from 'native-base';
+import { Container, Header, Left, Right, Title, Text, Body, Content, Icon, List, ListItem, Picker } from 'native-base';
 
 import { GetProfile, UpdateProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
@@ -29,26 +29,33 @@ import { RNS3 } from 'react-native-aws3';
 import styles from './profile.style';
 import theme from '../../styles/theme.style';
 
+import DatePicker from 'react-native-datepicker';
+
 
 type Props = {};
 class EditProfile extends Component<Props> {
 
-  state = {
-    editProfile: {},
-    refreshData: '',
-    storeUsername: '',
-    userName: '',
-    userDescription: '',
-    userStatus: '',
-    userCountry: '',
-    userDob: '',
-    userGender: '',
-    userSchool: '',
-    userMajor: '',
-    userLanguage: '',
-    userLearnLanguage: '',
-    userImageUrl: '',
-    error: null
+  constructor(props){
+      super(props);
+
+      this.state = {
+        date:'',
+        editProfile: {},
+        refreshData: '',
+        storeUsername: '',
+        userName: '',
+        userDescription: '',
+        userStatus: '',
+        userCountry: '',
+        userDob: '',
+        userGender: '',
+        userSchool: '',
+        userMajor: '',
+        userLanguage: '',
+        userLearnLanguage: '',
+        userImageUrl: '',
+        error: null
+      }
   }
 
   onChangeText = (key) => {
@@ -117,10 +124,33 @@ class EditProfile extends Component<Props> {
           })
     		  await API.graphql(graphqlOperation(UpdateProfile, editProfile));
           this.props.navigation.navigate('profile');
-    	} catch (err) {
-          console.log("Update Error: ", err);
-          this.setError(err.message);
-    	}
+        } catch (err) {
+            this.setError(err.message);
+            console.log("Update Error: ", err);
+            if (this.state.userName == "") {
+                alert('Please enter a User Name!');
+            } else if (this.state.userDescription == "") {
+                alert('Please enter a Description!');
+            } else if (this.state.userStatus == "") {
+                alert('Please enter a Status!');
+            } else if (this.state.userCountry == "") {
+                alert('Please enter a Country!');
+            } else if (this.state.userDob == "") {
+                alert('Please enter your Date of Birth!');
+            } else if (this.state.userGender == "") {
+                alert('Please enter your Gender!');
+            } else if (this.state.userSchool == "") {
+                alert('Please enter the School you graduated from!');
+            } else if (this.state.userMajor == "") {
+                alert('Please enter your School Major!');
+            } else if (this.state.userLanguage == "") {
+                alert('Please enter your First spoken Language!');
+            } else if (this.state.userLearnLanguage == "") {
+                alert('Please enter the desired Language you would like to learn!');
+            } else if (this.state.userImageUrl == "") {
+                alert('Please choose a Profile Photo by tapping the user icon located at the top of this page!');
+            }
+        }
 
   }
 
@@ -163,24 +193,24 @@ class EditProfile extends Component<Props> {
 
   render() {
 
+    const userPhoto = <View style={styles.editProfileCard}><TouchableOpacity activeOpacity = { .5 } onPress={ this.getImage.bind(this) }><Image style={{width: 140, borderRadius: 70, height: 140}} source={{uri: this.state.editProfile.userImageUrl}} /></TouchableOpacity></View>
+
+    const userIcon = <View style={styles.editProfileCard}><Icon onPress={this.getImage.bind(this)} type="Ionicons" name='ios-contact' ios="ios-contact" md="md-contact" style={{fontSize: 200, color: 'white', textAlign:'center'}} /></View>
+
+    let userProfilePhoto;
+    if (!this.state.editProfile.userImageUrl) {
+        userProfilePhoto = userPhoto
+    } else {
+        userProfilePhoto = userIcon
+    }
+
     return (
 
       <ScrollView>
         <KeyboardAvoidingView behavior='padding' style={styles.profileWrapper}>
           <Container>
             <Content>
-              <View style={styles.editProfileCard}>
-                  if ({this.state.editProfile.userImageUrl != ""}) {
-                    <TouchableOpacity activeOpacity = { .5 } onPress={ this.getImage.bind(this) }>
-                        <Image
-                          style={{width: 290, borderRadius: 145, height: 290}}
-                          source={{uri: this.state.editProfile.userImageUrl}}
-                        />
-                    </TouchableOpacity>
-                  } else {
-                      <Icon onPress={this.getImage.bind(this)} type="Ionicons" name='ios-contact' ios="ios-contact" md="md-contact" style={{fontSize: 300, color: 'white', textAlign:'center'}} />
-                  }
-              </View>
+              {userProfilePhoto}
               <View style={styles.editDescriptionCard}>
                   <View style={{flexDirection: 'row'}}>
                       <ListItem style={styles.editLayoutItem}>
@@ -197,7 +227,6 @@ class EditProfile extends Component<Props> {
                             keyboardType='email-address'
                             autoCapitalize='none'
                             autoCorrect={false}
-                            // onChangeText={(userName) => this.setState({userName})}
                             onChangeText={this.onChangeText('userName').bind(this)}
                             name='userName'
                             value={this.state.editProfile.userName}
@@ -234,17 +263,23 @@ class EditProfile extends Component<Props> {
                           ios='ios-heart'
                           md='md-heart'
                           style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <TextField
-                          placeholder='Status'
-                          placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                          returnKeyType='next'
-                          keyboardType='email-address'
-                          autoCapitalize='none'
-                          autoCorrect={false}
-                          onChangeText={this.onChangeText('userStatus').bind(this)}
-                          value={this.state.editProfile.userStatus}
-                          style={styles.input}
-                        />
+                        <Picker
+                          mode="dropdown"
+                          iosIcon={<Icon name="ios-arrow-down-outline" />}
+                          placeholder="Select your Status"
+                          placeholderStyle={{ color: theme.COLOR_PRIMARY_DARK }}
+                          placeholderIconColor={theme.COLOR_PRIMARY_DARK}
+                          headerStyle={{ backgroundColor: theme.COLOR_PRIMARY_DARK }}
+                          headerBackButtonTextStyle={{ color: "#fff" }}
+                          headerTitleStyle={{ color: "#fff" }}
+                          textStyle={{fontSize: 18, fontWeight: 'bold'}}
+                          style={{ width: 200 }}
+                          selectedValue={this.state.editProfile.userStatus}
+                          onValueChange={ (value) => {this.setState({userStatus: value}) }}
+                        >
+                          <Picker.Item label="Online" value="Online" />
+                          <Picker.Item label="Offline" value="Offline" />
+                        </Picker>
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
@@ -269,22 +304,30 @@ class EditProfile extends Component<Props> {
                 </View>
                 <View style={{flexDirection: 'row'}}>
                     <ListItem style={styles.editLayoutItem}>
-                        <Icon
-                          type='Ionicons'
-                          name='ios-calendar'
-                          ios='ios-calendar'
-                          md='md-calendar'
-                          style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <TextField
-                          placeholder='Date of Birth'
-                          placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                          returnKeyType='next'
-                          autoCapitalize='none'
-                          autoCorrect={false}
-                          onChangeText={this.onChangeText('userDob').bind(this)}
-                          value={this.state.editProfile.userDob}
-                          style={styles.input}
-                        />
+                          <DatePicker
+                            style={{marginLeft: 15, width: 320}}
+                            date={this.state.editProfile.userDob}
+                            mode="date"
+                            placeholder="select date"
+                            format="YYYY-MM-DD"
+                            minDate="1930-01-01"
+                            maxDate="2020-01-01"
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                              dateIcon: {
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0
+                              },
+                              dateInput: {
+                                marginLeft: 45
+                              }
+                            }}
+                            onDateChange={(date) => {this.setState({date: date})}}
+                            onValueChange={ (value) => {this.setState({userDob: value}) }}
+                          />
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
@@ -295,16 +338,23 @@ class EditProfile extends Component<Props> {
                           ios='ios-contacts'
                           md='md-contacts'
                           style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <TextField
-                          placeholder='Gender'
-                          placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                          returnKeyType='next'
-                          autoCapitalize='none'
-                          autoCorrect={false}
-                          onChangeText={this.onChangeText('userGender').bind(this)}
-                          value={this.state.editProfile.userGender}
-                          style={styles.input}
-                        />
+                        <Picker
+                          mode="dropdown"
+                          iosIcon={<Icon name="ios-arrow-down-outline" />}
+                          placeholder="Select your Gender"
+                          placeholderStyle={{ color: theme.COLOR_PRIMARY_DARK }}
+                          placeholderIconColor={theme.COLOR_PRIMARY_DARK}
+                          headerStyle={{ backgroundColor: theme.COLOR_PRIMARY_DARK }}
+                          headerBackButtonTextStyle={{ color: "#fff" }}
+                          headerTitleStyle={{ color: "#fff" }}
+                          textStyle={{fontSize: 18, fontWeight: 'bold'}}
+                          style={{ width: 200 }}
+                          selectedValue={this.state.userGender}
+                          onValueChange={ (value) => {this.setState({userGender: value}) }}
+                        >
+                          <Picker.Item label="Male" value="Male" />
+                          <Picker.Item label="Female" value="Female" />
+                        </Picker>
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>

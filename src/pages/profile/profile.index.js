@@ -85,10 +85,23 @@ class Profile extends Component {
 
   render() {
 
-    const LangTrunc = this.state.profile.userLanguage;
-    const shortLang = LangTrunc.slice(0, 2);
-    const LangLearnTrunc = this.state.profile.userLearnLanguage;
-    const shortLangLearn = LangLearnTrunc.slice(0, 2);
+    const manIcon = <Text><Icon type="Ionicons" name='ios-man' ios='ios-man' md='md-man' style={{fontSize: 30, color: 'grey', textAlign: 'center'}} /></Text>;
+    const womanIcon = <Text><Icon type="Ionicons" name='ios-woman' ios='ios-woman' md='md-woman' style={{fontSize: 30, color: 'grey', textAlign: 'center'}} /></Text>;
+    let genderIcon;
+    if (this.state.profile.userGender === 'Male') {
+        genderIcon = manIcon
+    } else {
+        genderIcon = womanIcon
+    }
+
+    const statusColorOnline = <Text style={{fontSize: 16, color: 'green'}}>{this.state.profile.userStatus}</Text>
+    const statusColorOffline = <Text style={{fontSize: 16, color: 'lightgrey'}}>{this.state.profile.userStatus}</Text>
+    let statusColor;
+    if (this.state.profile.userStatus == 'Online') {
+        statusColor = statusColorOnline
+    } else {
+        statusColor = statusColorOffline
+    }
 
     return (
       <ScrollView>
@@ -111,10 +124,19 @@ class Profile extends Component {
           </Header>
           <Content>
             <View style={styles.indexProfileCard}>
+            <View style={{flexDirection: 'row', marginTop: 8, marginLeft: -20}}>
+                <View style={{flexDirection: 'row', justifyContent: 'flex-end', width: Dimensions.get('window').width}}>
+                    <View style={{justifyContent: 'center'}}>
+                        <View style={{flexDirection: 'column'}}>
+                            {statusColor}
+                        </View>
+                    </View>
+                </View>
+            </View>
               <View style={{flexDirection: 'row', marginTop: 20}}>
                   <View style={{flexDirection: 'row', justifyContent: 'center', width: Dimensions.get('window').width}}>
                       <View style={{justifyContent: 'center'}}>
-                          <Text style={styles.topText}>{this.state.profile.userName}</Text>
+                          <Text style={styles.topText}>{genderIcon} {this.state.profile.userName}</Text>
                       </View>
                   </View>
               </View>
@@ -128,29 +150,14 @@ class Profile extends Component {
                       </View>
                   </View>
               </View>
-              <View style={{flexDirection: 'row', marginTop: 8, marginBottom: 20}}>
-                  <View style={{flexDirection: 'row', justifyContent: 'center', width: Dimensions.get('window').width}}>
-                      <View style={{justifyContent: 'center'}}>
-                          <View style={{flexDirection: 'column'}}>
-                              <Text style={{fontSize: 18, color: 'black'}}>{this.state.profile.userGender}</Text>
-                              <View style={{flexDirection: 'row'}}>
-                                  <Text style={{fontSize: 13, color: 'blue'}}>{shortLang}</Text>
-                                  <Text style={{fontSize: 13, color: 'black'}}>/</Text>
-                                  <Text style={{fontSize: 13, color: 'blue'}}>{shortLangLearn}</Text>
-                              </View>
-                              <Text style={{fontSize: 13, color: 'green'}}>{this.state.profile.userStatus}</Text>
-                          </View>
-                      </View>
-                  </View>
-              </View>
               <View style={{marginTop: 20, marginBottom: 25}}>
                   <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-                      <View style={{width: 140}}><Text style={{fontSize: 16, color: 'grey', textAlign: 'center'}}>Spoken Language</Text></View>
-                      <View style={{width: 140}}><Text style={{fontSize: 16, color: 'grey', textAlign: 'center'}}>Desired Language</Text></View>
+                      <View style={{width: 140}}><Text style={{fontSize: 16, color: 'grey', textAlign: 'center'}}>Spoken Language:</Text></View>
+                      <View style={{width: 140}}><Text style={{fontSize: 16, color: 'grey', textAlign: 'center'}}>Desired Language:</Text></View>
                   </View>
                   <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-                      <View style={{width: 140}}><Text style={{fontSize: 24, color: 'black', fontWeight: 'bold', textAlign: 'center'}}>{this.state.profile.userLanguage}</Text></View>
-                      <View style={{width: 140}}><Text style={{fontSize: 24, color: 'black', fontWeight: 'bold', textAlign: 'center'}}>{this.state.profile.userLearnLanguage}</Text></View>
+                      <View style={{width: 140}}><Text style={{fontSize: 18, color: 'black', fontWeight: 'bold', textAlign: 'center'}}>{this.state.profile.userLanguage}</Text></View>
+                      <View style={{width: 140}}><Text style={{fontSize: 18, color: 'black', fontWeight: 'bold', textAlign: 'center'}}>{this.state.profile.userLearnLanguage}</Text></View>
                   </View>
               </View>
             </View>

@@ -18,7 +18,7 @@ import {
 import { withNavigation, navigation } from 'react-navigation';
 import TextField from '../../components/textfield/textfield.component';
 import Button from '../../components/button/button.component';
-import { Container, Header, Left, Right, Title, Text, Body, Content, Icon, List, ListItem } from 'native-base';
+import { Container, Header, Left, Right, Title, Text, Body, Content, Icon, List, ListItem, Picker } from 'native-base';
 
 import { CreateProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
@@ -29,32 +29,40 @@ import { RNS3 } from 'react-native-aws3';
 import styles from './profile.style';
 import theme from '../../styles/theme.style';
 
+import DatePicker from 'react-native-datepicker';
+
 
 type Props = {};
 class AddProfile extends Component<Props> {
+
+  constructor(props){
+      super(props);
+
+      this.state = {
+        date:'',
+        loginUsername: this.props.navigation.getParam("username"),
+        addProfile: {},
+        asyncUsername: '',
+        userName: '',
+        userDescription: '',
+        userStatus: '',
+        userCountry: '',
+        userDob: '',
+        userGender: '',
+        userSchool: '',
+        userMajor: '',
+        userLanguage: '',
+        userLearnLanguage: '',
+        userImageUrl: '',
+        error: null
+      }
+  }
 
   static navigationOptions = ({ navigation }) => {
     return {
       header: null
     };
   };
-
-  state = {
-    addProfile: {},
-    storeUsername: '',
-    userName: '',
-    userDescription: '',
-    userStatus: '',
-    userCountry: '',
-    userDob: '',
-    userGender: '',
-    userSchool: '',
-    userMajor: '',
-    userLanguage: '',
-    userLearnLanguage: '',
-    userImageUrl: '',
-    error: null
-  }
 
   onChangeText = (key) => {
     return (value) => this.setState({
@@ -70,21 +78,11 @@ class AddProfile extends Component<Props> {
 		this.setState({error: ''});
 	}
 
-  async componentDidMount() {
-      // Get username from Store
-      try {
-          this.storeUsername = await AsyncStorage.getItem('username');
-          console.log(this.storeUsername);
-      } catch (err) {
-          console.log('This is the Store Username Error: ', err)
-      }
-  }
-
   async addProfile() {
 
     	try {
       		addProfile = {
-              userId: this.storeUsername,
+              userId: this.state.loginUsername,
     			    userName: this.state.userName,
               userDescription: this.state.userDescription,
               userStatus: this.state.userStatus,
@@ -184,7 +182,7 @@ class AddProfile extends Component<Props> {
             </Header>
             <Content>
               <View style={styles.editProfileCard}>
-                  <Icon onPress={this.getImage.bind(this)} type="Ionicons" name='ios-contact' ios="ios-contact" md="md-contact" style={{fontSize: 300, color: 'white', textAlign:'center'}} />
+                  <Icon onPress={this.getImage.bind(this)} type="Ionicons" name='ios-contact' ios="ios-contact" md="md-contact" style={{fontSize: 140, color: 'grey', textAlign:'center'}} />
               </View>
               <View style={styles.editDescriptionCard}>
                   <View style={{flexDirection: 'row'}}>
@@ -225,7 +223,6 @@ class AddProfile extends Component<Props> {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={(userDescription) => this.setState({userDescription})}
-                          // onChangeText={this.onChangeText('userDescription').bind(this)}
                           value=''
                           style={styles.input}
                         />
@@ -239,18 +236,23 @@ class AddProfile extends Component<Props> {
                           ios='ios-heart'
                           md='md-heart'
                           style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <TextField
-                          placeholder='Status'
-                          placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                          returnKeyType='next'
-                          keyboardType='email-address'
-                          autoCapitalize='none'
-                          autoCorrect={false}
-                          onChangeText={(userStatus) => this.setState({userStatus})}
-                          // onChangeText={this.onChangeText('userStatus').bind(this)}
-                          value=''
-                          style={styles.input}
-                        />
+                        <Picker
+                          mode="dropdown"
+                          iosIcon={<Icon name="ios-arrow-down-outline" />}
+                          placeholder="Select your Status"
+                          placeholderStyle={{ color: theme.COLOR_PRIMARY_DARK }}
+                          placeholderIconColor={theme.COLOR_PRIMARY_DARK}
+                          headerStyle={{ backgroundColor: theme.COLOR_PRIMARY_DARK }}
+                          headerBackButtonTextStyle={{ color: "#fff" }}
+                          headerTitleStyle={{ color: "#fff" }}
+                          textStyle={{fontSize: 18, fontWeight: 'bold'}}
+                          style={{ width: 200 }}
+                          selectedValue={this.state.userStatus}
+                          onValueChange={ (value) => {this.setState({userStatus: value}) }}
+                        >
+                          <Picker.Item label="Online" value="Online" />
+                          <Picker.Item label="Offline" value="Offline" />
+                        </Picker>
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
@@ -268,7 +270,6 @@ class AddProfile extends Component<Props> {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={(userCountry) => this.setState({userCountry})}
-                          // onChangeText={this.onChangeText('userCountry').bind(this)}
                           value=''
                           style={styles.input}
                         />
@@ -276,22 +277,29 @@ class AddProfile extends Component<Props> {
                 </View>
                 <View style={{flexDirection: 'row'}}>
                     <ListItem style={styles.editLayoutItem}>
-                        <Icon
-                          type='Ionicons'
-                          name='ios-calendar'
-                          ios='ios-calendar'
-                          md='md-calendar'
-                          style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <TextField
-                          placeholder='Date of Birth'
-                          placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                          returnKeyType='next'
-                          autoCapitalize='none'
-                          autoCorrect={false}
-                          onChangeText={(userDob) => this.setState({userDob})}
-                          // onChangeText={this.onChangeText('userDob').bind(this)}
-                          value=''
-                          style={styles.input}
+                        <DatePicker
+                          style={{marginLeft: 15, width: 320}}
+                          date={this.state.date}
+                          mode="date"
+                          placeholder="select date"
+                          format="YYYY-MM-DD"
+                          minDate="1930-01-01"
+                          maxDate="2020-01-01"
+                          confirmBtnText="Confirm"
+                          cancelBtnText="Cancel"
+                          customStyles={{
+                            dateIcon: {
+                              position: 'absolute',
+                              left: 0,
+                              top: 4,
+                              marginLeft: 0
+                            },
+                            dateInput: {
+                              marginLeft: 45
+                            }
+                          }}
+                          onDateChange={(date) => {this.setState({date: date})}}
+                          onValueChange={ (value) => {this.setState({userDob: value}) }}
                         />
                     </ListItem>
                 </View>
@@ -302,18 +310,24 @@ class AddProfile extends Component<Props> {
                           name='ios-contacts'
                           ios='ios-contacts'
                           md='md-contacts'
-                          style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <TextField
-                          placeholder='Gender'
-                          placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                          returnKeyType='next'
-                          autoCapitalize='none'
-                          autoCorrect={false}
-                          onChangeText={(userGender) => this.setState({userGender})}
-                          // onChangeText={this.onChangeText('userGender').bind(this)}
-                          value=''
-                          style={styles.input}
-                        />
+                          style={{fontSize: 30, color: 'grey', textAlign:'center', width: 55}} />
+                        <Picker
+                          mode="dropdown"
+                          iosIcon={<Icon name="ios-arrow-down-outline" />}
+                          placeholder="Select your Gender"
+                          placeholderStyle={{ color: theme.COLOR_PRIMARY_DARK }}
+                          placeholderIconColor={theme.COLOR_PRIMARY_DARK}
+                          headerStyle={{ backgroundColor: theme.COLOR_PRIMARY_DARK }}
+                          headerBackButtonTextStyle={{ color: "#fff" }}
+                          headerTitleStyle={{ color: "#fff" }}
+                          textStyle={{fontSize: 18, fontWeight: 'bold'}}
+                          style={{ width: 200 }}
+                          selectedValue={this.state.userGender}
+                          onValueChange={ (value) => {this.setState({userGender: value}) }}
+                        >
+                          <Picker.Item label="Male" value="Male" />
+                          <Picker.Item label="Female" value="Female" />
+                        </Picker>
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
@@ -331,7 +345,6 @@ class AddProfile extends Component<Props> {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={(userSchool) => this.setState({userSchool})}
-                          // onChangeText={this.onChangeText('userSchool').bind(this)}
                           value=''
                           style={styles.input}
                         />
@@ -352,7 +365,6 @@ class AddProfile extends Component<Props> {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={(userMajor) => this.setState({userMajor})}
-                          // onChangeText={this.onChangeText('userMajor').bind(this)}
                           value=''
                           style={styles.input}
                         />
@@ -373,7 +385,6 @@ class AddProfile extends Component<Props> {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={(userLanguage) => this.setState({userLanguage})}
-                          // onChangeText={this.onChangeText('userLanguage').bind(this)}
                           value=''
                           style={styles.input}
                         />
@@ -394,7 +405,6 @@ class AddProfile extends Component<Props> {
                           autoCapitalize='none'
                           autoCorrect={false}
                           onChangeText={(userLearnLanguage) => this.setState({userLearnLanguage})}
-                          // onChangeText={this.onChangeText('userLearnLanguage').bind(this)}
                           value=''
                           style={styles.input}
                         />

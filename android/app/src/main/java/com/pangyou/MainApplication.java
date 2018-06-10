@@ -3,6 +3,7 @@ package com.pangyou;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rnim.rn.audio.ReactNativeAudioPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.twiliorn.library.TwilioPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeAudioPackage(),
             new ImagePickerPackage(),
             new TwilioPackage(),
             new VectorIconsPackage(),

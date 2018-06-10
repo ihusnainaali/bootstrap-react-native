@@ -43,29 +43,31 @@ class Login extends Component {
     }
 
     signIn() {
-        const { username, password } = this.state;
         this.clearError();
+        const { username, password } = this.state;
 
-        const profileValid = API.graphql(graphqlOperation(GetProfile, {userId: this.state.username}))
-          .then(profile => {
-            if (!profile.data.getPangyouMobilehub1098576098UserProfile) {
-                this.props.navigation.navigate('AddProfile');
-            } else {
-              Auth.signIn(username, password)
-                  .then(user => {
-                      this.props.onLogin(username, password);
-                      this.props.navigation.navigate('Home');
-                  })
-                  .catch(err => {
-                      if (err.code === "UserNotConfirmedException") {
-                          this.props.navigation.navigate('Verification', { username });
-                      }
-                      else {
-                          this.setError(err.message);
-                      }
-                  });
-            }
-          });
+        Auth.signIn(username, password)
+            .then(user => {
+                // Assign username and password to Redux Store
+                this.props.onLogin(username, password);
+                // Check to see if user has a profile
+                const profileValid = API.graphql(graphqlOperation(GetProfile, {userId: this.state.username}))
+                  .then(profile => {
+                    if (!profile.data.getPangyouMobilehub1098576098UserProfile) {
+                        this.props.navigation.navigate('AddProfile', {username: username});
+                    } else {
+                        this.props.navigation.navigate('Home');
+                    }
+                });
+            })
+            .catch(err => {
+                if (err.code === "UserNotConfirmedException") {
+                    this.props.navigation.navigate('Verification', { username });
+                }
+                else {
+                    this.setError(err.message);
+                }
+            });
     }
 
 

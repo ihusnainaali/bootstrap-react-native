@@ -33,10 +33,11 @@ export default StyleSheet.create({
     },
     editProfileCard: {
         width: Dimensions.get('window').width,
-        height: 320,
+        height: 170,
         padding: 10,
+        paddingTop: 20,
         alignItems: 'center',
-        backgroundColor: '#90CAF9'
+        backgroundColor: '#FFFFFF'
         // backgroundColor: theme.COLOR_PRIMARY_LIGHT
     },
     indexDescriptionCard: {
@@ -102,7 +103,7 @@ export default StyleSheet.create({
       paddingTop: 30,
       paddingBottom: 30,
   		alignItems: 'center',
-      backgroundColor: '#90CAF9'
+      backgroundColor: theme.COLOR_PRIMARY_DARK
   	},
   	icon: {
   		padding: 10,
