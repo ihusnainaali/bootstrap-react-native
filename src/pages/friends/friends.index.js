@@ -1,16 +1,17 @@
 import React from 'react';
-import { Text, View, Image, TouchableOpacity, AsyncStorage } from 'react-native';
+import { Text, View, ListView, FlatList, SectionList, Image, TouchableOpacity, AsyncStorage } from 'react-native';
 import { withNavigation, navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Thumbnail, Item, List, ListItem, Input, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
 import ChatClientHelper from '../../utils/twilio';
 import operations from '../matchmaking/graphql';
+import Row from './row';
+import SectionHeader from './sectionheader';
 
 import styles from './friends.style';
 import theme from '../../styles/theme.style';
 
 import { route } from '../../routes/routes.constants';
-import Example from './example';
 
 let items = ['Simon Mignolet', 'Nathaniel Clyne', 'Dejan Lovren', 'Mama Sakho', 'Emre Can'];
 
@@ -32,10 +33,12 @@ class Friends extends React.Component {
 
     constructor(props) {
         super(props);
+        this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
             chatClientHelper: null,
             friendsChannel: {},
             friends: [],
+            search: "",
             user: null,
         };
         this.flag = true;
@@ -80,7 +83,8 @@ class Friends extends React.Component {
             });
         });
         this.setState({ user, friendsChannel, friends });
-        
+
+
         // subscribe to new friends
         operations.SubFriends(user).subscribe({
             next: async (eventData) => {
@@ -93,13 +97,13 @@ class Friends extends React.Component {
                     this.setState(previousState => {
                         friends = previousState.friends;
                         friendsChannel = previousState.friendsChannel;
-                        friends.push({
+                        friendProfile && friends.push({
                             name: friendProfile.userId,
                             avatar_url: friendProfile.userImageUrl,
                             subtitle: friendProfile.userStatus
                         })
                         friendsChannel[friendId] = channelSid;
-                        return ({friends, friendsChannel});
+                        return ({ friends, friendsChannel });
                     });
                 }
             }
@@ -109,7 +113,7 @@ class Friends extends React.Component {
             'didFocus',
             () => {
                 console.log("didFocus");
-                this.setState({friends: this.state.friends});
+                this.forceUpdate();
             }
         );
     }
@@ -149,9 +153,51 @@ class Friends extends React.Component {
             .catch(console.log);
     }
 
+    // For List View
+    formatData(data) {
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+        var formatedData = [];
+
+        for (let sectionId = 0; sectionId < alphabet.length; sectionId++) {
+            const currentChar = alphabet[sectionId];
+            const users = data.filter((user) => user.name.charAt(0).toUpperCase() === currentChar);
+            if (users.length > 0) {
+                formatedData.push({ data: users, key: currentChar });
+            }
+        }
+
+        return formatedData;
+    }
+
+    renderItem({ item }) {
+        return (
+            <ListItem avatar onPress={() => { this.chatWithFriend(item.name, item.avatar_url); }}>
+                <Left>
+                    <Thumbnail style={styles.photo} source={{ uri: item.avatar_url }} />
+                </Left>
+                <Body>
+                    <Text style={styles.text_name}>{item.name}</Text>
+                    <Text style={styles.text_subtitle} note>{item.subtitle}</Text>
+                </Body>
+                <Right>
+                </Right>
+            </ListItem>
+        );
+    }
+
+    renderSectionHeader({ section }) {
+        return (
+            <View style={styles.sectionHeader}>
+                <Text style={styles.text}>{section.key}</Text>
+            </View>
+        );
+    }
+
     render() {
-        console.log("render: ", this.state);
-        console.log("friends: ", this.state.friends);
+        const friends = this.state.friends;
+        const search = this.state.search;
+        const data = search ? friends.filter(item => item.name.includes(search)) : this.formatData(friends);
+
         return (
             <Container style={styles.container}>
                 <Header>
@@ -170,28 +216,30 @@ class Friends extends React.Component {
                     </Right>
                 </Header>
 
-                // TODO Add Search Functionality
                 <Item regular style={{ paddingLeft: 10 }}>
                     <Icon name="ios-search"
                         style={styles.icon} />
-                    <Input placeholder="Search" />
+                    <Input
+                        placeholder="Search"
+                        onChangeText={search => this.setState({ search })} />
                 </Item>
 
                 <Content>
-                    <List dataArray={this.state.friends}
-                        renderRow={(item) =>
-                            <ListItem avatar onPress={() => { this.chatWithFriend(item.name, item.avatar_url); }}>
-                                <Left>
-                                    <Thumbnail source={{ uri: item.avatar_url }} />
-                                </Left>
-                                <Body>
-                                    <Text style={styles.text_name}>{item.name}</Text>
-                                    <Text style={styles.text_subtitle} note>{item.subtitle}</Text>
-                                </Body>
-                                <Right>
-                                </Right>
-                            </ListItem>
-                        }>
+                    <List>
+                        {this.state.search ?
+                            <FlatList
+                                data={data}
+                                keyExtractor={item => item.name}
+                                renderItem={this.renderItem}
+                            />
+                            :
+                            <SectionList
+                                keyExtractor={item => item.name}
+                                renderItem={this.renderItem}
+                                renderSectionHeader={this.renderSectionHeader}
+                                sections={data}
+                            />
+                        }
                     </List>
                 </Content>
             </Container>

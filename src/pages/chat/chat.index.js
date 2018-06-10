@@ -2,7 +2,7 @@ import React from 'react';
 import { GiftedChat, Send, Actions } from 'react-native-gifted-chat';
 import { withNavigation } from 'react-navigation';
 import { AsyncStorage, Text, TouchableOpacity, View } from 'react-native';
-import { Button, Icon} from 'native-base';
+import { Button, Icon } from 'native-base';
 
 import { styles } from './chat.style';
 import uuidv4 from 'uuid/v4';
@@ -25,17 +25,19 @@ class Chat extends React.Component {
         this.parseMessage.bind(this);
         this.setMessages.bind(this);
         this.renderCustomActions.bind(this);
+        this.navigateToProfile.bind(this);
     }
 
+    // TODO change hardcode profile to nav const.
     static navigationOptions = ({ navigation }) => ({
-        headerRight: 
-                <Button transparent
-                    onPress={() => console.log("navigate to profile page.")}>
-                    <Icon
-                        name='person'
-                        type="MaterialIcons"
-                        style={styles.icon} />
-                </Button>
+        headerRight:
+            <Button transparent
+                onPress={() => navigation.navigate('profile', { userId: navigation.getParam('friend') })}>
+                <Icon
+                    name='person'
+                    type="MaterialIcons"
+                    style={styles.icon} />
+            </Button>
         ,
         title: navigation.state.params.friend,
         headerTitleStyle: { textAlign: 'center', alignSelf: 'center' },
@@ -45,7 +47,7 @@ class Chat extends React.Component {
     });
 
     navigateToProfile() {
-        this.props.navigation.navigate('profile');
+        this.props.navigation.navigate('profile', { userId: this.state.friend });
     }
 
     componentDidMount() {
@@ -132,7 +134,7 @@ class Chat extends React.Component {
                 messages={this.state.messages}
                 onSend={messages => this.onSend(messages)}
                 onInputTextChanged={text => this.setState({ text })}
-                onPressAvatar={() => console.log('hello avatar')}
+                onPressAvatar={() => this.navigateToProfile()}
                 user={{
                     _id: 1,
                     name: this.state.user,

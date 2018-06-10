@@ -21,7 +21,7 @@ class Matchmaking extends React.Component {
             cards: [
             ],
             curIndex: 0,
-            user: ''
+            user: this.props.navigation.getParam('user')
         };
         this.swipedLeft = this.swipedLeft.bind(this);
         this.swipedRight = this.swipedRight.bind(this);
@@ -52,18 +52,12 @@ class Matchmaking extends React.Component {
             .catch((err) => { console.log(err); this.props.navigation.goBack(); });
     }
 
-    //TODO yes/no button will not triger onSwipe subscription. Need to fix it.
     //TODO refetch data.
     swipedLeft(index) {
-        console.log(index);
-        console.log("swipe left");
         this.state.curIndex++;
     }
 
     swipedRight(index) {
-        console.log(index);
-        console.log("swipe right");
-        console.log(this.state.curIndex);
         card = this.state.cards[this.state.curIndex];
         this.state.curIndex++;
         friendId = card.userId;
