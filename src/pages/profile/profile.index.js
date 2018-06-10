@@ -4,6 +4,10 @@ import { TabNavigator,TabBarBottom,withNavigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 class Profile extends React.Component {
+    constructor(props){
+        super(props);
+        console.log(this.props.navigation.getParam("userId"));
+    }
     render() {
       return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

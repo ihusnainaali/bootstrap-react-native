@@ -10,7 +10,8 @@ const CREATE_FRIENDS_KEY = "createPangyouMobilehub1098576098Friends";
 const LIST_FRIENDS_KEY = "queryPangyouMobilehub1098576098FriendsByUserId";
 const SUB_VIDEO_CHANNEL_KEY = "onUpdatePangyouMobilehub1098576098UserVideoChannel";
 const SUB_FRIENDS_KEY = "onUpdatePangyouMobilehub1098576098Friends";
-
+const BATCH_GET_PROFILES_KEY = "batchGetPangyouMobilehub1098576098UserProfile";
+const GET_PROFILE_KEY = "getPangyouMobilehub1098576098UserProfile";
 
 Amplify.configure(aws_config);
 Amplify.configure(AppSyncConfig);
@@ -107,16 +108,20 @@ const SubFriends = `subscription SubFriends($userId: String!) {
     }
 }`
 
-const Test = `query Q {
+const BatchGetUserProfiles = `query BatchGetUserProfiles($userIds: [String]) {
+	batchGetPangyouMobilehub1098576098UserProfile(userIds: $userIds){
+        userId
+        userImageUrl
+        userStatus
+    }
+}`
 
-    queryPangyouMobilehub1098576098UserProfilesByUserIdNativeLanguage(userId:"test1", first:10, after:""){
-        items{
-          userId
-          country
-          nativeLanguage
-        }
-        nextToken
-      }
+const GetUserProfile = `query GetUserProfile($userId: String!)  {
+    getPangyouMobilehub1098576098UserProfile(userId: $userId){
+        userId
+        userImageUrl
+        userStatus
+    }
 }`
 
 export default {
@@ -127,6 +132,8 @@ export default {
     CREATE_FRIENDS_KEY,
     LIST_FRIENDS_KEY,
     SUB_FRIENDS_KEY,
+    BATCH_GET_PROFILES_KEY,
+    GET_PROFILE_KEY,
     GetUsersByLanguage(userLanguage, first, after) {
         return API.graphql(graphqlOperation(GetUsersByLanguage, { userLanguage, first, after }));
     },
@@ -154,7 +161,10 @@ export default {
     SubFriends(userId) {
         return API.graphql(graphqlOperation(SubFriends, { userId }));
     },
-    Test() {
-        return API.graphql(graphqlOperation(GetProfile, { userId: 'test3' }));
+    BatchGetUserProfiles(userIds) {
+        return API.graphql(graphqlOperation(BatchGetUserProfiles, { userIds }));
+    },
+    GetUserProfile(userId) {
+        return API.graphql(graphqlOperation(GetUserProfile, { userId }));
     }
 }

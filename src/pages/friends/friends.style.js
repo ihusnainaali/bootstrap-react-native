@@ -1,5 +1,5 @@
-import React , { Component } from 'react';
-import {StyleSheet} from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet } from 'react-native';
 
 import theme from '../../styles/theme.style';
 
@@ -22,5 +22,19 @@ export default StyleSheet.create({
     },
     text_subtitle: {
         fontFamily: theme.FONT_LIGHT
-    }
+    },
+    photo: {
+        height: 40,
+        width: 40,
+        borderRadius: 20,
+    },
+    sectionHeader: {
+        flex: 1,
+        padding: 8,
+        justifyContent: 'center',
+        backgroundColor: '#EAEAEA',
+    },
+    text: {
+        fontSize: 13,
+    },
 })
