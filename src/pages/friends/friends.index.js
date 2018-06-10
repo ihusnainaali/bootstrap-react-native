@@ -5,8 +5,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Thumbnail, Item, List, ListItem, Input, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
 import ChatClientHelper from '../../utils/twilio';
 import operations from '../matchmaking/graphql';
-import Row from './row';
-import SectionHeader from './sectionheader';
 
 import styles from './friends.style';
 import theme from '../../styles/theme.style';
