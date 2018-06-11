@@ -41,7 +41,6 @@ class EditProfile extends Component<Props> {
       this.state = {
         date:'',
         editProfile: {},
-        refreshData: '',
         storeUsername: '',
         userName: '',
         userDescription: '',
@@ -193,24 +192,17 @@ class EditProfile extends Component<Props> {
 
   render() {
 
-    const userPhoto = <View style={styles.editProfileCard}><TouchableOpacity activeOpacity = { .5 } onPress={ this.getImage.bind(this) }><Image style={{width: 140, borderRadius: 70, height: 140}} source={{uri: this.state.editProfile.userImageUrl}} /></TouchableOpacity></View>
-
-    const userIcon = <View style={styles.editProfileCard}><Icon onPress={this.getImage.bind(this)} type="Ionicons" name='ios-contact' ios="ios-contact" md="md-contact" style={{fontSize: 200, color: 'white', textAlign:'center'}} /></View>
-
-    let userProfilePhoto;
-    if (!this.state.editProfile.userImageUrl) {
-        userProfilePhoto = userPhoto
-    } else {
-        userProfilePhoto = userIcon
-    }
-
     return (
 
       <ScrollView>
         <KeyboardAvoidingView behavior='padding' style={styles.profileWrapper}>
           <Container>
             <Content>
-              {userProfilePhoto}
+              <View style={styles.editProfileCard}>
+                  <TouchableOpacity activeOpacity = { .5 } onPress={ this.getImage.bind(this) }>
+                      <Image style={{width: 140, borderRadius: 70, height: 140}} source={{uri: this.state.editProfile.userImageUrl}} />
+                  </TouchableOpacity>
+              </View>
               <View style={styles.editDescriptionCard}>
                   <View style={{flexDirection: 'row'}}>
                       <ListItem style={styles.editLayoutItem}>
@@ -274,7 +266,7 @@ class EditProfile extends Component<Props> {
                           headerTitleStyle={{ color: "#fff" }}
                           textStyle={{fontSize: 18, fontWeight: 'bold'}}
                           style={{ width: 200 }}
-                          selectedValue={this.state.editProfile.userStatus}
+                          selectedValue={this.state.userStatus}
                           onValueChange={ (value) => {this.setState({userStatus: value}) }}
                         >
                           <Picker.Item label="Online" value="Online" />
@@ -306,7 +298,7 @@ class EditProfile extends Component<Props> {
                     <ListItem style={styles.editLayoutItem}>
                           <DatePicker
                             style={{marginLeft: 15, width: 320}}
-                            date={this.state.editProfile.userDob}
+                            date={this.state.date}
                             mode="date"
                             placeholder="select date"
                             format="YYYY-MM-DD"
