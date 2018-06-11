@@ -89,6 +89,8 @@ class Pangyou extends React.Component {
           </TouchableOpacity>
         </View>
 
+      </Container>
+
         );
     }
 }
