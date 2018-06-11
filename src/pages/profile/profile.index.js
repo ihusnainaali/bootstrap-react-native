@@ -18,6 +18,8 @@ import { route } from '../../routes/routes.constants';
 import theme from '../../styles/theme.style';
 import styles from './profile.style';
 
+import Moment from 'moment';
+
 class Profile extends Component {
 
   navigateToSettings = () => {
@@ -102,6 +104,9 @@ class Profile extends Component {
     } else {
         statusColor = statusColorOffline
     }
+
+    const dobReFormatted = Moment(this.state.profile.userDob).format("MMM D, YYYY")
+    const dobFormatted = <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>Date of Birth: {dobReFormatted}</Text>
 
     return (
       <ScrollView>
@@ -209,9 +214,7 @@ class Profile extends Component {
                   <View style={{flexDirection: 'row', justifyContent: 'center', width: Dimensions.get('window').width}}>
                       <View style={{justifyContent: 'center'}}>
                           <Icon type="Ionicons" name='ios-calendar' ios='ios-calendar' md='md-calendar' style={{fontSize: 30, color: 'grey', textAlign: 'center'}} />
-                          <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>
-                            Date of Birth: {this.state.profile.userDob}
-                          </Text>
+                          {dobFormatted}
                       </View>
                   </View>
               </View>
