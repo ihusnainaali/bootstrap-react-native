@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image, TouchableOpacity, AsyncStorage } from 'react-native';
+import { Text, View, ListView, FlatList, SectionList, Image, TouchableOpacity, AsyncStorage } from 'react-native';
 import { withNavigation, navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Thumbnail, Item, List, ListItem, Input, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
@@ -8,7 +8,7 @@ import operations from '../matchmaking/graphql';
 import styles from './friends.style';
 import theme from '../../styles/theme.style';
 import { route } from '../../routes/routes.constants';
-import Example from './example';
+
 let items = ['Simon Mignolet', 'Nathaniel Clyne', 'Dejan Lovren', 'Mama Sakho', 'Emre Can'];
 // TODO Add Backend Retrieval
 const list = [
@@ -26,10 +26,12 @@ const list = [
 class Friends extends React.Component {
     constructor(props) {
         super(props);
+        this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
             chatClientHelper: null,
             friendsChannel: {},
             friends: [],
+            search: "",
             user: null,
         };
         this.flag = true;
@@ -47,27 +49,53 @@ class Friends extends React.Component {
         const username = await AsyncStorage.getItem('username');
         this.setState({ user: username });
         // get all channel sids and store them in state.
-        const res = await operations.ListFriends(username);
-        friends = {};
-        const items = res.data[operations.LIST_FRIENDS_KEY].items.forEach(friend => {
+        friendsChannel = {};
+        friendIds = [];
+        const listFriendsResp = await operations.ListFriends(user);
+        listFriendsResp.data[operations.LIST_FRIENDS_KEY].items.forEach(friend => {
             channelSid = friend.channelSid;
             friendId = friend.friendId;
             if (channelSid && channelSid !== "") {
-                friends[friendId] = channelSid;
+                friendsChannel[friendId] = channelSid;
+                friendIds.push(friendId);
             }
         });
         this.setState({ user: username, friendsChannel: friends });
         // subscribe to new friends
-        operations.SubFriends(username).subscribe({
-            next: (eventData) => {
+        operations.SubFriends(user).subscribe({
+            next: async (eventData) => {
                 friend = eventData.value.data[operations.SUB_FRIENDS_KEY];
+                channelSid = friend.channelSid;
+                friendId = friend.friendId;
                 if (friend.channelSid) {
-                    this.setState(previousState => ({
-                        friendsChannel: previousState.friendsChannel[friend.friendId] = friend.channelSid
-                    }))
+                    const getUserProfileResp = await operations.GetUserProfile(friendId);
+                    const friendProfile = getUserProfileResp.data[operations.GET_PROFILE_KEY];
+                    this.setState(previousState => {
+                        friends = previousState.friends;
+                        friendsChannel = previousState.friendsChannel;
+                        friendProfile && friends.push({
+                            name: friendProfile.userId,
+                            avatar_url: friendProfile.userImageUrl,
+                            subtitle: friendProfile.userStatus
+                        })
+                        friendsChannel[friendId] = channelSid;
+                        return ({ friends, friendsChannel });
+                    });
                 }
             }
         })
+
+        this._sub = this.props.navigation.addListener(
+            'didFocus',
+            () => {
+                console.log("didFocus");
+                this.forceUpdate();
+            }
+        );
+    }
+
+    componentWillUnmount() {
+        this._sub.remove();
     }
     // get the channel name for specific friend
     fetchChannelName(friend) {
@@ -118,23 +146,26 @@ class Friends extends React.Component {
                 <Item regular style={{ paddingLeft: 10 }}>
                     <Icon name="ios-search"
                         style={styles.icon} />
-                    <Input placeholder="Search" />
+                    <Input
+                        placeholder="Search"
+                        onChangeText={search => this.setState({ search })} />
                 </Item>
                 <Content>
-                    <List dataArray={list}
-                        renderRow={(item) =>
-                            <ListItem avatar onPress={() => { this.chatWithFriend(item.name, item.avatar_url); }}>
-                                <Left>
-                                    <Thumbnail source={{ uri: item.avatar_url }} />
-                                </Left>
-                                <Body>
-                                    <Text style={styles.text_name}>{item.name}</Text>
-                                    <Text style={styles.text_subtitle} note>{item.subtitle}</Text>
-                                </Body>
-                                <Right>
-                                </Right>
-                            </ListItem>
-                        }>
+                    <List>
+                        {this.state.search ?
+                            <FlatList
+                                data={data}
+                                keyExtractor={item => item.name}
+                                renderItem={this.renderItem}
+                            />
+                            :
+                            <SectionList
+                                keyExtractor={item => item.name}
+                                renderItem={this.renderItem}
+                                renderSectionHeader={this.renderSectionHeader}
+                                sections={data}
+                            />
+                        }
                     </List>
                 </Content>
             </Container>

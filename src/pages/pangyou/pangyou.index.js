@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, Image, TouchableOpacity, AsyncStorage } from 'react-native';
 import { withNavigation , navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Container, Header , Left, Right, Title, Content, Button , Icon, Body} from 'native-base';
+import { Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
 
 import { route } from '../../routes/routes.constants';
 
@@ -45,16 +45,17 @@ class Pangyou extends React.Component {
     this.props.navigation.navigate(route.MATCHMAKING)
   }
 
-  navigateToSettings = () => {
-    this.props.navigation.navigate(route.SETTINGS)
-  }
+    navigateToSettings = () => {
+        this.props.navigation.navigate(route.SETTINGS);
+    }
 
-  static navigationOptions = ({ navigation }) => {
+    static navigationOptions = ({ navigation }) => {
 
-    return {
-      header: null
+        return {
+            header: null
+        };
     };
-  };
+
 
   render() {
 
@@ -88,8 +89,7 @@ class Pangyou extends React.Component {
           </TouchableOpacity>
         </View>
 
-      </Container>
-      );
+        );
     }
 }
 
