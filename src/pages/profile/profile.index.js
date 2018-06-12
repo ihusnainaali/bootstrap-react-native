@@ -35,19 +35,18 @@ class Profile extends Component {
       super();
 
       this.state = {
-          profile: {
-            userName: '',
-            userDescription: '',
-            userStatus: '',
-            userCountry: '',
-            userDob: '',
-            userGender: '',
-            userSchool: '',
-            userMajor: '',
-            userLanguage: '',
-            userLearnLanguage: '',
-            userImageUrl: '',
-          },
+          profile: {},
+          userName: '',
+          userDescription: '',
+          userStatus: '',
+          userCountry: '',
+          userDob: '',
+          userGender: '',
+          userSchool: '',
+          userMajor: '',
+          userLanguage: '',
+          userLearnLanguage: '',
+          userImageUrl: '',
           playPauseButton: 'Preparing...',
           recordButton: 'Preparing...',
           stopButtonDisabled: true,
@@ -84,10 +83,6 @@ class Profile extends Component {
           this.setState({
             profile: profile.data.getPangyouMobilehub1098576098UserProfile
           })
-
-          if (profile.data.getPangyouMobilehub1098576098UserProfile == null) {
-            this.props.navigation.navigate('editprofile');
-          }
 
       } catch (err) {
           console.log('This is the Error: ', err)
@@ -249,8 +244,8 @@ class Profile extends Component {
 
   render() {
 
-    const manIcon = <Text><Icon type="Ionicons" name='ios-man' ios='ios-man' md='md-man' style={{fontSize: 30, color: 'grey', textAlign: 'center'}} /></Text>;
-    const womanIcon = <Text><Icon type="Ionicons" name='ios-woman' ios='ios-woman' md='md-woman' style={{fontSize: 30, color: 'grey', textAlign: 'center'}} /></Text>;
+    const manIcon = <Text><Icon type="Ionicons" name='ios-man' ios='ios-man' md='md-man' style={{fontSize: 38, color: 'grey', textAlign: 'center'}} /></Text>;
+    const womanIcon = <Text><Icon type="Ionicons" name='ios-woman' ios='ios-woman' md='md-woman' style={{fontSize: 38, color: 'grey', textAlign: 'center'}} /></Text>;
     let genderIcon;
     if (this.state.profile.userGender === 'Male') {
         genderIcon = manIcon
@@ -270,7 +265,7 @@ class Profile extends Component {
     const dobReFormatted = Moment(this.state.profile.userDob).format("MMM D, YYYY")
     const dobFormatted = <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>Date of Birth: {dobReFormatted}</Text>
 
-    const recordingOff = <TouchableOpacity activeOpacity = { .5 } disabled={this.state.recordButtonDisabled} onPress={() => this._toggleRecord()}><Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{fontSize: 40, color: 'grey', textAlign: 'center'}} /></TouchableOpacity>
+    const recordingOff = <TouchableOpacity activeOpacity = { .5 } disabled={this.state.recordButtonDisabled} onPress={() => this._toggleRecord()}><Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{fontSize: 40, color: 'pink', textAlign: 'center'}} /></TouchableOpacity>
     const recordingOn = <TouchableOpacity disabled={this.state.recordButtonDisabled} onPress={() => this._toggleRecord()}><Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{fontSize: 40, color: 'red', textAlign: 'center'}} /></TouchableOpacity>
     let recordAudio;
     if (this.recorder.isRecording != true) {
@@ -279,8 +274,8 @@ class Profile extends Component {
         recordAudio = recordingOn
     }
 
-    const playButtonOff = <TouchableOpacity disabled={this.state.playButtonDisabled} onPress={() => this._playPause()}><Icon type="Ionicons" name='ios-play' ios='ios-play' md='md-play' style={{fontSize: 35, color: 'grey', textAlign: 'center'}} /></TouchableOpacity>
-    const playButtonOn = <Icon type="Ionicons" name='ios-play' ios='ios-play' md='md-play' style={{fontSize: 35, color: 'lightgrey', textAlign: 'center'}} />
+    const playButtonOff = <TouchableOpacity disabled={this.state.playButtonDisabled} onPress={() => this._playPause()}><Icon type="Ionicons" name='ios-play' ios='ios-play' md='md-play' style={{fontSize: 35, color: '#157dfb', textAlign: 'center'}} /></TouchableOpacity>
+    const playButtonOn = <Icon type="Ionicons" name='ios-play' ios='ios-play' md='md-play' style={{fontSize: 35, color: '#5fc9f8', textAlign: 'center'}} />
     let playAndPause;
     if (this.player.isPlaying != true) {
         playAndPause = playButtonOff
@@ -353,7 +348,7 @@ class Profile extends Component {
             <View style={{height: 8}}></View>
 
             <View style={styles.indexProfileCard}>
-              <View style={{marginTop: 15, marginBottom: 10}}>
+              <View style={{marginTop: 10, marginBottom: 10}}>
                   <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                       <View style={{width: 250}}><Text style={{fontSize: 18, color: 'black', fontWeight: 'bold', textAlign: 'center'}}>Record a voice message:</Text></View>
                           <View style={{marginRight: 25}}>
@@ -377,7 +372,7 @@ class Profile extends Component {
                               </View>
                               <View style={{marginLeft: 20, width: 20}}>
                                 <TouchableOpacity activeOpacity = { .5 } disabled={this.state.stopButtonDisabled} onPress={() => this._stop()}>
-                                  <Icon type="Ionicons" name='ios-square' ios='ios-square' md='md-square' style={{fontSize: 25, color: 'grey', textAlign: 'center'}} />
+                                  <Icon type="Ionicons" name='ios-square' ios='ios-square' md='md-square' style={{fontSize: 25, color: '#0882fb', textAlign: 'center'}} />
                                 </TouchableOpacity>
                               </View>
                           </View>

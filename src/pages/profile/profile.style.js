@@ -78,7 +78,7 @@ export default StyleSheet.create({
     },
     topText: {
         fontFamily: theme.FONT_BOLD,
-        fontSize: 28,
+        fontSize: 38,
         fontWeight: 'bold',
         color: 'black'
     },

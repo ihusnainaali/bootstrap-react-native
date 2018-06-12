@@ -39,7 +39,6 @@ class EditProfile extends Component<Props> {
       super(props);
 
       this.state = {
-        date:'',
         editProfile: {},
         storeUsername: '',
         userName: '',
@@ -81,6 +80,10 @@ class EditProfile extends Component<Props> {
       // Get Profile from GraphQL
       try {
           const editProfile = await API.graphql(graphqlOperation(GetProfile, {userId: this.storeUsername}))
+          this.setState({userStatus: editProfile.data.getPangyouMobilehub1098576098UserProfile.userStatus});
+          this.setState({userDob: editProfile.data.getPangyouMobilehub1098576098UserProfile.userDob});
+          this.setState({userGender: editProfile.data.getPangyouMobilehub1098576098UserProfile.userGender});
+          console.log('This is the userStatus: ', this.state.userGender)
           this.setState({
             editProfile: editProfile.data.getPangyouMobilehub1098576098UserProfile
           })
@@ -298,7 +301,7 @@ class EditProfile extends Component<Props> {
                     <ListItem style={styles.editLayoutItem}>
                           <DatePicker
                             style={{marginLeft: 15, width: 320}}
-                            date={this.state.date}
+                            date={this.state.userDob}
                             mode="date"
                             placeholder="select date"
                             format="YYYY-MM-DD"
@@ -317,8 +320,7 @@ class EditProfile extends Component<Props> {
                                 marginLeft: 45
                               }
                             }}
-                            onDateChange={(date) => {this.setState({date: date})}}
-                            onValueChange={ (value) => {this.setState({userDob: value}) }}
+                            onDateChange={(value) => {this.setState({userDob: value})}}
                           />
                     </ListItem>
                 </View>
