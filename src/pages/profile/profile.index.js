@@ -270,15 +270,22 @@ class Profile extends Component {
     const dobReFormatted = Moment(this.state.profile.userDob).format("MMM D, YYYY")
     const dobFormatted = <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>Date of Birth: {dobReFormatted}</Text>
 
-    const playButton = <Icon type="Ionicons" name='ios-play' ios='ios-play' md='md-play' style={{fontSize: 35, color: 'grey', textAlign: 'center'}} />
-    const pauseButton = <Icon type="Ionicons" name='ios-pause' ios='ios-pause' md='md-pause' style={{fontSize: 30, color: 'grey', textAlign: 'center'}} />
+    const recordingOff = <TouchableOpacity activeOpacity = { .5 } disabled={this.state.recordButtonDisabled} onPress={() => this._toggleRecord()}><Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{fontSize: 40, color: 'grey', textAlign: 'center'}} /></TouchableOpacity>
+    const recordingOn = <TouchableOpacity disabled={this.state.recordButtonDisabled} onPress={() => this._toggleRecord()}><Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{fontSize: 40, color: 'red', textAlign: 'center'}} /></TouchableOpacity>
+    let recordAudio;
+    if (this.recorder.isRecording != true) {
+        recordAudio = recordingOff
+    } else if (this.recorder.isRecording == true) {
+        recordAudio = recordingOn
+    }
+
+    const playButtonOff = <TouchableOpacity disabled={this.state.playButtonDisabled} onPress={() => this._playPause()}><Icon type="Ionicons" name='ios-play' ios='ios-play' md='md-play' style={{fontSize: 35, color: 'grey', textAlign: 'center'}} /></TouchableOpacity>
+    const playButtonOn = <Icon type="Ionicons" name='ios-play' ios='ios-play' md='md-play' style={{fontSize: 35, color: 'lightgrey', textAlign: 'center'}} />
     let playAndPause;
     if (this.player.isPlaying != true) {
-        playAndPause = playButton
-        console.log(this.player.isPlaying)
+        playAndPause = playButtonOff
     } else if (this.player.isPlaying == true) {
-        playAndPause = pauseButton
-        console.log(this.player.isPlaying)
+        playAndPause = playButtonOn
     }
 
     return (
@@ -346,34 +353,32 @@ class Profile extends Component {
             <View style={{height: 8}}></View>
 
             <View style={styles.indexProfileCard}>
-              <View style={{marginTop: 15, marginBottom: 15}}>
+              <View style={{marginTop: 15, marginBottom: 10}}>
                   <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                      <View style={{width: 250}}><Text style={{fontSize: 18, color: 'grey', fontWeight: 'bold', textAlign: 'center'}}>Record a voice message:</Text></View>
-                          <View style={{marginRight: 20}}>
-                            <TouchableOpacity activeOpacity = { .5 } disabled={this.state.recordButtonDisabled} onPress={() => this._toggleRecord()}>
-                              <Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{fontSize: 40, color: 'red', textAlign: 'center'}} />
-                            </TouchableOpacity>
-                          </View>
-                          <View style={{marginRight: 20}}>
-                            <TouchableOpacity activeOpacity = { .5 } disabled={this.state.playButtonDisabled} onPress={() => this._playPause()}>
-                              {playAndPause}
-                            </TouchableOpacity>
-                          </View>
-                          <View style={{marginRight: 20}}>
-                            <TouchableOpacity activeOpacity = { .5 } disabled={this.state.stopButtonDisabled} onPress={() => this._stop()}>
-                              <Icon type="Ionicons" name='ios-square' ios='ios-square' md='md-square' style={{fontSize: 25, color: 'grey', textAlign: 'center'}} />
-                            </TouchableOpacity>
+                      <View style={{width: 250}}><Text style={{fontSize: 18, color: 'black', fontWeight: 'bold', textAlign: 'center'}}>Record a voice message:</Text></View>
+                          <View style={{marginRight: 25}}>
+                              {recordAudio}
                           </View>
                       </View>
                   </View>
-                  <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-                      <View style={{width: 350}}>
+                  <View style={{flexDirection: 'row', justifyContent: 'flex-start', marginBottom: 10}}>
+                      <View style={{width: 250}}>
                           <View style={{ marginLeft: 20}}>
-                              <Text style={{fontSize: 18, color: 'black', fontWeight: 'bold', textAlign: 'left'}}>My Personal Recording</Text>
+                              <Text style={{fontSize: 14, color: 'grey', textAlign: 'left'}}>My Personal Message:</Text>
                           </View>
-                          <View style={{marginLeft: 20, marginBottom: 20}}>
-                              <View style={styles.slider}>
-                                <Slider step={0.0001} disabled={this.state.playButtonDisabled} onValueChange={(percentage) => this._seek(percentage)} value={this.state.progress}/>
+                          <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center'}}>
+                              <View style={{marginLeft: 10, marginBottom: 30, width: 260}}>
+                                  <View style={styles.slider}>
+                                    <Slider step={0.0001} disabled={this.state.playButtonDisabled} onValueChange={(percentage) => this._seek(percentage)} value={this.state.progress}/>
+                                  </View>
+                              </View>
+                              <View style={{marginLeft: 20, width: 20}}>
+                                  {playAndPause}
+                              </View>
+                              <View style={{marginLeft: 20, width: 20}}>
+                                <TouchableOpacity activeOpacity = { .5 } disabled={this.state.stopButtonDisabled} onPress={() => this._stop()}>
+                                  <Icon type="Ionicons" name='ios-square' ios='ios-square' md='md-square' style={{fontSize: 25, color: 'grey', textAlign: 'center'}} />
+                                </TouchableOpacity>
                               </View>
                           </View>
                       </View>
