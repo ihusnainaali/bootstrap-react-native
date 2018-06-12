@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -22,6 +23,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		1845100F20CF596300966C7D /* libReactNativeAudioToolkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1845100E20CF592C00966C7D /* libReactNativeAudioToolkit.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -44,7 +46,6 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		87304633A30848FCB1A28DC4 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C26F48B854D845E0B6E83EA6 /* rubicon-icon-font.ttf */; };
 		8771E7CB09E4407B8D62785F /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6739F438927C47E781EC6CA0 /* Foundation.ttf */; };
-		87922C2B1C0141259BB0D094 /* libRNAudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B441EB5B9734C5F9E3B8D28 /* libRNAudio.a */; };
 		8AECF515BCF544FC875E9EFD /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C9D98D21CA440198CEF51DC /* Octicons.ttf */; };
 		8F42B8260C224EA6B96A733A /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F314F30AD1E54C19A563182A /* Quicksand-Bold.ttf */; };
 		9684E6F8750C414785A4FCB8 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B842B76A23624EDF857DF553 /* libRNImagePicker.a */; };
@@ -137,19 +138,19 @@
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
 		};
-		18283AB520CD9A8500806115 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 073716C7967F4A3CB77E7F5B /* RNAudio.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 42F559BA1CFC90C400DC3F84;
-			remoteInfo = RNAudio;
-		};
 		18283AB820CD9A8500806115 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DB58DB43A34B49E0A55954D0 /* RNImagePicker.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
 			remoteInfo = RNImagePicker;
+		};
+		1845100D20CF592C00966C7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1845100920CF592C00966C7D /* ReactNativeAudioToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5E8FD9831D269F5D00CF68CC;
+			remoteInfo = ReactNativeAudioToolkit;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -408,7 +409,6 @@
 		00E356EE1AD99517003FC87E /* PangyouTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PangyouTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* PangyouTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PangyouTests.m; sourceTree = "<group>"; };
-		073716C7967F4A3CB77E7F5B /* RNAudio.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNAudio.xcodeproj; path = "../node_modules/react-native-audio-player-recorder/ios/RNAudio.xcodeproj"; sourceTree = "<group>"; };
 		07B0623A206F41FFA7131D01 /* RNTwilioVideoWebRTC.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNTwilioVideoWebRTC.xcodeproj; path = "../node_modules/react-native-twilio-video-webrtc/ios/RNTwilioVideoWebRTC.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
@@ -420,6 +420,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Pangyou/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Pangyou/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		1845100920CF592C00966C7D /* ReactNativeAudioToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeAudioToolkit.xcodeproj; path = "../node_modules/react-native-audio-toolkit/ios/ReactNativeAudioToolkit/ReactNativeAudioToolkit.xcodeproj"; sourceTree = "<group>"; };
 		1C9D98D21CA440198CEF51DC /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		2BBE16DECC5741118FDC7324 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* Pangyou-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pangyou-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -477,6 +478,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1845100F20CF596300966C7D /* libReactNativeAudioToolkit.a in Frameworks */,
 				968E774120BF1E9A003FB23E /* libc++.tbd in Frameworks */,
 				968E773F20BF1E8D003FB23E /* SystemConfiguration.framework in Frameworks */,
 				968E773D20BF1E84003FB23E /* CoreMedia.framework in Frameworks */,
@@ -504,7 +506,6 @@
 				FE1A678A022D486DAD06C8AB /* libRNVectorIcons.a in Frameworks */,
 				9AAFBB73DFA14E54BAE0A32F /* libRNTwilioVideoWebRTC.a in Frameworks */,
 				9684E6F8750C414785A4FCB8 /* libRNImagePicker.a in Frameworks */,
-				87922C2B1C0141259BB0D094 /* libRNAudio.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,18 +651,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		18283AB020CD9A8500806115 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				18283AB620CD9A8500806115 /* libRNAudio.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		18283AB220CD9A8500806115 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				18283AB920CD9A8500806115 /* libRNImagePicker.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1845100A20CF592C00966C7D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1845100E20CF592C00966C7D /* libReactNativeAudioToolkit.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -704,6 +705,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				1845100920CF592C00966C7D /* ReactNativeAudioToolkit.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -720,7 +722,6 @@
 				E55C1C67706543B3A6D04596 /* RNVectorIcons.xcodeproj */,
 				07B0623A206F41FFA7131D01 /* RNTwilioVideoWebRTC.xcodeproj */,
 				DB58DB43A34B49E0A55954D0 /* RNImagePicker.xcodeproj */,
-				073716C7967F4A3CB77E7F5B /* RNAudio.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -996,8 +997,8 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
-					ProductGroup = 18283AB020CD9A8500806115 /* Products */;
-					ProjectRef = 073716C7967F4A3CB77E7F5B /* RNAudio.xcodeproj */;
+					ProductGroup = 1845100A20CF592C00966C7D /* Products */;
+					ProjectRef = 1845100920CF592C00966C7D /* ReactNativeAudioToolkit.xcodeproj */;
 				},
 				{
 					ProductGroup = 968E772320BF1D5E003FB23E /* Products */;
@@ -1083,18 +1084,18 @@
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		18283AB620CD9A8500806115 /* libRNAudio.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNAudio.a;
-			remoteRef = 18283AB520CD9A8500806115 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		18283AB920CD9A8500806115 /* libRNImagePicker.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNImagePicker.a;
 			remoteRef = 18283AB820CD9A8500806115 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1845100E20CF592C00966C7D /* libReactNativeAudioToolkit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativeAudioToolkit.a;
+			remoteRef = 1845100D20CF592C00966C7D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */ = {

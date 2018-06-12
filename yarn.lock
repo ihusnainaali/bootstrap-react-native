@@ -752,7 +752,7 @@ async@^1.4.0:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
-async@^2.0.1:
+async@^2.0.0, async@^2.0.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
   dependencies:
@@ -2558,6 +2558,10 @@ etag@~1.8.1:
 event-target-shim@^1.0.5:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-1.1.1.tgz#a86e5ee6bdaa16054475da797ccddf0c55698491"
+
+eventemitter3@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-1.2.0.tgz#1c86991d816ad1e504750e73874224ecf3bec508"
 
 eventemitter3@^3.0.0:
   version "3.1.0"
@@ -5863,6 +5867,14 @@ react-lifecycles-compat@^3:
 react-native-audio-player-recorder@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-native-audio-player-recorder/-/react-native-audio-player-recorder-2.0.0.tgz#356458423bb207d0c08816e7dda7cd7ce3f3a1fb"
+
+react-native-audio-toolkit@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-audio-toolkit/-/react-native-audio-toolkit-1.0.6.tgz#4eff06667c0d00ddad23f88facfcecf26cdd083b"
+  dependencies:
+    async "^2.0.0"
+    eventemitter3 "^1.2.0"
+    lodash "^4.13.1"
 
 react-native-aws3@0.0.8:
   version "0.0.8"
