@@ -135,5 +135,9 @@ export default StyleSheet.create({
     },
     containerHeight: {
       height: 400
+    },
+    slider: {
+      height: 10,
+      margin: 10,
     }
 })
