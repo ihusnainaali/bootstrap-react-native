@@ -275,7 +275,7 @@ class Profile extends Component {
     }
 
     const playButtonOff = <TouchableOpacity disabled={this.state.playButtonDisabled} onPress={() => this._playPause()}><Icon type="Ionicons" name='ios-play' ios='ios-play' md='md-play' style={{fontSize: 35, color: '#157dfb', textAlign: 'center'}} /></TouchableOpacity>
-    const playButtonOn = <Icon type="Ionicons" name='ios-play' ios='ios-play' md='md-play' style={{fontSize: 35, color: '#5fc9f8', textAlign: 'center'}} />
+    const playButtonOn = <Icon type="Ionicons" name='ios-play' ios='ios-play' md='md-play' style={{fontSize: 35, color: 'lightgrey', textAlign: 'center'}} />
     let playAndPause;
     if (this.player.isPlaying != true) {
         playAndPause = playButtonOff

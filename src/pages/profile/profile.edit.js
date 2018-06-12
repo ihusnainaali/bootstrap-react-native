@@ -83,7 +83,6 @@ class EditProfile extends Component<Props> {
           this.setState({userStatus: editProfile.data.getPangyouMobilehub1098576098UserProfile.userStatus});
           this.setState({userDob: editProfile.data.getPangyouMobilehub1098576098UserProfile.userDob});
           this.setState({userGender: editProfile.data.getPangyouMobilehub1098576098UserProfile.userGender});
-          console.log('This is the userStatus: ', this.state.userGender)
           this.setState({
             editProfile: editProfile.data.getPangyouMobilehub1098576098UserProfile
           })
@@ -129,29 +128,6 @@ class EditProfile extends Component<Props> {
         } catch (err) {
             this.setError(err.message);
             console.log("Update Error: ", err);
-            if (this.state.userName == "") {
-                alert('Please enter a User Name!');
-            } else if (this.state.userDescription == "") {
-                alert('Please enter a Description!');
-            } else if (this.state.userStatus == "") {
-                alert('Please enter a Status!');
-            } else if (this.state.userCountry == "") {
-                alert('Please enter a Country!');
-            } else if (this.state.userDob == "") {
-                alert('Please enter your Date of Birth!');
-            } else if (this.state.userGender == "") {
-                alert('Please enter your Gender!');
-            } else if (this.state.userSchool == "") {
-                alert('Please enter the School you graduated from!');
-            } else if (this.state.userMajor == "") {
-                alert('Please enter your School Major!');
-            } else if (this.state.userLanguage == "") {
-                alert('Please enter your First spoken Language!');
-            } else if (this.state.userLearnLanguage == "") {
-                alert('Please enter the desired Language you would like to learn!');
-            } else if (this.state.userImageUrl == "") {
-                alert('Please choose a Profile Photo by tapping the user icon located at the top of this page!');
-            }
         }
 
   }
