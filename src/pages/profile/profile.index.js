@@ -12,9 +12,7 @@ import {
 } from 'react-native';
 import { Container, Header, Left, Right, Title, Body, Button, Text, Content, Icon, List, ListItem } from 'native-base';
 import { withNavigation, navigation } from 'react-navigation';
-// import Recording from 'react-native-recording';
-// import { AudioRecorder, AudioUtils } from 'react-native-audio';
-import { Player, Recorder,  MediaStates } from 'react-native-audio-toolkit';
+import { Player, Recorder, MediaStates } from 'react-native-audio-toolkit';
 
 import { GetProfile, SubscribeToProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
@@ -27,7 +25,7 @@ import styles from './profile.style';
 import Moment from 'moment';
 
 
-let filename = 'test.mp4';
+let filename = 'personal_message.mp4';
 
 class Profile extends Component {
 
@@ -80,16 +78,17 @@ class Profile extends Component {
       try {
 
           const profile = await API.graphql(graphqlOperation(GetProfile, {userId: this.storeUsername}))
+          this.setState({userStatus: profile.data.getPangyouMobilehub1098576098UserProfile.userStatus})
           this.setState({
             profile: profile.data.getPangyouMobilehub1098576098UserProfile
           })
-
       } catch (err) {
           console.log('This is the Error: ', err)
       }
       // Subscribe Profile from GraphQL
       API.graphql(graphqlOperation(SubscribeToProfile, {userId: this.storeUsername})).subscribe({
           next: (eventData) => {
+              this.setState({userStatus: eventData.value.data.onUpdatePangyouMobilehub1098576098UserProfile.userStatus})
               this.setState({
                 profile: eventData.value.data.onUpdatePangyouMobilehub1098576098UserProfile
               })
@@ -241,8 +240,18 @@ class Profile extends Component {
     }
   }
 
+  setStatus() {
+    return null
+  }
+
 
   render() {
+    let currentStatus;
+    if (this.state.userStatus === 'Online') {
+        currentStatus = true
+    } else {
+        currentStatus = false
+    }
 
     const manIcon = <Text><Icon type="Ionicons" name='ios-man' ios='ios-man' md='md-man' style={{fontSize: 38, color: 'grey', textAlign: 'center'}} /></Text>;
     const womanIcon = <Text><Icon type="Ionicons" name='ios-woman' ios='ios-woman' md='md-woman' style={{fontSize: 38, color: 'grey', textAlign: 'center'}} /></Text>;
@@ -263,7 +272,7 @@ class Profile extends Component {
     }
 
     const dobReFormatted = Moment(this.state.profile.userDob).format("MMM D, YYYY")
-    const dobFormatted = <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>Date of Birth: {dobReFormatted}</Text>
+    const dobFormatted = <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>{dobReFormatted}</Text>
 
     const recordingOff = <TouchableOpacity activeOpacity = { .5 } disabled={this.state.recordButtonDisabled} onPress={() => this._toggleRecord()}><Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{fontSize: 40, color: 'pink', textAlign: 'center'}} /></TouchableOpacity>
     const recordingOn = <TouchableOpacity disabled={this.state.recordButtonDisabled} onPress={() => this._toggleRecord()}><Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{fontSize: 40, color: 'red', textAlign: 'center'}} /></TouchableOpacity>
@@ -309,8 +318,8 @@ class Profile extends Component {
                     <View style={{justifyContent: 'center'}}>
                         <View style={{flexDirection: 'column'}}>
                             <Switch
-                            onValueChange={(value) => this._toggleLooping(value)}
-                            value={this.state.loopButtonStatus} />
+                              onValueChange = {this.setStatus}
+                              value = {currentStatus}/>
                             {statusColor}
                         </View>
                     </View>
@@ -405,7 +414,7 @@ class Profile extends Component {
                       <View style={{justifyContent: 'center'}}>
                           <Icon type="Ionicons" name='ios-pin' ios='ios-pin' md='md-pin' style={{fontSize: 30, color: 'grey', textAlign: 'center'}} />
                           <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>
-                            Location: {this.state.profile.userCountry}
+                            {this.state.profile.userCountry}
                           </Text>
                       </View>
                   </View>
@@ -433,7 +442,7 @@ class Profile extends Component {
                       <View style={{justifyContent: 'center'}}>
                           <Icon type="Ionicons" name='ios-school' ios='ios-school' md='md-school' style={{fontSize: 30, color: 'grey', textAlign: 'center'}} />
                           <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>
-                            School: {this.state.profile.userSchool}
+                            {this.state.profile.userSchool}
                           </Text>
                       </View>
                   </View>
@@ -448,7 +457,7 @@ class Profile extends Component {
                       <View style={{justifyContent: 'center'}}>
                           <Icon type="Ionicons" name='ios-book' ios='ios-book' md='md-book' style={{fontSize: 30, color: 'grey', textAlign: 'center'}} />
                           <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>
-                            Major: {this.state.profile.userMajor}
+                            {this.state.profile.userMajor}
                           </Text>
                       </View>
                   </View>
