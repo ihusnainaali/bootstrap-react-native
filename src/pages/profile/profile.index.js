@@ -270,6 +270,17 @@ class Profile extends Component {
     const dobReFormatted = Moment(this.state.profile.userDob).format("MMM D, YYYY")
     const dobFormatted = <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>Date of Birth: {dobReFormatted}</Text>
 
+    const playButton = <Icon type="Ionicons" name='ios-play' ios='ios-play' md='md-play' style={{fontSize: 35, color: 'grey', textAlign: 'center'}} />
+    const pauseButton = <Icon type="Ionicons" name='ios-pause' ios='ios-pause' md='md-pause' style={{fontSize: 30, color: 'grey', textAlign: 'center'}} />
+    let playAndPause;
+    if (this.player.isPlaying != true) {
+        playAndPause = playButton
+        console.log(this.player.isPlaying)
+    } else if (this.player.isPlaying == true) {
+        playAndPause = pauseButton
+        console.log(this.player.isPlaying)
+    }
+
     return (
       <ScrollView>
         <Container>
@@ -340,17 +351,17 @@ class Profile extends Component {
                       <View style={{width: 250}}><Text style={{fontSize: 18, color: 'grey', fontWeight: 'bold', textAlign: 'center'}}>Record a voice message:</Text></View>
                           <View style={{marginRight: 20}}>
                             <TouchableOpacity activeOpacity = { .5 } disabled={this.state.recordButtonDisabled} onPress={() => this._toggleRecord()}>
-                              <Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{fontSize: 30, color: 'red', textAlign: 'center'}} />
+                              <Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{fontSize: 40, color: 'red', textAlign: 'center'}} />
                             </TouchableOpacity>
                           </View>
                           <View style={{marginRight: 20}}>
                             <TouchableOpacity activeOpacity = { .5 } disabled={this.state.playButtonDisabled} onPress={() => this._playPause()}>
-                              <Icon type="Ionicons" name='ios-play' ios='ios-play' md='md-play' style={{fontSize: 30, color: 'red', textAlign: 'center'}} />
+                              {playAndPause}
                             </TouchableOpacity>
                           </View>
-                          <View style={{marginRight: 40}}>
+                          <View style={{marginRight: 20}}>
                             <TouchableOpacity activeOpacity = { .5 } disabled={this.state.stopButtonDisabled} onPress={() => this._stop()}>
-                              <Icon type="Ionicons" name='ios-square' ios='ios-square' md='md-square' style={{fontSize: 30, color: 'red', textAlign: 'center'}} />
+                              <Icon type="Ionicons" name='ios-square' ios='ios-square' md='md-square' style={{fontSize: 25, color: 'grey', textAlign: 'center'}} />
                             </TouchableOpacity>
                           </View>
                       </View>
@@ -365,6 +376,9 @@ class Profile extends Component {
                                 <Slider step={0.0001} disabled={this.state.playButtonDisabled} onValueChange={(percentage) => this._seek(percentage)} value={this.state.progress}/>
                               </View>
                           </View>
+                      </View>
+                      <View>
+                          <Text style={styles.errorMessage}>{this.state.error}</Text>
                       </View>
               </View>
             </View>
