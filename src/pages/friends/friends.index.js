@@ -70,18 +70,19 @@ class Friends extends React.Component {
             }
         });
 
-        // get friends info.
-        friends = [];
-        const batchGetUserProfilesResp = await operations.BatchGetUserProfiles(friendIds);
-        batchGetUserProfilesResp.data[operations.BATCH_GET_PROFILES_KEY].forEach(friendProfile => {
-            friends.push({
-                name: friendProfile.userId,
-                avatar_url: friendProfile.userImageUrl,
-                subtitle: friendProfile.userStatus
+        if (friendIds.length > 0) {
+            // get friends info.
+            friends = [];
+            const batchGetUserProfilesResp = await operations.BatchGetUserProfiles(friendIds);
+            batchGetUserProfilesResp.data[operations.BATCH_GET_PROFILES_KEY].forEach(friendProfile => {
+                friends.push({
+                    name: friendProfile.userId,
+                    avatar_url: friendProfile.userImageUrl,
+                    subtitle: friendProfile.userStatus
+                });
             });
-        });
-        this.setState({ user, friendsChannel, friends });
-
+            this.setState({ user, friendsChannel, friends });
+        }
 
         // subscribe to new friends
         operations.SubFriends(user).subscribe({

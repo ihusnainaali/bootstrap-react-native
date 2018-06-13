@@ -41,21 +41,15 @@ features:
             tablePrivacy: protected
           - !com.amazonaws.mobilehub.v0.NoSQLTable 
             attributes:
+              channelSid: S
               friendId: S
               userId: S
             hashKeyName: userId
             hashKeyType: S
-            indexes:
-              - !com.amazonaws.mobilehub.v0.NoSQLIndex 
-                hashKeyName: userId
-                hashKeyType: S
-                indexName: userId-friendId
-                rangeKeyName: friendId
-                rangeKeyType: S
             rangeKeyName: friendId
             rangeKeyType: S
             tableName: ___DYNAMIC_PREFIX___-Friends
-            tablePrivacy: private
+            tablePrivacy: protected
           - !com.amazonaws.mobilehub.v0.NoSQLTable 
             attributes:
               content: S
@@ -76,6 +70,17 @@ features:
             rangeKeyType: S
             tableName: ___DYNAMIC_PREFIX___-Notes
             tablePrivacy: private
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
+              channelName: S
+              friendId: S
+              userId: S
+            hashKeyName: userId
+            hashKeyType: S
+            rangeKeyName: ''
+            rangeKeyType: ''
+            tableName: ___DYNAMIC_PREFIX___-UserVideoChannel
+            tablePrivacy: public
   mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
     components:
       analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
