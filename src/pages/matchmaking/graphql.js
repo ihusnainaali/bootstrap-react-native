@@ -25,8 +25,12 @@ const GetUsersByLanguage = `query QueryUsersByLanguage($userLanguage: String!, $
         items{
             userId
             userName
-            userLanguage
+            userGender
+            userDob
             userSchool
+            userLanguage
+            userLearnLanguage
+            userImageUrl
         }
         nextToken
     }
@@ -38,7 +42,7 @@ const CreateFriend = `mutation CreateFriend($userId: String!, $friendId: String!
         friendId: $friendId
     }){
         userId
-    }   
+    }
 }`
 
 const GetFriend = `query GetFriend($userId: String!, $friendId: String!) {

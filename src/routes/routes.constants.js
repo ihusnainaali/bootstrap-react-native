@@ -9,6 +9,8 @@ export const route = {
     MATCHMAKING: 'matchmaking',
     PANGYOU: 'pangyou',
     PROFILE: 'profile',
+    PROFILEADD: 'profileadd',
+    PROFILEEDIT: 'profileedit',
     REGISTER: 'register',
     SETTINGS: 'settings',
     SPLASH: 'splash',

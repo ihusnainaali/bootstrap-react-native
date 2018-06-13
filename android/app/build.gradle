@@ -137,6 +137,8 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-audio-player-recorder')
+    compile project(':react-native-image-picker')
     compile project(':react-native-twilio-video-webrtc')
     compile project(':react-native-vector-icons')
     compile project(':aws-amplify-react-native')

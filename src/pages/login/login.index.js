@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, KeyboardAvoidingView, AsyncStorage} from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import { connect } from 'react-redux';
@@ -8,11 +8,12 @@ import { onLogin } from '../../redux/actions/auth.actions'
 import TextField from '../../components/textfield/textfield.component';
 import ButtonComponent from '../../components/button/button.component';
 import { Container, Button, Header , Left, Right, Title, Content, Icon, Body} from 'native-base';
-import ChatClientHelper from '../../utils/twilio';
-import operations from '../matchmaking/graphql';
 
 import styles from './login.style';
 import theme from '../../styles/theme.style';
+
+import { GetProfile } from '../profile/graphql_query';
+import { API, graphqlOperation } from 'aws-amplify';
 
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../../../aws-exports';
@@ -42,24 +43,22 @@ class Login extends Component {
     }
 
     signIn() {
-        const { username, password } = this.state;
         this.clearError();
+        const { username, password } = this.state;
 
         Auth.signIn(username, password)
             .then(user => {
-                console.log(user);
+                // Assign username and password to Redux Store
                 this.props.onLogin(username, password);
-                //set up twilio video and chat
-                ChatClientHelper.getInstance().login(username);
-                operations.SubVideoChannel(username).subscribe({
-                    next: (eventData) => {
-                        data = eventData.value.data[operations.SUB_VIDEO_CHANNEL_KEY];
-                        if (data.username !== "") {
-                            this.props.navigation.navigate('video', {status: 'incoming', friend: data.username, roomName: data.channelName});
-                        }
+                // Check to see if user has a profile
+                const profileValid = API.graphql(graphqlOperation(GetProfile, {userId: this.state.username}))
+                  .then(profile => {
+                    if (!profile.data.getPangyouMobilehub1098576098UserProfile) {
+                        this.props.navigation.navigate('AddProfile', {username: username});
+                    } else {
+                        this.props.navigation.navigate('Home');
                     }
-                })
-                this.props.navigation.navigate('Home');
+                });
             })
             .catch(err => {
                 if (err.code === "UserNotConfirmedException") {
@@ -84,7 +83,7 @@ class Login extends Component {
         return (
 
             <Container style={styles.wrapper}>
-            
+
             <Header>
                 <Left>
                 <Button transparent

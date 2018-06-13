@@ -1,13 +1,16 @@
 import React from 'react';
-import { Text, View, Image, TouchableOpacity, AsyncStorage } from 'react-native';
+import { Text, View, Image, TouchableOpacity, AsyncStorage, Dimensions } from 'react-native';
 import { withNavigation, navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { DeckSwiper, Card, CardItem, Thumbnail, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
 import Loader from '../../components/loader/loader.component'
 import uuidv4 from 'uuid/v4';
+import { Player, Recorder, MediaStates } from 'react-native-audio-toolkit';
 
 import styles from './matchmaking.style';
 import theme from '../../styles/theme.style';
+
+import Moment from 'moment';
 
 import operations from './graphql'
 import ChatClientHelper from '../../utils/twilio';
@@ -18,6 +21,7 @@ class Matchmaking extends React.Component {
         super(props);
         this.state = {
             dataReady: false,
+            userGender: '',
             cards: [
             ],
             curIndex: 0,
@@ -48,6 +52,7 @@ class Matchmaking extends React.Component {
                     nextToken: data.nextToken
                 });
                 this.setState({ dataReady: true });
+                console.log('This is the RESP: ', resp)
             })
             .catch((err) => { console.log(err); this.props.navigation.goBack(); });
     }
@@ -130,35 +135,67 @@ class Matchmaking extends React.Component {
     }
 
     rendDeckSwiper() {
+        const maleGender = <Icon type="Ionicons" name='ios-man' ios='ios-man' md='md-man' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />;
+        const femaleGender = <Icon type="Ionicons" name='ios-woman' ios='ios-woman' md='md-woman' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />;
+
         return (
-            <DeckSwiper
-                ref={(c) => this._deckSwiper = c}
-                onSwipeLeft={(index) => this.swipedLeft(index)}
-                onSwipeRight={(index) => this.swipedRight(index)}
-                dataSource={this.state.cards}
-                looping={false}
-                renderEmpty={this.renderEmpty}
-                renderItem={item =>
-                    <Card style={{ elevation: 3 }}>
-                        <CardItem>
+          <Container>
+            <View style={{marginLeft: 35}}>
+                <DeckSwiper
+                    ref={(c) => this._deckSwiper = c}
+                    onSwipeLeft={(index) => this.swipedLeft(index)}
+                    onSwipeRight={(index) => this.swipedRight(index)}
+                    dataSource={this.state.cards}
+                    looping={false}
+                    renderEmpty={this.renderEmpty}
+                    renderItem={item =>
+                        <Card style={{elevation: 3, width: 300, height: 500 }}>
+                          <CardItem>
                             <Left>
-                                <Thumbnail source={item.image} />
-                                <Body>
-                                    <Text>{item.userId}</Text>
-                                    <Text>{item.userLanguage}</Text>
-                                    <Text>{item.userCountry}</Text>
-                                    <Text note>NativeBase</Text>
-                                </Body>
+                                <Icon name="heart" style={{ color: '#ED4A6A' }} /><Text style={styles.topText}> {item.userName}</Text>
                             </Left>
-                        </CardItem>
-                        <CardItem cardBody>
-                            <Image style={{ height: 400, flex: 1 }} source={item.image} />
-                        </CardItem>
-                    </Card>
-                }
-            />
+                          </CardItem>
+                          <CardItem cardBody style={{justifyContent: 'center'}}>
+                              <Image style={{width: 240, borderRadius: 120, height: 240, justifyContent: 'center'}} source={{uri: item.userImageUrl}} />
+                          </CardItem>
+                          <CardItem style={{justifyContent: 'flex-start', marginBottom: -5}}>
+                              {(item.userGender == 'Male') ? maleGender : femaleGender}
+                              <Text style={{fontSize: 14, color: 'black', textAlign: 'center'}}>{item.userGender}</Text>
+                          </CardItem>
+                          <CardItem style={{justifyContent: 'flex-start', marginBottom: -5}}>
+                              <Icon type="Ionicons" name='ios-calendar' ios='ios-calendar' md='md-calendar' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />
+                              <Text style={{fontSize: 14, color: 'black', textAlign: 'center'}}>
+                                  {Moment(item.userDob).format("MMM D, YYYY")}
+                              </Text>
+                          </CardItem>
+                          <CardItem style={{justifyContent: 'flex-start', marginBottom: -5}}>
+                              <Icon type="Ionicons" name='ios-school' ios='ios-school' md='md-school' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />
+                              <Text style={{fontSize: 14, color: 'black', textAlign: 'center'}}>{item.userSchool}</Text>
+                          </CardItem>
+                          <CardItem style={{justifyContent: 'flex-start', marginBottom: -5}}>
+                              <Icon type="Ionicons" name='ios-globe' ios='ios-globe' md='md-globe' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />
+                              <Text style={{fontSize: 14, color: 'black', textAlign: 'center'}}>Spoken Language: {item.userLanguage}</Text>
+                          </CardItem>
+                          <CardItem style={{justifyContent: 'flex-start', marginBottom: -5}}>
+                              <Icon type="Ionicons" name='ios-globe' ios='ios-globe' md='md-globe' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />
+                              <Text style={{fontSize: 14, color: 'black', textAlign: 'center'}}>Desired Language: {item.userLearnLanguage}</Text>
+                          </CardItem>
+                        </Card>
+                    }
+                />
+              </View>
+          </Container>
+
         );
     }
+
+    // getGenderIcon() {
+    //     if ((item.userGender == 'Male')) {
+    //         return <Icon type="Ionicons" name='ios-man' ios='ios-man' md='md-man' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />;
+    //     } else {
+    //         return <Icon type="Ionicons" name='ios-woman' ios='ios-woman' md='md-woman' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />;
+    //     }
+    // }
 
     rendLoading() {
         return (
@@ -183,12 +220,10 @@ class Matchmaking extends React.Component {
                 {this.rendDeckSwiper()}
                 <View style={{ flexDirection: "row", flex: 1, position: "absolute", bottom: 0, left: 0, right: 0, justifyContent: 'space-between', padding: 15 }}>
                     <Button iconLeft onPress={() => { this._deckSwiper._root.swipeLeft(); this.swipedLeft() }}>
-                        <Icon name="arrow-back" />
-                        <Text>No</Text>
+                        <Icon name="arrow-back" /><Text style={{color: 'white', marginLeft: 10, width: 30}}>No</Text>
                     </Button>
                     <Button iconRight onPress={() => { this._deckSwiper._root.swipeRight(); this.swipedRight() }}>
-                        <Text>Yes</Text>
-                        <Icon name="arrow-forward" />
+                        <Text style={{color: 'white', marginLeft: 10, width: 30}}>Yes</Text><Icon name="arrow-forward" />
                     </Button>
                 </View>
             </Container>

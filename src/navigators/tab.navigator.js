@@ -1,26 +1,22 @@
 import React from 'react';
 import { Text, View, Button} from 'react-native';
 import { navigation, createStackNavigator, createBottomTabNavigator, withNavigation } from 'react-navigation';
-
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import HeaderButtons from 'react-navigation-header-buttons'
-
 import Pangyou from '../pages/pangyou/pangyou.index';
 import Friends from '../pages/friends/friends.index';
 import Journals from '../pages/journals/journals.index';
 import Profile from '../pages/profile/profile.index';
+import AddProfile from '../pages/profile/profile.add';
+import EditProfile from '../pages/profile/profile.edit';
 import Settings from '../pages/settings/settings.index';
 import Matchmaking from '../pages/matchmaking/matchmaking.index';
 import Chat from '../pages/chat/chat.index';
 import Video from '../pages/video/video.index';
-
 import { route } from '../routes/routes.constants';
-
 import theme from '../styles/theme.style';
-
 // Create Pangyou Stack
 const PangyouStack = createStackNavigator({
-
     pangyou: {
       screen: Pangyou,
     },
@@ -28,13 +24,11 @@ const PangyouStack = createStackNavigator({
   {
     initialRouteName: 'pangyou',
   }
-  
-)
 
+)
 // Create Friends Stack
 const FriendsStack = createStackNavigator({
-
-    friends: { 
+    friends: {
       screen: Friends,
     },
     // TODO add Friend Redirection Profile
@@ -44,11 +38,10 @@ const FriendsStack = createStackNavigator({
     initialRouteName: 'friends',
   }
 )
-  
+
 // Create Journals Stack
 const JournalsStack = createStackNavigator({
-
-    journals: { 
+    journals: {
       screen: Journals,
     }
     // TODO add Specific Journal Redirection
@@ -58,11 +51,9 @@ const JournalsStack = createStackNavigator({
   }
   // TODO add journal screen redirection
 )
-
 // Create Profile Stack
 const ProfileStack = createStackNavigator({
-
-    profile: { 
+    profile: {
       screen: Profile,
     }
   },
@@ -71,14 +62,13 @@ const ProfileStack = createStackNavigator({
   }
   // TODO add edit profile screen redirection
 )
-
 const Tabs = createBottomTabNavigator({
-  
-		Pangyou: PangyouStack,
-		Friends: FriendsStack,
-		Journals: JournalsStack,
-    Profile: ProfileStack
-    
+
+        Pangyou: PangyouStack,
+        Friends: FriendsStack,
+        Journals: JournalsStack,
+        Profile: ProfileStack
+
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -87,13 +77,13 @@ const Tabs = createBottomTabNavigator({
         let iconName;
         if (routeName === 'Pangyou') {
           iconName = `face`;
-				} else if (routeName === 'Friends') {
-					iconName = `people${focused ? '' : '-outline'}`;
-				} else if (routeName === 'Journals') {
+                } else if (routeName === 'Friends') {
+                    iconName = `people${focused ? '' : '-outline'}`;
+                } else if (routeName === 'Journals') {
           iconName = `library-books`;
-				} else if (routeName === 'Profile') {
-					iconName = `person${focused ? '' : '-outline'}`;
-				}
+                } else if (routeName === 'Profile') {
+                    iconName = `person${focused ? '' : '-outline'}`;
+                }
         return <MaterialIcons name={iconName} size={25} color={tintColor} />;
       },
     }),
@@ -104,19 +94,16 @@ const Tabs = createBottomTabNavigator({
     animationEnabled: true,
     swipeEnabled: false,
   }
-
 );
-
 Tabs.navigationOptions = {
     header: null,
 };
-
 const TabNavigator = createStackNavigator({
     Tabs,
     chat: {
         screen: Chat,
     },
-    matchmaking: { 
+    matchmaking: {
         screen: Matchmaking,
     },
     settings: {
@@ -124,7 +111,12 @@ const TabNavigator = createStackNavigator({
     },
     video: {
         screen: Video,
+    },
+    profileadd: {
+        screen: AddProfile,
+    },
+    profileedit: {
+        screen: EditProfile,
     }
 })
-
 export default TabNavigator;

@@ -5,14 +5,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Thumbnail, Item, List, ListItem, Input, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
 import ChatClientHelper from '../../utils/twilio';
 import operations from '../matchmaking/graphql';
-
 import styles from './friends.style';
 import theme from '../../styles/theme.style';
-
 import { route } from '../../routes/routes.constants';
 
 let items = ['Simon Mignolet', 'Nathaniel Clyne', 'Dejan Lovren', 'Mama Sakho', 'Emre Can'];
-
 // TODO Add Backend Retrieval
 const list = [
     {
@@ -26,9 +23,7 @@ const list = [
         subtitle: 'New York, New York\n'
     },
 ]
-
 class Friends extends React.Component {
-
     constructor(props) {
         super(props);
         this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -41,22 +36,18 @@ class Friends extends React.Component {
         };
         this.flag = true;
     }
-
     // Declare Edit Friend Icon
     static navigationOptions = ({ navigation }) => {
-
         // TODO Move Edit Friend to Header
         return {
             header: null
         };
     };
-
-    async componentDidMount() {
+    async componentWillMount() {
         chatClientHelper = ChatClientHelper.getInstance();
         this.setState({ chatClientHelper });
-
-        const user = await AsyncStorage.getItem('username');
-
+        const username = await AsyncStorage.getItem('username');
+        this.setState({ user: username });
         // get all channel sids and store them in state.
         friendsChannel = {};
         friendIds = [];
@@ -120,19 +111,16 @@ class Friends extends React.Component {
     componentWillUnmount() {
         this._sub.remove();
     }
-
     // get the channel name for specific friend
     fetchChannelName(friend) {
         // const resp = await operations.GetFriend(this.state.user, friend);
         // return resp.data[operations.GET_FRIENDS_KEY];
         return "Test1"
     }
-
     fetchChannelSID(friend) {
         console.log(friend, this.state.friendsChannel[friend]);
         return this.state.friendsChannel[friend];
     }
-
     chatWithFriend(friend, avatar) {
         client = this.state.chatClientHelper.client;
         user = this.state.user;
@@ -147,56 +135,10 @@ class Friends extends React.Component {
                 }
                 channel.getMessages()
                     .then(messages => this.props.navigation.navigate(route.CHAT, { user, friend, messages, avatar, channel, user }));
-
             })
             .catch(console.log);
     }
-
-    // For List View
-    formatData(data) {
-        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-        var formatedData = [];
-
-        for (let sectionId = 0; sectionId < alphabet.length; sectionId++) {
-            const currentChar = alphabet[sectionId];
-            const users = data.filter((user) => user.name.charAt(0).toUpperCase() === currentChar);
-            if (users.length > 0) {
-                formatedData.push({ data: users, key: currentChar });
-            }
-        }
-
-        return formatedData;
-    }
-
-    renderItem({ item }) {
-        return (
-            <ListItem avatar onPress={() => { this.chatWithFriend(item.name, item.avatar_url); }}>
-                <Left>
-                    <Thumbnail style={styles.photo} source={{ uri: item.avatar_url }} />
-                </Left>
-                <Body>
-                    <Text style={styles.text_name}>{item.name}</Text>
-                    <Text style={styles.text_subtitle} note>{item.subtitle}</Text>
-                </Body>
-                <Right>
-                </Right>
-            </ListItem>
-        );
-    }
-
-    renderSectionHeader({ section }) {
-        return (
-            <View style={styles.sectionHeader}>
-                <Text style={styles.text}>{section.key}</Text>
-            </View>
-        );
-    }
-
     render() {
-        const friends = this.state.friends;
-        const search = this.state.search;
-        const data = search ? friends.filter(item => item.name.includes(search)) : this.formatData(friends);
-
         return (
             <Container style={styles.container}>
                 <Header>
@@ -214,7 +156,7 @@ class Friends extends React.Component {
                         </Button>
                     </Right>
                 </Header>
-
+                // TODO Add Search Functionality
                 <Item regular style={{ paddingLeft: 10 }}>
                     <Icon name="ios-search"
                         style={styles.icon} />
@@ -222,7 +164,6 @@ class Friends extends React.Component {
                         placeholder="Search"
                         onChangeText={search => this.setState({ search })} />
                 </Item>
-
                 <Content>
                     <List>
                         {this.state.search ?
@@ -242,10 +183,7 @@ class Friends extends React.Component {
                     </List>
                 </Content>
             </Container>
-
         );
     }
-
 }
-
 export default withNavigation(Friends);
