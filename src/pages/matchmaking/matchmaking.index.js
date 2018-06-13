@@ -21,6 +21,7 @@ class Matchmaking extends React.Component {
         super(props);
         this.state = {
             dataReady: false,
+            userGender: '',
             cards: [
             ],
             curIndex: 0,
@@ -51,6 +52,7 @@ class Matchmaking extends React.Component {
                     nextToken: data.nextToken
                 });
                 this.setState({ dataReady: true });
+                console.log('This is the RESP: ', resp)
             })
             .catch((err) => { console.log(err); this.props.navigation.goBack(); });
     }
@@ -133,6 +135,9 @@ class Matchmaking extends React.Component {
     }
 
     rendDeckSwiper() {
+        const maleGender = <Icon type="Ionicons" name='ios-man' ios='ios-man' md='md-man' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />;
+        const femaleGender = <Icon type="Ionicons" name='ios-woman' ios='ios-woman' md='md-woman' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />;
+
         return (
           <Container>
             <View style={{marginLeft: 35}}>
@@ -154,7 +159,7 @@ class Matchmaking extends React.Component {
                               <Image style={{width: 240, borderRadius: 120, height: 240, justifyContent: 'center'}} source={{uri: item.userImageUrl}} />
                           </CardItem>
                           <CardItem style={{justifyContent: 'flex-start', marginBottom: -5}}>
-                              <Icon type="Ionicons" name='ios-man' ios='ios-man' md='md-man' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />
+                              {(item.userGender == 'Male') ? maleGender : femaleGender}
                               <Text style={{fontSize: 14, color: 'black', textAlign: 'center'}}>{item.userGender}</Text>
                           </CardItem>
                           <CardItem style={{justifyContent: 'flex-start', marginBottom: -5}}>
@@ -183,6 +188,14 @@ class Matchmaking extends React.Component {
 
         );
     }
+
+    // getGenderIcon() {
+    //     if ((item.userGender == 'Male')) {
+    //         return <Icon type="Ionicons" name='ios-man' ios='ios-man' md='md-man' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />;
+    //     } else {
+    //         return <Icon type="Ionicons" name='ios-woman' ios='ios-woman' md='md-woman' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />;
+    //     }
+    // }
 
     rendLoading() {
         return (
