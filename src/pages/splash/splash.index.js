@@ -30,9 +30,8 @@ export default class Splash extends Component {
             const profileValid = API.graphql(graphqlOperation(GetProfile, {userId: username}))
               .then(profile => {
                 if (!profile.data.getPangyouMobilehub1098576098UserProfile) {
-                    setTimeout(() => {
-                      this.props.navigation.navigate('AddProfile', {username: username});
-                    }, 2000);
+                    operations.CreateVideoChannel(username).catch(err => console.log(err));
+                    this.props.navigation.navigate('AddProfile', {username: username});
                 } else {
                   // This will switch to the Home screen or Welcome screen and this loading
                   // screen will be unmounted and thrown away.

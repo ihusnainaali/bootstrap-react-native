@@ -15,6 +15,9 @@ import theme from '../../styles/theme.style';
 import { GetProfile } from '../profile/graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
 
+import ChatClientHelper from '../../utils/twilio';
+import operations from '../matchmaking/graphql';
+
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../../../aws-exports';
 Amplify.configure(config);
@@ -50,10 +53,21 @@ class Login extends Component {
             .then(user => {
                 // Assign username and password to Redux Store
                 this.props.onLogin(username, password);
+                //create chat clientHelper, and subscribe to video calls.
+                ChatClientHelper.getInstance().login(username);
+                operations.SubVideoChannel(username).subscribe({
+                    next: (eventData) => {
+                        data = eventData.value.data[operations.SUB_VIDEO_CHANNEL_KEY];
+                        if (data.username !== "") {
+                            this.props.navigation.navigate('video', {status: 'incoming', friend: data.username, roomName: data.channelName});
+                        }
+                    }
+                });
                 // Check to see if user has a profile
                 const profileValid = API.graphql(graphqlOperation(GetProfile, {userId: this.state.username}))
                   .then(profile => {
                     if (!profile.data.getPangyouMobilehub1098576098UserProfile) {
+                        operations.CreateVideoChannel(username).catch(err => console.log(err));
                         this.props.navigation.navigate('AddProfile', {username: username});
                     } else {
                         this.props.navigation.navigate('Home');
