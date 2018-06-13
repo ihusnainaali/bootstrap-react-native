@@ -125,6 +125,8 @@ const GetUserProfile = `query GetUserProfile($userId: String!)  {
         userId
         userImageUrl
         userStatus
+        userLanguage
+        userLearnLanguage
     }
 }`
 

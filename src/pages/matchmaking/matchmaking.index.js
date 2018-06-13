@@ -30,17 +30,24 @@ class Matchmaking extends React.Component {
         this.swipedLeft = this.swipedLeft.bind(this);
         this.swipedRight = this.swipedRight.bind(this);
         this.fetchData = this.fetchData.bind(this);
-        this.rendHeader = this.rendHeader.bind(this);
-        this.rendLoading = this.rendLoading.bind(this);
-        this.rendDeckSwiper = this.rendDeckSwiper.bind(this);
+        this.renderHeader = this.renderHeader.bind(this);
+        this.renderLoading = this.renderLoading.bind(this);
+        this.renderDeckSwiper = this.renderDeckSwiper.bind(this);
     }
 
     async componentDidMount() {
         // operations.CreateFriend("RN1", "RN2", "oops").then(resp => console.log(resp)).catch(err => console.log(err));
         // operations.UpdateFriend("RN1", "RN2", "CHid").then(resp => console.log(resp)).catch(err => console.log(err));
-        this.fetchData("English");
         const user = await AsyncStorage.getItem("username");
+        const fetchData = this.fetchData;
         this.setState({ user });
+        operations.GetUserProfile(user)
+        .then(resp => {
+            console.log(resp);
+            userLearnLanguage = resp.data[operations.GET_PROFILE_KEY].userLearnLanguage;
+            userLearnLanguage = "English";
+            fetchData(userLearnLanguage);
+        })
     }
 
     fetchData(language = "Chinese") {
@@ -59,12 +66,12 @@ class Matchmaking extends React.Component {
 
     //TODO refetch data.
     swipedLeft(index) {
-        this.state.curIndex++;
+        this.setState(prevState => ({curIndex: prevState.curIndex+1}));
     }
 
     swipedRight(index) {
         card = this.state.cards[this.state.curIndex];
-        this.state.curIndex++;
+        this.setState(prevState => ({curIndex: prevState.curIndex+1}));
         friendId = card.userId;
         userId = this.state.user;
         console.log(userId, friendId);
@@ -93,8 +100,8 @@ class Matchmaking extends React.Component {
                     .catch(err => {
                         console.log(err);
                     })
-            }
-            );
+            })
+            .catch(err => console.log(err));
     }
 
 
@@ -107,7 +114,7 @@ class Matchmaking extends React.Component {
 
     };
 
-    rendHeader() {
+    renderHeader() {
         return (
             <Header>
                 <Left>
@@ -128,80 +135,74 @@ class Matchmaking extends React.Component {
 
     renderEmpty() {
         return (
-            <View style={styles.empty}>
-                <Text>Please try again later!</Text>
-            </View>
+            <Container>
+                {this.renderHeader()}
+                <View style={styles.empty}>
+                    <Text>Please try again later!</Text>
+                </View>
+            </Container>
         )
     }
 
-    rendDeckSwiper() {
-        const maleGender = <Icon type="Ionicons" name='ios-man' ios='ios-man' md='md-man' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />;
-        const femaleGender = <Icon type="Ionicons" name='ios-woman' ios='ios-woman' md='md-woman' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />;
+    renderDeckSwiper() {
+        const maleGender = <Icon type="Ionicons" name='ios-man' ios='ios-man' md='md-man' style={{ fontSize: 20, color: 'grey', textAlign: 'center' }} />;
+        const femaleGender = <Icon type="Ionicons" name='ios-woman' ios='ios-woman' md='md-woman' style={{ fontSize: 20, color: 'grey', textAlign: 'center' }} />;
 
         return (
-          <Container>
-            <View>
-                <DeckSwiper
-                    ref={(c) => this._deckSwiper = c}
-                    onSwipeLeft={(index) => this.swipedLeft(index)}
-                    onSwipeRight={(index) => this.swipedRight(index)}
-                    dataSource={this.state.cards}
-                    looping={false}
-                    renderEmpty={this.renderEmpty}
-                    renderItem={item =>
+            <Container>
+                <View>
+                    <DeckSwiper
+                        ref={(c) => this._deckSwiper = c}
+                        onSwipeLeft={(index) => this.swipedLeft(index)}
+                        onSwipeRight={(index) => this.swipedRight(index)}
+                        dataSource={this.state.cards}
+                        looping={false}
+                        renderItem={item =>
 
-                        <Card style={{elevation: 3, width: 300, height: 500, alignSelf: 'center' }}>
-                          <CardItem>
-                            <Left>
-                                <Icon name="heart" style={{ color: '#ED4A6A' }} /><Text style={styles.topText}> {item.userName}</Text>
-                            </Left>
-                          </CardItem>
-                          <CardItem cardBody style={{justifyContent: 'center'}}>
-                              <Image style={{width: 240, borderRadius: 120, height: 240, justifyContent: 'center'}} source={{uri: item.userImageUrl}} />
-                          </CardItem>
-                          <CardItem style={{justifyContent: 'flex-start', marginBottom: -5}}>
-                              {(item.userGender == 'Male') ? maleGender : femaleGender}
-                              <Text style={{fontSize: 14, color: 'black', textAlign: 'center'}}>{item.userGender}</Text>
-                          </CardItem>
-                          <CardItem style={{justifyContent: 'flex-start', marginBottom: -5}}>
-                              <Icon type="Ionicons" name='ios-calendar' ios='ios-calendar' md='md-calendar' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />
-                              <Text style={{fontSize: 14, color: 'black', textAlign: 'center'}}>
-                                  {Moment(item.userDob).format("MMM D, YYYY")}
-                              </Text>
-                          </CardItem>
-                          <CardItem style={{justifyContent: 'flex-start', marginBottom: -5}}>
-                              <Icon type="Ionicons" name='ios-school' ios='ios-school' md='md-school' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />
-                              <Text style={{fontSize: 14, color: 'black', textAlign: 'center'}}>{item.userSchool}</Text>
-                          </CardItem>
-                          <CardItem style={{justifyContent: 'flex-start', marginBottom: -5}}>
-                              <Icon type="Ionicons" name='ios-globe' ios='ios-globe' md='md-globe' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />
-                              <Text style={{fontSize: 14, color: 'black', textAlign: 'center'}}>Spoken Language: {item.userLanguage}</Text>
-                          </CardItem>
-                          <CardItem style={{justifyContent: 'flex-start', marginBottom: -5}}>
-                              <Icon type="Ionicons" name='ios-globe' ios='ios-globe' md='md-globe' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />
-                              <Text style={{fontSize: 14, color: 'black', textAlign: 'center'}}>Desired Language: {item.userLearnLanguage}</Text>
-                          </CardItem>
-                        </Card>
-                    }
-                />
-              </View>
-          </Container>
+                            <Card style={{ elevation: 3, width: 340, height: 500, alignSelf: 'center' }}>
+                                <CardItem>
+                                    <Left>
+                                        <Icon name="heart" style={{ color: '#ED4A6A' }} /><Text style={styles.topText}> {item.userName}</Text>
+                                    </Left>
+                                </CardItem>
+                                <CardItem cardBody style={{ justifyContent: 'center' }}>
+                                    <Image style={{ width: 240, borderRadius: 120, height: 240, justifyContent: 'center' }} source={{ uri: item.userImageUrl }} />
+                                </CardItem>
+                                <CardItem style={{ justifyContent: 'flex-start', marginBottom: -5 }}>
+                                    {(item.userGender == 'Male') ? maleGender : femaleGender}
+                                    <Text style={{ fontSize: 14, color: 'black', textAlign: 'center' }}>{item.userGender}</Text>
+                                </CardItem>
+                                <CardItem style={{ justifyContent: 'flex-start', marginBottom: -5 }}>
+                                    <Icon type="Ionicons" name='ios-calendar' ios='ios-calendar' md='md-calendar' style={{ fontSize: 20, color: 'grey', textAlign: 'center' }} />
+                                    <Text style={{ fontSize: 14, color: 'black', textAlign: 'center' }}>
+                                        {Moment(item.userDob).format("MMM D, YYYY")}
+                                    </Text>
+                                </CardItem>
+                                <CardItem style={{ justifyContent: 'flex-start', marginBottom: -5 }}>
+                                    <Icon type="Ionicons" name='ios-school' ios='ios-school' md='md-school' style={{ fontSize: 20, color: 'grey', textAlign: 'center' }} />
+                                    <Text style={{ fontSize: 14, color: 'black', textAlign: 'center' }}>{item.userSchool}</Text>
+                                </CardItem>
+                                <CardItem style={{ justifyContent: 'flex-start', marginBottom: -5 }}>
+                                    <Icon type="Ionicons" name='ios-globe' ios='ios-globe' md='md-globe' style={{ fontSize: 20, color: 'grey', textAlign: 'center' }} />
+                                    <Text style={{ fontSize: 14, color: 'black', textAlign: 'center' }}>Spoken Language: {item.userLanguage}</Text>
+                                </CardItem>
+                                <CardItem style={{ justifyContent: 'flex-start', marginBottom: -5 }}>
+                                    <Icon type="Ionicons" name='ios-globe' ios='ios-globe' md='md-globe' style={{ fontSize: 20, color: 'grey', textAlign: 'center' }} />
+                                    <Text style={{ fontSize: 14, color: 'black', textAlign: 'center' }}>Desired Language: {item.userLearnLanguage}</Text>
+                                </CardItem>
+                            </Card>
+                        }
+                    />
+                </View>
+            </Container>
 
         );
     }
 
-    // getGenderIcon() {
-    //     if ((item.userGender == 'Male')) {
-    //         return <Icon type="Ionicons" name='ios-man' ios='ios-man' md='md-man' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />;
-    //     } else {
-    //         return <Icon type="Ionicons" name='ios-woman' ios='ios-woman' md='md-woman' style={{fontSize: 20, color: 'grey', textAlign: 'center'}} />;
-    //     }
-    // }
-
-    rendLoading() {
+    renderLoading() {
         return (
             <Container>
-                {this.rendHeader()}
+                {this.renderHeader()}
                 <Loader />
             </Container>
         );
@@ -210,21 +211,26 @@ class Matchmaking extends React.Component {
     render() {
         console.log("render");
         console.log(this.state.cards);
+        console.log(this.state.curIndex);
 
         if (!this.state.dataReady) {
-            return this.rendLoading();
+            return this.renderLoading();
+        }
+
+        if (this.state.curIndex >= this.state.cards.length) {
+            return this.renderEmpty();
         }
 
         return (
             <Container>
-                {this.rendHeader()}
-                {this.rendDeckSwiper()}
+                {this.renderHeader()}
+                {this.renderDeckSwiper()}
                 <View style={{ flexDirection: "row", flex: 1, position: "absolute", bottom: 0, left: 0, right: 0, justifyContent: 'space-between', padding: 15 }}>
                     <Button iconLeft onPress={() => { this._deckSwiper._root.swipeLeft(); this.swipedLeft() }}>
-                        <Icon name="arrow-back" /><Text style={{color: 'white', marginLeft: 10, width: 30}}>No</Text>
+                        <Icon name="arrow-back" /><Text style={{ color: 'white', marginLeft: 10, width: 30 }}>No</Text>
                     </Button>
                     <Button iconRight onPress={() => { this._deckSwiper._root.swipeRight(); this.swipedRight() }}>
-                        <Text style={{color: 'white', marginLeft: 10, width: 30}}>Yes</Text><Icon name="arrow-forward" />
+                        <Text style={{ color: 'white', marginLeft: 10, width: 30 }}>Yes</Text><Icon name="arrow-forward" />
                     </Button>
                 </View>
             </Container>
