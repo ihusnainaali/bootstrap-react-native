@@ -60,7 +60,21 @@ class Friends extends React.Component {
                 friendIds.push(friendId);
             }
         });
-        this.setState({ user: username, friendsChannel: friends });
+
+        if (friendIds.length > 0) {
+            // get friends info.
+            friends = [];
+            const batchGetUserProfilesResp = await operations.BatchGetUserProfiles(friendIds);
+            batchGetUserProfilesResp.data[operations.BATCH_GET_PROFILES_KEY].forEach(friendProfile => {
+                friends.push({
+                    name: friendProfile.userId,
+                    avatar_url: friendProfile.userImageUrl,
+                    subtitle: friendProfile.userStatus
+                });
+            });
+            this.setState({ user, friendsChannel, friends });
+        }
+
         // subscribe to new friends
         operations.SubFriends(user).subscribe({
             next: async (eventData) => {
@@ -156,12 +170,12 @@ class Friends extends React.Component {
                             <FlatList
                                 data={data}
                                 keyExtractor={item => item.name}
-                                renderItem={this.renderItem}
+                                renderItem={this.renderItem.bind(this)}
                             />
                             :
                             <SectionList
                                 keyExtractor={item => item.name}
-                                renderItem={this.renderItem}
+                                renderItem={this.renderItem.bind(this)}
                                 renderSectionHeader={this.renderSectionHeader}
                                 sections={data}
                             />
