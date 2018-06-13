@@ -58,7 +58,7 @@ class Profile extends Component {
     }
 
     static navigationOptions = ({ navigation }) => ({
-        headerTitle: <Title style={{ fontFamily: theme.FONT_LIGHT }}>Matchmaking</Title>,
+        headerTitle: <Title style={{ fontFamily: theme.FONT_LIGHT }}>Friend Profile</Title>,
         headerTitleStyle: { textAlign: 'center', alignSelf: 'center' },
         headerStyle: {
             backgroundColor: 'white',
