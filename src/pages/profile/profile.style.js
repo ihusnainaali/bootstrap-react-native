@@ -139,5 +139,10 @@ export default StyleSheet.create({
     slider: {
       height: 10,
       margin: 10,
+    },
+    errorMessage: {
+      color: 'red',
+      justifyContent: 'center',
+      alignItems: 'center',
     }
 })

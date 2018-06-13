@@ -16,6 +16,7 @@ import { Player, Recorder, MediaStates } from 'react-native-audio-toolkit';
 
 import { GetProfile, SubscribeToProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
+import { RNS3 } from 'react-native-aws3';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { route } from '../../routes/routes.constants';
@@ -24,8 +25,6 @@ import styles from './profile.style';
 
 import Moment from 'moment';
 
-
-let filename = 'personal_message.mp4';
 
 class Profile extends Component {
 
@@ -111,6 +110,7 @@ class Profile extends Component {
           this.setState({progress: Math.max(0, this.player.currentTime) / this.player.duration});
         }
       }, 100);
+
   }
 
   componentWillUnmount() {
@@ -171,7 +171,7 @@ class Profile extends Component {
       this.player.destroy();
     }
 
-    this.player = new Player(filename, {
+    this.player = new Player('user_personalized_message.mp4', {
       autoDestroy: false
     }).prepare((err) => {
       if (err) {
@@ -180,6 +180,7 @@ class Profile extends Component {
       } else {
         this.player.looping = this.state.loopButtonStatus;
       }
+
 
       this._updateState();
     });
@@ -199,14 +200,14 @@ class Profile extends Component {
       this.recorder.destroy();
     }
 
-    this.recorder = new Recorder(filename, {
+    this.recorder = new Recorder('user_personalized_message.mp4', {
       bitrate: 256000,
       channels: 2,
       sampleRate: 44100,
       quality: 'max'
       //format: 'ac3', // autodetected
       //encoder: 'aac', // autodetected
-    });
+    })
 
     this._updateState();
   }
@@ -313,18 +314,18 @@ class Profile extends Component {
           </Header>
           <Content>
             <View style={styles.indexProfileCard}>
-            <View style={{flexDirection: 'row', marginTop: 8, marginLeft: -20}}>
-                <View style={{flexDirection: 'row', justifyContent: 'flex-end', width: Dimensions.get('window').width}}>
-                    <View style={{justifyContent: 'center'}}>
-                        <View style={{flexDirection: 'column'}}>
-                            <Switch
-                              onValueChange = {this.setStatus}
-                              value = {currentStatus}/>
-                            {statusColor}
-                        </View>
-                    </View>
-                </View>
-            </View>
+              <View style={{flexDirection: 'row', marginTop: 8, marginLeft: -20}}>
+                  <View style={{flexDirection: 'row', justifyContent: 'flex-end', width: Dimensions.get('window').width}}>
+                      <View style={{justifyContent: 'center'}}>
+                          <View style={{flexDirection: 'column'}}>
+                              <Switch
+                                onValueChange = {this.setStatus}
+                                value = {currentStatus}/>
+                              {statusColor}
+                          </View>
+                      </View>
+                  </View>
+              </View>
               <View style={{flexDirection: 'row', marginTop: 20}}>
                   <View style={{flexDirection: 'row', justifyContent: 'center', width: Dimensions.get('window').width}}>
                       <View style={{justifyContent: 'center'}}>
@@ -386,9 +387,9 @@ class Profile extends Component {
                               </View>
                           </View>
                       </View>
-                      <View>
-                          <Text style={styles.errorMessage}>{this.state.error}</Text>
-                      </View>
+              </View>
+              <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 20, marginBottom: 20}}>
+                  <Text style={styles.errorMessage}>{this.state.error}</Text>
               </View>
             </View>
 

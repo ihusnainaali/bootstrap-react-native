@@ -24,6 +24,7 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		1845100F20CF596300966C7D /* libReactNativeAudioToolkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1845100E20CF592C00966C7D /* libReactNativeAudioToolkit.a */; };
+		18B1DEAF20D0A5F400E9CBB0 /* user_personalized_message.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 18B1DE8420D0A5F400E9CBB0 /* user_personalized_message.mp4 */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -421,6 +422,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Pangyou/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		1845100920CF592C00966C7D /* ReactNativeAudioToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeAudioToolkit.xcodeproj; path = "../node_modules/react-native-audio-toolkit/ios/ReactNativeAudioToolkit/ReactNativeAudioToolkit.xcodeproj"; sourceTree = "<group>"; };
+		18B1DE8420D0A5F400E9CBB0 /* user_personalized_message.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = user_personalized_message.mp4; path = ../../../../user_personalized_message.mp4; sourceTree = "<group>"; };
 		1C9D98D21CA440198CEF51DC /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		2BBE16DECC5741118FDC7324 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* Pangyou-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pangyou-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -617,6 +619,7 @@
 		13B07FAE1A68108700A75B9A /* Pangyou */ = {
 			isa = PBXGroup;
 			children = (
+				18B1DE8420D0A5F400E9CBB0 /* user_personalized_message.mp4 */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1349,6 +1352,7 @@
 				424004474D8C43E08DEA1949 /* Ionicons.ttf in Resources */,
 				C0FF0A8C46D947639AC85318 /* MaterialIcons.ttf in Resources */,
 				8AECF515BCF544FC875E9EFD /* Octicons.ttf in Resources */,
+				18B1DEAF20D0A5F400E9CBB0 /* user_personalized_message.mp4 in Resources */,
 				F7104643C4F24C2789D5C94E /* Roboto_medium.ttf in Resources */,
 				306BF217B7FC491FB9B8BAC9 /* Roboto.ttf in Resources */,
 				87304633A30848FCB1A28DC4 /* rubicon-icon-font.ttf in Resources */,
