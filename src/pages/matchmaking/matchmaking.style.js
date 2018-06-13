@@ -11,9 +11,10 @@ export default StyleSheet.create({
         fontSize: theme.HEADER_ICON_SIZE
     },
     empty: {
-        flex: 1, 
+        flex: 1,
         alignSelf: 'center',
         justifyContent: 'center',
+        marginBottom: 250
     },
 		indexProfileCard: {
         width: Dimensions.get('window').width,
