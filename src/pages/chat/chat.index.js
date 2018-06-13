@@ -7,6 +7,7 @@ import { Button, Icon } from 'native-base';
 import { styles } from './chat.style';
 import uuidv4 from 'uuid/v4';
 import operations from '../matchmaking/graphql';
+import { route } from '../../routes/routes.constants';
 
 class Chat extends React.Component {
     constructor(props) {
@@ -32,7 +33,7 @@ class Chat extends React.Component {
     static navigationOptions = ({ navigation }) => ({
         headerRight:
             <Button transparent
-                onPress={() => navigation.navigate('profile', { userId: navigation.getParam('friend') })}>
+                onPress={() => navigation.navigate(route.PROFILE, { userId: navigation.getParam('friend') })}>
                 <Icon
                     name='person'
                     type="MaterialIcons"
@@ -47,7 +48,7 @@ class Chat extends React.Component {
     });
 
     navigateToProfile() {
-        this.props.navigation.navigate('profile', { userId: this.state.friend });
+        this.props.navigation.navigate(route.PROFILE, { userId: this.state.friend });
     }
 
     componentDidMount() {
@@ -119,7 +120,7 @@ class Chat extends React.Component {
                 friend = props.friend;
                 // notify the friend to join the call.
                 operations.UpdateVideoChannel(friend, user, roomName);
-                props.navigation.navigate('video', { friend, status, roomName });
+                props.navigation.navigate(route.VIDEO, { friend, status, roomName });
             },
             'Cancel': () => { },
         };

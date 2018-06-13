@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, ListView, FlatList, SectionList, Image, TouchableOpacity, AsyncStorage } from 'react-native';
+import { Text, View, FlatList, SectionList, Image, TouchableOpacity, AsyncStorage } from 'react-native';
 import { withNavigation, navigation } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Thumbnail, Item, List, ListItem, Input, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
@@ -17,7 +17,6 @@ class Friends extends React.Component {
 
     constructor(props) {
         super(props);
-        this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
             chatClientHelper: null,
             friendsChannel: {},
