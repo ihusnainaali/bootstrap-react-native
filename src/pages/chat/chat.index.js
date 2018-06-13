@@ -40,7 +40,7 @@ class Chat extends React.Component {
                     style={styles.icon} />
             </Button>
         ,
-        title: navigation.state.params.friend,
+        headerTitle: <Text>{navigation.state.params.friend}</Text>,
         headerTitleStyle: { textAlign: 'center', alignSelf: 'center' },
         headerStyle: {
             backgroundColor: 'white',
