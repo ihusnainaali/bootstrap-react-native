@@ -84,14 +84,17 @@ class Chat extends React.Component {
     parseMessage(message) {
         this.state.channel.advanceLastConsumedMessageIndex(message.state.index)
             .catch(err => console.log(err));
+        var user = {};
+        if (message.state.author === this.state.user) {
+            user._id = 1;
+        }
+        user.user = message.state.author;
+        user.avatar = this.state.avatar;
         return ([{
             _id: message.state.sid,
             text: message.state.body,
             createdAt: message.state.timestamp,
-            user: {
-                user: message.state.author,
-                avatar: this.state.avatar,
-            }
+            user: user
         }]);
     }
 
