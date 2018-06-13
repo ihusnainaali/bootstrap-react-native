@@ -2,9 +2,11 @@ import React from 'react';
 import { GiftedChat, Send, Actions } from 'react-native-gifted-chat';
 import { withNavigation } from 'react-navigation';
 import { AsyncStorage, Text, TouchableOpacity, View } from 'react-native';
-import { Button, Icon } from 'native-base';
+import { Button, Icon, Title } from 'native-base';
 
 import { styles } from './chat.style';
+import theme from '../../styles/theme.style';
+
 import uuidv4 from 'uuid/v4';
 import operations from '../matchmaking/graphql';
 import { route } from '../../routes/routes.constants';
@@ -33,14 +35,14 @@ class Chat extends React.Component {
     static navigationOptions = ({ navigation }) => ({
         headerRight:
             <Button transparent
-                onPress={() => navigation.navigate(route.PROFILEFRIEND, { userId: navigation.getParam('friend') })}>
+                onPress={() => navigation.navigate(route.PROFILEFRIEND, { userId: navigation.getParam('friendId') })}>
                 <Icon
                     name='person'
                     type="MaterialIcons"
                     style={styles.icon} />
             </Button>
         ,
-        headerTitle: <Text>{navigation.state.params.friend}</Text>,
+        headerTitle: <Title style={{ fontFamily: theme.FONT_LIGHT }}>{navigation.getParam('friendName')}</Title>,
         headerTitleStyle: { textAlign: 'center', alignSelf: 'center' },
         headerStyle: {
             backgroundColor: 'white',

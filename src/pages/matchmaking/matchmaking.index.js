@@ -35,6 +35,15 @@ class Matchmaking extends React.Component {
         this.renderDeckSwiper = this.renderDeckSwiper.bind(this);
     }
 
+    // Declare Navigation Options Here :|
+    static navigationOptions = ({ navigation }) => ({
+        headerTitle: <Title style={{ fontFamily: theme.FONT_LIGHT }}>Matchmaking</Title>,
+        headerTitleStyle: { textAlign: 'center', alignSelf: 'center' },
+        headerStyle: {
+            backgroundColor: 'white',
+        },
+    });
+
     async componentDidMount() {
         // operations.CreateFriend("RN1", "RN2", "oops").then(resp => console.log(resp)).catch(err => console.log(err));
         // operations.UpdateFriend("RN1", "RN2", "CHid").then(resp => console.log(resp)).catch(err => console.log(err));
@@ -104,27 +113,10 @@ class Matchmaking extends React.Component {
             .catch(err => console.log(err));
     }
 
-
-    // Declare Navigation Options Here :|
-    static navigationOptions = ({ navigation }) => {
-
-        return {
-            header: null
-        }
-
-    };
-
     renderHeader() {
         return (
             <Header>
-                <Left>
-                    <Button transparent
-                        onPress={() => { this.props.navigation.goBack() }}>
-                        <Icon
-                            name='arrow-back'
-                            style={styles.icon} />
-                    </Button>
-                </Left>
+                <Left />
                 <Body>
                     <Title style={{ fontFamily: theme.FONT_LIGHT }}>Matchmaking</Title>
                 </Body>
@@ -201,7 +193,6 @@ class Matchmaking extends React.Component {
     renderLoading() {
         return (
             <Container>
-                {this.renderHeader()}
                 <Loader />
             </Container>
         );
@@ -220,7 +211,6 @@ class Matchmaking extends React.Component {
 
         return (
             <Container>
-                {this.renderHeader()}
                 {this.renderDeckSwiper()}
                 {empty ?
                     <View style={styles.empty}>

@@ -61,7 +61,8 @@ class Friends extends React.Component {
             const batchGetUserProfilesResp = await operations.BatchGetUserProfiles(friendIds);
             batchGetUserProfilesResp.data[operations.BATCH_GET_PROFILES_KEY].forEach(friendProfile => {
                 friends.push({
-                    name: friendProfile.userId,
+                    userId: friendProfile.userId,
+                    userName: friendProfile.userName,
                     avatar_url: friendProfile.userImageUrl,
                     subtitle: friendProfile.userStatus
                 });
@@ -82,7 +83,8 @@ class Friends extends React.Component {
                         friends = previousState.friends;
                         friendsChannel = previousState.friendsChannel;
                         friendProfile && friends.push({
-                            name: friendProfile.userId,
+                            userId: friendProfile.userId,
+                            userName: friendProfile.userName,
                             avatar_url: friendProfile.userImageUrl,
                             subtitle: friendProfile.userStatus
                         })
@@ -106,25 +108,28 @@ class Friends extends React.Component {
         this._sub.remove();
     }
 
-    fetchChannelSID(friend) {
-        console.log(friend, this.state.friendsChannel[friend]);
-        return this.state.friendsChannel[friend];
+    fetchChannelSID(friendId) {
+        console.log(friendId, this.state.friendsChannel[friendId]);
+        return this.state.friendsChannel[friendId];
     }
 
-    chatWithFriend(friend, avatar) {
+    chatWithFriend(friend) {
         client = this.state.chatClientHelper.client;
         user = this.state.user;
-        client && client.getChannelBySid(this.fetchChannelSID(friend))
+        friendId = friend.userId;
+        friendName = friend.userName;
+        friendAvatar = friend.userImageUrl;
+        client && client.getChannelBySid(this.fetchChannelSID(friendId))
             .then(channel => {
                 if (channel.state.status !== 'joined') {
                     channel.join()
                         .then(channel => {
                             channel.getMessages()
-                                .then(messages => this.props.navigation.navigate(route.CHAT, { user, friend, messages, avatar, channel, user }))
+                                .then(messages => this.props.navigation.navigate(route.CHAT, { user, friendId, friendName, messages, friendAvatar, channel, user }))
                         })
                 }
                 channel.getMessages()
-                    .then(messages => this.props.navigation.navigate(route.CHAT, { user, friend, messages, avatar, channel, user }));
+                    .then(messages => this.props.navigation.navigate(route.CHAT, { user, friendId, friendName, messages, friendAvatar, channel, user }));
 
             })
             .catch(console.log);
@@ -137,7 +142,7 @@ class Friends extends React.Component {
 
         for (let sectionId = 0; sectionId < alphabet.length; sectionId++) {
             const currentChar = alphabet[sectionId];
-            const users = data.filter((user) => user.name.charAt(0).toUpperCase() === currentChar);
+            const users = data.filter((user) => user.userName.charAt(0).toUpperCase() === currentChar);
             if (users.length > 0) {
                 formatedData.push({ data: users, key: currentChar });
             }
@@ -148,12 +153,12 @@ class Friends extends React.Component {
 
     renderItem({ item }) {
         return (
-            <ListItem avatar onPress={() => { this.chatWithFriend(item.name, item.avatar_url); }}>
+            <ListItem avatar onPress={() => { this.chatWithFriend(item); }}>
                 <Left>
                     <Thumbnail style={styles.photo} source={{ uri: item.avatar_url }} />
                 </Left>
                 <Body>
-                    <Text style={styles.text_name}>{item.name}</Text>
+                    <Text style={styles.text_name}>{item.userName}</Text>
                     <Text style={styles.text_subtitle} note>{item.subtitle}</Text>
                 </Body>
                 <Right>
@@ -206,12 +211,12 @@ class Friends extends React.Component {
                         {this.state.search ?
                             <FlatList
                                 data={data}
-                                keyExtractor={item => item.name}
+                                keyExtractor={item => item.userId}
                                 renderItem={this.renderItem.bind(this)}
                             />
                             :
                             <SectionList
-                                keyExtractor={item => item.name}
+                                keyExtractor={item => item.userId}
                                 renderItem={this.renderItem.bind(this)}
                                 renderSectionHeader={this.renderSectionHeader}
                                 sections={data}

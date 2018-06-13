@@ -115,6 +115,7 @@ const SubFriends = `subscription SubFriends($userId: String!) {
 const BatchGetUserProfiles = `query BatchGetUserProfiles($userIds: [String]) {
 	batchGetPangyouMobilehub1098576098UserProfile(userIds: $userIds){
         userId
+        userName
         userImageUrl
         userStatus
     }
