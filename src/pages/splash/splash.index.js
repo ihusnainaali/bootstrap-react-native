@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Image, View, Text, AsyncStorage } from 'react-native';
 import ChatClientHelper from '../../utils/twilio';
 import operations from '../matchmaking/graphql';
+import { GetProfile } from '../profile/graphql_query';
+import { API, graphqlOperation } from 'aws-amplify';
 
 import styles from './splash.style'
 
@@ -24,12 +26,22 @@ export default class Splash extends Component {
                     }
                 }
             })
+            // Check to see if user has a profile
+            const profileValid = API.graphql(graphqlOperation(GetProfile, {userId: username}))
+              .then(profile => {
+                if (!profile.data.getPangyouMobilehub1098576098UserProfile) {
+                    setTimeout(() => {
+                      this.props.navigation.navigate('AddProfile', {username: username});
+                    }, 2000);
+                } else {
+                  // This will switch to the Home screen or Welcome screen and this loading
+                  // screen will be unmounted and thrown away.
+                  setTimeout(() => {
+                      this.props.navigation.navigate(username ? 'Home' : 'Welcome');
+                  }, 2000);
+                }
+            });
         }
-        // This will switch to the Home screen or Welcome screen and this loading
-        // screen will be unmounted and thrown away.
-        setTimeout(() => {
-            this.props.navigation.navigate(username ? 'Home' : 'Welcome');
-        }, 2000);
     };
 
     render() {
@@ -47,4 +59,3 @@ export default class Splash extends Component {
         );
     }
 }
-

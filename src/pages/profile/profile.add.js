@@ -279,7 +279,7 @@ class AddProfile extends Component<Props> {
                     <ListItem style={styles.editLayoutItem}>
                         <DatePicker
                           style={{marginLeft: 15, width: 320}}
-                          date={this.state.date}
+                          date={this.state.userDob}
                           mode="date"
                           placeholder="select date"
                           format="YYYY-MM-DD"
@@ -298,8 +298,7 @@ class AddProfile extends Component<Props> {
                               marginLeft: 45
                             }
                           }}
-                          onDateChange={(date) => {this.setState({date: date})}}
-                          onValueChange={ (value) => {this.setState({userDob: value}) }}
+                          onDateChange={(value) => {this.setState({userDob: value})}}
                         />
                     </ListItem>
                 </View>

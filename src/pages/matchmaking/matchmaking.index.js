@@ -129,7 +129,7 @@ class Matchmaking extends React.Component {
     renderEmpty() {
         return (
             <View style={styles.empty}>
-                <Text>Please come back later!</Text>
+                <Text>Please try again later!</Text>
             </View>
         )
     }
@@ -140,7 +140,7 @@ class Matchmaking extends React.Component {
 
         return (
           <Container>
-            <View style={{marginLeft: 35}}>
+            <View>
                 <DeckSwiper
                     ref={(c) => this._deckSwiper = c}
                     onSwipeLeft={(index) => this.swipedLeft(index)}
@@ -149,7 +149,8 @@ class Matchmaking extends React.Component {
                     looping={false}
                     renderEmpty={this.renderEmpty}
                     renderItem={item =>
-                        <Card style={{elevation: 3, width: 300, height: 500 }}>
+
+                        <Card style={{elevation: 3, width: 300, height: 500, alignSelf: 'center' }}>
                           <CardItem>
                             <Left>
                                 <Icon name="heart" style={{ color: '#ED4A6A' }} /><Text style={styles.topText}> {item.userName}</Text>
