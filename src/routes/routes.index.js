@@ -9,6 +9,7 @@ import Pangyou from '../pages/pangyou/pangyou.index';
 import Profile from '../pages/profile/profile.index';
 import AddProfile from '../pages/profile/profile.add';
 import EditProfile from '../pages/profile/profile.edit';
+import FriendProfile from '../pages/profile/profile.friend';
 import Register from '../pages/register/register.index';
 import Settings from '../pages/settings/settings.index';
 import Splash from '../pages/splash/splash.index';
@@ -30,6 +31,7 @@ const {
     PROFILE,
     PROFILEADD,
     PROFILEEDIT,
+    PROFILEFRIEND,
     REGISTER,
     SETTINGS,
     SPLASH,
@@ -103,6 +105,10 @@ const routes = [
     {
         name: VIDEO,
         component: Video
+    },
+    {
+        name: PROFILEFRIEND,
+        component: FriendProfile
     },
 
 ]

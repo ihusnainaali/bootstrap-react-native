@@ -11,8 +11,8 @@ export default StyleSheet.create({
         fontSize: theme.HEADER_ICON_SIZE
     },
     empty: {
-        flex: 1,
-        alignItems: "center",
+        flex: 1, 
+        alignSelf: 'center',
         justifyContent: 'center',
     },
 		indexProfileCard: {

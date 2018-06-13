@@ -11,6 +11,7 @@ export const route = {
     PROFILE: 'profile',
     PROFILEADD: 'profileadd',
     PROFILEEDIT: 'profileedit',
+    PROFILEFRIEND: 'profilefriend',
     REGISTER: 'register',
     SETTINGS: 'settings',
     SPLASH: 'splash',

@@ -33,7 +33,7 @@ class Chat extends React.Component {
     static navigationOptions = ({ navigation }) => ({
         headerRight:
             <Button transparent
-                onPress={() => navigation.navigate(route.PROFILE, { userId: navigation.getParam('friend') })}>
+                onPress={() => navigation.navigate(route.PROFILEFRIEND, { userId: navigation.getParam('friend') })}>
                 <Icon
                     name='person'
                     type="MaterialIcons"
@@ -48,7 +48,7 @@ class Chat extends React.Component {
     });
 
     navigateToProfile() {
-        this.props.navigation.navigate(route.PROFILE, { userId: this.state.friend });
+        this.props.navigation.navigate(route.PROFILEFRIEND, { userId: this.state.friend });
     }
 
     componentDidMount() {

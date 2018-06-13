@@ -9,6 +9,7 @@ import Journals from '../pages/journals/journals.index';
 import Profile from '../pages/profile/profile.index';
 import AddProfile from '../pages/profile/profile.add';
 import EditProfile from '../pages/profile/profile.edit';
+import FriendProfile from '../pages/profile/profile.friend';
 import Settings from '../pages/settings/settings.index';
 import Matchmaking from '../pages/matchmaking/matchmaking.index';
 import Chat from '../pages/chat/chat.index';
@@ -117,6 +118,9 @@ const TabNavigator = createStackNavigator({
     },
     profileedit: {
         screen: EditProfile,
+    },
+    profilefriend: {
+        screen: FriendProfile,
     }
 })
 export default TabNavigator;

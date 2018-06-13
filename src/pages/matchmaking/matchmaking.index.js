@@ -42,12 +42,12 @@ class Matchmaking extends React.Component {
         const fetchData = this.fetchData;
         this.setState({ user });
         operations.GetUserProfile(user)
-        .then(resp => {
-            console.log(resp);
-            userLearnLanguage = resp.data[operations.GET_PROFILE_KEY].userLearnLanguage;
-            userLearnLanguage = "English";
-            fetchData(userLearnLanguage);
-        })
+            .then(resp => {
+                console.log(resp);
+                userLearnLanguage = resp.data[operations.GET_PROFILE_KEY].userLearnLanguage;
+                userLearnLanguage = "English";
+                fetchData(userLearnLanguage);
+            })
     }
 
     fetchData(language = "Chinese") {
@@ -66,12 +66,12 @@ class Matchmaking extends React.Component {
 
     //TODO refetch data.
     swipedLeft(index) {
-        this.setState(prevState => ({curIndex: prevState.curIndex+1}));
+        this.setState(prevState => ({ curIndex: prevState.curIndex + 1 }));
     }
 
     swipedRight(index) {
         card = this.state.cards[this.state.curIndex];
-        this.setState(prevState => ({curIndex: prevState.curIndex+1}));
+        this.setState(prevState => ({ curIndex: prevState.curIndex + 1 }));
         friendId = card.userId;
         userId = this.state.user;
         console.log(userId, friendId);
@@ -136,7 +136,6 @@ class Matchmaking extends React.Component {
     renderEmpty() {
         return (
             <Container>
-                {this.renderHeader()}
                 <View style={styles.empty}>
                     <Text>Please try again later!</Text>
                 </View>
@@ -217,22 +216,26 @@ class Matchmaking extends React.Component {
             return this.renderLoading();
         }
 
-        if (this.state.curIndex >= this.state.cards.length) {
-            return this.renderEmpty();
-        }
+        const empty = this.state.curIndex >= this.state.cards.length;
 
         return (
             <Container>
                 {this.renderHeader()}
                 {this.renderDeckSwiper()}
-                <View style={{ flexDirection: "row", flex: 1, position: "absolute", bottom: 0, left: 0, right: 0, justifyContent: 'space-between', padding: 15 }}>
-                    <Button iconLeft onPress={() => { this._deckSwiper._root.swipeLeft(); this.swipedLeft() }}>
-                        <Icon name="arrow-back" /><Text style={{ color: 'white', marginLeft: 10, width: 30 }}>No</Text>
-                    </Button>
-                    <Button iconRight onPress={() => { this._deckSwiper._root.swipeRight(); this.swipedRight() }}>
-                        <Text style={{ color: 'white', marginLeft: 10, width: 30 }}>Yes</Text><Icon name="arrow-forward" />
-                    </Button>
-                </View>
+                {empty ?
+                    <View style={styles.empty}>
+                        <Text>Please try again later!</Text>
+                    </View>
+                    :
+                    <View style={{ flexDirection: "row", flex: 1, position: "absolute", bottom: 0, left: 0, right: 0, justifyContent: 'space-between', padding: 15 }}>
+                        <Button iconLeft onPress={() => { this._deckSwiper._root.swipeLeft(); this.swipedLeft() }}>
+                            <Icon name="arrow-back" /><Text style={{ color: 'white', marginLeft: 10, width: 30 }}>No</Text>
+                        </Button>
+                        <Button iconRight onPress={() => { this._deckSwiper._root.swipeRight(); this.swipedRight() }}>
+                            <Text style={{ color: 'white', marginLeft: 10, width: 30 }}>Yes</Text><Icon name="arrow-forward" />
+                        </Button>
+                    </View>
+                }
             </Container>
         );
     }
