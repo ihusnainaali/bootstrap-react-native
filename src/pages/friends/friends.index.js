@@ -229,12 +229,12 @@ class Friends extends React.Component {
                             <FlatList
                                 data={data}
                                 keyExtractor={item => item.name}
-                                renderItem={this.renderItem}
+                                renderItem={this.renderItem.bind(this)}
                             />
                             :
                             <SectionList
                                 keyExtractor={item => item.name}
-                                renderItem={this.renderItem}
+                                renderItem={this.renderItem.bind(this)}
                                 renderSectionHeader={this.renderSectionHeader}
                                 sections={data}
                             />
