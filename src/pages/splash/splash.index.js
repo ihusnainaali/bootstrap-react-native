@@ -31,7 +31,9 @@ export default class Splash extends Component {
               .then(profile => {
                 if (!profile.data.getPangyouMobilehub1098576098UserProfile) {
                     operations.CreateVideoChannel(username).catch(err => console.log(err));
-                    this.props.navigation.navigate('AddProfile', {username: username});
+                    setTimeout(() => {
+                        this.props.navigation.navigate('AddProfile', {username: username});
+                    }, 2000);
                 } else {
                   // This will switch to the Home screen or Welcome screen and this loading
                   // screen will be unmounted and thrown away.
@@ -40,6 +42,8 @@ export default class Splash extends Component {
                   }, 2000);
                 }
             });
+        } else {
+          console.log('No Username!')
         }
     };
 
