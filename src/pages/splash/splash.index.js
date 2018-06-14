@@ -43,7 +43,9 @@ export default class Splash extends Component {
                 }
             });
         } else {
-          console.log('No Username!')
+          setTimeout(() => {
+              this.props.navigation.navigate('Welcome');
+          }, 2000);
         }
     };
 
