@@ -6,6 +6,7 @@ import { DeckSwiper, Card, CardItem, Thumbnail, Container, Header, Left, Right, 
 import Loader from '../../components/loader/loader.component'
 import uuidv4 from 'uuid/v4';
 import { Player, Recorder, MediaStates } from 'react-native-audio-toolkit';
+import FastImage from 'react-native-fast-image';
 
 import styles from './matchmaking.style';
 import theme from '../../styles/theme.style';
@@ -156,7 +157,7 @@ class Matchmaking extends React.Component {
                                     </Left>
                                 </CardItem>
                                 <CardItem cardBody style={{ justifyContent: 'center' }}>
-                                    <Image style={{ width: 240, borderRadius: 120, height: 240, justifyContent: 'center' }} source={{ uri: item.userImageUrl }} />
+                                    <FastImage style={{ width: 240, borderRadius: 120, height: 240, justifyContent: 'center' }} source={{ uri: item.userImageUrl }} />
                                 </CardItem>
                                 <CardItem style={{ justifyContent: 'flex-start', marginBottom: -5 }}>
                                     {(item.userGender == 'Male') ? maleGender : femaleGender}

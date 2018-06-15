@@ -3,6 +3,8 @@ package com.pangyou;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.dylanvann.fastimage.FastImageViewPackage;
+import com.futurice.rctaudiotoolkit.AudioPackage;
 import com.rnim.rn.audio.ReactNativeAudioPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.twiliorn.library.TwilioPackage;
@@ -29,6 +31,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new FastImageViewPackage(),
+            new AudioPackage(),
             new ReactNativeAudioPackage(),
             new ImagePickerPackage(),
             new TwilioPackage(),

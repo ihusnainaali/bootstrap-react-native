@@ -142,7 +142,7 @@ class Friends extends React.Component {
 
         for (let sectionId = 0; sectionId < alphabet.length; sectionId++) {
             const currentChar = alphabet[sectionId];
-            const users = data.filter((user) => user.userName.charAt(0).toUpperCase() === currentChar);
+            const users = data.filter((user) => user.userName && user.userName.charAt(0).toUpperCase() === currentChar);
             if (users.length > 0) {
                 formatedData.push({ data: users, key: currentChar });
             }
