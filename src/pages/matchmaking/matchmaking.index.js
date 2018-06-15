@@ -54,12 +54,12 @@ class Matchmaking extends React.Component {
             .then(resp => {
                 console.log(resp);
                 userLearnLanguage = resp.data[operations.GET_PROFILE_KEY].userLearnLanguage;
-                userLearnLanguage = "English";
                 fetchData(userLearnLanguage);
             })
     }
 
-    fetchData(language = "Chinese") {
+    // TODO: add resolver that filter out the users whos already friend of each other.
+    fetchData(language) {
         operations.GetUsersByLanguage(language, 20, null)
             .then(resp => {
                 const data = resp.data[operations.USERS_BY_LANGUAGE_KEY];
@@ -68,7 +68,6 @@ class Matchmaking extends React.Component {
                     nextToken: data.nextToken
                 });
                 this.setState({ dataReady: true });
-                console.log('This is the RESP: ', resp)
             })
             .catch((err) => { console.log(err); this.props.navigation.goBack(); });
     }

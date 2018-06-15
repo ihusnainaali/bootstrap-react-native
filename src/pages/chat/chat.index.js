@@ -88,7 +88,7 @@ class Chat extends React.Component {
         this.state.channel.advanceLastConsumedMessageIndex(message.state.index)
             .catch(err => console.log(err));
         var user = {};
-        if (message.state.author === this.state.user) {
+        if (message.state.author !== this.state.user) {
             user._id = 1;
         }
         user.user = message.state.author;
