@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView, AsyncStorage} from 'react-native';
+import { View, Text, StyleSheet, KeyboardAvoidingView, AsyncStorage } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import { onLogin } from '../../redux/actions/auth.actions'
 
 import TextField from '../../components/textfield/textfield.component';
 import ButtonComponent from '../../components/button/button.component';
-import { Container, Button, Header , Left, Right, Title, Content, Icon, Body} from 'native-base';
+import { Container, Button, Header, Left, Right, Title, Content, Icon, Body } from 'native-base';
 
 import styles from './login.style';
 import theme from '../../styles/theme.style';
@@ -58,21 +58,21 @@ class Login extends Component {
                 operations.SubVideoChannel(username).subscribe({
                     next: (eventData) => {
                         data = eventData.value.data[operations.SUB_VIDEO_CHANNEL_KEY];
-                        if (data.username !== "") {
-                            this.props.navigation.navigate('video', {status: 'incoming', friend: data.username, roomName: data.channelName});
+                        if (data.userId !== "") {
+                            this.props.navigation.navigate('video', { status: 'incoming', userId: data.userId, friendId: data.friendId, roomName: data.channelName });
                         }
                     }
                 });
                 // Check to see if user has a profile
-                const profileValid = API.graphql(graphqlOperation(GetProfile, {userId: this.state.username}))
-                  .then(profile => {
-                    if (!profile.data.getPangyouMobilehub1098576098UserProfile) {
-                        operations.CreateVideoChannel(username).catch(err => console.log(err));
-                        this.props.navigation.navigate('AddProfile', {username: username});
-                    } else {
-                        this.props.navigation.navigate('Home');
-                    }
-                });
+                const profileValid = API.graphql(graphqlOperation(GetProfile, { userId: this.state.username }))
+                    .then(profile => {
+                        if (!profile.data.getPangyouMobilehub1098576098UserProfile) {
+                            operations.CreateVideoChannel(username).catch(err => console.log(err));
+                            this.props.navigation.navigate('AddProfile', { username: username });
+                        } else {
+                            this.props.navigation.navigate('Home');
+                        }
+                    });
             })
             .catch(err => {
                 if (err.code === "UserNotConfirmedException") {
@@ -98,66 +98,66 @@ class Login extends Component {
 
             <Container style={styles.wrapper}>
 
-            <Header>
-                <Left>
-                <Button transparent
-                    onPress={() => {this.props.navigation.goBack()}}>
-                    <Icon name='arrow-back' style={styles.icon} />
-                </Button>
-                </Left>
-                  <Body>
-                   <Title style={{fontFamily: theme.FONT_LIGHT}}>Login</Title>
-                  </Body>
-                  <Right/>
-              </Header>
+                <Header>
+                    <Left>
+                        <Button transparent
+                            onPress={() => { this.props.navigation.goBack() }}>
+                            <Icon name='arrow-back' style={styles.icon} />
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Title style={{ fontFamily: theme.FONT_LIGHT }}>Login</Title>
+                    </Body>
+                    <Right />
+                </Header>
 
-            <KeyboardAvoidingView behavior="padding" style={styles.loginWrapper}>
-                <View style={styles.loginTopGrid}>
-                </View>
-                <View style={styles.loginMiddleGrid}>
-                  <View style={{flexDirection: 'row'}}>
-                    <Icon
-                      name='md-person'
-                      style={styles.icon}
-                    />
-                    <TextField
-                        placeholder="Username or Email"
-                        placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                        returnKeyType="next"
-                        onSubmitEditing={() => this.passwordInput.focus()}
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        onChangeText={this.onChangeText("username").bind(this)}
-                    />
-                  </View>
-                  <View style={{flexDirection: 'row'}}>
-                    <Icon
-                      style={styles.icon}
-                      name='md-lock'
-                    />
-                    <TextField
-                        placeholder="Password"
-                        placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                        returnKeyType="go"
-                        secureTextEntry
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        onChangeText={this.onChangeText("password").bind(this)}
-                    />
-                  </View>
-                    <Text>{this.state.error}</Text>
-                </View>
-                <View style={styles.loginBottomGrid}>
-                    <ButtonComponent
-                        onPress={this.signIn.bind(this)}
-                        name='Submit'
-                        screen='Home'/>
-                    <ButtonComponent
-                        name='Forgot?'
-                        screen='ForgetPassword' />
-                </View>
-            </KeyboardAvoidingView>
+                <KeyboardAvoidingView behavior="padding" style={styles.loginWrapper}>
+                    <View style={styles.loginTopGrid}>
+                    </View>
+                    <View style={styles.loginMiddleGrid}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Icon
+                                name='md-person'
+                                style={styles.icon}
+                            />
+                            <TextField
+                                placeholder="Username or Email"
+                                placeholderTextColor={theme.COLOR_PRIMARY_DARK}
+                                returnKeyType="next"
+                                onSubmitEditing={() => this.passwordInput.focus()}
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                onChangeText={this.onChangeText("username").bind(this)}
+                            />
+                        </View>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Icon
+                                style={styles.icon}
+                                name='md-lock'
+                            />
+                            <TextField
+                                placeholder="Password"
+                                placeholderTextColor={theme.COLOR_PRIMARY_DARK}
+                                returnKeyType="go"
+                                secureTextEntry
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                onChangeText={this.onChangeText("password").bind(this)}
+                            />
+                        </View>
+                        <Text>{this.state.error}</Text>
+                    </View>
+                    <View style={styles.loginBottomGrid}>
+                        <ButtonComponent
+                            onPress={this.signIn.bind(this)}
+                            name='Submit'
+                            screen='Home' />
+                        <ButtonComponent
+                            name='Forgot?'
+                            screen='ForgetPassword' />
+                    </View>
+                </KeyboardAvoidingView>
             </Container>
 
         );

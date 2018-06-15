@@ -19,7 +19,8 @@ class Video extends Component {
             videoTrack: null,
             host: 'http://54.164.94.85:9527',
             status: props.navigation.getParam('status') || 'disconnected',
-            friend: props.navigation.getParam('friend'),
+            userId: props.navigation.getParam('userId'),
+            friendId: props.navigation.getParam('friendId'),
             roomName: props.navigation.getParam('roomName') || 'test',
             token: ''
         };
@@ -53,7 +54,7 @@ class Video extends Component {
 
     _onConnectButtonPress = () => {
         console.log(this.state);
-        this.getToken('Yuhong')
+        this.getToken()
             .then(token => {
                 console.log("token: ", token);
                 this.refs.twilioVideo.connect({ roomName: this.state.roomName, accessToken: token })

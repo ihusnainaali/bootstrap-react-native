@@ -15,7 +15,8 @@ class Chat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            friend: props.navigation.getParam('friend'),
+            friendId: props.navigation.getParam('friendId'),
+            friendName: props.navigation.getParam('friendName'),
             user: props.navigation.getParam('user'),
             history: props.navigation.getParam('messages'),
             channel: props.navigation.getParam('channel'),
@@ -118,11 +119,12 @@ class Chat extends React.Component {
             'Video Chat': (props) => {
                 status = 'calling';
                 roomName = uuidv4();
-                user = props.user;
-                friend = props.friend;
+                userId = props.userId;
+                friendId = props.friendId;
                 // notify the friend to join the call.
-                operations.UpdateVideoChannel(friend, user, roomName);
-                props.navigation.navigate(route.VIDEO, { friend, status, roomName });
+                console.log(friendId, userId);
+                operations.UpdateVideoChannel(friendId, userId, roomName);
+                props.navigation.navigate(route.VIDEO, { userId, friendId, status, roomName });
             },
             'Cancel': () => { },
         };
@@ -147,8 +149,8 @@ class Chat extends React.Component {
                 }}
                 renderActions={this.renderCustomActions}
                 navigation={this.props.navigation}
-                friend={{ friend: this.state.friend }}
-                user={{ user: this.state.user }}
+                friendId={ this.state.friendId }
+                userId={ this.state.user }
             />
         )
     }

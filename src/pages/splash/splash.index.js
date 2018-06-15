@@ -21,8 +21,8 @@ export default class Splash extends Component {
             operations.SubVideoChannel(username).subscribe({
                 next: (eventData) => {
                     data = eventData.value.data[operations.SUB_VIDEO_CHANNEL_KEY];
-                    if (data.username !== "") {
-                        this.props.navigation.navigate('video', {status: 'incoming', friend: data.username, roomName: data.channelName});
+                    if (data.userId !== "") {
+                        this.props.navigation.navigate('video', {status: 'incoming', userId: data.userId, friendId: data.friendId, roomName: data.channelName});
                     }
                 }
             })
