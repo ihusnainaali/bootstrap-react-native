@@ -24,6 +24,7 @@ import { GetProfile, UpdateProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
 
 import ImagePicker from 'react-native-image-picker';
+import FastImage from 'react-native-fast-image'
 import { RNS3 } from 'react-native-aws3';
 
 import styles from './profile.style';
@@ -83,6 +84,8 @@ class EditProfile extends Component<Props> {
           this.setState({userStatus: editProfile.data.getPangyouMobilehub1098576098UserProfile.userStatus});
           this.setState({userDob: editProfile.data.getPangyouMobilehub1098576098UserProfile.userDob});
           this.setState({userGender: editProfile.data.getPangyouMobilehub1098576098UserProfile.userGender});
+          this.setState({userLanguage: editProfile.data.getPangyouMobilehub1098576098UserProfile.userLanguage});
+          this.setState({userLearnLanguage: editProfile.data.getPangyouMobilehub1098576098UserProfile.userLearnLanguage});
           this.setState({
             editProfile: editProfile.data.getPangyouMobilehub1098576098UserProfile
           })
@@ -179,7 +182,12 @@ class EditProfile extends Component<Props> {
             <Content>
               <View style={styles.editProfileCard}>
                   <TouchableOpacity activeOpacity = { .5 } onPress={ this.getImage.bind(this) }>
-                      <Image style={{width: 140, borderRadius: 70, height: 140}} source={{uri: this.state.editProfile.userImageUrl}} />
+                      <FastImage
+                        style={{ width: 140, borderRadius: 70, height: 140, justifyContent: 'center' }}
+                        source={{
+                          uri: this.state.editProfile.userImageUrl
+                        }}
+                        />
                   </TouchableOpacity>
               </View>
               <View style={styles.editDescriptionCard}>
@@ -243,7 +251,7 @@ class EditProfile extends Component<Props> {
                           headerStyle={{ backgroundColor: theme.COLOR_PRIMARY_DARK }}
                           headerBackButtonTextStyle={{ color: "#fff" }}
                           headerTitleStyle={{ color: "#fff" }}
-                          textStyle={{fontSize: 18, fontWeight: 'bold'}}
+                          textStyle={{fontFamily: theme.FONT_REGULAR, fontSize: 18, fontWeight: 'bold'}}
                           style={{ width: 200 }}
                           selectedValue={this.state.userStatus}
                           onValueChange={ (value) => {this.setState({userStatus: value}) }}
@@ -276,7 +284,7 @@ class EditProfile extends Component<Props> {
                 <View style={{flexDirection: 'row'}}>
                     <ListItem style={styles.editLayoutItem}>
                           <DatePicker
-                            style={{marginLeft: 15, width: 320}}
+                            style={{fontFamily: theme.FONT_REGULAR, fontSize: 18, marginLeft: 15, width: 320}}
                             date={this.state.userDob}
                             mode="date"
                             placeholder="select date"
@@ -317,7 +325,7 @@ class EditProfile extends Component<Props> {
                           headerStyle={{ backgroundColor: theme.COLOR_PRIMARY_DARK }}
                           headerBackButtonTextStyle={{ color: "#fff" }}
                           headerTitleStyle={{ color: "#fff" }}
-                          textStyle={{fontSize: 18, fontWeight: 'bold'}}
+                          textStyle={{fontFamily: theme.FONT_REGULAR, fontSize: 18, fontWeight: 'bold'}}
                           style={{ width: 200 }}
                           selectedValue={this.state.userGender}
                           onValueChange={ (value) => {this.setState({userGender: value}) }}
@@ -375,16 +383,23 @@ class EditProfile extends Component<Props> {
                           ios='ios-globe'
                           md='md-globe'
                           style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <TextField
-                          placeholder='Language'
-                          placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                          returnKeyType='next'
-                          autoCapitalize='none'
-                          autoCorrect={false}
-                          onChangeText={this.onChangeText('userLanguage').bind(this)}
-                          value={this.state.editProfile.userLanguage}
-                          style={styles.input}
-                        />
+                        <Picker
+                          mode="dropdown"
+                          iosIcon={<Icon name="ios-arrow-down-outline" />}
+                          placeholder="Select your Spoke Language:"
+                          placeholderStyle={{ color: theme.COLOR_PRIMARY_DARK }}
+                          placeholderIconColor={theme.COLOR_PRIMARY_DARK}
+                          headerStyle={{ backgroundColor: theme.COLOR_PRIMARY_DARK }}
+                          headerBackButtonTextStyle={{ color: "#fff" }}
+                          headerTitleStyle={{ color: "#fff" }}
+                          textStyle={{fontFamily: theme.FONT_REGULAR, fontSize: 18, fontWeight: 'bold'}}
+                          style={{ width: 200 }}
+                          selectedValue={this.state.userLanguage}
+                          onValueChange={ (value) => {this.setState({userLanguage: value}) }}
+                        >
+                          <Picker.Item label="English" value="English" />
+                          <Picker.Item label="Chinese" value="Chinese" />
+                        </Picker>
                     </ListItem>
                 </View>
                 <View style={{flexDirection: 'row'}}>
@@ -395,16 +410,23 @@ class EditProfile extends Component<Props> {
                           ios='ios-globe'
                           md='md-globe'
                           style={{fontSize: 30, color: 'grey', textAlign:'center', width: 60}} />
-                        <TextField
-                          placeholder='Language Interested in Learning'
-                          placeholderTextColor={theme.COLOR_PRIMARY_DARK}
-                          returnKeyType='next'
-                          autoCapitalize='none'
-                          autoCorrect={false}
-                          onChangeText={this.onChangeText('userLearnLanguage').bind(this)}
-                          value={this.state.editProfile.userLearnLanguage}
-                          style={styles.input}
-                        />
+                        <Picker
+                          mode="dropdown"
+                          iosIcon={<Icon name="ios-arrow-down-outline" />}
+                          placeholder="Select the Language you are Interested in Learning:"
+                          placeholderStyle={{ color: theme.COLOR_PRIMARY_DARK }}
+                          placeholderIconColor={theme.COLOR_PRIMARY_DARK}
+                          headerStyle={{ backgroundColor: theme.COLOR_PRIMARY_DARK }}
+                          headerBackButtonTextStyle={{ color: "#fff" }}
+                          headerTitleStyle={{ color: "#fff" }}
+                          textStyle={{fontFamily: theme.FONT_REGULAR, fontSize: 18, fontWeight: 'bold'}}
+                          style={{ width: 200 }}
+                          selectedValue={this.state.userLearnLanguage}
+                          onValueChange={ (value) => {this.setState({userLearnLanguage: value}) }}
+                        >
+                          <Picker.Item label="English" value="English" />
+                          <Picker.Item label="Chinese" value="Chinese" />
+                        </Picker>
                     </ListItem>
                 </View>
                 <Text>{this.state.error}</Text>

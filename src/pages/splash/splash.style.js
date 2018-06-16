@@ -6,7 +6,7 @@ import theme from '../../styles/theme.style';
 export default StyleSheet.create({
 
 	wrapper: {
-		backgroundColor: theme.COLOR_SECONDARY,
+		backgroundColor: theme.COLOR_PRIMARY,
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center'
