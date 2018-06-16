@@ -24,6 +24,7 @@ class Video extends Component {
             roomName: props.navigation.getParam('roomName') || 'test',
             token: ''
         };
+        console.log(this.state);
     }
 
     componentDidMount() {

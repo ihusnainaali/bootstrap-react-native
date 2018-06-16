@@ -5,6 +5,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Thumbnail, Item, List, ListItem, Input, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
 import ChatClientHelper from '../../utils/twilio';
 import operations from '../matchmaking/graphql';
+import FastImage from 'react-native-fast-image';
 
 import styles from './friends.style';
 import theme from '../../styles/theme.style';
@@ -140,12 +141,20 @@ class Friends extends React.Component {
         const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
         var formatedData = [];
 
+        // Alphabetical 
         for (let sectionId = 0; sectionId < alphabet.length; sectionId++) {
             const currentChar = alphabet[sectionId];
             const users = data.filter((user) => user.userName && user.userName.charAt(0).toUpperCase() === currentChar);
             if (users.length > 0) {
                 formatedData.push({ data: users, key: currentChar });
             }
+        }
+
+        // #
+        const regex = /^[a-zA-z]+$/;
+        const users = data.filter((user) => user.userName && !regex.test(user.userName.charAt(0)));
+        if (users.length > 0) {
+            formatedData.push({ data: users, key: '#' });
         }
 
         return formatedData;
@@ -155,7 +164,7 @@ class Friends extends React.Component {
         return (
             <ListItem avatar onPress={() => { this.chatWithFriend(item); }}>
                 <Left>
-                    <Thumbnail style={styles.photo} source={{ uri: item.avatar_url }} />
+                    <FastImage style={styles.photo} source={{ uri: item.avatar_url }} />
                 </Left>
                 <Body>
                     <Text style={styles.text_name}>{item.userName}</Text>
@@ -178,7 +187,7 @@ class Friends extends React.Component {
     render() {
         const friends = this.state.friends;
         const search = this.state.search;
-        const data = search ? friends.filter(item => item.name.includes(search)) : this.formatData(friends);
+        const data = search ? friends.filter(item => item.userName.toUpperCase().includes(search.toUpperCase())) : this.formatData(friends);
 
         return (
             <Container style={styles.container}>

@@ -20,7 +20,7 @@ class Chat extends React.Component {
             user: props.navigation.getParam('user'),
             history: props.navigation.getParam('messages'),
             channel: props.navigation.getParam('channel'),
-            avatar: props.navigation.getParam('avatar'),
+            friendAvatar: props.navigation.getParam('friendAvatar'),
             messages: [],
             text: "",
         }
@@ -89,11 +89,12 @@ class Chat extends React.Component {
         this.state.channel.advanceLastConsumedMessageIndex(message.state.index)
             .catch(err => console.log(err));
         var user = {};
+        user._id = 1;
         if (message.state.author !== this.state.user) {
-            user._id = 1;
+            user._id = 2;
         }
         user.user = message.state.author;
-        user.avatar = this.state.avatar;
+        user.avatar = this.state.friendAvatar;
         return ([{
             _id: message.state.sid,
             text: message.state.body,
