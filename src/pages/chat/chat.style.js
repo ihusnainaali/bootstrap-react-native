@@ -15,4 +15,9 @@ export const styles = StyleSheet.create({
         color: theme.COLOR_SECONDARY_DARK,
         fontSize: theme.HEADER_ICON_SIZE
     },
+    photo: {
+        height: 40,
+        width: 40,
+        borderRadius: 20,
+    },
 });

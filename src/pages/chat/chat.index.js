@@ -3,6 +3,7 @@ import { GiftedChat, Send, Actions } from 'react-native-gifted-chat';
 import { withNavigation } from 'react-navigation';
 import { AsyncStorage, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Icon, Title } from 'native-base';
+import FastImage from 'react-native-fast-image';
 
 import { styles } from './chat.style';
 import theme from '../../styles/theme.style';
@@ -24,12 +25,11 @@ class Chat extends React.Component {
             messages: [],
             text: "",
         }
-        console.log(this.props);
         this.onSend.bind(this);
         this.parseMessage.bind(this);
         this.setMessages.bind(this);
         this.renderCustomActions.bind(this);
-        this.navigateToProfile.bind(this);
+        this.renderAvatar.bind(this);
     }
 
     // TODO change hardcode profile to nav const.
@@ -49,10 +49,6 @@ class Chat extends React.Component {
             backgroundColor: 'white',
         },
     });
-
-    navigateToProfile() {
-        this.props.navigation.navigate(route.PROFILEFRIEND, { userId: this.state.friend });
-    }
 
     componentDidMount() {
         messages = [];
@@ -123,7 +119,6 @@ class Chat extends React.Component {
                 userId = props.userId;
                 friendId = props.friendId;
                 // notify the friend to join the call.
-                console.log(friendId, userId);
                 operations.UpdateVideoChannel(friendId, userId, roomName);
                 props.navigation.navigate(route.VIDEO, { userId, friendId, status, roomName });
             },
@@ -137,6 +132,17 @@ class Chat extends React.Component {
         );
     }
 
+    renderAvatar(props) {
+        return (
+            <TouchableOpacity
+                onPress={() => props.navigation.navigate(route.PROFILEFRIEND, { userId: props.friendId })}>
+                <FastImage
+                    style={styles.photo}
+                    source={{ uri: props.friendAvatar }} />
+            </TouchableOpacity>
+        )
+    }
+
     render() {
         return (
             <GiftedChat
@@ -148,10 +154,12 @@ class Chat extends React.Component {
                     _id: 1,
                     name: this.state.user,
                 }}
+                renderAvatar={this.renderAvatar}
                 renderActions={this.renderCustomActions}
                 navigation={this.props.navigation}
-                friendId={ this.state.friendId }
-                userId={ this.state.user }
+                friendId={this.state.friendId}
+                userId={this.state.user}
+                friendAvatar={this.state.friendAvatar}
             />
         )
     }

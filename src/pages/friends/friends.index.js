@@ -64,7 +64,7 @@ class Friends extends React.Component {
                 friends.push({
                     userId: friendProfile.userId,
                     userName: friendProfile.userName,
-                    avatar_url: friendProfile.userImageUrl,
+                    userImageUrl: friendProfile.userImageUrl,
                     subtitle: friendProfile.userStatus
                 });
             });
@@ -86,7 +86,7 @@ class Friends extends React.Component {
                         friendProfile && friends.push({
                             userId: friendProfile.userId,
                             userName: friendProfile.userName,
-                            avatar_url: friendProfile.userImageUrl,
+                            userImageUrl: friendProfile.userImageUrl,
                             subtitle: friendProfile.userStatus
                         })
                         friendsChannel[friendId] = channelSid;
@@ -164,7 +164,7 @@ class Friends extends React.Component {
         return (
             <ListItem avatar onPress={() => { this.chatWithFriend(item); }}>
                 <Left>
-                    <FastImage style={styles.photo} source={{ uri: item.avatar_url }} />
+                    <FastImage style={styles.photo} source={{ uri: item.userImageUrl }} />
                 </Left>
                 <Body>
                     <Text style={styles.text_name}>{item.userName}</Text>
