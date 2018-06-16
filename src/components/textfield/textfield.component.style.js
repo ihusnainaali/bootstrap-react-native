@@ -9,6 +9,7 @@ export default StyleSheet.create({
 		backgroundColor: theme.COLOR_PRIMARY_LIGHT,
 		marginBottom: 10,
 		color: theme.TEXT_COLOR,
+		fontFamily: theme.FONT_REGULAR,
 		fontWeight: 'bold',
 		paddingHorizontal: 10,
 		paddingVertical: 10,
