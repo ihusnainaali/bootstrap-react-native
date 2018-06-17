@@ -70,6 +70,8 @@ class Friends extends React.Component {
                 });
             });
             this.setState({ user, friendsChannel, friends });
+            // store friends list to local storage.
+            AsyncStorage.setItem("friendLists", JSON.stringify({friendsChannel: friendsChannel, friends: friends}));
         }
 
         // subscribe to new friends

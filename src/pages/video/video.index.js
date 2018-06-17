@@ -55,7 +55,7 @@ class Video extends Component {
 
     _onConnectButtonPress = () => {
         console.log(this.state);
-        this.getToken()
+        this.getToken(this.state.userId)
             .then(token => {
                 console.log("token: ", token);
                 this.refs.twilioVideo.connect({ roomName: this.state.roomName, accessToken: token })
@@ -108,6 +108,13 @@ class Video extends Component {
 
     _onParticipantRemovedVideoTrack = ({ participant, track }) => {
         console.log("onParticipantRemovedVideoTrack: ", participant, track)
+
+        this.setState({ participant: null, videoTrack: null });
+        this.props.navigation.goBack();
+    }
+
+    _onRoomParticipantDidDisconnect = (props) => {
+        console.log("onRoomParticipantDidDisconnect: ", props);
 
         this.setState({ participant: null, videoTrack: null });
         this.props.navigation.goBack();
@@ -182,6 +189,7 @@ class Video extends Component {
                     onRoomDidConnect={this._onRoomDidConnect}
                     onRoomDidDisconnect={this._onRoomDidDisconnect}
                     onRoomDidFailToConnect={this._onRoomDidFailToConnect}
+                    onRoomParticipantDidDisconnect={this._onRoomParticipantDidDisconnect}
                     onParticipantAddedVideoTrack={this._onParticipantAddedVideoTrack}
                     onParticipantRemovedVideoTrack={this._onParticipantRemovedVideoTrack}
                 />

@@ -12,7 +12,7 @@ export default class ChatClientHelper {
         this.host = tokenAndConfigurationProviderHost;
         this.client = null;
         this.accessManager = null;
-        console.log("new instance has been created.");
+        this.identity = "";
     }
 
     static getInstance() {
@@ -28,10 +28,10 @@ export default class ChatClientHelper {
                 chatClientHelperInstance.client = chatClient;
                 chatClientHelperInstance.accessManager = new TwilioAccessManager(token);
                 chatClientHelperInstance.accessManager.on('tokenUpdated', am => chatClientHelperInstance.client.updateToken(am.token));
-                chatClientHelperInstance.accessManager.on('tokenExpired', () =>
-                chatClientHelperInstance.getToken(identity)
-                        .then(newData => that.accessManager.updateToken(newData)));
-                        chatClientHelperInstance.subscribeToAllAccessManagerEvents();
+                chatClientHelperInstance.accessManager.on('tokenExpired', () => 
+                    chatClientHelperInstance.getToken(chatClientHelperInstance.identity)
+                        .then(newData => chatClientHelperInstance.accessManager.updateToken(newData)));
+                chatClientHelperInstance.subscribeToAllAccessManagerEvents();
                 chatClientHelperInstance.subscribeToAllChatClientEvents();
             })
             .catch(err => {
@@ -40,6 +40,7 @@ export default class ChatClientHelper {
     }
 
     login(identity) {
+        this.identity = identity;
         this.getToken(identity)
             .then(token => {
                 console.log('ChatClientHelper', 'got chat token', token);
