@@ -26,6 +26,7 @@ class Friends extends React.Component {
             user: null,
         };
         this.flag = true;
+        this.updateFriends.bind(this);
     }
 
     // Declare Edit Friend Icon
@@ -75,24 +76,7 @@ class Friends extends React.Component {
         operations.SubFriends(user).subscribe({
             next: async (eventData) => {
                 friend = eventData.value.data[operations.SUB_FRIENDS_KEY];
-                channelSid = friend.channelSid;
-                friendId = friend.friendId;
-                if (friend.channelSid) {
-                    const getUserProfileResp = await operations.GetUserProfile(friendId);
-                    const friendProfile = getUserProfileResp.data[operations.GET_PROFILE_KEY];
-                    this.setState(previousState => {
-                        friends = previousState.friends;
-                        friendsChannel = previousState.friendsChannel;
-                        friendProfile && friends.push({
-                            userId: friendProfile.userId,
-                            userName: friendProfile.userName,
-                            userImageUrl: friendProfile.userImageUrl,
-                            subtitle: friendProfile.userStatus
-                        })
-                        friendsChannel[friendId] = channelSid;
-                        return ({ friends, friendsChannel });
-                    });
-                }
+                this.updateFriends(friend);
             }
         })
 
@@ -107,6 +91,27 @@ class Friends extends React.Component {
 
     componentWillUnmount() {
         this._sub.remove();
+    }
+
+    async updateFriends(friend) {
+        channelSid = friend.channelSid;
+        friendId = friend.friendId;
+        if (friend.channelSid) {
+            const getUserProfileResp = await operations.GetUserProfile(friendId);
+            const friendProfile = getUserProfileResp.data[operations.GET_PROFILE_KEY];
+            this.setState(previousState => {
+                friends = previousState.friends;
+                friendsChannel = previousState.friendsChannel;
+                friendProfile && friends.push({
+                    userId: friendProfile.userId,
+                    userName: friendProfile.userName,
+                    userImageUrl: friendProfile.userImageUrl,
+                    subtitle: friendProfile.userStatus
+                })
+                friendsChannel[friendId] = channelSid;
+                return ({ friends, friendsChannel });
+            });
+        }
     }
 
     fetchChannelSID(friendId) {
@@ -187,7 +192,7 @@ class Friends extends React.Component {
     render() {
         const friends = this.state.friends;
         const search = this.state.search;
-        const data = search ? friends.filter(item => item.userName.toUpperCase().includes(search.toUpperCase())) : this.formatData(friends);
+        const data = search ? friends.filter(item => item.userName && item.userName.toUpperCase().includes(search.toUpperCase())) : this.formatData(friends);
 
         return (
             <Container style={styles.container}>
