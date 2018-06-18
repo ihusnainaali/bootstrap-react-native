@@ -258,8 +258,8 @@ class Profile extends Component {
             genderIcon = womanIcon
         }
 
-        const statusColorOnline = <Text style={{ fontSize: 16, color: 'green' }}>{this.state.profile.userStatus}</Text>
-        const statusColorOffline = <Text style={{ fontSize: 16, color: 'lightgrey' }}>{this.state.profile.userStatus}</Text>
+        const statusColorOnline = <Text style={{ fontFamily: theme.FONT_REGULAR, fontSize: 16, color: 'green' }}>{this.state.profile.userStatus}</Text>
+        const statusColorOffline = <Text style={{ fontFamily: theme.FONT_REGULAR, fontSize: 16, color: 'lightgrey' }}>{this.state.profile.userStatus}</Text>
         let statusColor;
         if (this.state.profile.userStatus == 'Online') {
             statusColor = statusColorOnline
@@ -268,7 +268,7 @@ class Profile extends Component {
         }
 
         const dobReFormatted = Moment(this.state.profile.userDob).format("MMM D, YYYY")
-        const dobFormatted = <Text style={{ fontSize: 18, color: 'black', textAlign: 'center' }}>{dobReFormatted}</Text>
+        const dobFormatted = <Text style={{ fontFamily: theme.FONT_REGULAR, fontSize: 18, color: 'black', textAlign: 'center' }}>{dobReFormatted}</Text>
 
         const recordingOff = <TouchableOpacity activeOpacity={.5} disabled={this.state.recordButtonDisabled} onPress={() => this._toggleRecord()}><Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{ fontSize: 40, color: 'pink', textAlign: 'center' }} /></TouchableOpacity>
         const recordingOn = <TouchableOpacity disabled={this.state.recordButtonDisabled} onPress={() => this._toggleRecord()}><Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{ fontSize: 40, color: 'red', textAlign: 'center' }} /></TouchableOpacity>
@@ -324,12 +324,12 @@ class Profile extends Component {
                             </View>
                             <View style={{ marginTop: 20, marginBottom: 25 }}>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                                    <View style={{ width: 140 }}><Text style={{ fontSize: 16, color: 'grey', textAlign: 'center' }}>Spoken Language:</Text></View>
-                                    <View style={{ width: 140 }}><Text style={{ fontSize: 16, color: 'grey', textAlign: 'center' }}>Desired Language:</Text></View>
+                                    <View style={{ width: 140 }}><Text style={{ fontFamily: theme.FONT_REGULAR, fontSize: 16, color: 'grey', textAlign: 'center' }}>Spoken Language:</Text></View>
+                                    <View style={{ width: 140 }}><Text style={{ fontFamily: theme.FONT_REGULAR, fontSize: 16, color: 'grey', textAlign: 'center' }}>Desired Language:</Text></View>
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                                    <View style={{ width: 140 }}><Text style={{ fontSize: 18, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>{this.state.profile.userLanguage}</Text></View>
-                                    <View style={{ width: 140 }}><Text style={{ fontSize: 18, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>{this.state.profile.userLearnLanguage}</Text></View>
+                                    <View style={{ width: 140 }}><Text style={{ fontFamily: theme.FONT_REGULAR, fontSize: 18, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>{this.state.profile.userLanguage}</Text></View>
+                                    <View style={{ width: 140 }}><Text style={{ fontFamily: theme.FONT_REGULAR, fontSize: 18, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>{this.state.profile.userLearnLanguage}</Text></View>
                                 </View>
                             </View>
                         </View>
@@ -340,7 +340,7 @@ class Profile extends Component {
                             <View style={{ flexDirection: 'row', marginTop: 30, marginBottom: 30 }}>
                                 <View style={{ justifyContent: 'flex-start', marginLeft: 20, marginRight: 15 }}>
                                     <View style={{ justifyContent: 'center' }}>
-                                        <Text style={{ fontSize: 16, color: 'black' }}>
+                                        <Text style={{ fontFamily: theme.FONT_REGULAR, fontSize: 16, color: 'black' }}>
                                             {this.state.profile.userDescription}
                                         </Text>
                                     </View>
@@ -355,7 +355,7 @@ class Profile extends Component {
                                 <View style={{ flexDirection: 'row', justifyContent: 'center', width: Dimensions.get('window').width }}>
                                     <View style={{ justifyContent: 'center' }}>
                                         <Icon type="Ionicons" name='ios-pin' ios='ios-pin' md='md-pin' style={{ fontSize: 30, color: 'grey', textAlign: 'center' }} />
-                                        <Text style={{ fontSize: 18, color: 'black', textAlign: 'center' }}>
+                                        <Text style={{ fontFamily: theme.FONT_REGULAR, fontSize: 18, color: 'black', textAlign: 'center' }}>
                                             {this.state.profile.userCountry}
                                         </Text>
                                     </View>
@@ -383,7 +383,7 @@ class Profile extends Component {
                                 <View style={{ flexDirection: 'row', justifyContent: 'center', width: Dimensions.get('window').width }}>
                                     <View style={{ justifyContent: 'center' }}>
                                         <Icon type="Ionicons" name='ios-school' ios='ios-school' md='md-school' style={{ fontSize: 30, color: 'grey', textAlign: 'center' }} />
-                                        <Text style={{ fontSize: 18, color: 'black', textAlign: 'center' }}>
+                                        <Text style={{ fontFamily: theme.FONT_REGULAR, fontSize: 18, color: 'black', textAlign: 'center' }}>
                                             {this.state.profile.userSchool}
                                         </Text>
                                     </View>

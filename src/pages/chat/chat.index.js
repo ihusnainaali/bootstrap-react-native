@@ -1,5 +1,5 @@
 import React from 'react';
-import { GiftedChat, Send, Actions } from 'react-native-gifted-chat';
+import { GiftedChat, Send, Actions, Bubble, SystemMessage } from 'react-native-gifted-chat';
 import { withNavigation } from 'react-navigation';
 import { AsyncStorage, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Icon, Title } from 'native-base';
@@ -22,6 +22,7 @@ class Chat extends React.Component {
             history: props.navigation.getParam('messages'),
             channel: props.navigation.getParam('channel'),
             friendAvatar: props.navigation.getParam('friendAvatar'),
+            renderBubble: props.navigation.getParam('renderBubble'),
             messages: [],
             text: "",
         }
@@ -30,6 +31,7 @@ class Chat extends React.Component {
         this.setMessages.bind(this);
         this.renderCustomActions.bind(this);
         this.renderAvatar.bind(this);
+        this.renderBubble.bind(this);
     }
 
     // TODO change hardcode profile to nav const.
@@ -143,24 +145,61 @@ class Chat extends React.Component {
         )
     }
 
+    renderCustomView(props) {
+        return (
+          <CustomView
+            {...props}
+          />
+        );
+    }
+    
+    renderFooter(props) {
+        if (this.state.typingText) {
+          return (
+            <View style={styles.footerContainer}>
+              <Text style={styles.footerText}>
+                {this.state.typingText}
+              </Text>
+            </View>
+          );
+        }
+        return null;
+    }
+
+    renderBubble(props) {
+        return (
+          <Bubble
+            {...props}
+            wrapperStyle={{
+              left: {
+                backgroundColor: '#f0f0f0',
+              }
+            }}
+          />
+        );
+      }
+
     render() {
         return (
-            <GiftedChat
-                messages={this.state.messages}
-                onSend={messages => this.onSend(messages)}
-                onInputTextChanged={text => this.setState({ text })}
-                onPressAvatar={() => this.navigateToProfile()}
-                user={{
-                    _id: 1,
-                    name: this.state.user,
-                }}
-                renderAvatar={this.renderAvatar}
-                renderActions={this.renderCustomActions}
-                navigation={this.props.navigation}
-                friendId={this.state.friendId}
-                userId={this.state.user}
-                friendAvatar={this.state.friendAvatar}
-            />
+            <View style={{ backgroundColor: "#FFFFFF", flex: 1 }}>
+                <GiftedChat
+                    messages={this.state.messages}
+                    onSend={messages => this.onSend(messages)}
+                    onInputTextChanged={text => this.setState({ text })}
+                    onPressAvatar={() => this.navigateToProfile()}
+                    user={{
+                        _id: 1,
+                        name: this.state.user,
+                    }}
+                    renderAvatar={this.renderAvatar}
+                    renderActions={this.renderCustomActions}
+                    navigation={this.props.navigation}
+                    friendId={this.state.friendId}
+                    userId={this.state.user}
+                    friendAvatar={this.state.friendAvatar}
+                    renderBubble={this.renderBubble}
+                />
+            </View>
         )
     }
 }
