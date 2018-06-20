@@ -11,11 +11,6 @@ import Splash from './src/pages/splash/splash.index';
 
 const store = createStore(rootReducer)
 
-store.subscribe(() => {
-    var state = store.getState();
-    AsyncStorage.setItem('username', state.auth.username);
-})
-
 class App extends Component {
 
     render() {

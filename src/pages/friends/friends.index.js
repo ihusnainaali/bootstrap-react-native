@@ -6,6 +6,7 @@ import { Thumbnail, Item, List, ListItem, Input, Container, Header, Left, Right,
 import ChatClientHelper from '../../utils/twilio';
 import operations from '../matchmaking/graphql';
 import FastImage from 'react-native-fast-image';
+import { connect } from 'react-redux';
 
 import styles from './friends.style';
 import theme from '../../styles/theme.style';
@@ -20,8 +21,8 @@ class Friends extends React.Component {
         super(props);
         this.state = {
             chatClientHelper: null,
-            friendsChannel: {},
-            friends: [],
+            friendsChannel: this.props.friendsChannel,
+            friends: this.props.friends,
             search: "",
             user: null,
         };
@@ -38,7 +39,7 @@ class Friends extends React.Component {
         };
     };
 
-    async componentDidMount() {
+    async componentWillMount() {
         chatClientHelper = ChatClientHelper.getInstance();
         this.setState({ chatClientHelper });
 
@@ -71,7 +72,7 @@ class Friends extends React.Component {
             });
             this.setState({ user, friendsChannel, friends });
             // store friends list to local storage.
-            AsyncStorage.setItem("friendLists", JSON.stringify({friendsChannel: friendsChannel, friends: friends}));
+            AsyncStorage.setItem("friendList", JSON.stringify({ friendsChannel: friendsChannel, friends: friends }));
         }
 
         // subscribe to new friends
@@ -138,13 +139,15 @@ class Friends extends React.Component {
                 }
                 channel.getMessages()
                     .then(messages => this.props.navigation.navigate(route.CHAT, { user, friendId, friendName, messages, friendAvatar, channel, user }));
-
             })
             .catch(console.log);
     }
 
     // For List View
     formatData(data) {
+        if (!data) {
+            return [];
+        }
         const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
         var formatedData = [];
 
@@ -165,6 +168,13 @@ class Friends extends React.Component {
         }
 
         return formatedData;
+    }
+
+    filterFriends(friends, searchStr) {
+        if (!friends) {
+            return [];
+        }
+        return friends.filter(item => item.userName && item.userName.toUpperCase().includes(searchStr.toUpperCase()));
     }
 
     renderItem({ item }) {
@@ -194,7 +204,7 @@ class Friends extends React.Component {
     render() {
         const friends = this.state.friends;
         const search = this.state.search;
-        const data = search ? friends.filter(item => item.userName && item.userName.toUpperCase().includes(search.toUpperCase())) : this.formatData(friends);
+        const data = search ? this.filterFriends(friends, search) : this.formatData(friends);
 
         return (
             <Container style={styles.container}>
@@ -247,4 +257,11 @@ class Friends extends React.Component {
 
 }
 
-export default withNavigation(Friends);
+const mapStateToProps = (state) => {
+    return ({
+        friends: state.friends.friends,
+        friendsChannel: state.friends.friendsChannel
+    });
+}
+
+export default connect(mapStateToProps)(withNavigation(Friends));
