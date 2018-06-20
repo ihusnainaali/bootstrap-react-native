@@ -45,11 +45,8 @@ class Chat extends React.Component {
                     style={styles.icon} />
             </Button>
         ,
-        headerTitle: <Title style={{ fontFamily: theme.FONT_LIGHT }}>{navigation.getParam('friendName')}</Title>,
-        headerTitleStyle: { textAlign: 'center', alignSelf: 'center' },
-        headerStyle: {
-            backgroundColor: 'white',
-        },
+        headerTitle: <Title>{navigation.getParam('friendName')}</Title>,
+        headerTitleStyle: styles.headerTitle,
     });
 
     componentDidMount() {
@@ -181,7 +178,7 @@ class Chat extends React.Component {
 
     render() {
         return (
-            <View style={{ backgroundColor: "#FFFFFF", flex: 1 }}>
+            <View style={styles.container}>
                 <GiftedChat
                     messages={this.state.messages}
                     onSend={messages => this.onSend(messages)}

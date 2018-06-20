@@ -70,6 +70,7 @@ class Login extends Component {
                             operations.CreateVideoChannel(username).catch(err => console.log(err));
                             this.props.navigation.navigate('AddProfile', { username: username });
                         } else {
+                            AsyncStorage.setItem("username",  username);
                             this.props.navigation.navigate('Home');
                         }
                     });

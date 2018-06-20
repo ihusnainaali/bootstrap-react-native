@@ -8,6 +8,7 @@ import { API, graphqlOperation } from 'aws-amplify';
 //redux
 import { connect } from 'react-redux';
 import { onAddFriend } from '../../redux/actions/friends.actions';
+import { onLogin } from '../../redux/actions/auth.actions';
 
 import styles from './splash.style'
 
@@ -30,6 +31,7 @@ class Splash extends Component {
         }
         const username = await AsyncStorage.getItem('username');
         if (username) {
+            this.props.onLogin(username, '');
             ChatClientHelper.getInstance().login(username);
             operations.SubVideoChannel(username).subscribe({
                 next: (eventData) => {
@@ -51,7 +53,7 @@ class Splash extends Component {
                         // This will switch to the Home screen or Welcome screen and this loading
                         // screen will be unmounted and thrown away.
                         setTimeout(() => {
-                            this.props.navigation.navigate(username ? 'Home' : 'Welcome');
+                            this.props.navigation.navigate('Home');
                         }, 2000);
                     }
                 });
@@ -78,4 +80,4 @@ class Splash extends Component {
     }
 }
 
-export default connect(undefined, { onAddFriend })(Splash);
+export default connect(undefined, { onAddFriend, onLogin })(Splash);

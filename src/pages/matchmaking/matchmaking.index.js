@@ -7,6 +7,7 @@ import Loader from '../../components/loader/loader.component'
 import uuidv4 from 'uuid/v4';
 import { Player, Recorder, MediaStates } from 'react-native-audio-toolkit';
 import FastImage from 'react-native-fast-image';
+import { connect } from 'react-redux';
 
 import styles from './matchmaking.style';
 import theme from '../../styles/theme.style';
@@ -115,10 +116,10 @@ class Matchmaking extends React.Component {
 
     renderHeader() {
         return (
-            <Header>
+            <Header style={styles.header}>
                 <Left />
                 <Body>
-                    <Title style={{ fontFamily: theme.FONT_LIGHT }}>Matchmaking</Title>
+                    <Title style={styles.headerTitle}>Matchmaking</Title>
                 </Body>
                 <Right />
             </Header>
@@ -231,4 +232,10 @@ class Matchmaking extends React.Component {
     }
 }
 
-export default withNavigation(Matchmaking);
+const mapStateToProps = (state) => {
+    return ({
+        username: state.auth.username,
+    });
+}
+
+export default connect(mapStateToProps)(withNavigation(Matchmaking));

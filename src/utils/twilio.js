@@ -31,8 +31,8 @@ export default class ChatClientHelper {
                 chatClientHelperInstance.accessManager.on('tokenExpired', () => 
                     chatClientHelperInstance.getToken(chatClientHelperInstance.identity)
                         .then(newData => chatClientHelperInstance.accessManager.updateToken(newData)));
-                chatClientHelperInstance.subscribeToAllAccessManagerEvents();
-                chatClientHelperInstance.subscribeToAllChatClientEvents();
+                // chatClientHelperInstance.subscribeToAllAccessManagerEvents();
+                // chatClientHelperInstance.subscribeToAllChatClientEvents();
             })
             .catch(err => {
                 console.log('login', 'can\'t create client', err);

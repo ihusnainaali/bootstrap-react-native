@@ -24,7 +24,7 @@ class Friends extends React.Component {
             friendsChannel: this.props.friendsChannel,
             friends: this.props.friends,
             search: "",
-            user: null,
+            user: this.props.username,
         };
         this.flag = true;
         this.updateFriends.bind(this);
@@ -43,11 +43,11 @@ class Friends extends React.Component {
         chatClientHelper = ChatClientHelper.getInstance();
         this.setState({ chatClientHelper });
 
-        const user = await AsyncStorage.getItem('username');
+        const user = this.state.user;
 
         // get all channel sids and store them in state.
-        friendsChannel = {};
-        friendIds = [];
+        const friendsChannel = {};
+        const friendIds = [];
         const listFriendsResp = await operations.ListFriends(user);
         listFriendsResp.data[operations.LIST_FRIENDS_KEY].items.forEach(friend => {
             channelSid = friend.channelSid;
@@ -259,6 +259,7 @@ class Friends extends React.Component {
 
 const mapStateToProps = (state) => {
     return ({
+        username: state.auth.username,
         friends: state.friends.friends,
         friendsChannel: state.friends.friendsChannel
     });

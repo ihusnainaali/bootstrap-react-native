@@ -4,7 +4,10 @@ import theme from '../../styles/theme.style';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: theme.COLOR_PRIMARY,
+    },
+    headerTitle: { 
+        fontFamily: theme.FONT_LIGHT 
     },
     sendButton: {
         flex: 1,
