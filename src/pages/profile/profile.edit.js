@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
 import {
   View,
-  TouchableHighlight,
   TouchableOpacity,
-  Modal,
-  StyleSheet,
-  CameraRoll,
-  Image,
-  Dimensions,
   ScrollView,
-  RefreshControl,
-  FlatList,
-  SectionList,
   KeyboardAvoidingView,
   AsyncStorage
 } from 'react-native';

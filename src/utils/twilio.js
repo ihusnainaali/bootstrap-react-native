@@ -1,6 +1,5 @@
 import { Client as TwilioChatClient } from "twilio-chat";
 import { AccessManager as TwilioAccessManager } from "twilio-common";
-import { AsyncStorage } from "react-native";
 
 export default class ChatClientHelper {
     static instance = null;

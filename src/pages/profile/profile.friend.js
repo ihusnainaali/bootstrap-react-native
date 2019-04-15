@@ -1,25 +1,19 @@
 import React, { Component } from 'react';
 import {
     View,
-    StyleSheet,
     ScrollView,
     Image,
-    AsyncStorage,
     Dimensions,
     TouchableOpacity,
     Switch,
-    Slider
 } from 'react-native';
-import { Container, Header, Left, Right, Title, Body, Button, Text, Content, Icon, List, ListItem } from 'native-base';
-import { withNavigation, navigation } from 'react-navigation';
-import { Player, Recorder, MediaStates } from 'react-native-audio-toolkit';
+import { Container, Title, Text, Content, Icon } from 'native-base';
+import { withNavigation } from 'react-navigation';
+import { Player, Recorder } from 'react-native-audio-toolkit';
 
 import { GetProfile, SubscribeToProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';
-import { RNS3 } from 'react-native-aws3';
 
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { route } from '../../routes/routes.constants';
 import theme from '../../styles/theme.style';
 import styles from './profile.style';
 
@@ -57,7 +51,7 @@ class Profile extends Component {
 
     }
 
-    static navigationOptions = ({ navigation }) => ({
+    static navigationOptions = () => ({
         headerTitle: <Title style={{ fontFamily: theme.FONT_LIGHT }}>Friend Profile</Title>,
         headerTitleStyle: { textAlign: 'center', alignSelf: 'center' },
         headerStyle: {
@@ -119,7 +113,7 @@ class Profile extends Component {
         return Date.now() - this.lastSeek > 200;
     }
 
-    _updateState(err) {
+    _updateState() {
         this.setState({
             playPauseButton: this.player && this.player.isPlaying ? 'Pause' : 'Play',
             recordButton: this.recorder && this.recorder.isRecording ? 'Stop' : 'Record',
@@ -131,7 +125,7 @@ class Profile extends Component {
     }
 
     _playPause() {
-        this.player.playPause((err, playing) => {
+        this.player.playPause((err) => {
             if (err) {
                 this.setState({
                     error: err.message
@@ -272,20 +266,14 @@ class Profile extends Component {
 
         const recordingOff = <TouchableOpacity activeOpacity={.5} disabled={this.state.recordButtonDisabled} onPress={() => this._toggleRecord()}><Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{ fontSize: 40, color: 'pink', textAlign: 'center' }} /></TouchableOpacity>
         const recordingOn = <TouchableOpacity disabled={this.state.recordButtonDisabled} onPress={() => this._toggleRecord()}><Icon type="Ionicons" name='ios-mic' ios='ios-mic' md='md-mic' style={{ fontSize: 40, color: 'red', textAlign: 'center' }} /></TouchableOpacity>
-        let recordAudio;
         if (this.recorder.isRecording != true) {
-            recordAudio = recordingOff
         } else if (this.recorder.isRecording == true) {
-            recordAudio = recordingOn
         }
 
         const playButtonOff = <TouchableOpacity disabled={this.state.playButtonDisabled} onPress={() => this._playPause()}><Icon type="Ionicons" name='ios-play' ios='ios-play' md='md-play' style={{ fontSize: 35, color: '#157dfb', textAlign: 'center' }} /></TouchableOpacity>
         const playButtonOn = <Icon type="Ionicons" name='ios-play' ios='ios-play' md='md-play' style={{ fontSize: 35, color: 'lightgrey', textAlign: 'center' }} />
-        let playAndPause;
         if (this.player.isPlaying != true) {
-            playAndPause = playButtonOff
         } else if (this.player.isPlaying == true) {
-            playAndPause = playButtonOn
         }
 
         return (
