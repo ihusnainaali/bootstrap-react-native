@@ -1,9 +1,7 @@
 import React from 'react';
-import { Text, View, Button} from 'react-native';
-import { navigation, createStackNavigator, createBottomTabNavigator, withNavigation } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import HeaderButtons from 'react-navigation-header-buttons'
-import Pangyou from '../pages/pangyou/pangyou.index';
+import Home from '../pages/Home/Home.index';
 import Friends from '../pages/friends/friends.index';
 import Journals from '../pages/journals/journals.index';
 import Profile from '../pages/profile/profile.index';
@@ -14,16 +12,15 @@ import Settings from '../pages/settings/settings.index';
 import Matchmaking from '../pages/matchmaking/matchmaking.index';
 import Chat from '../pages/chat/chat.index';
 import Video from '../pages/video/video.index';
-import { route } from '../routes/routes.constants';
 import theme from '../styles/theme.style';
-// Create Pangyou Stack
-const PangyouStack = createStackNavigator({
-    pangyou: {
-      screen: Pangyou,
+
+const HomeStack = createStackNavigator({
+    Home: {
+      screen: Home,
     },
   },
   {
-    initialRouteName: 'pangyou',
+    initialRouteName: 'Home',
   }
 
 )
@@ -65,7 +62,7 @@ const ProfileStack = createStackNavigator({
 )
 const Tabs = createBottomTabNavigator({
 
-        Pangyou: PangyouStack,
+        Home: HomeStack,
         Friends: FriendsStack,
         Journals: JournalsStack,
         Profile: ProfileStack
@@ -76,7 +73,7 @@ const Tabs = createBottomTabNavigator({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === 'Pangyou') {
+        if (routeName === 'Home') {
           iconName = `face`;
                 } else if (routeName === 'Friends') {
                     iconName = `people${focused ? '' : '-outline'}`;

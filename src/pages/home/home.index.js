@@ -8,8 +8,6 @@ import { route } from '../../routes/routes.constants';
 import styles from './pangyou.style';
 import theme from '../../styles/theme.style';
 
-
-
 class Pangyou extends React.Component {
 
     navigateToMatchmaking = () => {
@@ -66,4 +64,4 @@ class Pangyou extends React.Component {
     }
 }
 
-export default withNavigation(Pangyou);
+export default withNavigation(home);

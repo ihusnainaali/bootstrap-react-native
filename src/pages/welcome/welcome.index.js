@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Image, View, Text, StyleSheet, StatusBar } from 'react-native';
+import { Image, View, Text, StatusBar } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import styles from './welcome.style';
 
 import Button from '../../components/button/button.component';
-import { Container, Header , Left, Right, Title, Content , Icon, Body, Footer} from 'native-base';
+import { Container, Content} from 'native-base';
 
 class Welcome extends Component {
 

@@ -2,20 +2,15 @@
 *   Auth Navigation
 */
 import React, { Component } from 'react';
-import { Platform,Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import { createStore } from 'redux';
-import { Provider, connect } from 'react-redux';
-import rootReducer from '../redux/reducers/index.reducer';
+import { connect } from 'react-redux';
 
 import Welcome from '../pages/welcome/welcome.index';
 import Login from '../pages/login/login.index';
 import Register from '../pages/register/register.index';
 import Verification from '../pages/verification/verification.index';
 import ForgetPassword from '../pages/forgetpassword/forgetpassword.index';
-
-
 
 // Log-in Screen
 class LoginScreen extends Component {

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, TouchableOpacity, Dimensions } from 'react-native';
-import { withNavigation, navigation } from 'react-navigation';
+import { Text, View } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 import { TwilioVideoLocalView, TwilioVideoParticipantView, TwilioVideo } from 'react-native-twilio-video-webrtc';
-import Loader from '../../components/loader/loader.component';
 import { CallButton } from './callbutton';
 
 import { styles } from './video.style';

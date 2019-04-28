@@ -1,12 +1,11 @@
 import React from 'react';
-import { GiftedChat, Send, Actions, Bubble, SystemMessage } from 'react-native-gifted-chat';
+import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat';
 import { withNavigation } from 'react-navigation';
-import { AsyncStorage, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Button, Icon, Title } from 'native-base';
 import FastImage from 'react-native-fast-image';
 
 import { styles } from './chat.style';
-import theme from '../../styles/theme.style';
 
 import uuidv4 from 'uuid/v4';
 import operations from '../matchmaking/graphql';
@@ -54,16 +53,6 @@ class Chat extends React.Component {
         this.state.history.items.forEach(item => {
             this.setMessages(this.parseMessage(item));
         });
-
-        // TODO : Add load earlier button by calling prevPage function.
-        // if (this.state.history.hasPrevPage) {
-        //     try {
-        //         this.state.history.prevPage()
-        //             .then(console.log);
-        //     } catch (error) {
-        //         console.log(error);
-        //     }
-        // }
 
         this.state.channel.getUnconsumedMessagesCount()
             .then(count => console.log("unconsumed messages count: ", count));

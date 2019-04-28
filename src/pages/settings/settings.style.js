@@ -20,5 +20,4 @@ export default StyleSheet.create({
 			fontSize: theme.HEADER_ICON_SIZE
 	}
 
-
 })

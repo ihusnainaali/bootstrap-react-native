@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, KeyboardAvoidingView } from 'react-native';
+import { View, Text, KeyboardAvoidingView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import TextField from '../../components/textfield/textfield.component';
 import ButtonComponent from '../../components/button/button.component';

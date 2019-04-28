@@ -1,24 +1,14 @@
 import React, { Component } from 'react';
 import {
     View,
-    TouchableHighlight,
-    TouchableOpacity,
-    Modal,
-    StyleSheet,
-    CameraRoll,
-    Image,
-    Dimensions,
     ScrollView,
-    RefreshControl,
-    FlatList,
-    SectionList,
     KeyboardAvoidingView,
     AsyncStorage
 } from 'react-native';
-import { withNavigation, navigation } from 'react-navigation';
+import { withNavigation } from 'react-navigation';
 import TextField from '../../components/textfield/textfield.component';
 import Button from '../../components/button/button.component';
-import { Container, Header, Left, Right, Title, Text, Body, Content, Icon, List, ListItem, Picker } from 'native-base';
+import { Container, Header, Left, Right, Title, Text, Body, Content, Icon, ListItem, Picker } from 'native-base';
 
 import { CreateProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';

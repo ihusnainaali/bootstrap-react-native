@@ -1,11 +1,9 @@
 import React from 'react';
-import { Text, View, Image, TouchableOpacity, AsyncStorage, Dimensions } from 'react-native';
-import { withNavigation, navigation } from 'react-navigation';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { DeckSwiper, Card, CardItem, Thumbnail, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
+import { Text, View, AsyncStorage } from 'react-native';
+import { withNavigation,  } from 'react-navigation';
+import { DeckSwiper, Card, CardItem, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
 import Loader from '../../components/loader/loader.component'
 import uuidv4 from 'uuid/v4';
-import { Player, Recorder, MediaStates } from 'react-native-audio-toolkit';
 import FastImage from 'react-native-fast-image';
 import { connect } from 'react-redux';
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { Container, Header , Left, Right, Title, Content, Button , Icon, Body} from 'native-base';
 import { connect } from 'react-redux';

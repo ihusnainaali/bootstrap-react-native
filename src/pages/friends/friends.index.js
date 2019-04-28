@@ -1,8 +1,7 @@
 import React from 'react';
-import { Text, View, FlatList, SectionList, Image, TouchableOpacity, AsyncStorage } from 'react-native';
-import { withNavigation, navigation } from 'react-navigation';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Thumbnail, Item, List, ListItem, Input, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
+import { Text, View, FlatList, SectionList, AsyncStorage } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import { Item, List, ListItem, Input, Container, Header, Left, Right, Title, Content, Button, Icon, Body } from 'native-base';
 import ChatClientHelper from '../../utils/twilio';
 import operations from '../matchmaking/graphql';
 import FastImage from 'react-native-fast-image';
@@ -12,8 +11,6 @@ import styles from './friends.style';
 import theme from '../../styles/theme.style';
 
 import { route } from '../../routes/routes.constants';
-
-let items = ['Simon Mignolet', 'Nathaniel Clyne', 'Dejan Lovren', 'Mama Sakho', 'Emre Can'];
 
 class Friends extends React.Component {
 

@@ -1,7 +1,6 @@
 /*
 *   Application Navigator
 */
-import React, { Component } from 'react';
 import { createSwitchNavigator } from 'react-navigation';
 
 import Splash from '../pages/splash/splash.index';

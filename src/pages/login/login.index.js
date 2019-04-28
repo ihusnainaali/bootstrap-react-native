@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView, AsyncStorage } from 'react-native';
+import { View, Text, KeyboardAvoidingView, AsyncStorage } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import { connect } from 'react-redux';

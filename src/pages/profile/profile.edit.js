@@ -9,7 +9,7 @@ import {
 import { withNavigation } from 'react-navigation';
 import TextField from '../../components/textfield/textfield.component';
 import Button from '../../components/button/button.component';
-import { Container, Header, Left, Right, Title, Text, Body, Content, Icon, List, ListItem, Picker } from 'native-base';
+import { Container, Text, Content, Icon, ListItem, Picker } from 'native-base';
 
 import { GetProfile, UpdateProfile } from './graphql_query';
 import { API, graphqlOperation } from 'aws-amplify';

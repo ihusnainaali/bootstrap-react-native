@@ -1,24 +1,10 @@
 import React from 'react';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
-import { withNavigation , navigation } from 'react-navigation';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Text } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import { List, ListItem, Item, Input, Container, Header , Left, Right, Title, Content, Button , Icon, Body} from 'native-base';
 
 import styles from './journals.style';
 import theme from '../../styles/theme.style';
-
-// TODO Add Backend Data Implementation to Populate Data
-const list = [
-  {
-    name: 'Chinese Lesson 1',
-    date: '01/16/2017'
-  },
-  {
-    name: 'Chinese Lesson 2',
-    date: '04/05/2019'
-  },
-]
-
 
 class Journals extends React.Component {
   

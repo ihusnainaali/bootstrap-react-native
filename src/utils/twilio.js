@@ -7,7 +7,7 @@ export default class ChatClientHelper {
     client = null;
     accessManager = null;
 
-    constructor(tokenAndConfigurationProviderHost = "http://54.164.94.85:9527") { //54.164.94.85
+    constructor(tokenAndConfigurationProviderHost = "") { 
         this.host = tokenAndConfigurationProviderHost;
         this.client = null;
         this.accessManager = null;
@@ -30,8 +30,6 @@ export default class ChatClientHelper {
                 chatClientHelperInstance.accessManager.on('tokenExpired', () => 
                     chatClientHelperInstance.getToken(chatClientHelperInstance.identity)
                         .then(newData => chatClientHelperInstance.accessManager.updateToken(newData)));
-                // chatClientHelperInstance.subscribeToAllAccessManagerEvents();
-                // chatClientHelperInstance.subscribeToAllChatClientEvents();
             })
             .catch(err => {
                 console.log('login', 'can\'t create client', err);
